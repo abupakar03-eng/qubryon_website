@@ -2,8 +2,10 @@ import * as THREE from "three";
 import { landPoints } from "../geo/land";
 
 /**
- * Point-cloud hero: thousands of particles that morph between one shape per service
- * (code, AI network, cloud, team, globe), drift gently, and scatter away from the cursor.
+ * Hero point-cloud: thousands of particles that morph between flowing 3D forms
+ * expressing the Qubryon idea — Quality + Quantum innovation + a future-ready outlook.
+ * Particles stream along each form (orbits, strands, knots), the form slowly turns,
+ * and the cloud scatters away from the cursor.
  */
 
 export interface ParticleShapeDef {
@@ -13,14 +15,14 @@ export interface ParticleShapeDef {
 }
 
 export const PARTICLE_SHAPES: ParticleShapeDef[] = [
-  { id: "code", label: "Custom Software", href: "#service-software" },
-  { id: "ai", label: "AI & Machine Learning", href: "#service-ai" },
-  { id: "cloud", label: "Cloud & DevOps", href: "#service-cloud" },
-  { id: "team", label: "IT Staff Augmentation", href: "#service-staffing" },
-  { id: "globe", label: "Global Delivery", href: "#global" },
+  { id: "q", label: "Qubryon — quality meets quantum", href: "#services" },
+  { id: "atom", label: "Quantum-grade innovation", href: "#service-ai" },
+  { id: "knot", label: "Quality, continuously delivered", href: "#service-software" },
+  { id: "helix", label: "Talent that fits your team's DNA", href: "#talent" },
+  { id: "globe", label: "Future-ready, delivered worldwide", href: "#global" },
 ];
 
-export const SHAPE_DURATION = 5.5; // seconds each shape is shown
+export const SHAPE_DURATION = 6; // seconds per form
 
 interface Options {
   reducedMotion?: boolean;
@@ -28,13 +30,33 @@ interface Options {
   onShapeChange?: (index: number) => void;
 }
 
-const SIZE = 3.9; // world units a 2D glyph spans
-const GLOBE_R = 1.75;
+/** Per-particle random seeds shared by every form. */
+interface Seeds {
+  a: Float32Array; // 0..1
+  b: Float32Array; // 0..1
+  c: Float32Array; // 0..1
+  jx: Float32Array; // unit-ish jitter vector
+  jy: Float32Array;
+  jz: Float32Array;
+}
+
+/** A form writes particle i's local position at time t into out[k..k+2]. */
+type Form = {
+  at: (i: number, t: number, s: Seeds, out: Float32Array, k: number) => void;
+  /** continuous turn speed (rad/s); 0 = gentle sway only */
+  spin: number;
+  /** axis of the continuous turn: "y" turns it round, "z" spins it face-on */
+  spinAxis?: "y" | "z";
+  tiltX: number;
+  tiltZ: number;
+};
+
+const TAU = Math.PI * 2;
 
 export function createParticleScene(container: HTMLElement, opts: Options = {}) {
   const { reducedMotion = false } = opts;
   const narrow = container.clientWidth < 520;
-  const N = narrow ? 3800 : 7200;
+  const N = narrow ? 4200 : 8000;
 
   const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true, powerPreference: "high-performance" });
   const dpr = Math.min(window.devicePixelRatio, 2);
@@ -49,46 +71,51 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
   const group = new THREE.Group();
   scene.add(group);
 
-  /* ---------- shape targets ---------- */
-  const fontMono =
-    getComputedStyle(document.documentElement).getPropertyValue("--font-geist-mono").trim() || "ui-monospace, monospace";
-  const shapes: { pos: Float32Array; spin: boolean }[] = [
-    { pos: sampleGlyph(N, (ctx, S) => drawCode(ctx, S, fontMono)), spin: false },
-    { pos: sampleGlyph(N, drawNeuralNet), spin: false },
-    { pos: sampleGlyph(N, drawCloud), spin: false },
-    { pos: sampleGlyph(N, drawTeam), spin: false },
-    { pos: sampleGlobe(N), spin: true },
-  ];
+  /* ---------- seeds ---------- */
+  const seeds: Seeds = {
+    a: new Float32Array(N),
+    b: new Float32Array(N),
+    c: new Float32Array(N),
+    jx: new Float32Array(N),
+    jy: new Float32Array(N),
+    jz: new Float32Array(N),
+  };
+  const tmpV = new THREE.Vector3();
+  for (let i = 0; i < N; i++) {
+    seeds.a[i] = Math.random();
+    seeds.b[i] = Math.random();
+    seeds.c[i] = Math.random();
+    tmpV.randomDirection().multiplyScalar(Math.cbrt(Math.random()));
+    seeds.jx[i] = tmpV.x;
+    seeds.jy[i] = tmpV.y;
+    seeds.jz[i] = tmpV.z;
+  }
+
+  const forms: Form[] = [qMonogram(), quantumAtom(), torusKnot(), doubleHelix(), globe(N)];
 
   /* ---------- particle buffers ---------- */
   const positions = new Float32Array(N * 3);
   const from = new Float32Array(N * 3);
+  const target = new Float32Array(N * 3);
   const disp = new Float32Array(N * 3);
   const delay = new Float32Array(N);
-  const phase = new Float32Array(N);
   const scatter = new Float32Array(N * 3);
   const sizes = new Float32Array(N);
   const colors = new Float32Array(N * 3);
 
-  const cWarm = new THREE.Color("#EDE6DA");
+  const cCream = new THREE.Color("#F3ECE3");
+  const cAqua = new THREE.Color("#7FE6DA");
   const cYellow = new THREE.Color("#F4D03F");
-  const cOlive = new THREE.Color("#B5CF6B");
+  const cSand = new THREE.Color("#EDC9AF");
   for (let i = 0; i < N; i++) {
-    // start as a loose cloud so the first shape "assembles" on load
-    const r = 2.5 + Math.random() * 2.5;
-    const a = Math.random() * Math.PI * 2;
-    const b = Math.acos(Math.random() * 2 - 1);
-    from[i * 3] = Math.sin(b) * Math.cos(a) * r;
-    from[i * 3 + 1] = Math.sin(b) * Math.sin(a) * r;
-    from[i * 3 + 2] = Math.cos(b) * r;
-
+    tmpV.randomDirection().multiplyScalar(2.5 + Math.random() * 2.5);
+    from.set([tmpV.x, tmpV.y, tmpV.z], i * 3);
     delay[i] = Math.random();
-    phase[i] = Math.random() * Math.PI * 2;
-    const v = new THREE.Vector3().randomDirection();
-    scatter.set([v.x, v.y, v.z], i * 3);
-    sizes[i] = 1.4 + Math.random() * 1.9;
+    tmpV.randomDirection();
+    scatter.set([tmpV.x, tmpV.y, tmpV.z], i * 3);
+    sizes[i] = 1.0 + Math.random() * 1.6 + (Math.random() < 0.04 ? 1.6 : 0); // a few bright "sparks"
     const roll = Math.random();
-    const c = roll < 0.1 ? cYellow : roll < 0.16 ? cOlive : cWarm;
+    const c = roll < 0.62 ? cCream : roll < 0.82 ? cAqua : roll < 0.93 ? cYellow : cSand;
     colors.set([c.r, c.g, c.b], i * 3);
   }
   positions.set(from);
@@ -111,12 +138,13 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
       varying vec3 vColor;
       varying float vAlpha;
       void main() {
-        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        vec4 world = modelMatrix * vec4(position, 1.0);
+        vec4 mv = viewMatrix * world;
         gl_Position = projectionMatrix * mv;
         gl_PointSize = aSize * uPixelRatio * uScale * (7.0 / -mv.z);
         vColor = aColor;
-        // flat shapes stay bright; the far side of 3D shapes (globe) fades away
-        vAlpha = mix(0.1, 1.0, smoothstep(-1.7, -0.15, position.z));
+        // fade the far side so 3D forms read clearly
+        vAlpha = mix(0.12, 1.0, smoothstep(-2.0, 0.6, world.z));
       }
     `,
     fragmentShader: /* glsl */ `
@@ -125,13 +153,13 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
       void main() {
         float d = length(gl_PointCoord - 0.5);
         if (d > 0.5) discard;
-        float a = smoothstep(0.5, 0.1, d) * vAlpha * 0.85;
+        float core = smoothstep(0.5, 0.0, d);
+        float a = (core * core * 0.9 + core * 0.25) * vAlpha;
         gl_FragColor = vec4(vColor, a);
       }
     `,
   });
-  const points = new THREE.Points(geo, mat);
-  group.add(points);
+  group.add(new THREE.Points(geo, mat));
 
   /* ---------- interaction ---------- */
   const ndc = new THREE.Vector2();
@@ -147,7 +175,7 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
     const y = (e.clientY - r.top) / r.height;
     pointerInside = x >= 0 && x <= 1 && y >= 0 && y <= 1;
     ndc.set(x * 2 - 1, -(y * 2 - 1));
-    tilt.ty = (e.clientX / window.innerWidth - 0.5) * 0.5;
+    tilt.ty = (e.clientX / window.innerWidth - 0.5) * 0.45;
     tilt.tx = (e.clientY / window.innerHeight - 0.5) * 0.25;
   };
   const onLeaveWindow = () => (pointerInside = false);
@@ -160,12 +188,11 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
     const h = container.clientHeight || 1;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
-    const half = 2.35;
+    const half = 2.5;
     const dist = half / (Math.tan(THREE.MathUtils.degToRad(FOV / 2)) * Math.min(camera.aspect, 1));
     camera.position.set(0, 0, dist);
     camera.lookAt(0, 0, 0);
     camera.updateProjectionMatrix();
-    // keep dot size consistent relative to the canvas
     mat.uniforms.uScale.value = THREE.MathUtils.clamp(Math.min(w, h) / 560, 0.6, 1.3) * (dist / 7);
   };
   const ro = new ResizeObserver(resize);
@@ -176,35 +203,40 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
   let current = 0;
   let morphStart = 0;
   let elapsed = 0;
-  let spinAngle = 0;
-  const MORPH = 2.0;
+  let formClock = 0; // time since the current form appeared (drives flow + spin)
+  const MORPH = 2.2;
 
   const goTo = (index: number) => {
-    const next = ((index % shapes.length) + shapes.length) % shapes.length;
+    const next = ((index % forms.length) + forms.length) % forms.length;
     from.set(positions);
-    // remove the cursor push from the snapshot so it doesn't get baked in
     for (let i = 0; i < from.length; i++) from[i] -= disp[i];
     current = next;
     morphStart = elapsed;
-    if (shapes[next].spin) spinAngle = 0;
+    formClock = 0;
     opts.onShapeChange?.(next);
     if (reducedMotion) start();
   };
 
   const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const euler = new THREE.Euler();
+  const rot = new THREE.Matrix4();
+  const e = rot.elements;
 
   const frame = (dt: number) => {
     elapsed += dt;
-    const t = elapsed;
+    formClock += dt;
+    if (!reducedMotion && elapsed - morphStart > SHAPE_DURATION) goTo(current + 1);
 
-    if (!reducedMotion && t - morphStart > SHAPE_DURATION) goTo(current + 1);
+    const form = forms[current];
+    const ft = reducedMotion ? 1.5 : formClock;
 
-    const shape = shapes[current];
-    if (shape.spin) spinAngle += dt * 0.35;
-    const cs = Math.cos(spinAngle);
-    const sn = Math.sin(spinAngle);
+    // whole-form orientation: tilt + continuous spin (or sway)
+    const sway = Math.sin(ft * 0.6) * 0.45;
+    if (form.spinAxis === "z") euler.set(form.tiltX, sway * 0.6, form.tiltZ + ft * form.spin, "YXZ");
+    else euler.set(form.tiltX, form.spin ? ft * form.spin : sway, form.tiltZ, "YXZ");
+    rot.makeRotationFromEuler(euler);
 
-    // cursor position on the z=0 plane, in group space
+    // cursor on the z=0 plane in group space
     let px = 99, py = 99;
     if (pointerInside) {
       raycaster.setFromCamera(ndc, camera);
@@ -215,40 +247,34 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
       }
     }
 
-    const since = t - morphStart;
-    const target = shape.pos;
-    const R = 0.85;
+    const since = elapsed - morphStart;
+    const R = 0.8;
     for (let i = 0; i < N; i++) {
       const k = i * 3;
-      const local = reducedMotion ? 1 : THREE.MathUtils.clamp((since - delay[i] * 0.6) / MORPH, 0, 1);
-      const e = ease(local);
+      form.at(i, ft, seeds, target, k);
+      // rotate target
+      const lx = target[k], ly = target[k + 1], lz = target[k + 2];
+      const tx = e[0] * lx + e[4] * ly + e[8] * lz;
+      const ty = e[1] * lx + e[5] * ly + e[9] * lz;
+      const tz = e[2] * lx + e[6] * ly + e[10] * lz;
 
-      let tx = target[k];
-      const ty = target[k + 1];
-      let tz = target[k + 2];
-      if (shape.spin) {
-        const rx = tx * cs - tz * sn;
-        tz = tx * sn + tz * cs;
-        tx = rx;
-      }
+      const local = reducedMotion ? 1 : THREE.MathUtils.clamp((since - delay[i] * 0.7) / MORPH, 0, 1);
+      const m = ease(local);
+      const burst = Math.sin(Math.PI * m) * 1.1;
 
-      const burst = Math.sin(Math.PI * e) * 0.9;
-      const breathe = Math.sin(t * 1.2 + phase[i]) * 0.012;
+      let x = from[k] + (tx - from[k]) * m + scatter[k] * burst;
+      let y = from[k + 1] + (ty - from[k + 1]) * m + scatter[k + 1] * burst;
+      let z = from[k + 2] + (tz - from[k + 2]) * m + scatter[k + 2] * burst;
 
-      let x = from[k] + (tx - from[k]) * e + scatter[k] * burst + breathe;
-      let y = from[k + 1] + (ty - from[k + 1]) * e + scatter[k + 1] * burst + breathe;
-      let z = from[k + 2] + (tz - from[k + 2]) * e + scatter[k + 2] * burst;
-
-      // cursor repulsion (smoothed)
       const dx = x - px;
       const dy = y - py;
       const d = Math.sqrt(dx * dx + dy * dy);
       let ox = 0, oy = 0, oz = 0;
       if (d < R && d > 0.0001) {
-        const f = (1 - d / R) ** 2 * 0.6;
+        const f = (1 - d / R) ** 2 * 0.65;
         ox = (dx / d) * f;
         oy = (dy / d) * f;
-        oz = f * 0.8;
+        oz = f * 0.9;
       }
       disp[k] += (ox - disp[k]) * 0.12;
       disp[k + 1] += (oy - disp[k + 1]) * 0.12;
@@ -266,7 +292,7 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
     tilt.x += (tilt.tx - tilt.x) * 0.04;
     tilt.y += (tilt.ty - tilt.y) * 0.04;
     group.rotation.x = tilt.x;
-    group.rotation.y = tilt.y + Math.sin(t * 0.35) * 0.18;
+    group.rotation.y = tilt.y;
 
     renderer.render(scene, camera);
   };
@@ -284,16 +310,15 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
       readyFired = true;
       opts.onReady?.();
     }
-    // reduced motion: render only on demand (load / shape change), no continuous animation
     if (!reducedMotion) raf = requestAnimationFrame(loop);
   };
-  const start = () => {
+  function start() {
     if (raf) return;
     clock.getDelta();
     raf = requestAnimationFrame(loop);
-  };
-  const io = new IntersectionObserver(([e]) => {
-    visible = e.isIntersecting;
+  }
+  const io = new IntersectionObserver(([en]) => {
+    visible = en.isIntersecting;
     if (visible) start();
   });
   io.observe(container);
@@ -304,7 +329,6 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
   start();
 
   return {
-    /** Jump to a shape (e.g. from the caption dots). */
     goTo,
     dispose() {
       cancelAnimationFrame(raf);
@@ -321,142 +345,164 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
   };
 }
 
-/* ======================= shape generators ======================= */
+/* ======================= forms ======================= */
 
-type Draw = (ctx: CanvasRenderingContext2D, S: number) => void;
-
-/** Rasterise a 2D drawing and scatter N particles over its filled pixels, with slight depth. */
-function sampleGlyph(N: number, draw: Draw) {
-  const S = 256;
-  const c = document.createElement("canvas");
-  c.width = c.height = S;
-  const ctx = c.getContext("2d", { willReadFrequently: true })!;
-  ctx.fillStyle = "#fff";
-  ctx.strokeStyle = "#fff";
-  ctx.lineCap = "round";
-  ctx.lineJoin = "round";
-  draw(ctx, S);
-  const data = ctx.getImageData(0, 0, S, S).data;
-  const filled: number[] = [];
-  for (let y = 0; y < S; y++) {
-    for (let x = 0; x < S; x++) {
-      if (data[(y * S + x) * 4 + 3] > 128) filled.push(x, y);
-    }
-  }
-  const out = new Float32Array(N * 3);
-  const count = filled.length / 2 || 1;
-  for (let i = 0; i < N; i++) {
-    const j = Math.floor(Math.random() * count) * 2;
-    const x = (filled[j] ?? S / 2) + Math.random();
-    const y = (filled[j + 1] ?? S / 2) + Math.random();
-    out[i * 3] = (x / S - 0.5) * SIZE;
-    out[i * 3 + 1] = -(y / S - 0.5) * SIZE;
-    out[i * 3 + 2] = (Math.random() - 0.5) * 0.45;
-  }
-  return out;
-}
-
-function drawCode(ctx: CanvasRenderingContext2D, S: number, font: string) {
-  ctx.font = `700 ${S * 0.42}px ${font}`;
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText("</>", S / 2, S / 2 + 4);
-}
-
-function drawNeuralNet(ctx: CanvasRenderingContext2D, S: number) {
-  const layers = [3, 5, 5, 2];
-  const xs = layers.map((_, i) => S * (0.14 + (i * 0.72) / (layers.length - 1)));
-  const nodes = layers.map((n, li) =>
-    Array.from({ length: n }, (_, j) => ({ x: xs[li], y: S * (0.5 + (j - (n - 1) / 2) * 0.17) })),
-  );
-  ctx.lineWidth = 3;
-  for (let l = 0; l < nodes.length - 1; l++) {
-    for (const a of nodes[l]) {
-      for (const b of nodes[l + 1]) {
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
-        ctx.stroke();
+/** "Q" monogram: a glowing ring with a tail; particles stream round the ring. */
+function qMonogram(): Form {
+  const RING = 1.35;
+  return {
+    spin: 0,
+    tiltX: 0.15,
+    tiltZ: 0,
+    at(i, t, s, out, k) {
+      if (s.a[i] < 0.82) {
+        const u = s.b[i] * TAU + t * 0.35;
+        const tube = 0.16 * Math.sqrt(s.c[i]);
+        const v = s.c[i] * 97.3;
+        const r = RING + tube * Math.cos(v);
+        out[k] = r * Math.cos(u);
+        out[k + 1] = r * Math.sin(u);
+        out[k + 2] = tube * Math.sin(v) * 1.4;
+      } else {
+        // tail: from inside the ring at -45° out past the rim, flowing outward
+        const f = (s.b[i] + t * 0.18) % 1;
+        const r = 0.7 + f * 1.45;
+        const ang = -Math.PI / 4;
+        out[k] = Math.cos(ang) * r + s.jx[i] * 0.09;
+        out[k + 1] = Math.sin(ang) * r + s.jy[i] * 0.09;
+        out[k + 2] = s.jz[i] * 0.12;
       }
-    }
-  }
-  for (const layer of nodes) {
-    for (const n of layer) {
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, S * 0.042, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-}
-
-function drawIcon(ctx: CanvasRenderingContext2D, S: number, path: string, mode: "fill" | "stroke", width = 2.4, scale = 0.86) {
-  const s = (S * scale) / 24;
-  ctx.save();
-  ctx.translate((S - 24 * s) / 2, (S - 24 * s) / 2);
-  ctx.scale(s, s);
-  const p = new Path2D(path);
-  if (mode === "fill") ctx.fill(p);
-  else {
-    ctx.lineWidth = width;
-    ctx.stroke(p);
-  }
-  ctx.restore();
-}
-
-function drawCloud(ctx: CanvasRenderingContext2D, S: number) {
-  drawIcon(ctx, S, "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z", "fill");
-}
-
-function drawTeam(ctx: CanvasRenderingContext2D, S: number) {
-  // three people: two behind, one in front; a cut-out gap keeps silhouettes separate
-  type Person = { cx: number; headY: number; r: number; baseY: number; rx: number; ry: number };
-  const side: Person[] = [
-    { cx: 4.6, headY: 9.6, r: 2.4, baseY: 19, rx: 4.1, ry: 5 },
-    { cx: 19.4, headY: 9.6, r: 2.4, baseY: 19, rx: 4.1, ry: 5 },
-  ];
-  const front: Person = { cx: 12, headY: 8.6, r: 3.2, baseY: 21, rx: 5.8, ry: 6.6 };
-  const figure = (p: Person) => {
-    const path = new Path2D();
-    path.arc(p.cx, p.headY, p.r, 0, Math.PI * 2);
-    path.moveTo(p.cx + p.rx, p.baseY);
-    path.ellipse(p.cx, p.baseY, p.rx, p.ry, 0, 0, Math.PI, true);
-    path.closePath();
-    return path;
+    },
   };
-  const s = (S * 0.92) / 24;
-  ctx.save();
-  ctx.translate((S - 24 * s) / 2, (S - 24 * s) / 2 - S * 0.03);
-  ctx.scale(s, s);
-  side.forEach((p) => ctx.fill(figure(p)));
-  ctx.globalCompositeOperation = "destination-out";
-  ctx.lineWidth = 1.8;
-  const f = figure(front);
-  ctx.stroke(f);
-  ctx.fill(f);
-  ctx.globalCompositeOperation = "source-over";
-  ctx.fill(f);
-  ctx.restore();
 }
 
-/** A dotted Earth: dense land, faint ocean shell. */
-function sampleGlobe(N: number) {
+/** Quantum atom: pulsing nucleus, three tilted electron orbits, racing electrons. */
+function quantumAtom(): Form {
+  const A = 1.95;
+  const B = 0.7;
+  return {
+    spin: 0.25,
+    tiltX: 0.35,
+    tiltZ: 0,
+    at(i, t, s, out, k) {
+      if (s.a[i] < 0.16) {
+        const pulse = 1 + Math.sin(t * 3) * 0.08;
+        const r = 0.42 * pulse;
+        out[k] = s.jx[i] * r;
+        out[k + 1] = s.jy[i] * r;
+        out[k + 2] = s.jz[i] * r;
+        return;
+      }
+      const orbit = Math.floor(s.c[i] * 3);
+      const speed = 0.9 + orbit * 0.25;
+      // ~6% of each orbit's particles bunch up into a bright moving "electron"
+      const electron = s.b[i] < 0.06;
+      const u = electron ? t * speed * 1.6 + orbit * 2.1 + (s.b[i] - 0.03) * 2.2 : s.b[i] * TAU + t * speed * 0.35;
+      const j = electron ? 0.05 : 0.035;
+      const x0 = A * Math.cos(u) + s.jx[i] * j;
+      const y0 = B * Math.sin(u) + s.jy[i] * j;
+      const z0 = s.jz[i] * j;
+      const ang = (orbit * Math.PI) / 3;
+      const ca = Math.cos(ang), sa = Math.sin(ang);
+      // rotate the ellipse about Z, then lean it about X so the orbits cross in 3D
+      const x1 = x0 * ca - y0 * sa;
+      const y1 = x0 * sa + y0 * ca;
+      out[k] = x1;
+      out[k + 1] = y1 * 0.92 - z0 * 0.38;
+      out[k + 2] = y1 * 0.38 + z0 * 0.92;
+    },
+  };
+}
+
+/** (2,3) torus knot: an endless loop of flowing particles. */
+function torusKnot(): Form {
+  return {
+    spin: 0.22,
+    spinAxis: "z",
+    tiltX: 0.3,
+    tiltZ: 0,
+    at(i, t, s, out, k) {
+      const u = ((s.b[i] + t * 0.05) % 1) * TAU;
+      const r = 1.05 + 0.48 * Math.cos(3 * u);
+      const tube = 0.17;
+      out[k] = (r * Math.cos(2 * u)) * 1.05 + s.jx[i] * tube;
+      out[k + 1] = (r * Math.sin(2 * u)) * 1.05 + s.jy[i] * tube;
+      out[k + 2] = -Math.sin(3 * u) * 0.55 + s.jz[i] * tube;
+    },
+  };
+}
+
+/** DNA double helix with rungs; strands flow upward. */
+function doubleHelix(): Form {
+  const H = 3.9;
+  const TURNS = 2.1;
+  const RAD = 0.9;
+  const RUNGS = 16;
+  return {
+    spin: 0.45,
+    tiltX: 0,
+    tiltZ: 0.38,
+    at(i, t, s, out, k) {
+      if (s.a[i] < 0.74) {
+        const strand = s.c[i] < 0.5 ? 0 : 1;
+        const f = (s.b[i] + t * 0.04) % 1;
+        const ang = f * TURNS * TAU + strand * Math.PI;
+        out[k] = RAD * Math.cos(ang) + s.jx[i] * 0.07;
+        out[k + 1] = (f - 0.5) * H + s.jy[i] * 0.07;
+        out[k + 2] = RAD * Math.sin(ang) + s.jz[i] * 0.07;
+      } else {
+        const rung = Math.floor(s.b[i] * RUNGS);
+        const f = (rung + 0.5) / RUNGS;
+        const ang = f * TURNS * TAU;
+        const along = s.c[i] * 2 - 1;
+        out[k] = RAD * Math.cos(ang) * along + s.jx[i] * 0.03;
+        out[k + 1] = (f - 0.5) * H + s.jy[i] * 0.03;
+        out[k + 2] = RAD * Math.sin(ang) * along + s.jz[i] * 0.03;
+      }
+    },
+  };
+}
+
+/** Dotted Earth with an orbiting satellite ring. */
+function globe(N: number): Form {
+  const R = 1.55;
   const land = landPoints(2.2);
-  const out = new Float32Array(N * 3);
-  const toXYZ = (lat: number, lon: number, r: number, k: number) => {
+  const base = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    let lat: number, lon: number;
+    if (Math.random() < 0.8 && land.length) {
+      const p = land[Math.floor(Math.random() * land.length)];
+      lat = p.lat + (Math.random() - 0.5) * 2.2;
+      lon = p.lon + (Math.random() - 0.5) * 2.2;
+    } else {
+      lat = Math.asin(Math.random() * 2 - 1) * (180 / Math.PI);
+      lon = Math.random() * 360 - 180;
+    }
     const la = THREE.MathUtils.degToRad(lat);
     const lo = THREE.MathUtils.degToRad(lon);
-    out[k] = r * Math.cos(la) * Math.sin(lo);
-    out[k + 1] = r * Math.sin(la);
-    out[k + 2] = r * Math.cos(la) * Math.cos(lo);
-  };
-  for (let i = 0; i < N; i++) {
-    if (i < N * 0.84 && land.length) {
-      const p = land[Math.floor(Math.random() * land.length)];
-      toXYZ(p.lat + (Math.random() - 0.5) * 2.2, p.lon + (Math.random() - 0.5) * 2.2, GLOBE_R, i * 3);
-    } else {
-      const v = new THREE.Vector3().randomDirection().multiplyScalar(GLOBE_R * (0.98 + Math.random() * 0.04));
-      out.set([v.x, v.y, v.z], i * 3);
-    }
+    base[i * 3] = R * Math.cos(la) * Math.sin(lo);
+    base[i * 3 + 1] = R * Math.sin(la);
+    base[i * 3 + 2] = R * Math.cos(la) * Math.cos(lo);
   }
-  return out;
+  return {
+    spin: 0.32,
+    tiltX: 0.25,
+    tiltZ: 0,
+    at(i, t, s, out, k) {
+      if (s.a[i] < 0.12) {
+        // satellite ring, tilted, counter-flowing
+        const u = s.b[i] * TAU - t * 0.6;
+        const rr = 2.15 + s.jx[i] * 0.04;
+        const x = rr * Math.cos(u);
+        const z = rr * Math.sin(u);
+        out[k] = x;
+        out[k + 1] = z * 0.42 + s.jy[i] * 0.03;
+        out[k + 2] = z * 0.9;
+        return;
+      }
+      out[k] = base[k];
+      out[k + 1] = base[k + 1];
+      out[k + 2] = base[k + 2];
+    },
+  };
 }

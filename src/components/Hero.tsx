@@ -31,7 +31,13 @@ export default function Hero({ onOpenConsultation, onOpenTalentModal }: HeroProp
           <div className="lg:col-span-6">
             <GlobeBadge />
 
-            <ArrowDownRight className="w-7 h-7 mt-12 mb-8 text-[#F3ECE3]/70" strokeWidth={1.5} aria-hidden="true" />
+            <div className="mt-12 mb-7 flex items-center gap-4">
+              <ArrowDownRight className="w-7 h-7 text-[#F3ECE3]/70 shrink-0" strokeWidth={1.5} aria-hidden="true" />
+              {/* What the name stands for: Quality + Quantum innovation + future-ready */}
+              <p className="text-[12px] uppercase text-[#EDC9AF]/90">
+                <span className="text-[#F4D03F]">Q</span>uality · <span className="text-[#F4D03F]">Q</span>uantum innovation · Future-ready engineering
+              </p>
+            </div>
 
             <h1 className="text-[2.6rem] sm:text-6xl lg:text-[3.6rem] xl:text-[4.1rem] leading-[1.04] tracking-[-0.035em] font-light font-sans">
               <span className="block text-[#F3ECE3]">Software that ships.</span>
