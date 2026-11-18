@@ -184,9 +184,6 @@ export default function Navbar({ onOpenConsultation, onOpenTalentModal }: Navbar
               </button>
             </div>
 
-            <div className="text-[10px] font-mono text-[#EDC9AF] text-center pt-1 border-t border-[#6B8E23]/30">
-              CIN: U62013TN2026PTC199725 &bull; Tennur, Tiruchirappalli, TN 620017
-            </div>
           </div>
         </div>
       )}

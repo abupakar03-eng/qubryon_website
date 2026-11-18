@@ -85,7 +85,7 @@ export default function ContactSection({
 
         {/* Corporate Information & Contact Grid */}
         <div id="corporate" className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
-          {/* Left Column: Official Corporate Entity Verification Card (30% Olive Drab) */}
+          {/* Left Column: Company Info & Contact (30% Olive Drab) */}
           <div className="lg:col-span-5 space-y-6">
             <div className="olive-chassis p-7 sm:p-8 rounded-3xl relative overflow-hidden shadow-xl">
               <div className="brass-rivet absolute top-3.5 left-3.5" />
@@ -93,39 +93,20 @@ export default function ContactSection({
               <div className="brass-rivet absolute bottom-3.5 left-3.5" />
               <div className="brass-rivet absolute bottom-3.5 right-3.5" />
 
-              <div className="flex items-center justify-between border-b border-[#6B8E23]/40 pb-4 mb-5">
-                <div className="flex items-center space-x-2">
-                  <Building2 className="w-5 h-5 text-[#F4D03F]" />
-                  <span className="font-mono text-xs font-bold text-[#F4D03F] tracking-wider">
-                    REGISTERED CORPORATE ENTITY
-                  </span>
-                </div>
-                <span className="olive-recessed-channel text-[10px] font-mono px-2 py-0.5 rounded text-[#8BAE3A] border border-[#6B8E23]/60 font-bold">
-                  GOVT. OF INDIA VERIFIED
+              <div className="flex items-center space-x-2 border-b border-[#6B8E23]/40 pb-4 mb-5">
+                <Building2 className="w-5 h-5 text-[#F4D03F]" />
+                <span className="font-mono text-xs font-bold text-[#F4D03F] tracking-wider">
+                  QUBRYON TECHNOLOGIES PRIVATE LIMITED
                 </span>
               </div>
 
               <div className="space-y-4 text-xs font-mono">
-                <div>
-                  <span className="text-[#A2B682] block text-[10px] tracking-wider uppercase font-bold">LEGAL COMPANY NAME</span>
-                  <span className="text-white font-bold text-sm block font-syne tracking-wide mt-0.5">
-                    Qubryon Technologies Private Limited
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <span className="text-[#A2B682] block text-[10px] tracking-wider uppercase font-bold">CORPORATE ID (CIN)</span>
-                    <span className="text-[#F4D03F] font-bold">U62013TN2026PTC199725</span>
-                  </div>
-                  <div>
-                    <span className="text-[#A2B682] block text-[10px] tracking-wider uppercase font-bold">INCORPORATION DATE</span>
-                    <span className="text-[#EDC9AF]">November 3, 2026</span>
-                  </div>
-                </div>
+                <p className="text-[#EDC9AF] leading-relaxed">
+                  A registered cyber-physical engineering firm specializing in custom IoT hardware architectures, edge AI predictive analytics, and enterprise IT staff augmentation — headquartered in Tiruchirappalli, Tamil Nadu, India.
+                </p>
 
                 <div>
-                  <span className="text-[#A2B682] block text-[10px] tracking-wider uppercase font-bold">REGISTERED OFFICE ADDRESS</span>
+                  <span className="text-[#A2B682] block text-[10px] tracking-wider uppercase font-bold">REGISTERED OFFICE</span>
                   <div className="text-[#FAF1E8] flex items-start space-x-2 mt-1">
                     <MapPin className="w-4 h-4 text-[#F4D03F] shrink-0 mt-0.5" />
                     <span className="font-mono text-xs">
@@ -134,22 +115,8 @@ export default function ContactSection({
                   </div>
                 </div>
 
-                <div>
-                  <span className="text-[#A2B682] block text-[10px] tracking-wider uppercase font-bold">REGISTERED DIRECTORS</span>
-                  <div className="space-y-1.5 mt-1.5">
-                    <div className="flex items-center space-x-2 text-[#FAF1E8]">
-                      <UserCheck className="w-3.5 h-3.5 text-[#F4D03F]" />
-                      <span>Senthilkumar Vivek Santha Kumar</span>
-                    </div>
-                    <div className="flex items-center space-x-2 text-[#FAF1E8]">
-                      <UserCheck className="w-3.5 h-3.5 text-[#F4D03F]" />
-                      <span>Abubakkar Mohamed Sathik</span>
-                    </div>
-                  </div>
-                </div>
-
                 <div className="pt-3 border-t border-[#6B8E23]/40 text-[11px] text-[#EDC9AF] flex items-center justify-between">
-                  <span>Authorized Industry:</span>
+                  <span>Domain:</span>
                   <span className="text-[#F4D03F] font-bold">IoT &amp; AI Integration Engineering</span>
                 </div>
               </div>

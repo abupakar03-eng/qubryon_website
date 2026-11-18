@@ -17,16 +17,12 @@ export default function Hero({ onOpenConsultation, onOpenTalentModal }: HeroProp
       <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[450px] h-[350px] bg-[#F4D03F]/20 rounded-full blur-[130px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        {/* Top Incorporation & Enterprise Status Badge (30% Olive Drab) */}
+        {/* Top Enterprise Status Badge (30% Olive Drab) */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-7">
           <div className="olive-recessed-channel inline-flex items-center space-x-2.5 px-4.5 py-1.5 rounded-full border border-[#6B8E23] text-[#F4D03F] text-xs font-mono shadow-[inset_0_2px_4px_rgba(0,0,0,0.8),0_2px_8px_rgba(30,40,15,0.15)]">
             <span className="hardware-led-yellow animate-pulse" />
             <span className="font-bold tracking-[0.16em] uppercase">
               ENTERPRISE CYBER-PHYSICAL SYSTEMS
-            </span>
-            <span className="text-[#6B8E23]">|</span>
-            <span className="text-[#EDC9AF] font-mono text-[11px] hidden sm:inline tracking-wider">
-              CIN: U62013TN2026PTC199725
             </span>
           </div>
         </div>

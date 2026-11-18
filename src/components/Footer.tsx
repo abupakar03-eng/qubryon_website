@@ -51,29 +51,6 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
               <strong className="text-white">Qubryon Technologies Private Limited</strong> is a registered cyber-physical engineering firm specializing in custom IoT hardware architectures, edge AI predictive analytics, and enterprise IT staff augmentation.
             </p>
 
-            {/* Incorporation Credentials with Hardware Chassis */}
-            <div className="olive-chassis p-4 rounded-xl text-[11px] font-mono space-y-1.5 text-[#EDC9AF] relative border border-[#6B8E23]/60 shadow-md">
-              <div className="brass-rivet absolute top-2 right-2" />
-              <div className="flex justify-between">
-                <span className="text-[#A2B682]">Corporate Identity (CIN):</span>
-                <span className="text-[#F4D03F] font-bold">U62013TN2026PTC199725</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[#A2B682]">Incorporation Date:</span>
-                <span className="text-[#FAF1E8]">November 3, 2026</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[#A2B682]">Registered Office:</span>
-                <span className="text-[#FAF1E8]">Tennur, Tiruchirappalli, TN 620017</span>
-              </div>
-              <div className="pt-1 border-t border-[#6B8E23]/40 flex justify-between text-[10px]">
-                <span className="text-[#A2B682]">Directors:</span>
-                <span className="text-[#F4D03F] truncate ml-2">
-                  Senthilkumar Vivek Santha Kumar &bull; Abubakkar Mohamed Sathik
-                </span>
-              </div>
-            </div>
-
             {/* Social Tactile Buttons */}
             <div className="flex items-center space-x-3 pt-2">
               <a
@@ -251,7 +228,7 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
             <span>&bull;</span>
             <span className="hover:text-[#F4D03F] cursor-pointer">Security Standards</span>
             <span>&bull;</span>
-            <span className="text-[#F4D03F] font-bold">CIN: U62013TN2026PTC199725</span>
+            <span className="text-[#EDC9AF]">Tiruchirappalli, Tamil Nadu, India</span>
           </div>
         </div>
       </div>
