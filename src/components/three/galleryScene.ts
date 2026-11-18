@@ -15,11 +15,40 @@ export interface GalleryArtwork {
   tagSub: string;
 }
 
+export type GalleryTheme = "teal" | "sand";
+
 interface Options {
   onSelect?: (index: number) => void;
   onReady?: () => void;
   fontFamily?: string;
+  theme?: GalleryTheme;
 }
+
+/** Room colours per theme: a deep Abyss Teal room or a warm Desert Sand room. */
+const ROOM = {
+  teal: {
+    fog: 0x082f35,
+    wall: ["#0F4950", "#0B3C42", "#082F35"],
+    floorInner: "#0E434A",
+    floorOuter: "#06262B",
+    skirt: 0x05211f,
+    arch: "rgba(237,201,175,0.30)",
+    shadow: "rgba(0,0,0,0.55)",
+    tagTitle: "#F3ECE3",
+    tagSub: "#A9C3C2",
+  },
+  sand: {
+    fog: 0xedc9af,
+    wall: ["#F6DECB", "#EDCBB1", "#E2BB9E"],
+    floorInner: "#F2D6C0",
+    floorOuter: "#D9B194",
+    skirt: 0xc9a183,
+    arch: "rgba(255,255,255,0.85)",
+    shadow: "rgba(60,36,20,0.35)",
+    tagTitle: "#2A2018",
+    tagSub: "#7A5F4A",
+  },
+} as const;
 
 const R = 7.5; // wall radius
 const STEP = 0.62; // radians between panels
@@ -29,6 +58,7 @@ const PANEL_Y = 1.95;
 
 export function createGalleryScene(container: HTMLElement, items: GalleryArtwork[], opts: Options = {}) {
   const family = opts.fontFamily || "system-ui, sans-serif";
+  const room = ROOM[opts.theme ?? "sand"];
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -38,14 +68,14 @@ export function createGalleryScene(container: HTMLElement, items: GalleryArtwork
   const aniso = renderer.capabilities.getMaxAnisotropy();
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0xf3eee6, 10, 22);
+  scene.fog = new THREE.Fog(room.fog, 10, 22);
   const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 60);
 
   const disposables: { dispose: () => void }[] = [];
   const keep = <T extends { dispose: () => void }>(x: T) => (disposables.push(x), x);
 
   /* ---------- room ---------- */
-  const wallTex = keep(gradientTexture(["#F1ECE4", "#E6DFD4", "#DCD4C7"]));
+  const wallTex = keep(gradientTexture([...room.wall]));
   const wall = new THREE.Mesh(
     keep(new THREE.CylinderGeometry(R, R, 7, 160, 1, true)),
     keep(new THREE.MeshBasicMaterial({ map: wallTex, side: THREE.BackSide })),
@@ -53,7 +83,7 @@ export function createGalleryScene(container: HTMLElement, items: GalleryArtwork
   wall.position.y = 3.5;
   scene.add(wall);
 
-  const floorTex = keep(radialTexture("#EDE7DE", "#CFC7BA"));
+  const floorTex = keep(radialTexture(room.floorInner, room.floorOuter));
   const floor = new THREE.Mesh(keep(new THREE.CircleGeometry(R, 120)), keep(new THREE.MeshBasicMaterial({ map: floorTex })));
   floor.rotation.x = -Math.PI / 2;
   scene.add(floor);
@@ -61,14 +91,14 @@ export function createGalleryScene(container: HTMLElement, items: GalleryArtwork
   // skirting line where wall meets floor
   const skirt = new THREE.Mesh(
     keep(new THREE.CylinderGeometry(R - 0.01, R - 0.01, 0.06, 160, 1, true)),
-    keep(new THREE.MeshBasicMaterial({ color: 0xcac1b3, side: THREE.BackSide })),
+    keep(new THREE.MeshBasicMaterial({ color: room.skirt, side: THREE.BackSide })),
   );
   skirt.position.y = 0.03;
   scene.add(skirt);
 
   /* ---------- artworks ---------- */
-  const archTex = keep(archTexture());
-  const shadowTex = keep(shadowTexture());
+  const archTex = keep(archTexture(room.arch));
+  const shadowTex = keep(shadowTexture(room.shadow));
   const archMat = keep(new THREE.MeshBasicMaterial({ map: archTex, transparent: true, depthWrite: false }));
   const shadowMat = keep(new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false }));
 
@@ -104,7 +134,7 @@ export function createGalleryScene(container: HTMLElement, items: GalleryArtwork
     mesh.renderOrder = 3;
     g.add(mesh);
 
-    const tagTex = keep(tagTexture(item.tagTitle, item.tagSub, family));
+    const tagTex = keep(tagTexture(item.tagTitle, item.tagSub, family, room.tagTitle, room.tagSub));
     tagTex.anisotropy = aniso;
     const tag = new THREE.Mesh(
       keep(new THREE.PlaneGeometry(1.5, 0.375)),
@@ -263,10 +293,10 @@ function radialTexture(inner: string, outer: string) {
 }
 
 /** Soft white arch-shaped light pool, like a lit gallery niche. */
-function archTexture() {
+function archTexture(color: string) {
   return canvasTex(256, 416, (ctx) => {
     ctx.filter = "blur(26px)";
-    ctx.fillStyle = "rgba(255,255,255,0.85)";
+    ctx.fillStyle = color;
     const x = 52, y = 46, w = 152, h = 330;
     ctx.beginPath();
     ctx.moveTo(x, y + h);
@@ -278,10 +308,10 @@ function archTexture() {
   });
 }
 
-function shadowTexture() {
+function shadowTexture(color: string) {
   return canvasTex(256, 256, (ctx) => {
     ctx.filter = "blur(14px)";
-    ctx.fillStyle = "rgba(30,26,18,0.35)";
+    ctx.fillStyle = color;
     ctx.fillRect(34, 40, 188, 184);
   });
 }
@@ -292,9 +322,9 @@ function paintTexture(draw: GalleryArtwork["draw"], aspect: number) {
   return canvasTex(W, H, (ctx) => draw(ctx, W, H));
 }
 
-function tagTexture(title: string, sub: string, family: string) {
+function tagTexture(title: string, sub: string, family: string, titleColor: string, subColor: string) {
   return canvasTex(640, 160, (ctx) => {
-    ctx.fillStyle = "#2A2A22";
+    ctx.fillStyle = titleColor;
     ctx.textBaseline = "top";
     let size = 40;
     do {
@@ -302,7 +332,7 @@ function tagTexture(title: string, sub: string, family: string) {
       size -= 1;
     } while (ctx.measureText(title).width > 620 && size > 20);
     ctx.fillText(title, 0, 18);
-    ctx.fillStyle = "#77705F";
+    ctx.fillStyle = subColor;
     ctx.font = `400 30px ${family}`;
     ctx.fillText(sub, 0, 80);
   });

@@ -117,21 +117,21 @@ export default function GlobalPresence() {
   const hq = project(HQ.lon, HQ.lat);
 
   return (
-    <section id="global" className="relative py-28 bg-[#F6F1EA] text-[#1C260D] sand-cyber-grid overflow-hidden">
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#6B8E23]/15 rounded-full blur-[140px] pointer-events-none" />
+    <section id="global" className="relative py-28 bg-[#0A3A40] text-[#F3ECE3] overflow-hidden">
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#EDC9AF]/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[#6B8E23] text-[#F4D03F] font-sans text-xs mb-3 shadow-md">
-            <Globe className="w-3.5 h-3.5 text-[#F4D03F]" />
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[#EDC9AF]/25 bg-[#EDC9AF]/10 text-[#EDC9AF] text-xs mb-3">
+            <Globe className="w-3.5 h-3.5 text-[#EDC9AF]" />
             <span className="tracking-[0.18em] uppercase font-bold">GLOBAL DELIVERY NETWORK</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#172108] mb-4 font-syne">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#F3ECE3] mb-4 font-syne">
             <span className="block drop-shadow-sm">Engineered in India.</span>
-            <span className="block mt-1 text-[#466016]">Deployed Worldwide.</span>
+            <span className="block mt-1 text-[#EDC9AF]">Deployed Worldwide.</span>
           </h2>
-          <p className="text-[#3A4A1C] text-sm sm:text-base leading-relaxed font-sans">
+          <p className="text-[#F3ECE3]/70 text-sm sm:text-base leading-relaxed font-sans">
             One delivery center, every major market. We partner with product companies, OEMs and enterprises across
             North America, Europe, the Middle East and Asia Pacific, working in your time zone and to your standards.
           </p>
@@ -144,11 +144,11 @@ export default function GlobalPresence() {
           <div className="brass-rivet absolute bottom-3 left-3" />
           <div className="brass-rivet absolute bottom-3 right-3" />
 
-          <div className="flex flex-wrap items-center justify-between gap-2 px-2 pb-3 mb-2 border-b border-[#6B8E23]/40 text-[10px] sm:text-[11px] font-sans tracking-[0.16em] uppercase">
+          <div className="flex flex-wrap items-center justify-between gap-2 px-2 pb-3 mb-2 border-b border-white/10 text-[10px] sm:text-[11px] font-sans tracking-[0.16em] uppercase">
             <span className="text-[#F4D03F] font-bold flex items-center gap-2">
               <span className="hardware-led-yellow animate-pulse" /> LIVE DELIVERY UPLINKS
             </span>
-            <span className="text-[#A2B682]">ORIGIN: TIRUCHIRAPPALLI, IN · 10.8°N 78.7°E</span>
+            <span className="text-[#F3ECE3]/55">ORIGIN: TIRUCHIRAPPALLI, IN · 10.8°N 78.7°E</span>
           </div>
 
           <svg
@@ -158,7 +158,7 @@ export default function GlobalPresence() {
             aria-label="World map showing delivery links from India to North America, Europe, the Middle East, Singapore and Australia"
           >
             {dots.map((d, i) => (
-              <circle key={i} cx={d.x} cy={d.y} r={1.9} fill="#6B8E23" opacity={0.55} />
+              <circle key={i} cx={d.x} cy={d.y} r={1.9} fill="#EDC9AF" opacity={0.38} />
             ))}
 
             {HUBS.map((h) => {
@@ -221,7 +221,7 @@ export default function GlobalPresence() {
                 <div className="brass-rivet absolute top-2.5 right-2.5" />
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <div className="text-[10px] font-sans tracking-[0.18em] uppercase text-[#A2B682] font-bold">
+                    <div className="text-[10px] font-sans tracking-[0.18em] uppercase text-[#9FC9C4] font-bold">
                       {r.region}
                     </div>
                     <div className="text-sm font-sans text-[#FAF1E8] mt-0.5">{r.city}</div>
@@ -235,11 +235,11 @@ export default function GlobalPresence() {
                     </div>
                   </div>
                 </div>
-                <div className="mt-4 pt-3 border-t border-[#6B8E23]/40 flex items-center justify-between text-[11px] font-sans">
+                <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-sans">
                   <span className="text-[#EDC9AF]">
                     Overlap: <span className="text-[#FAF1E8] font-bold">{r.overlap}</span>
                   </span>
-                  <span className="flex items-center gap-1.5 text-[#A2B682]">
+                  <span className="flex items-center gap-1.5 text-[#9FC9C4]">
                     <span className={info?.open ? "hardware-led-yellow" : "hardware-led-olive opacity-60"} />
                     {info ? (info.open ? "OPEN" : "AFTER HRS") : ""}
                   </span>
@@ -252,12 +252,12 @@ export default function GlobalPresence() {
         {/* Delivery pillars */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {PILLARS.map(({ icon: Icon, title, body }) => (
-            <div key={title} className="sand-recessed-channel rounded-2xl p-6">
+            <div key={title} className="rounded-2xl p-6 bg-[#EDC9AF] text-[#141B08] transition-transform hover:-translate-y-0.5">
               <div className="w-10 h-10 rounded-xl olive-chassis flex items-center justify-center mb-4">
                 <Icon className="w-5 h-5 text-[#F4D03F]" />
               </div>
-              <h3 className="text-lg font-bold font-syne text-[#172108] mb-2">{title}</h3>
-              <p className="text-xs font-sans leading-relaxed text-[#3A4A1C]">{body}</p>
+              <h3 className="text-lg font-bold font-syne text-[#072C31] mb-2">{title}</h3>
+              <p className="text-xs font-sans leading-relaxed text-[#3B2F25]">{body}</p>
             </div>
           ))}
         </div>

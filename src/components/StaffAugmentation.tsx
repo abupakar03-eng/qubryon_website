@@ -49,8 +49,8 @@ const STEPS: Step[] = [
     title: "Tell us exactly who you need",
     body: "Share the role, seniority, tech stack, time zone and engagement length. A solutions lead reviews it and replies within 2 hours.",
     outcome: "A clear, written role profile agreed with you before any search begins.",
-    tint: "from-[#FBF1C7] to-[#F6F1EA]",
-    accent: "#D4AC0D",
+    tint: "from-[#0F4C53] to-[#0A3A40]",
+    accent: "#F4D03F",
     tiles: [
       {
         icon: FileCheck,
@@ -93,8 +93,8 @@ const STEPS: Step[] = [
     title: "Interview pre-vetted engineers",
     body: "Within 48 hours you receive 2–3 profiles matched to your architecture. You run the technical interview and make the call.",
     outcome: "Engineers you have personally interviewed and approved, backed by a 2-week risk-free trial.",
-    tint: "from-[#E7EDD6] to-[#F6F1EA]",
-    accent: "#6B8E23",
+    tint: "from-[#0B4047] to-[#072E33]",
+    accent: "#EDC9AF",
     tiles: [
       {
         icon: Users,
@@ -139,8 +139,8 @@ const STEPS: Step[] = [
     title: "Scale your team from day one",
     body: "Engineers join your Slack, Jira and GitHub on day one and follow your sprint rhythm. We handle contracts, payroll and HR.",
     outcome: "More delivery capacity without hiring overhead, with full IP assignment and strict NDAs.",
-    tint: "from-[#EDE6DA] to-[#F6F1EA]",
-    accent: "#4F6B1A",
+    tint: "from-[#12585F] to-[#0A3A40]",
+    accent: "#8FD0C9",
     tiles: [
       {
         icon: Workflow,
@@ -241,13 +241,13 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
   return (
     <>
       {/* ---------------------------- TALENT ---------------------------- */}
-      <section id="talent" className="relative bg-[#F6F1EA] text-[#141B08]">
+      <section id="talent" className="relative bg-[#0A3A40] text-[#F3ECE3]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-28 pb-16 text-center">
-          <div className="text-[12px] uppercase tracking-[0.18em] text-[#4F6B1A] font-semibold">IT staff augmentation</div>
+          <div className="text-[12px] uppercase tracking-[0.18em] text-[#EDC9AF] font-semibold">IT staff augmentation</div>
           <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-light tracking-[-0.03em] leading-[1.05] font-sans">
             Senior engineers in your team, within 48 hours.
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-[#4A5634] leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-5 text-base sm:text-lg text-[#F3ECE3]/70 leading-relaxed max-w-2xl mx-auto">
             Skip three-month hiring cycles. We match vetted developers, ML engineers and DevOps specialists to your stack,
             time zone and sprint rhythm, in three simple steps.
           </p>
@@ -258,33 +258,33 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
           {STEPS.map((step, i) => (
             <div
               key={step.name}
-              className={`lg:sticky lg:top-0 lg:min-h-screen flex items-center bg-gradient-to-b ${step.tint} border-t border-[#141B08]/5`}
+              className={`lg:sticky lg:top-0 lg:min-h-screen flex items-center bg-gradient-to-b ${step.tint} border-t border-white/5`}
               style={{ zIndex: i + 1 }}
             >
               <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 lg:pt-28 pb-12">
-                <div className="rounded-3xl bg-white/75 backdrop-blur border border-white shadow-[0_30px_80px_-40px_rgba(20,27,8,0.35)] p-6 sm:p-9">
+                <div className="rounded-3xl bg-white/[0.06] backdrop-blur border border-white/10 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)] p-6 sm:p-9">
                   <div className="flex items-center justify-between">
                     <div className="text-lg font-semibold">{step.name}</div>
-                    <div className="text-[12px] text-[#4A5634] tabular-nums">
+                    <div className="text-[12px] text-[#F3ECE3]/55 tabular-nums">
                       {String(i + 1).padStart(2, "0")} / {String(STEPS.length).padStart(2, "0")}
                     </div>
                   </div>
                   <h3 className="mt-3 text-2xl sm:text-4xl font-light tracking-[-0.02em] font-sans">{step.title}</h3>
-                  <p className="mt-3 text-[15px] text-[#4A5634] max-w-3xl leading-relaxed">{step.body}</p>
+                  <p className="mt-3 text-[15px] text-[#F3ECE3]/70 max-w-3xl leading-relaxed">{step.body}</p>
                   <div className="mt-6 h-6 w-px" style={{ background: step.accent }} />
                   <div className="mt-3 text-[11px] uppercase tracking-[0.14em] font-semibold">Outcome</div>
-                  <p className="mt-1 text-[15px] text-[#2A3517]">{step.outcome}</p>
+                  <p className="mt-1 text-[15px] text-[#F3ECE3]/90">{step.outcome}</p>
                 </div>
 
                 <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5">
                   {step.tiles.map(({ icon: Icon, caption, mock }) => (
-                    <div key={caption} className="rounded-3xl bg-white/60 backdrop-blur border border-white p-4 sm:p-5">
-                      <div className="rounded-2xl bg-[#F6F1EA]/80 p-3 sm:p-4 min-h-[150px]">{mock}</div>
+                    <div key={caption} className="rounded-3xl bg-white/[0.05] backdrop-blur border border-white/10 p-4 sm:p-5">
+                      <div className="rounded-2xl bg-[#F3ECE3] text-[#141B08] p-3 sm:p-4 min-h-[150px]">{mock}</div>
                       <div className="mt-4 flex items-center gap-3">
-                        <span className="w-9 h-9 rounded-xl bg-[#1A2309] flex items-center justify-center shrink-0">
-                          <Icon className="w-4 h-4 text-[#F4D03F]" />
+                        <span className="w-9 h-9 rounded-xl bg-[#EDC9AF] flex items-center justify-center shrink-0">
+                          <Icon className="w-4 h-4 text-[#072C31]" />
                         </span>
-                        <span className="text-[14px] text-[#2A3517]">{caption}</span>
+                        <span className="text-[14px] text-[#F3ECE3]/85">{caption}</span>
                       </div>
                     </div>
                   ))}
@@ -294,25 +294,31 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
           ))}
         </div>
 
-        <div className="relative z-10 bg-[#F6F1EA] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="relative z-10 bg-[#0A3A40] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <RequestDevelopers onSuccessSubmit={onSuccessSubmit} />
         </div>
       </section>
 
       {/* ---------------------------- TECH STACKS ---------------------------- */}
-      <section id="tech-stacks" className="relative bg-gradient-to-b from-[#F6F1EA] via-[#EEEAE2] to-[#F6F1EA] text-[#141B08] overflow-hidden">
+      <section id="tech-stacks" className="relative bg-gradient-to-b from-[#0A3A40] via-[#072C31] to-[#0A3A40] text-[#F3ECE3] overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-28 text-center">
-          <div className="text-[12px] uppercase tracking-[0.18em] text-[#4F6B1A] font-semibold">One team. Every layer.</div>
+          <div className="text-[12px] uppercase tracking-[0.18em] text-[#EDC9AF] font-semibold">One team. Every layer.</div>
           <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-light tracking-[-0.03em] leading-[1.05] font-sans">
             Engineers across 40+ technology stacks
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-[#4A5634] leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-5 text-base sm:text-lg text-[#F3ECE3]/70 leading-relaxed max-w-2xl mx-auto">
             From the browser to the cloud to the device, our engineers already know the tools your product runs on.
             Tap a technology to see where it fits.
           </p>
         </div>
 
-        <DotTerrain pins={TECH_PINS} onPinClick={onPinClick} className="h-[420px] sm:h-[520px] -mt-4" />
+        <DotTerrain
+          pins={TECH_PINS}
+          onPinClick={onPinClick}
+          dotRgb="237,201,175"
+          stemClass="bg-[#EDC9AF]/40"
+          className="h-[420px] sm:h-[520px] -mt-4"
+        />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28 -mt-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -322,21 +328,21 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                 id={`stack-group-${i}`}
                 className={`rounded-3xl p-6 border backdrop-blur transition-all duration-300 ${
                   highlight === i
-                    ? "bg-[#1A2309] border-[#1A2309] text-[#F3ECE3] shadow-[0_24px_60px_-28px_rgba(20,27,8,0.7)] -translate-y-1"
-                    : "bg-white/70 border-white text-[#141B08]"
+                    ? "bg-[#EDC9AF] border-[#EDC9AF] text-[#072C31] shadow-[0_24px_60px_-28px_rgba(0,0,0,0.7)] -translate-y-1"
+                    : "bg-white/[0.05] border-white/10 text-[#F3ECE3]"
                 }`}
               >
-                <div className={`text-[12px] tabular-nums ${highlight === i ? "text-[#F4D03F]" : "text-[#4A5634]"}`}>
+                <div className={`text-[12px] tabular-nums ${highlight === i ? "text-[#0A3A40]" : "text-[#F3ECE3]/50"}`}>
                   {String(i + 1).padStart(2, "0")} / {String(STACK_GROUPS.length).padStart(2, "0")}
                 </div>
                 <h3 className="mt-2 text-lg font-semibold leading-snug">{g.title}</h3>
-                <p className={`mt-2 text-[13px] leading-relaxed ${highlight === i ? "text-[#E6DED3]/80" : "text-[#4A5634]"}`}>{g.body}</p>
+                <p className={`mt-2 text-[13px] leading-relaxed ${highlight === i ? "text-[#3B2F25]" : "text-[#F3ECE3]/65"}`}>{g.body}</p>
                 <div className="mt-4 flex flex-wrap gap-1.5">
                   {g.stack.map((s) => (
                     <span
                       key={s}
                       className={`text-[12px] rounded-full px-2.5 py-1 ${
-                        highlight === i ? "bg-white/10 text-[#F3ECE3]" : "bg-[#141B08]/[0.06] text-[#2A3517]"
+                        highlight === i ? "bg-[#072C31]/10 text-[#072C31]" : "bg-white/[0.07] text-[#F3ECE3]/85"
                       }`}
                     >
                       {s}

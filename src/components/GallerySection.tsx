@@ -25,11 +25,41 @@ interface Props {
   /** "Look closer" action. Default: switch to the list and scroll to the item's anchor. */
   onOpen?: (index: number) => void;
   openLabel?: string;
+  /** "teal" = dark Abyss Teal room, "sand" = light Desert Sand room */
+  theme?: "teal" | "sand";
 }
 
 const VH_PER_ITEM = 45;
 
-export default function GallerySection({ id, eyebrow, heading, intro, items, list, onOpen, openLabel = "Look closer" }: Props) {
+const THEME = {
+  teal: {
+    section: "bg-[#0A3A40] text-[#F3ECE3]",
+    eyebrow: "border-[#EDC9AF]/25 bg-[#EDC9AF]/10 text-[#EDC9AF]",
+    intro: "text-[#F3ECE3]/70",
+    toggle: "border-white/15 bg-white/5",
+    toggleOn: "bg-[#EDC9AF] text-[#072C31]",
+    toggleOff: "text-[#F3ECE3]/70 hover:text-white",
+    muted: "text-[#F3ECE3]/50",
+    sub: "text-[#F3ECE3]/70",
+    link: "text-[#F3ECE3] decoration-[#F3ECE3]/40 hover:decoration-[#F3ECE3]",
+    arrow: "border-white/25 bg-white/5 text-[#F3ECE3] hover:bg-white/15",
+  },
+  sand: {
+    section: "bg-[#EDC9AF] text-[#141B08]",
+    eyebrow: "border-[#0A3A40]/20 bg-[#0A3A40]/[0.07] text-[#0A3A40]",
+    intro: "text-[#3B2F25]",
+    toggle: "border-[#141B08]/15 bg-white/40",
+    toggleOn: "bg-[#0A3A40] text-[#F3ECE3]",
+    toggleOff: "text-[#141B08]/70 hover:text-[#141B08]",
+    muted: "text-[#141B08]/50",
+    sub: "text-[#3B2F25]",
+    link: "text-[#141B08] decoration-[#141B08]/40 hover:decoration-[#141B08]",
+    arrow: "border-[#141B08]/25 bg-white/50 hover:bg-white",
+  },
+} as const;
+
+export default function GallerySection({ id, eyebrow, heading, intro, items, list, onOpen, openLabel = "Look closer", theme = "sand" }: Props) {
+  const t = THEME[theme];
   const [view, setView] = useState<"gallery" | "list">("gallery");
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
@@ -103,6 +133,7 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
           items.map((it) => ({ draw: it.makeDraw(family, mono), aspect: it.aspect ?? 4 / 3, tagTitle: it.title, tagSub: it.subtitle })),
           {
             fontFamily: family,
+            theme,
             onReady: () => setReady(true),
             onSelect: (i) => (i === indexRef.current ? openRef.current(i) : walkRef.current(i)),
           },
@@ -164,7 +195,7 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
       cleanup?.();
       setReady(false);
     };
-  }, [showGallery, items, n]);
+  }, [showGallery, items, n, theme]);
 
   /* In-page links to an item's anchor walk the gallery there instead */
   useEffect(() => {
@@ -187,25 +218,25 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
   const current = items[index];
 
   return (
-    <section id={id} className="relative bg-[#F3EEE6] text-[#141B08]">
+    <section id={id} className={`relative ${t.section}`}>
       {/* Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#6B8E23]/25 bg-[#6B8E23]/10 px-3.5 py-1.5 text-xs text-[#3D5214] mb-4">
+          <div className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs mb-4 ${t.eyebrow}`}>
             {eyebrow}
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight font-syne leading-[1.08] mb-4">{heading}</h2>
-          <p className="text-[#4A5634] text-base sm:text-lg leading-relaxed">{intro}</p>
+          <p className={`text-base sm:text-lg leading-relaxed ${t.intro}`}>{intro}</p>
         </div>
         {!failed && (
-          <div className="inline-flex self-start lg:self-auto rounded-full border border-[#141B08]/15 p-1 bg-white/60" role="group" aria-label="View">
+          <div className={`inline-flex self-start lg:self-auto rounded-full border p-1 ${t.toggle}`} role="group" aria-label="View">
             {(["gallery", "list"] as const).map((v) => (
               <button
                 key={v}
                 onClick={() => setView(v)}
                 aria-pressed={view === v}
                 className={`px-4 py-1.5 rounded-full text-[12px] uppercase cursor-pointer transition-colors ${
-                  view === v ? "bg-[#141B08] text-[#F3ECE3]" : "text-[#141B08]/70 hover:text-[#141B08]"
+                  view === v ? t.toggleOn : t.toggleOff
                 }`}
               >
                 {v}
@@ -226,18 +257,18 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
               aria-label={`3D gallery. Now viewing ${current?.title}: ${current?.subtitle}`}
             />
 
-            <div className="absolute top-28 right-4 sm:right-8 text-[12px] uppercase text-[#141B08]/50 tabular-nums">
+            <div className={`absolute top-28 right-4 sm:right-8 text-[12px] uppercase tabular-nums ${t.muted}`}>
               {String(index + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
             </div>
 
             {/* Caption + controls */}
             <div className="absolute inset-x-0 bottom-24 sm:bottom-10 flex flex-col items-center text-center px-4 pointer-events-none">
-              <div className="text-[11px] uppercase text-[#141B08]/55">You are walking past</div>
+              <div className={`text-[11px] uppercase ${t.muted}`}>You are walking past</div>
               <div className="mt-1.5 text-2xl sm:text-3xl font-bold font-syne tracking-tight">{current?.title}</div>
-              <div className="text-sm text-[#4A5634] mt-1">{current?.subtitle}</div>
+              <div className={`text-sm mt-1 ${t.sub}`}>{current?.subtitle}</div>
               <button
                 onClick={() => open(index)}
-                className="pointer-events-auto mt-3 text-[12px] uppercase text-[#141B08] underline underline-offset-4 decoration-[#141B08]/40 hover:decoration-[#141B08] inline-flex items-center gap-1 cursor-pointer"
+                className={`pointer-events-auto mt-3 text-[12px] uppercase underline underline-offset-4 inline-flex items-center gap-1 cursor-pointer ${t.link}`}
               >
                 {openLabel} <ArrowUpRight className="w-3.5 h-3.5" />
               </button>
@@ -246,7 +277,7 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
                   onClick={() => walkTo(Math.max(index - 1, 0))}
                   disabled={index === 0}
                   aria-label="Previous"
-                  className="w-12 h-12 rounded-full border border-[#141B08]/25 bg-white/50 backdrop-blur flex items-center justify-center hover:bg-white disabled:opacity-35 cursor-pointer"
+                  className={`w-12 h-12 rounded-full border backdrop-blur flex items-center justify-center disabled:opacity-35 cursor-pointer ${t.arrow}`}
                 >
                   <ArrowLeft className="w-4 h-4" />
                 </button>
@@ -254,12 +285,12 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
                   onClick={() => walkTo(Math.min(index + 1, n - 1))}
                   disabled={index === n - 1}
                   aria-label="Next"
-                  className="w-12 h-12 rounded-full border border-[#141B08]/25 bg-white/50 backdrop-blur flex items-center justify-center hover:bg-white disabled:opacity-35 cursor-pointer"
+                  className={`w-12 h-12 rounded-full border backdrop-blur flex items-center justify-center disabled:opacity-35 cursor-pointer ${t.arrow}`}
                 >
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
-              <div className="mt-4 text-[11px] uppercase text-[#141B08]/45 hidden sm:block">
+              <div className={`mt-4 text-[11px] uppercase hidden sm:block ${t.muted}`}>
                 Scroll or drag to walk round · Click a panel to look closer
               </div>
             </div>

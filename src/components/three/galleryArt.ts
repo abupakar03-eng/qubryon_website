@@ -60,7 +60,7 @@ export interface ServiceArt {
 export function drawServicePoster(svc: ServiceArt, index: number, family: string, mono: string) {
   return (ctx: Ctx, W: number, H: number) => {
     const dark = !svc.highlight;
-    const bg = dark ? "#1A2309" : YELLOW;
+    const bg = dark ? "#052226" : YELLOW;
     const fg = dark ? CREAM : INK;
     const accent = dark ? YELLOW : INK;
 
@@ -113,10 +113,10 @@ export interface CaseArt {
 }
 
 const CASE_PALETTES = [
-  { bg: "#1A2309", fg: CREAM, accent: YELLOW },
+  { bg: "#052226", fg: CREAM, accent: YELLOW },
   { bg: YELLOW, fg: INK, accent: INK },
-  { bg: "#EDE6DA", fg: INK, accent: "#4F6B1A" },
-  { bg: "#2C3A14", fg: CREAM, accent: "#C9DB9A" },
+  { bg: "#FBF3EA", fg: INK, accent: "#0C5A63" },
+  { bg: "#0F4E57", fg: CREAM, accent: "#EDC9AF" },
 ];
 
 export function drawCasePoster(c: CaseArt, index: number, family: string, mono: string) {

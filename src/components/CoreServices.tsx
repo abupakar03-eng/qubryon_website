@@ -269,7 +269,7 @@ export default function CoreServices({ onOpenConsultation, onOpenTalentModal }: 
         </div>
 
         {/* Engagement models */}
-        <div className="mt-6 rounded-3xl border border-[#141B08]/10 bg-white/50 p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-4 gap-6 items-center">
+        <div className="mt-6 rounded-3xl border border-[#141B08]/10 bg-[#F3ECE3] text-[#141B08] p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-4 gap-6 items-center">
           <div>
             <div className="text-[11px] uppercase text-[#4A5634] mb-1">How we work with you</div>
             <h3 className="text-xl font-bold font-syne text-[#141B08]">Pick the model that fits.</h3>
@@ -300,13 +300,14 @@ export default function CoreServices({ onOpenConsultation, onOpenTalentModal }: 
       }
       heading={
         <>
-          Software engineering and expert talent, <span className="text-[#4F6B1A]">under one roof.</span>
+          Software engineering and expert talent, <span className="text-[#EDC9AF]">under one roof.</span>
         </>
       }
       intro="Hand us a whole product to build, or add senior engineers to the team you already have. Either way you get the same engineering standards, transparent communication and full ownership of your code."
       items={GALLERY_ITEMS}
       list={list}
       openLabel="See the details"
+      theme="teal"
     />
   );
 }

@@ -253,7 +253,7 @@ export default function Portfolio() {
           }
           heading={
             <>
-              Proven work, <span className="text-[#4F6B1A]">measurable results.</span>
+              Proven work, <span className="text-[#0C5A63]">measurable results.</span>
             </>
           }
           intro="Walk through projects where our product teams and embedded engineers delivered outcomes our clients could measure, from factory floors to cold-chain fleets."
@@ -261,6 +261,7 @@ export default function Portfolio() {
           list={list}
           onOpen={openCase}
           openLabel="Open case study"
+          theme="sand"
         />
 
         {/* Case Study Deep-Dive Modal */}

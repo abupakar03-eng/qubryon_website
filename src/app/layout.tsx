@@ -75,7 +75,7 @@ export default function RootLayout({
       lang="en"
       className={`${syne.variable} ${geist.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#F6F1EA] text-[#1E260F] selection:bg-[#F4D03F] selection:text-[#1E260F] font-sans">
+      <body className="min-h-full flex flex-col bg-[#0A3A40] text-[#1E260F] selection:bg-[#F4D03F] selection:text-[#1E260F] font-sans">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

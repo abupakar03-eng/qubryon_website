@@ -23,12 +23,16 @@ interface Props {
   pins: TerrainPin[];
   className?: string;
   onPinClick?: (pin: TerrainPin, index: number) => void;
+  /** dot colour as "r,g,b" */
+  dotRgb?: string;
+  /** Tailwind classes for the pin stems */
+  stemClass?: string;
 }
 
 const COLS = 90;
 const ROWS = 34;
 
-export default function DotTerrain({ pins, className = "", onPinClick }: Props) {
+export default function DotTerrain({ pins, className = "", onPinClick, dotRgb = "74,86,52", stemClass = "bg-[#141B08]/25" }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pinRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -88,7 +92,7 @@ export default function DotTerrain({ pins, className = "", onPinClick }: Props) 
           const p = project(x, y, z);
           const size = 0.6 + p.scale * 1.6;
           const alpha = (0.15 + p.scale * 0.6) * (0.55 + (y + 0.7) * 0.45);
-          ctx.fillStyle = `rgba(74,86,52,${Math.min(alpha, 0.9)})`;
+          ctx.fillStyle = `rgba(${dotRgb},${Math.min(alpha, 0.9)})`;
           ctx.fillRect(p.sx - size / 2, p.sy - size / 2, size, size);
         }
       }
@@ -127,7 +131,7 @@ export default function DotTerrain({ pins, className = "", onPinClick }: Props) 
       io.disconnect();
       document.removeEventListener("visibilitychange", onVis);
     };
-  }, [pins]);
+  }, [pins, dotRgb]);
 
   return (
     <div ref={wrapRef} className={`relative overflow-hidden isolate ${className}`}>
@@ -142,7 +146,7 @@ export default function DotTerrain({ pins, className = "", onPinClick }: Props) 
         >
           {/* stem down to the terrain */}
           <span
-            className="absolute left-0 top-0 w-px bg-[#141B08]/25 origin-top"
+            className={`absolute left-0 top-0 w-px origin-top ${stemClass}`}
             style={{ height: "var(--stem, 80px)", transform: "translateY(0)" }}
             aria-hidden="true"
           />

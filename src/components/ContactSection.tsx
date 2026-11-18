@@ -41,8 +41,8 @@ const FAQS = [
 function Chips({ options, value, onChange, label }: { options: string[]; value: string; onChange: (v: string) => void; label: string }) {
   return (
     <fieldset>
-      <legend className="text-[13px] text-[#4A5634] mb-2.5">
-        {label} <span className="text-[#4A5634]/60">(optional)</span>
+      <legend className="text-[13px] text-[#5A4636] mb-2.5">
+        {label} <span className="text-[#5A4636]/60">(optional)</span>
       </legend>
       <div className="flex flex-wrap gap-2">
         {options.map((o) => {
@@ -54,7 +54,7 @@ function Chips({ options, value, onChange, label }: { options: string[]; value: 
               aria-pressed={active}
               onClick={() => onChange(active ? "" : o)}
               className={`px-3.5 py-1.5 text-[15px] rounded-md transition-colors cursor-pointer ${
-                active ? "bg-[#141B08] text-[#F3ECE3]" : "bg-[#141B08]/[0.07] text-[#2A3517] hover:bg-[#141B08]/[0.12]"
+                active ? "bg-[#0A3A40] text-[#F3ECE3]" : "bg-[#141B08]/[0.07] text-[#2A3517] hover:bg-[#141B08]/[0.12]"
               }`}
             >
               {o}
@@ -98,7 +98,7 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
               className="group inline-flex items-center gap-4 bg-[#F3ECE3] text-[#141B08] pl-5 pr-2 py-2 text-[17px] hover:bg-white transition-colors cursor-pointer"
             >
               Book a 30-min intro call
-              <span className="w-8 h-8 bg-[#141B08] text-[#F3ECE3] flex items-center justify-center">
+              <span className="w-8 h-8 bg-[#0A3A40] text-[#F3ECE3] flex items-center justify-center">
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </span>
             </button>
@@ -118,15 +118,15 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
           {/* Form */}
           <div className="lg:col-span-8 lg:order-1">
             <h3 className="flex items-center gap-3 text-2xl font-medium">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#4A5634]" /> Tell us about your project
+              <span className="w-2.5 h-2.5 rounded-full bg-[#0A3A40]" /> Tell us about your project
             </h3>
-            <p className="mt-2 text-[15px] text-[#4A5634]">A few details help us bring the right people to the first call.</p>
+            <p className="mt-2 text-[15px] text-[#5A4636]">A few details help us bring the right people to the first call.</p>
 
             {submitted ? (
               <div className="mt-10 border-t border-[#141B08]/15 pt-10">
-                <CheckCircle2 className="w-9 h-9 text-[#4F6B1A]" />
+                <CheckCircle2 className="w-9 h-9 text-[#0A3A40]" />
                 <h4 className="mt-4 text-2xl font-medium">Thanks, {form.name || "we've got it"}.</h4>
-                <p className="mt-2 text-[#4A5634] max-w-lg">
+                <p className="mt-2 text-[#5A4636] max-w-lg">
                   Your message is with our team. We&apos;ll reply personally at{" "}
                   <span className="text-[#141B08] font-medium">{form.email}</span>.
                 </p>
@@ -141,7 +141,7 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
               <form onSubmit={handleSubmit} className="mt-10 space-y-9">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-9">
                   <label className="block">
-                    <span className="text-[13px] text-[#4A5634]">Name</span>
+                    <span className="text-[13px] text-[#5A4636]">Name</span>
                     <input
                       required
                       value={form.name}
@@ -151,7 +151,7 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
                     />
                   </label>
                   <label className="block">
-                    <span className="text-[13px] text-[#4A5634]">Work email</span>
+                    <span className="text-[13px] text-[#5A4636]">Work email</span>
                     <input
                       required
                       type="email"
@@ -163,8 +163,8 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
                   </label>
                 </div>
                 <label className="block">
-                  <span className="text-[13px] text-[#4A5634]">
-                    Company &amp; country <span className="text-[#4A5634]/60">(optional)</span>
+                  <span className="text-[13px] text-[#5A4636]">
+                    Company &amp; country <span className="text-[#5A4636]/60">(optional)</span>
                   </span>
                   <input
                     value={form.company}
@@ -183,7 +183,7 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
                 />
 
                 <label className="block">
-                  <span className="text-[13px] text-[#4A5634]">The project</span>
+                  <span className="text-[13px] text-[#5A4636]">The project</span>
                   <textarea
                     required
                     rows={4}
@@ -197,7 +197,7 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="group inline-flex items-center gap-4 bg-[#141B08] text-[#F3ECE3] pl-5 pr-2 py-2 text-[17px] hover:bg-[#2C3A14] transition-colors disabled:opacity-60 cursor-pointer"
+                  className="group inline-flex items-center gap-4 bg-[#0A3A40] text-[#F3ECE3] pl-5 pr-2 py-2 text-[17px] hover:bg-[#0F4E57] transition-colors disabled:opacity-60 cursor-pointer"
                 >
                   {submitting ? "Sending…" : "Send message"}
                   <span className="w-8 h-8 bg-[#F3ECE3] text-[#141B08] flex items-center justify-center">
@@ -212,7 +212,7 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
           <aside id="corporate" className="lg:col-span-4 lg:order-2 space-y-10 lg:pt-1">
             <div>
               <h3 className="flex items-center gap-3 text-2xl font-medium">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#4A5634]" /> Talk to us directly
+                <span className="w-2.5 h-2.5 rounded-full bg-[#0A3A40]" /> Talk to us directly
               </h3>
               <dl className="mt-6 divide-y divide-[#141B08]/12 border-y border-[#141B08]/12">
                 {[
@@ -222,14 +222,14 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
                   ["Hours", <span key="h">Mon–Fri, 09:00–18:30 IST<br />plus overlap for US, EU, GCC &amp; APAC</span>],
                 ].map(([k, v]) => (
                   <div key={k as string} className="py-4 grid grid-cols-[120px_1fr] gap-4 text-[15px]">
-                    <dt className="text-[#4A5634]">{k}</dt>
+                    <dt className="text-[#5A4636]">{k}</dt>
                     <dd className="text-[#141B08]">{v}</dd>
                   </div>
                 ))}
               </dl>
             </div>
             <div>
-              <div className="text-[13px] text-[#4A5634]">Registered office</div>
+              <div className="text-[13px] text-[#5A4636]">Registered office</div>
               <p className="mt-1.5 text-[15px] leading-relaxed">
                 Qubryon Technologies Private Limited
                 <br />
@@ -248,22 +248,22 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
         {/* FAQs */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28">
           <h3 className="flex items-center gap-3 text-2xl font-medium">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#4A5634]" /> FAQs
+            <span className="w-2.5 h-2.5 rounded-full bg-[#0A3A40]" /> FAQs
           </h3>
           <div className="mt-6 border-t border-[#141B08]/15">
             {FAQS.map((f) => (
               <details key={f.q} className="group border-b border-[#141B08]/15">
                 <summary className="flex items-center justify-between gap-6 py-5 cursor-pointer list-none text-lg">
                   {f.q}
-                  <Plus className="w-5 h-5 shrink-0 text-[#4A5634] transition-transform duration-200 group-open:rotate-45" />
+                  <Plus className="w-5 h-5 shrink-0 text-[#5A4636] transition-transform duration-200 group-open:rotate-45" />
                 </summary>
-                <p className="pb-6 -mt-1 text-[16px] text-[#4A5634] leading-relaxed max-w-3xl">{f.a}</p>
+                <p className="pb-6 -mt-1 text-[16px] text-[#5A4636] leading-relaxed max-w-3xl">{f.a}</p>
               </details>
             ))}
           </div>
           <button
             onClick={onOpenConsultation}
-            className="group mt-10 inline-flex items-center gap-4 bg-[#141B08] text-[#F3ECE3] pl-5 pr-2 py-2 text-[17px] hover:bg-[#2C3A14] transition-colors cursor-pointer"
+            className="group mt-10 inline-flex items-center gap-4 bg-[#0A3A40] text-[#F3ECE3] pl-5 pr-2 py-2 text-[17px] hover:bg-[#0F4E57] transition-colors cursor-pointer"
           >
             Book an intro call
             <span className="w-8 h-8 bg-[#F3ECE3] text-[#141B08] flex items-center justify-center">
