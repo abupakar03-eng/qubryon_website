@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
+import GallerySection, { type GalleryItem } from "./GallerySection";
+import { drawCasePoster } from "./three/galleryArt";
 import {
   Layers,
   ArrowUpRight,
@@ -124,32 +126,30 @@ export default function Portfolio() {
     },
   ];
 
+  // gallery panels (data is static, so build them once)
+  const galleryItems = useMemo<GalleryItem[]>(
+    () =>
+      caseStudies.map((c, i) => ({
+        title: c.title,
+        subtitle: c.clientSector,
+        makeDraw: (family: string, mono: string) => drawCasePoster(c, i, family, mono),
+      })),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const openCase = useCallback((i: number) => setSelectedCase(caseStudies[i]), []);
+
   const filteredCases =
     activeFilter === "all"
       ? caseStudies
       : caseStudies.filter((c) => c.category === activeFilter);
 
-  return (
-    <section id="case-studies" className="relative py-28 bg-[#EFE8DE] text-[#1C260D] sand-cyber-grid">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header with Syne & DM Mono */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[#6B8E23] text-[#F4D03F] font-sans text-xs mb-3 shadow-md">
-            <Layers className="w-3.5 h-3.5 text-[#F4D03F]" />
-            <span className="tracking-[0.18em] uppercase font-bold">
-              DEPLOYMENT TRACK RECORD
-            </span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#172108] mb-4 font-syne">
-            <span className="block drop-shadow-sm">Proven Case Studies &amp;</span>
-            <span className="block mt-1 text-[#466016]">Measurable ROI.</span>
-          </h2>
-          <p className="text-[#3A4A1C] text-sm sm:text-base leading-relaxed font-sans">
-            Examine how Qubryon&apos;s custom IoT hardware architectures and embedded AI intelligence deliver tangible business outcomes in harsh physical environments.
-          </p>
-
-          {/* Tactile Filter Keys (Signal Yellow on Active) */}
-          <div className="flex flex-wrap justify-center gap-2 mt-8 olive-recessed-channel p-1.5 rounded-2xl inline-flex border border-[#6B8E23]/40 shadow-inner">
+  const list = (
+      <div>
+        <div className="mb-10">
+          {/* Filters */}
+          <div className="flex flex-wrap gap-2 olive-recessed-channel p-1.5 rounded-2xl inline-flex border border-[#6B8E23]/40 shadow-inner">
             {[
               { id: "all", label: "ALL CASE STUDIES" },
               { id: "industrial", label: "SMART MANUFACTURING" },
@@ -238,6 +238,30 @@ export default function Portfolio() {
             </div>
           ))}
         </div>
+      </div>
+  );
+
+  return (
+    <>
+        <GallerySection
+          id="case-studies"
+          eyebrow={
+            <>
+              <Layers className="w-3.5 h-3.5" />
+              <span className="font-medium">Case studies</span>
+            </>
+          }
+          heading={
+            <>
+              Proven work, <span className="text-[#4F6B1A]">measurable results.</span>
+            </>
+          }
+          intro="Walk through projects where our product teams and embedded engineers delivered outcomes our clients could measure, from factory floors to cold-chain fleets."
+          items={galleryItems}
+          list={list}
+          onOpen={openCase}
+          openLabel="Open case study"
+        />
 
         {/* Case Study Deep-Dive Modal */}
         {selectedCase && (
@@ -340,7 +364,6 @@ export default function Portfolio() {
             </div>
           </div>
         )}
-      </div>
-    </section>
+    </>
   );
 }

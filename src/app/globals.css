@@ -221,6 +221,56 @@ section > div > div > .olive-recessed-channel.rounded-full svg,
   box-shadow: 0 0 0 3px rgba(244, 208, 63, 0.2);
 }
 
+/* 6b. Contact & footer textures */
+.texture-code {
+  background-color: #141B08;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='140' viewBox='0 0 220 140'%3E%3Cg fill='%23F3ECE3' fill-opacity='0.045' font-family='monospace' font-size='18' font-weight='700'%3E%3Ctext x='8' y='28'%3E%26lt;/%26gt;%3C/text%3E%3Ctext x='92' y='22'%3E%7B %7D%3C/text%3E%3Ctext x='160' y='34'%3E01%3C/text%3E%3Ctext x='40' y='72'%3E=%26gt;%3C/text%3E%3Ctext x='118' y='78'%3E[ ]%3C/text%3E%3Ctext x='184' y='70'%3E//%3C/text%3E%3Ctext x='14' y='118'%3E()%3C/text%3E%3Ctext x='70' y='124'%3E10%3C/text%3E%3Ctext x='140' y='118'%3E%26lt;%26gt;%3C/text%3E%3C/g%3E%3C/svg%3E");
+}
+
+.texture-grain {
+  background-color: #EFE9DF;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.27  0 0 0 0 0.2  0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* underline-only form fields */
+.line-input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(20, 27, 8, 0.25);
+  padding: 0.6rem 0;
+  font-size: 1.125rem;
+  color: #141B08;
+  transition: border-color 0.15s ease;
+}
+
+.line-input::placeholder {
+  color: rgba(20, 27, 8, 0.35);
+}
+
+.line-input:focus {
+  outline: none;
+  border-bottom-color: #141B08;
+}
+
+/* embossed footer wordmark */
+.wordmark-emboss {
+  color: #1D270E;
+  text-shadow: 0 1px 0 rgba(243, 236, 227, 0.1), 0 -1px 1px rgba(0, 0, 0, 0.75);
+}
+
+/* 7. Dark hero: particle progress bar */
+.hero-progress {
+  width: 0;
+  animation-name: hero-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hero-progress {
+  to { width: 100%; }
+}
+
 /* 7a. Frosted glass cards floating over the 3D hero */
 .glass-card {
   z-index: 10;

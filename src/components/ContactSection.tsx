@@ -1,40 +1,75 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  MapPin,
-  Mail,
-  Phone,
-  Building2,
-  ShieldCheck,
-  Calendar,
-  Send,
-  UserCheck,
-  CheckCircle2,
-  MessageSquare,
-  Clock,
-  Globe,
-} from "lucide-react";
+import { ArrowUpRight, Plus, CheckCircle2 } from "lucide-react";
 
 interface ContactSectionProps {
   onOpenConsultation: () => void;
   onOpenTalentModal: () => void;
 }
 
-export default function ContactSection({
-  onOpenConsultation,
-  onOpenTalentModal,
-}: ContactSectionProps) {
-  const [inquiryType, setInquiryType] = useState<"iot" | "staffing" | "consultation">("iot");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    message: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
+const NEEDS = ["Custom software", "Staff augmentation", "AI & ML", "Cloud & DevOps", "IoT / embedded", "Not sure yet"];
+const TIMELINES = ["As soon as possible", "Within a month", "In 1–3 months", "Just exploring"];
+
+const FAQS = [
+  {
+    q: "What does Qubryon do?",
+    a: "We build custom software, AI, cloud, data and IoT products for companies worldwide, and we embed pre-vetted engineers into existing teams through IT staff augmentation.",
+  },
+  {
+    q: "How does working together start?",
+    a: "With a short intro call. We clarify your goals, scope and constraints, then send either a project proposal or a shortlist of engineer profiles, usually within 48 hours.",
+  },
+  {
+    q: "Can you work in our time zone?",
+    a: "Yes. Our teams plan overlap hours for North America, the UK and Europe, the Gulf and Asia Pacific, and use async hand-offs for the rest of the day.",
+  },
+  {
+    q: "Who owns the code and the IP?",
+    a: "You do. Every engagement includes full IP assignment and a mutual NDA, and code lives in your repositories from day one.",
+  },
+  {
+    q: "What engagement models do you offer?",
+    a: "Fixed-scope projects with clear milestones, time & material for evolving roadmaps, and dedicated teams that work only on your product.",
+  },
+  {
+    q: "How quickly can engineers start?",
+    a: "We share vetted profiles within 48 hours. Once you have interviewed and approved them, they can usually start right away, with a 2-week risk-free trial.",
+  },
+];
+
+function Chips({ options, value, onChange, label }: { options: string[]; value: string; onChange: (v: string) => void; label: string }) {
+  return (
+    <fieldset>
+      <legend className="text-[13px] text-[#4A5634] mb-2.5">
+        {label} <span className="text-[#4A5634]/60">(optional)</span>
+      </legend>
+      <div className="flex flex-wrap gap-2">
+        {options.map((o) => {
+          const active = value === o;
+          return (
+            <button
+              key={o}
+              type="button"
+              aria-pressed={active}
+              onClick={() => onChange(active ? "" : o)}
+              className={`px-3.5 py-1.5 text-[15px] rounded-md transition-colors cursor-pointer ${
+                active ? "bg-[#141B08] text-[#F3ECE3]" : "bg-[#141B08]/[0.07] text-[#2A3517] hover:bg-[#141B08]/[0.12]"
+              }`}
+            >
+              {o}
+            </button>
+          );
+        })}
+      </div>
+    </fieldset>
+  );
+}
+
+export default function ContactSection({ onOpenConsultation, onOpenTalentModal }: ContactSectionProps) {
+  const [form, setForm] = useState({ name: "", email: "", company: "", need: "", timeline: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,279 +81,195 @@ export default function ContactSection({
   };
 
   return (
-    <section id="contact" className="relative py-28 bg-[#F6F1EA] text-[#1C260D] sand-cyber-grid">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header with Syne & DM Mono */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[#6B8E23] text-[#F4D03F] font-sans text-xs mb-3 shadow-md">
-            <MessageSquare className="w-3.5 h-3.5 text-[#F4D03F]" />
-            <span className="tracking-[0.18em] uppercase font-bold">
-              GLOBAL B2B ENGAGEMENT &amp; INQUIRY
-            </span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#172108] mb-4 font-syne">
-            <span className="block drop-shadow-sm">Let&apos;s Build the Future of</span>
-            <span className="block mt-1 text-[#466016]">Cyber-Physical Tech.</span>
+    <section id="contact" className="relative">
+      {/* ---------- Intro band ---------- */}
+      <div className="texture-code text-[#F3ECE3]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-24">
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-[-0.035em] leading-[1.02] max-w-3xl font-sans">
+            Have a project in mind? Let&apos;s build it together.
           </h2>
-          <p className="text-[#3A4A1C] text-sm sm:text-base leading-relaxed font-sans">
-            Wherever you are, in North America, Europe, the Middle East or Asia Pacific, connect with our engineering leadership or book a strategy call with our principal IoT and AI architects in your time zone.
+          <p className="mt-6 text-lg sm:text-xl text-[#F3ECE3]/75 max-w-xl leading-relaxed">
+            Whether you need a whole product built or senior engineers added to your team, one conversation is enough to
+            get started.
           </p>
-
-          {/* Quick Schedule Tactile Trigger Bar (10% Signal Yellow & 30% Tactical Olive) */}
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
             <button
               onClick={onOpenConsultation}
-              className="key-signal-yellow px-6 py-3.5 rounded-xl font-sans text-xs sm:text-sm tracking-wider uppercase flex items-center space-x-2 cursor-pointer shadow-lg"
+              className="group inline-flex items-center gap-4 bg-[#F3ECE3] text-[#141B08] pl-5 pr-2 py-2 text-[17px] hover:bg-white transition-colors cursor-pointer"
             >
-              <Calendar className="w-4 h-4 text-[#172108]" />
-              <span>Book an architecture call</span>
+              Book a 30-min intro call
+              <span className="w-8 h-8 bg-[#141B08] text-[#F3ECE3] flex items-center justify-center">
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </span>
             </button>
-
-            <button
-              onClick={onOpenTalentModal}
-              className="key-tactical-olive px-6 py-3.5 rounded-xl font-sans text-xs sm:text-sm tracking-wider uppercase flex items-center space-x-2 cursor-pointer shadow-md"
+            <a
+              href="mailto:contact@qubryon.com"
+              className="text-[17px] underline underline-offset-[6px] decoration-[#F3ECE3]/50 hover:decoration-[#F4D03F] hover:text-[#F4D03F] transition-colors"
             >
-              <UserCheck className="w-4 h-4 text-[#F4D03F]" />
-              <span>Request engineer profiles</span>
-            </button>
+              contact@qubryon.com
+            </a>
           </div>
         </div>
+      </div>
 
-        {/* Corporate Information & Contact Grid */}
-        <div id="corporate" className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
-          {/* Left Column: Company Info & Contact (30% Olive Drab) */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="olive-chassis p-7 sm:p-8 rounded-3xl relative overflow-hidden shadow-xl">
-              <div className="brass-rivet absolute top-3.5 left-3.5" />
-              <div className="brass-rivet absolute top-3.5 right-3.5" />
-              <div className="brass-rivet absolute bottom-3.5 left-3.5" />
-              <div className="brass-rivet absolute bottom-3.5 right-3.5" />
+      {/* ---------- Form + details ---------- */}
+      <div className="texture-grain text-[#141B08]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 grid grid-cols-1 lg:grid-cols-12 gap-16">
+          {/* Form */}
+          <div className="lg:col-span-8 lg:order-1">
+            <h3 className="flex items-center gap-3 text-2xl font-medium">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#4A5634]" /> Tell us about your project
+            </h3>
+            <p className="mt-2 text-[15px] text-[#4A5634]">A few details help us bring the right people to the first call.</p>
 
-              <div className="flex items-center space-x-2 border-b border-[#6B8E23]/40 pb-4 mb-5">
-                <Building2 className="w-5 h-5 text-[#F4D03F]" />
-                <span className="font-sans text-xs font-bold text-[#F4D03F] tracking-wider">
-                  QUBRYON TECHNOLOGIES PRIVATE LIMITED
-                </span>
-              </div>
-
-              <div className="space-y-4 text-xs font-sans">
-                <p className="text-[#EDC9AF] leading-relaxed">
-                  A registered cyber-physical engineering firm specializing in custom IoT hardware architectures, edge AI predictive analytics, and enterprise IT staff augmentation — headquartered in Tiruchirappalli, Tamil Nadu, India.
+            {submitted ? (
+              <div className="mt-10 border-t border-[#141B08]/15 pt-10">
+                <CheckCircle2 className="w-9 h-9 text-[#4F6B1A]" />
+                <h4 className="mt-4 text-2xl font-medium">Thanks, {form.name || "we've got it"}.</h4>
+                <p className="mt-2 text-[#4A5634] max-w-lg">
+                  Your message is with our team. We&apos;ll reply personally at{" "}
+                  <span className="text-[#141B08] font-medium">{form.email}</span>.
                 </p>
-
-                <div>
-                  <span className="text-[#A2B682] block text-[10px] tracking-wider uppercase font-bold">REGISTERED OFFICE</span>
-                  <div className="text-[#FAF1E8] flex items-start space-x-2 mt-1">
-                    <MapPin className="w-4 h-4 text-[#F4D03F] shrink-0 mt-0.5" />
-                    <span className="font-sans text-xs">
-                      Tennur, Tiruchirappalli, Tamil Nadu, India, 620017.
-                    </span>
-                  </div>
-                </div>
-
-                <div className="pt-3 border-t border-[#6B8E23]/40 text-[11px] text-[#EDC9AF] flex items-center justify-between">
-                  <span>Domain:</span>
-                  <span className="text-[#F4D03F] font-bold">IoT &amp; AI Integration Engineering</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Direct Contact Channels */}
-            <div className="olive-chassis p-6 rounded-2xl space-y-4 shadow-md">
-              <h4 className="text-xs font-sans text-[#F4D03F] font-bold uppercase tracking-wider">
-                Direct Engineering Desk
-              </h4>
-
-              <div className="space-y-2.5 text-xs font-sans">
-                <a
-                  href="mailto:contact@qubryon.com"
-                  className="olive-recessed-channel flex items-center space-x-3 text-[#EDC9AF] hover:text-[#F4D03F] transition-colors p-2.5 rounded-lg border border-[#6B8E23]/40"
+                <button
+                  onClick={() => setSubmitted(false)}
+                  className="mt-6 text-[15px] underline underline-offset-4 cursor-pointer"
                 >
-                  <Mail className="w-4 h-4 text-[#F4D03F]" />
-                  <span>contact@qubryon.com</span>
-                </a>
-
-                <a
-                  href="mailto:solutions@qubryon.com"
-                  className="olive-recessed-channel flex items-center space-x-3 text-[#EDC9AF] hover:text-[#F4D03F] transition-colors p-2.5 rounded-lg border border-[#6B8E23]/40"
-                >
-                  <Mail className="w-4 h-4 text-[#F4D03F]" />
-                  <span>solutions@qubryon.com (RFP &amp; Staffing)</span>
-                </a>
-
-                <div className="olive-recessed-channel flex items-center space-x-3 text-[#EDC9AF] p-2.5 rounded-lg border border-[#6B8E23]/40">
-                  <Phone className="w-4 h-4 text-[#F4D03F]" />
-                  <span>+91 431 279 8900 / +91 94890 12026</span>
-                </div>
-
-                <div className="olive-recessed-channel flex items-center space-x-3 text-[#A2B682] p-2.5 rounded-lg border border-[#6B8E23]/40">
-                  <Clock className="w-4 h-4 text-[#F4D03F]" />
-                  <span>09:00 - 18:30 IST (Mon - Fri)</span>
-                </div>
-
-                <div className="olive-recessed-channel flex items-center space-x-3 text-[#A2B682] p-2.5 rounded-lg border border-[#6B8E23]/40">
-                  <Globe className="w-4 h-4 text-[#F4D03F]" />
-                  <span>Extended overlap shifts for US, UK/EU, GCC &amp; APAC clients</span>
-                </div>
+                  Send another message
+                </button>
               </div>
-            </div>
-          </div>
-
-          {/* Right Column: Direct RFP & Inquiry Form */}
-          <div className="lg:col-span-7">
-            <div className="olive-carbon-panel p-7 sm:p-9 rounded-3xl border-2 border-[#6B8E23] shadow-2xl">
-              <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-[#6B8E23]/40">
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white font-syne tracking-wide">
-                    Send an RFP or Technical Inquiry
-                  </h3>
-                  <p className="text-xs text-[#EDC9AF] font-sans mt-0.5">
-                    Guaranteed response within 4 hours by a Solutions Lead.
-                  </p>
-                </div>
-
-                {/* Inquiry Type Selector (10% Signal Yellow on Active) */}
-                <div className="flex gap-1 olive-recessed-channel p-1 rounded-xl border border-[#6B8E23]/40">
-                  <button
-                    type="button"
-                    onClick={() => setInquiryType("iot")}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-sans font-bold tracking-wider cursor-pointer ${
-                      inquiryType === "iot" ? "key-signal-yellow" : "key-tactical-olive"
-                    }`}
-                  >
-                    <span>Custom IoT</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setInquiryType("staffing")}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-sans font-bold tracking-wider cursor-pointer ${
-                      inquiryType === "staffing" ? "key-signal-yellow" : "key-tactical-olive"
-                    }`}
-                  >
-                    <span>Staffing</span>
-                  </button>
-                </div>
-              </div>
-
-              {submitted ? (
-                <div className="py-12 text-center space-y-4 animate-in fade-in">
-                  <div className="w-16 h-16 rounded-full bg-[#F4D03F]/20 border border-[#F4D03F] flex items-center justify-center text-[#F4D03F] mx-auto shadow-[0_0_25px_rgba(244,208,63,0.5)]">
-                    <CheckCircle2 className="w-8 h-8" />
-                  </div>
-                  <h4 className="text-xl font-bold text-white font-syne">Inquiry Successfully Transmitted!</h4>
-                  <p className="text-xs sm:text-sm text-[#EDC9AF] max-w-md mx-auto font-sans">
-                    Thank you, <strong className="text-[#F4D03F]">{formData.name || "Partner"}</strong>. Our leadership team has received your message. A technical director will review your specifications and contact you shortly at{" "}
-                    <span className="text-[#F4D03F] font-sans">{formData.email}</span>.
-                  </p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="key-signal-yellow px-6 py-2.5 rounded-xl text-xs font-sans tracking-wider uppercase cursor-pointer"
-                  >
-                    Send Another Inquiry
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 font-sans">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
-                        YOUR FULL NAME *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Sarah Mitchell"
-                        className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
-                        CORPORATE WORK EMAIL *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="sarah@company.com"
-                        className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
-                        PHONE / WHATSAPP NUMBER
-                      </label>
-                      <input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="+1 415 555 0134"
-                        className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
-                        COMPANY NAME &amp; COUNTRY *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        placeholder="e.g. Siemens / Germany"
-                        className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
-                      PROJECT SPECIFICATIONS / SPRINT OBJECTIVES *
-                    </label>
-                    <textarea
+            ) : (
+              <form onSubmit={handleSubmit} className="mt-10 space-y-9">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-9">
+                  <label className="block">
+                    <span className="text-[13px] text-[#4A5634]">Name</span>
+                    <input
                       required
-                      rows={4}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Share details regarding your target microcontrollers, telemetry bandwidth, required AI inference speeds, or staff augmentation headcount..."
-                      className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      placeholder="Your name"
+                      className="line-input"
                     />
-                  </div>
+                  </label>
+                  <label className="block">
+                    <span className="text-[13px] text-[#4A5634]">Work email</span>
+                    <input
+                      required
+                      type="email"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      placeholder="you@company.com"
+                      className="line-input"
+                    />
+                  </label>
+                </div>
+                <label className="block">
+                  <span className="text-[13px] text-[#4A5634]">
+                    Company &amp; country <span className="text-[#4A5634]/60">(optional)</span>
+                  </span>
+                  <input
+                    value={form.company}
+                    onChange={(e) => setForm({ ...form, company: e.target.value })}
+                    placeholder="e.g. Acme Inc., Germany"
+                    className="line-input"
+                  />
+                </label>
 
-                  {/* 10% Signal Yellow Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="key-signal-yellow w-full py-4 rounded-xl font-sans text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 shadow-lg"
-                  >
-                    {submitting ? (
-                      <span>Sending…</span>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 text-[#172108]" />
-                        <span>Send inquiry</span>
-                      </>
-                    )}
-                  </button>
+                <Chips label="What do you need?" options={NEEDS} value={form.need} onChange={(v) => setForm({ ...form, need: v })} />
+                <Chips
+                  label="When would you like to start?"
+                  options={TIMELINES}
+                  value={form.timeline}
+                  onChange={(v) => setForm({ ...form, timeline: v })}
+                />
 
-                  <div className="flex items-center justify-between text-[10px] font-sans text-[#EDC9AF] pt-1">
-                    <span className="flex items-center space-x-1">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#F4D03F]" />
-                      <span>Encrypted SSL Transmission</span>
-                    </span>
-                    <span>Qubryon Technologies Private Limited</span>
-                  </div>
-                </form>
-              )}
-            </div>
+                <label className="block">
+                  <span className="text-[13px] text-[#4A5634]">The project</span>
+                  <textarea
+                    required
+                    rows={4}
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    placeholder="What are you building, who is it for, and what do you need from us?"
+                    className="line-input resize-y"
+                  />
+                </label>
+
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="group inline-flex items-center gap-4 bg-[#141B08] text-[#F3ECE3] pl-5 pr-2 py-2 text-[17px] hover:bg-[#2C3A14] transition-colors disabled:opacity-60 cursor-pointer"
+                >
+                  {submitting ? "Sending…" : "Send message"}
+                  <span className="w-8 h-8 bg-[#F3ECE3] text-[#141B08] flex items-center justify-center">
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </span>
+                </button>
+              </form>
+            )}
           </div>
+
+          {/* Direct details */}
+          <aside id="corporate" className="lg:col-span-4 lg:order-2 space-y-10 lg:pt-1">
+            <div>
+              <h3 className="flex items-center gap-3 text-2xl font-medium">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#4A5634]" /> Talk to us directly
+              </h3>
+              <dl className="mt-6 divide-y divide-[#141B08]/12 border-y border-[#141B08]/12">
+                {[
+                  ["General", <a key="g" href="mailto:contact@qubryon.com" className="hover:underline">contact@qubryon.com</a>],
+                  ["Projects & staffing", <a key="s" href="mailto:solutions@qubryon.com" className="hover:underline">solutions@qubryon.com</a>],
+                  ["Phone", <span key="p">+91 431 279 8900<br />+91 94890 12026</span>],
+                  ["Hours", <span key="h">Mon–Fri, 09:00–18:30 IST<br />plus overlap for US, EU, GCC &amp; APAC</span>],
+                ].map(([k, v]) => (
+                  <div key={k as string} className="py-4 grid grid-cols-[120px_1fr] gap-4 text-[15px]">
+                    <dt className="text-[#4A5634]">{k}</dt>
+                    <dd className="text-[#141B08]">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+            <div>
+              <div className="text-[13px] text-[#4A5634]">Registered office</div>
+              <p className="mt-1.5 text-[15px] leading-relaxed">
+                Qubryon Technologies Private Limited
+                <br />
+                Tennur, Tiruchirappalli, Tamil Nadu 620017, India
+              </p>
+            </div>
+            <button
+              onClick={onOpenTalentModal}
+              className="text-[15px] underline underline-offset-4 decoration-[#141B08]/40 hover:decoration-[#141B08] inline-flex items-center gap-1 cursor-pointer"
+            >
+              Looking to hire engineers? Request profiles <ArrowUpRight className="w-4 h-4" />
+            </button>
+          </aside>
+        </div>
+
+        {/* FAQs */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28">
+          <h3 className="flex items-center gap-3 text-2xl font-medium">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#4A5634]" /> FAQs
+          </h3>
+          <div className="mt-6 border-t border-[#141B08]/15">
+            {FAQS.map((f) => (
+              <details key={f.q} className="group border-b border-[#141B08]/15">
+                <summary className="flex items-center justify-between gap-6 py-5 cursor-pointer list-none text-lg">
+                  {f.q}
+                  <Plus className="w-5 h-5 shrink-0 text-[#4A5634] transition-transform duration-200 group-open:rotate-45" />
+                </summary>
+                <p className="pb-6 -mt-1 text-[16px] text-[#4A5634] leading-relaxed max-w-3xl">{f.a}</p>
+              </details>
+            ))}
+          </div>
+          <button
+            onClick={onOpenConsultation}
+            className="group mt-10 inline-flex items-center gap-4 bg-[#141B08] text-[#F3ECE3] pl-5 pr-2 py-2 text-[17px] hover:bg-[#2C3A14] transition-colors cursor-pointer"
+          >
+            Book an intro call
+            <span className="w-8 h-8 bg-[#F3ECE3] text-[#141B08] flex items-center justify-center">
+              <ArrowUpRight className="w-4 h-4" />
+            </span>
+          </button>
         </div>
       </div>
     </section>

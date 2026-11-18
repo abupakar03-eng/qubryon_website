@@ -2,126 +2,371 @@
 
 import React, { useState } from "react";
 import {
-  Users,
   CheckCircle2,
   Clock,
-  Shield,
   FileCheck,
   Send,
-  Zap,
-  Code2,
-  Cpu,
-  BrainCircuit,
-  Cloud,
-  Layers,
+  Users,
+  Video,
+  Workflow,
+  ChartColumn,
+  Search,
   ArrowRight,
-  Terminal,
 } from "lucide-react";
+import DotTerrain, { type TerrainPin } from "./DotTerrain";
 
 interface StaffAugmentationProps {
-  onSuccessSubmit?: (data: any) => void;
+  onSuccessSubmit?: (data: Record<string, string>) => void;
 }
 
-export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentationProps) {
-  // Tech stack filter state
-  const [activeCategory, setActiveCategory] = useState<string>("all");
+/* ======================= Talent: hiring process as stacked cards ======================= */
 
-  // Quick Developer Request Form State
+interface Step {
+  name: string;
+  title: string;
+  body: string;
+  outcome: string;
+  tint: string;
+  accent: string;
+  tiles: { icon: React.ElementType; caption: string; mock: React.ReactNode }[];
+}
+
+const Row = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+  <div className={`flex items-center justify-between gap-3 rounded-xl bg-white border border-[#141B08]/8 px-3 py-2 text-[13px] ${className}`}>
+    {children}
+  </div>
+);
+
+const Avatar = ({ text }: { text: string }) => (
+  <span className="w-7 h-7 rounded-full bg-[#1A2309] text-[#F4D03F] text-[10px] font-semibold flex items-center justify-center shrink-0">
+    {text}
+  </span>
+);
+
+const STEPS: Step[] = [
+  {
+    name: "Brief",
+    title: "Tell us exactly who you need",
+    body: "Share the role, seniority, tech stack, time zone and engagement length. A solutions lead reviews it and replies within 2 hours.",
+    outcome: "A clear, written role profile agreed with you before any search begins.",
+    tint: "from-[#FBF1C7] to-[#F6F1EA]",
+    accent: "#D4AC0D",
+    tiles: [
+      {
+        icon: FileCheck,
+        caption: "Role, stack and time-zone needs captured in one brief",
+        mock: (
+          <div className="space-y-2">
+            <Row>
+              <span className="text-[#4A5634]">Role</span>
+              <span className="font-medium">Senior React Engineer</span>
+            </Row>
+            <Row>
+              <span className="text-[#4A5634]">Stack</span>
+              <span className="font-medium">Next.js · TypeScript · AWS</span>
+            </Row>
+            <Row>
+              <span className="text-[#4A5634]">Overlap</span>
+              <span className="font-medium">US Eastern, 4 hrs</span>
+            </Row>
+          </div>
+        ),
+      },
+      {
+        icon: Clock,
+        caption: "Reply from a solutions lead within 2 hours",
+        mock: (
+          <div className="space-y-2.5">
+            <div className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-[#1A2309] text-[#F3ECE3] px-3.5 py-2 text-[13px]">
+              We need two senior React developers for Q3.
+            </div>
+            <div className="w-fit max-w-[85%] rounded-2xl rounded-bl-md bg-white border border-[#141B08]/8 px-3.5 py-2 text-[13px]">
+              Got it. Your shortlist will be ready within 48 hours.
+            </div>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    name: "Match",
+    title: "Interview pre-vetted engineers",
+    body: "Within 48 hours you receive 2–3 profiles matched to your architecture. You run the technical interview and make the call.",
+    outcome: "Engineers you have personally interviewed and approved, backed by a 2-week risk-free trial.",
+    tint: "from-[#E7EDD6] to-[#F6F1EA]",
+    accent: "#6B8E23",
+    tiles: [
+      {
+        icon: Users,
+        caption: "A shortlist of vetted profiles in under 48 hours",
+        mock: (
+          <div className="space-y-2">
+            {[
+              ["FE", "Frontend · React / Next.js", "Strong match"],
+              ["BE", "Backend · Python / Rust", "Available now"],
+              ["ML", "ML Engineer · PyTorch", "Strong match"],
+            ].map(([a, r, tag]) => (
+              <Row key={a}>
+                <span className="flex items-center gap-2.5 min-w-0">
+                  <Avatar text={a} />
+                  <span className="truncate">{r}</span>
+                </span>
+                <span className="text-[11px] rounded-full bg-[#6B8E23]/12 text-[#3D5214] px-2 py-0.5 shrink-0">{tag}</span>
+              </Row>
+            ))}
+          </div>
+        ),
+      },
+      {
+        icon: Video,
+        caption: "You interview candidates directly",
+        mock: (
+          <div className="rounded-2xl bg-white border border-[#141B08]/8 p-4">
+            <div className="text-[11px] uppercase text-[#4A5634]">Technical interview</div>
+            <div className="mt-1 font-semibold">Thursday · 10:00 ET · 45 min</div>
+            <div className="mt-3 flex items-center gap-2">
+              <Avatar text="FE" />
+              <span className="text-[13px] text-[#4A5634]">with your engineering lead</span>
+            </div>
+            <div className="mt-4 inline-flex rounded-full bg-[#F4D03F] px-3 py-1 text-[12px] font-medium">Join call</div>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    name: "Onboard",
+    title: "Scale your team from day one",
+    body: "Engineers join your Slack, Jira and GitHub on day one and follow your sprint rhythm. We handle contracts, payroll and HR.",
+    outcome: "More delivery capacity without hiring overhead, with full IP assignment and strict NDAs.",
+    tint: "from-[#EDE6DA] to-[#F6F1EA]",
+    accent: "#4F6B1A",
+    tiles: [
+      {
+        icon: Workflow,
+        caption: "Working inside your tools and rituals",
+        mock: (
+          <div className="space-y-2">
+            {["Slack", "Jira", "GitHub"].map((tool) => (
+              <Row key={tool}>
+                <span className="font-medium">{tool}</span>
+                <span className="flex items-center gap-1 text-[12px] text-[#3D5214]">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Connected
+                </span>
+              </Row>
+            ))}
+          </div>
+        ),
+      },
+      {
+        icon: ChartColumn,
+        caption: "Weekly progress and velocity reports",
+        mock: (
+          <div className="rounded-2xl bg-white border border-[#141B08]/8 p-4 space-y-3">
+            <div className="text-[11px] uppercase text-[#4A5634]">This sprint</div>
+            {[
+              ["Stories done", "w-[80%]"],
+              ["PRs merged", "w-[65%]"],
+              ["Bugs closed", "w-[90%]"],
+            ].map(([label, width]) => (
+              <div key={label}>
+                <div className="text-[12px] text-[#141B08] mb-1">{label}</div>
+                <div className="h-2 rounded-full bg-[#141B08]/8">
+                  <div className={`h-2 rounded-full bg-[#6B8E23] ${width}`} />
+                </div>
+              </div>
+            ))}
+          </div>
+        ),
+      },
+    ],
+  },
+];
+
+/* ======================= Tech stacks ======================= */
+
+const TECH_PINS: TerrainPin[] = [
+  { label: "React", sub: "Frontend", x: -0.78, z: 0.12 },
+  { label: "Python", sub: "Backend", x: -0.32, z: 0.05 },
+  { label: "AWS", sub: "Cloud", x: 0.2, z: 0.1 },
+  { label: "PyTorch", sub: "AI / ML", x: 0.66, z: 0.06 },
+  { label: "Next.js", x: -0.55, z: 0.42, wideOnly: true },
+  { label: "Rust", x: -0.05, z: 0.38, wideOnly: true },
+  { label: "Kubernetes", x: 0.42, z: 0.4, wideOnly: true },
+  { label: "Azure", x: 0.86, z: 0.36, wideOnly: true },
+  { label: "TypeScript", x: -0.88, z: 0.72, wideOnly: true },
+  { label: "Kafka", x: -0.3, z: 0.75, wideOnly: true },
+  { label: "C / C++", x: 0.18, z: 0.7, wideOnly: true },
+  { label: "MQTT", x: 0.62, z: 0.78, wideOnly: true },
+];
+
+const STACK_GROUPS = [
+  {
+    title: "Web & product engineering",
+    body: "Modern web apps, client portals and real-time dashboards.",
+    stack: ["React", "Next.js", "TypeScript", "Three.js", "WebSockets"],
+  },
+  {
+    title: "Backend & cloud",
+    body: "Serverless and streaming backends on AWS and Azure that scale with you.",
+    stack: ["Python", "Rust", "AWS", "Azure", "Docker", "Kubernetes"],
+  },
+  {
+    title: "AI & machine learning",
+    body: "Production ML, computer vision and on-device TinyML models.",
+    stack: ["PyTorch", "TensorFlow Lite", "ONNX", "TensorRT", "Edge Impulse"],
+  },
+  {
+    title: "Data & analytics",
+    body: "Pipelines, time-series storage and analytics for high-volume data.",
+    stack: ["Kafka", "PostgreSQL", "TimescaleDB", "Grafana"],
+  },
+  {
+    title: "Embedded & IoT",
+    body: "Reliable firmware and device connectivity for connected products.",
+    stack: ["C / C++", "Rust", "Zephyr RTOS", "FreeRTOS", "MQTT v5", "Modbus"],
+  },
+];
+
+export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentationProps) {
+  const [highlight, setHighlight] = useState<number | null>(null);
+
+  const onPinClick = (pin: TerrainPin) => {
+    const i = STACK_GROUPS.findIndex((g) => g.stack.some((s) => s.toLowerCase().startsWith(pin.label.toLowerCase())));
+    if (i < 0) return;
+    setHighlight(i);
+    document.getElementById(`stack-group-${i}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
+  return (
+    <>
+      {/* ---------------------------- TALENT ---------------------------- */}
+      <section id="talent" className="relative bg-[#F6F1EA] text-[#141B08]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-28 pb-16 text-center">
+          <div className="text-[12px] uppercase tracking-[0.18em] text-[#4F6B1A] font-semibold">IT staff augmentation</div>
+          <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-light tracking-[-0.03em] leading-[1.05] font-sans">
+            Senior engineers in your team, within 48 hours.
+          </h2>
+          <p className="mt-5 text-base sm:text-lg text-[#4A5634] leading-relaxed max-w-2xl mx-auto">
+            Skip three-month hiring cycles. We match vetted developers, ML engineers and DevOps specialists to your stack,
+            time zone and sprint rhythm, in three simple steps.
+          </p>
+        </div>
+
+        {/* Stacked, sticky step cards */}
+        <div className="relative">
+          {STEPS.map((step, i) => (
+            <div
+              key={step.name}
+              className={`lg:sticky lg:top-0 lg:min-h-screen flex items-center bg-gradient-to-b ${step.tint} border-t border-[#141B08]/5`}
+              style={{ zIndex: i + 1 }}
+            >
+              <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 lg:pt-28 pb-12">
+                <div className="rounded-3xl bg-white/75 backdrop-blur border border-white shadow-[0_30px_80px_-40px_rgba(20,27,8,0.35)] p-6 sm:p-9">
+                  <div className="flex items-center justify-between">
+                    <div className="text-lg font-semibold">{step.name}</div>
+                    <div className="text-[12px] text-[#4A5634] tabular-nums">
+                      {String(i + 1).padStart(2, "0")} / {String(STEPS.length).padStart(2, "0")}
+                    </div>
+                  </div>
+                  <h3 className="mt-3 text-2xl sm:text-4xl font-light tracking-[-0.02em] font-sans">{step.title}</h3>
+                  <p className="mt-3 text-[15px] text-[#4A5634] max-w-3xl leading-relaxed">{step.body}</p>
+                  <div className="mt-6 h-6 w-px" style={{ background: step.accent }} />
+                  <div className="mt-3 text-[11px] uppercase tracking-[0.14em] font-semibold">Outcome</div>
+                  <p className="mt-1 text-[15px] text-[#2A3517]">{step.outcome}</p>
+                </div>
+
+                <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {step.tiles.map(({ icon: Icon, caption, mock }) => (
+                    <div key={caption} className="rounded-3xl bg-white/60 backdrop-blur border border-white p-4 sm:p-5">
+                      <div className="rounded-2xl bg-[#F6F1EA]/80 p-3 sm:p-4 min-h-[150px]">{mock}</div>
+                      <div className="mt-4 flex items-center gap-3">
+                        <span className="w-9 h-9 rounded-xl bg-[#1A2309] flex items-center justify-center shrink-0">
+                          <Icon className="w-4 h-4 text-[#F4D03F]" />
+                        </span>
+                        <span className="text-[14px] text-[#2A3517]">{caption}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="relative z-10 bg-[#F6F1EA] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          <RequestDevelopers onSuccessSubmit={onSuccessSubmit} />
+        </div>
+      </section>
+
+      {/* ---------------------------- TECH STACKS ---------------------------- */}
+      <section id="tech-stacks" className="relative bg-gradient-to-b from-[#F6F1EA] via-[#EEEAE2] to-[#F6F1EA] text-[#141B08] overflow-hidden">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-28 text-center">
+          <div className="text-[12px] uppercase tracking-[0.18em] text-[#4F6B1A] font-semibold">One team. Every layer.</div>
+          <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-light tracking-[-0.03em] leading-[1.05] font-sans">
+            Engineers across 40+ technology stacks
+          </h2>
+          <p className="mt-5 text-base sm:text-lg text-[#4A5634] leading-relaxed max-w-2xl mx-auto">
+            From the browser to the cloud to the device, our engineers already know the tools your product runs on.
+            Tap a technology to see where it fits.
+          </p>
+        </div>
+
+        <DotTerrain pins={TECH_PINS} onPinClick={onPinClick} className="h-[420px] sm:h-[520px] -mt-4" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28 -mt-6 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            {STACK_GROUPS.map((g, i) => (
+              <div
+                key={g.title}
+                id={`stack-group-${i}`}
+                className={`rounded-3xl p-6 border backdrop-blur transition-all duration-300 ${
+                  highlight === i
+                    ? "bg-[#1A2309] border-[#1A2309] text-[#F3ECE3] shadow-[0_24px_60px_-28px_rgba(20,27,8,0.7)] -translate-y-1"
+                    : "bg-white/70 border-white text-[#141B08]"
+                }`}
+              >
+                <div className={`text-[12px] tabular-nums ${highlight === i ? "text-[#F4D03F]" : "text-[#4A5634]"}`}>
+                  {String(i + 1).padStart(2, "0")} / {String(STACK_GROUPS.length).padStart(2, "0")}
+                </div>
+                <h3 className="mt-2 text-lg font-semibold leading-snug">{g.title}</h3>
+                <p className={`mt-2 text-[13px] leading-relaxed ${highlight === i ? "text-[#E6DED3]/80" : "text-[#4A5634]"}`}>{g.body}</p>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {g.stack.map((s) => (
+                    <span
+                      key={s}
+                      className={`text-[12px] rounded-full px-2.5 py-1 ${
+                        highlight === i ? "bg-white/10 text-[#F3ECE3]" : "bg-[#141B08]/[0.06] text-[#2A3517]"
+                      }`}
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+/* ======================= Request developers form ======================= */
+
+function RequestDevelopers({ onSuccessSubmit }: StaffAugmentationProps) {
   const [formData, setFormData] = useState({
-    roleNeeded: "Embedded C / IoT Firmware Engineer",
+    roleNeeded: "Senior React / Next.js Engineer",
     seniority: "Senior (5-8 yrs)",
-    teamSize: "2 Engineers",
+    teamSize: "1 Dedicated Engineer",
     duration: "6+ Months",
-    workModel: "Dedicated Full-Time (160 hrs/mo)",
-    primaryTech: "Embedded C, FreeRTOS, MQTT, AWS IoT",
+    primaryTech: "",
     clientName: "",
     workEmail: "",
     companyName: "",
-    projectBrief: "",
   });
-
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-
-  const techStacks = [
-    {
-      name: "Embedded C / C++",
-      category: "embedded",
-      icon: Cpu,
-      level: "Kernel / Bare-metal / RTOS",
-      popularFor: "STM32, ESP32, ARM Cortex, nRF52",
-      badgeColor: "border-[#6B8E23] text-[#F4D03F]",
-    },
-    {
-      name: "Python & PyTorch",
-      category: "ai",
-      icon: BrainCircuit,
-      level: "Production AI / MLOps",
-      popularFor: "Anomaly Detection, Edge ML, Computer Vision",
-      badgeColor: "border-[#6B8E23] text-[#F4D03F]",
-    },
-    {
-      name: "AWS IoT & Cloud Fabric",
-      category: "cloud",
-      icon: Cloud,
-      level: "Serverless & Streaming",
-      popularFor: "AWS IoT Core, Lambda, Kinesis, DynamoDB",
-      badgeColor: "border-[#6B8E23] text-[#F4D03F]",
-    },
-    {
-      name: "MQTT & Industrial Protocols",
-      category: "protocols",
-      icon: Terminal,
-      level: "High-Frequency Telemetry",
-      popularFor: "MQTT v5, CoAP, Modbus RTU/TCP, CAN Bus",
-      badgeColor: "border-[#6B8E23] text-[#F4D03F]",
-    },
-    {
-      name: "React & Next.js",
-      category: "frontend",
-      icon: Code2,
-      level: "Modern Telemetry Dashboards",
-      popularFor: "WebSockets, Three.js 3D Twins, Real-time Charts",
-      badgeColor: "border-[#6B8E23] text-[#F4D03F]",
-    },
-    {
-      name: "AI/ML & Edge Impulse",
-      category: "ai",
-      icon: BrainCircuit,
-      level: "TinyML & Quantized Models",
-      popularFor: "TensorFlow Lite, ONNX, Vibration Analytics",
-      badgeColor: "border-[#6B8E23] text-[#F4D03F]",
-    },
-    {
-      name: "Rust Systems Programming",
-      category: "embedded",
-      icon: Cpu,
-      level: "Memory-Safe Embedded & Cloud",
-      popularFor: "Embedded HAL, High-Performance Microservices",
-      badgeColor: "border-[#6B8E23] text-[#F4D03F]",
-    },
-    {
-      name: "Zephyr RTOS & FreeRTOS",
-      category: "embedded",
-      icon: Layers,
-      level: "Multi-threaded Deterministic OS",
-      popularFor: "Nordic BLE, ESP-IDF, Ultra-low Power Sleep",
-      badgeColor: "border-[#6B8E23] text-[#F4D03F]",
-    },
-    {
-      name: "Azure IoT & Time Series",
-      category: "cloud",
-      icon: Cloud,
-      level: "Enterprise Telemetry Pipelines",
-      popularFor: "Azure IoT Hub, TimescaleDB, Grafana, Docker",
-      badgeColor: "border-[#6B8E23] text-[#F4D03F]",
-    },
-  ];
-
-  const filteredTech =
-    activeCategory === "all"
-      ? techStacks
-      : techStacks.filter((t) => t.category === activeCategory);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -129,437 +374,147 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
     setTimeout(() => {
       setSubmitting(false);
       setSubmitted(true);
-      if (onSuccessSubmit) {
-        onSuccessSubmit(formData);
-      }
+      onSuccessSubmit?.(formData);
     }, 800);
   };
 
+  const select = (key: keyof typeof formData, label: string, options: string[]) => (
+    <div>
+      <label className="block text-[12px] text-[#E6DED3]/80 mb-1.5">{label}</label>
+      <select
+        value={formData[key]}
+        onChange={(e) => setFormData({ ...formData, [key]: e.target.value })}
+        className="w-full px-3 py-2.5 rounded-xl text-sm sand-glass-input cursor-pointer"
+      >
+        {options.map((o) => (
+          <option key={o} value={o} className="bg-[#172108]">
+            {o}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+
   return (
-    <section id="talent" className="relative py-28 bg-[#F6F1EA] text-[#1C260D] sand-cyber-grid-dense">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header with Syne & DM Mono */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[#6B8E23] text-[#F4D03F] font-sans text-xs mb-3 shadow-md">
-            <Users className="w-3.5 h-3.5 text-[#F4D03F]" />
-            <span className="tracking-[0.18em] uppercase font-bold">
-              ELITE ENGINEERING ON-DEMAND
-            </span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#172108] mb-4 font-syne">
-            <span className="block drop-shadow-sm">Dedicated IT Staff Augmentation for</span>
-            <span className="block mt-1 text-[#466016]">IoT &amp; AI Teams.</span>
-          </h2>
-          <p className="text-[#3A4A1C] text-sm sm:text-base leading-relaxed font-sans">
-            Eliminate 3-month hiring cycles. Scale your product development with vetted senior engineers who have battle-tested experience in low-power firmware, high-throughput cloud streaming, and predictive AI models.
+    <div className="olive-carbon-panel rounded-3xl p-7 sm:p-10 text-[#F3ECE3]">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="lg:col-span-5">
+          <div className="text-[12px] uppercase tracking-[0.16em] text-[#F4D03F] font-semibold">Start in 48 hours</div>
+          <h3 className="mt-3 text-3xl sm:text-4xl font-light tracking-[-0.02em] text-white">Request pre-vetted developers</h3>
+          <p className="mt-4 text-[15px] text-[#E6DED3]/75 leading-relaxed">
+            Tell us the profile you need. A technical lead curates matching candidates and sets up interviews within 48 hours.
           </p>
+          <ul className="mt-6 space-y-3 text-[14px]">
+            {[
+              "2-week risk-free trial",
+              "Works in your Slack, Teams, Jira and GitHub",
+              "Full IP assignment and strict NDAs",
+              "Time-zone overlap for US, EU, GCC and APAC",
+            ].map((t) => (
+              <li key={t} className="flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-[#F4D03F] shrink-0" />
+                {t}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* 3-Step Hiring Process Layout (30% Olive Drab Enclosures) */}
-        <div className="mb-20">
-          <div className="text-center mb-10">
-            <h3 className="text-xl sm:text-2xl font-bold font-syne text-[#172108] tracking-wide">
-              THE 3-STEP HIGH-VELOCITY HIRING PROCESS
-            </h3>
-            <p className="text-xs sm:text-sm text-[#425227] font-sans mt-1">
-              From requirement definition to sprint onboarding in under 48 hours.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            {/* Step 1 */}
-            <div className="olive-chassis p-7 rounded-2xl relative overflow-hidden group shadow-lg">
-              <div className="brass-rivet absolute top-3.5 right-3.5" />
-              <div className="olive-recessed-channel inline-block px-3 py-1 rounded-md text-[11px] font-sans font-bold text-[#F4D03F] mb-4 border border-[#6B8E23]">
-                STEP 01 // DISPATCH
-              </div>
-              <div className="w-12 h-12 rounded-xl bg-[#172108] border border-[#6B8E23] flex items-center justify-center text-[#F4D03F] mb-5 shadow-inner">
-                <FileCheck className="w-6 h-6 drop-shadow-[0_0_8px_rgba(244,208,63,0.8)]" />
-              </div>
-              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#F4D03F] transition-colors font-syne">
-                1. Share Your Requirement
-              </h4>
-              <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed mb-4 font-sans">
-                Define your exact technology stack, target microcontrollers, cloud platform, seniority level, and time-zone preferences via our inquiry wizard.
+        <div className="lg:col-span-7">
+          {submitted ? (
+            <div className="rounded-2xl bg-white/5 border border-white/10 p-8 text-center">
+              <CheckCircle2 className="w-10 h-10 text-[#F4D03F] mx-auto" />
+              <h4 className="mt-4 text-xl font-semibold text-white">Request received</h4>
+              <p className="mt-2 text-sm text-[#E6DED3]/80 max-w-md mx-auto">
+                Thank you, {formData.clientName || "there"}. We&apos;ll share 2–3 vetted profiles for{" "}
+                <span className="text-[#F4D03F]">{formData.roleNeeded}</span> at{" "}
+                <span className="text-[#F4D03F]">{formData.workEmail}</span> within 48 hours.
               </p>
-              <div className="pt-3 border-t border-[#6B8E23]/40 text-[11px] font-sans text-[#F4D03F] flex items-center space-x-1.5">
-                <Clock className="w-3.5 h-3.5" />
-                <span>Response SLA: &lt; 2 Hours</span>
-              </div>
+              <button onClick={() => setSubmitted(false)} className="key-signal-yellow mt-6 px-6 py-2.5 rounded-full text-sm cursor-pointer">
+                Submit another request
+              </button>
             </div>
-
-            {/* Step 2 */}
-            <div className="olive-chassis p-7 rounded-2xl relative overflow-hidden group shadow-lg">
-              <div className="brass-rivet absolute top-3.5 right-3.5" />
-              <div className="olive-recessed-channel inline-block px-3 py-1 rounded-md text-[11px] font-sans font-bold text-[#F4D03F] mb-4 border border-[#6B8E23]">
-                STEP 02 // SCREENING
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {select("roleNeeded", "Role *", [
+                  "Senior React / Next.js Engineer",
+                  "Backend Engineer (Python / Rust)",
+                  "ML / AI Engineer (PyTorch)",
+                  "DevOps / Cloud Engineer (AWS / Azure)",
+                  "Data Engineer (Kafka / SQL)",
+                  "Embedded / Firmware Engineer (C / C++)",
+                  "Dedicated cross-functional pod",
+                ])}
+                {select("seniority", "Experience *", ["Senior (5-8 yrs)", "Lead / Principal (8+ yrs)", "Mid-level (3-5 yrs)"])}
+                {select("teamSize", "Headcount", ["1 Dedicated Engineer", "2 Engineers", "3-5 Engineers", "5+ Engineers"])}
+                {select("duration", "Engagement length", ["1-3 Months", "3-6 Months", "6+ Months"])}
               </div>
-              <div className="w-12 h-12 rounded-xl bg-[#172108] border border-[#6B8E23] flex items-center justify-center text-[#F4D03F] mb-5 shadow-inner">
-                <Users className="w-6 h-6 drop-shadow-[0_0_8px_rgba(244,208,63,0.8)]" />
+              <div>
+                <label className="block text-[12px] text-[#E6DED3]/80 mb-1.5">Main tech stack</label>
+                <input
+                  type="text"
+                  value={formData.primaryTech}
+                  onChange={(e) => setFormData({ ...formData, primaryTech: e.target.value })}
+                  placeholder="e.g. Next.js, Python, AWS, PostgreSQL"
+                  className="w-full px-3 py-2.5 rounded-xl text-sm sand-glass-input"
+                />
               </div>
-              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#F4D03F] transition-colors font-syne">
-                2. Interview Vetted Experts
-              </h4>
-              <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed mb-4 font-sans">
-                Receive 2–3 pre-screened senior profiles matching your exact architecture within 24 to 48 hours. Conduct your technical interview directly with the candidates.
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[12px] text-[#E6DED3]/80 mb-1.5">Your name *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.clientName}
+                    onChange={(e) => setFormData({ ...formData, clientName: e.target.value })}
+                    placeholder="e.g. Alex Johnson"
+                    className="w-full px-3 py-2.5 rounded-xl text-sm sand-glass-input"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[12px] text-[#E6DED3]/80 mb-1.5">Work email *</label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.workEmail}
+                    onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
+                    placeholder="alex@company.com"
+                    className="w-full px-3 py-2.5 rounded-xl text-sm sand-glass-input"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-[12px] text-[#E6DED3]/80 mb-1.5">Company</label>
+                <input
+                  type="text"
+                  value={formData.companyName}
+                  onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
+                  placeholder="e.g. Acme Inc."
+                  className="w-full px-3 py-2.5 rounded-xl text-sm sand-glass-input"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={submitting}
+                className="key-signal-yellow w-full py-3.5 rounded-full text-sm flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              >
+                {submitting ? (
+                  <span>Matching engineers…</span>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>Request candidate profiles</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+              <p className="text-[12px] text-[#E6DED3]/60 text-center flex items-center justify-center gap-1.5">
+                <Search className="w-3.5 h-3.5" /> Confidential talent scoping, protected by NDA.
               </p>
-              <div className="pt-3 border-t border-[#6B8E23]/40 text-[11px] font-sans text-[#F4D03F] flex items-center space-x-1.5">
-                <Shield className="w-3.5 h-3.5" />
-                <span>2-Week Risk-Free Trial Guarantee</span>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="olive-chassis p-7 rounded-2xl relative overflow-hidden group shadow-lg">
-              <div className="brass-rivet absolute top-3.5 right-3.5" />
-              <div className="olive-recessed-channel inline-block px-3 py-1 rounded-md text-[11px] font-sans font-bold text-[#F4D03F] mb-4 border border-[#6B8E23]">
-                STEP 03 // ONBOARD
-              </div>
-              <div className="w-12 h-12 rounded-xl bg-[#172108] border border-[#6B8E23] flex items-center justify-center text-[#F4D03F] mb-5 shadow-inner">
-                <Zap className="w-6 h-6 drop-shadow-[0_0_8px_rgba(244,208,63,0.8)]" />
-              </div>
-              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#F4D03F] transition-colors font-syne">
-                3. Scale Your Team Seamlessly
-              </h4>
-              <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed mb-4 font-sans">
-                Integrate chosen engineers into your Slack, Jira, and GitHub on Day 1. Complete IP assignment, strict NDA protection, and zero administrative or HR overhead.
-              </p>
-              <div className="pt-3 border-t border-[#6B8E23]/40 text-[11px] font-sans text-[#F4D03F] flex items-center space-x-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Zero Onboarding Overhead</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Tech Stacks Showcase & Matrix */}
-        <div id="tech-stacks" className="mb-20">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 border-b border-[#6B8E23]/40 pb-4">
-            <div>
-              <div className="text-xs font-sans text-[#466016] mb-1 tracking-widest uppercase font-bold">
-                PROVEN TALENT CAPABILITIES
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-[#172108] font-syne tracking-wide">
-                Vetted Across Core IoT, AI &amp; Cloud Stacks
-              </h3>
-            </div>
-
-            {/* Tactile Category Filter Keys (10% Signal Yellow Active) */}
-            <div className="flex flex-wrap gap-2 olive-recessed-channel p-1.5 rounded-xl border border-[#6B8E23]/40">
-              {[
-                { id: "all", label: "ALL STACKS" },
-                { id: "embedded", label: "EMBEDDED & HARDWARE" },
-                { id: "ai", label: "AI & ML" },
-                { id: "cloud", label: "CLOUD & INGESTION" },
-                { id: "protocols", label: "IOT PROTOCOLS" },
-                { id: "frontend", label: "DASHBOARDS" },
-              ].map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-sans font-bold tracking-wider cursor-pointer ${
-                    activeCategory === cat.id ? "key-signal-yellow" : "key-tactical-olive"
-                  }`}
-                >
-                  <span>{cat.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredTech.map((tech) => {
-              const Icon = tech.icon;
-              return (
-                <div
-                  key={tech.name}
-                  className="olive-chassis p-5 rounded-2xl transition-all group flex items-start space-x-3.5 hover:border-[#F4D03F] shadow-md"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-[#172108] border border-[#6B8E23] flex items-center justify-center text-[#F4D03F] group-hover:scale-105 shadow-inner transition-all shrink-0">
-                    <Icon className="w-5 h-5 drop-shadow-[0_0_6px_rgba(244,208,63,0.8)]" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between mb-1">
-                      <h4 className="text-sm font-bold text-white group-hover:text-[#F4D03F] transition-colors truncate font-syne">
-                        {tech.name}
-                      </h4>
-                      <span className="text-[10px] font-sans px-2 py-0.5 rounded olive-recessed-channel text-[#F4D03F] border border-[#6B8E23]/60">
-                        VERIFIED
-                      </span>
-                    </div>
-                    <p className="text-xs text-[#F4D03F] font-sans mb-1">{tech.level}</p>
-                    <p className="text-[11px] text-[#EDC9AF] truncate font-sans">{tech.popularFor}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Quick Inquiry Form for Clients to Request Developers */}
-        <div className="olive-carbon-panel p-8 sm:p-10 rounded-3xl border-2 border-[#6B8E23] relative overflow-hidden shadow-2xl">
-          {/* Top Yellow Bevel Highlight */}
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#F4D03F] to-transparent shadow-[0_0_12px_rgba(244,208,63,0.8)]" />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Column: Value Proposition */}
-            <div className="lg:col-span-5 space-y-4">
-              <div className="olive-recessed-channel inline-flex items-center space-x-2 px-3 py-1 rounded-md border border-[#6B8E23] text-[#F4D03F] font-sans text-xs">
-                <span>TALENT DEPLOYMENT ACCELERATOR</span>
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-syne tracking-wide">
-                Request Pre-Vetted Developers
-              </h3>
-              <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed font-sans">
-                Specify your engineering profile requirements. Our Technical Director will curate vetted profiles and arrange technical interviews within 48 hours.
-              </p>
-
-              <div className="space-y-3 pt-2 font-sans">
-                <div className="flex items-center space-x-2.5 text-xs text-[#FAF1E8]">
-                  <span className="hardware-led-yellow" />
-                  <span>2-Week Risk-Free Trial Period</span>
-                </div>
-                <div className="flex items-center space-x-2.5 text-xs text-[#FAF1E8]">
-                  <span className="hardware-led-yellow" />
-                  <span>Direct Communication via Slack / Teams / GitHub</span>
-                </div>
-                <div className="flex items-center space-x-2.5 text-xs text-[#FAF1E8]">
-                  <span className="hardware-led-yellow" />
-                  <span>Full IP Assignment &amp; Strict NDA Guaranteed</span>
-                </div>
-                <div className="flex items-center space-x-2.5 text-xs text-[#FAF1E8]">
-                  <span className="hardware-led-yellow" />
-                  <span>Time-Zone Alignment (US, EU, APAC, India)</span>
-                </div>
-              </div>
-
-              {/* Developer availability live ticker */}
-              <div className="p-4 rounded-xl olive-recessed-channel border border-[#6B8E23]/60 text-xs font-sans text-[#EDC9AF] mt-4">
-                <div className="text-[#F4D03F] font-bold mb-1 flex items-center justify-between">
-                  <span>CURRENT BENCH CAPACITY</span>
-                  <span className="text-[#8BAE3A] flex items-center space-x-1.5">
-                    <span className="hardware-led-yellow animate-pulse" />
-                    <span>14 ENGINEERS READY</span>
-                  </span>
-                </div>
-                <p className="text-[11px] text-[#A2B682]">
-                  Embedded C (4), PyTorch/Edge AI (3), AWS IoT Cloud (4), React/Next.js (3).
-                </p>
-              </div>
-            </div>
-
-            {/* Right Column: Inquiry Form */}
-            <div className="lg:col-span-7">
-              {submitted ? (
-                <div className="p-8 rounded-2xl olive-chassis text-center space-y-4 animate-in fade-in zoom-in-95">
-                  <div className="w-16 h-16 rounded-full bg-[#F4D03F]/20 border border-[#F4D03F] flex items-center justify-center text-[#F4D03F] mx-auto shadow-[0_0_20px_rgba(244,208,63,0.5)]">
-                    <CheckCircle2 className="w-8 h-8" />
-                  </div>
-                  <h4 className="text-xl font-bold text-white font-syne">
-                    Developer Request Dispatched!
-                  </h4>
-                  <p className="text-xs sm:text-sm text-[#EDC9AF] max-w-md mx-auto font-sans">
-                    Thank you, <strong className="text-[#F4D03F]">{formData.clientName || "Valued Partner"}</strong>. Our technical talent director at Qubryon Technologies has received your request for{" "}
-                    <span className="text-[#F4D03F] font-sans">{formData.roleNeeded}</span>. We will share 2–3 vetted candidate dossiers to{" "}
-                    <span className="text-[#F4D03F] font-sans">{formData.workEmail}</span> within 24 hours.
-                  </p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="key-signal-yellow px-6 py-2.5 rounded-xl text-xs font-sans tracking-wider uppercase cursor-pointer"
-                  >
-                    Submit Another Inquiry
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 font-sans">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Role Needed */}
-                    <div>
-                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
-                        ROLE REQUIRED *
-                      </label>
-                      <select
-                        value={formData.roleNeeded}
-                        onChange={(e) => setFormData({ ...formData, roleNeeded: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-lg text-xs font-sans sand-glass-input cursor-pointer"
-                        required
-                      >
-                        <option value="Embedded C / IoT Firmware Engineer" className="bg-[#172108]">
-                          Embedded C / IoT Firmware Engineer
-                        </option>
-                        <option value="AI / Edge ML Telemetry Specialist" className="bg-[#172108]">
-                          AI / Edge ML Telemetry Specialist
-                        </option>
-                        <option value="AWS / Cloud IoT Systems Architect" className="bg-[#172108]">
-                          AWS / Cloud IoT Systems Architect
-                        </option>
-                        <option value="Full-Stack React & Next.js IoT Engineer" className="bg-[#172108]">
-                          Full-Stack React &amp; Next.js IoT Engineer
-                        </option>
-                        <option value="Complete Dedicated Pod (Firmware + AI + Cloud)" className="bg-[#172108]">
-                          Complete Dedicated Pod (Firmware + AI + Cloud)
-                        </option>
-                      </select>
-                    </div>
-
-                    {/* Seniority */}
-                    <div>
-                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
-                        EXPERIENCE LEVEL *
-                      </label>
-                      <select
-                        value={formData.seniority}
-                        onChange={(e) => setFormData({ ...formData, seniority: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-lg text-xs font-sans sand-glass-input cursor-pointer"
-                        required
-                      >
-                        <option value="Senior (5-8 yrs)" className="bg-[#172108]">
-                          Senior (5-8 yrs) - Recommended
-                        </option>
-                        <option value="Lead / Principal Architect (8+ yrs)" className="bg-[#172108]">
-                          Lead / Principal Architect (8+ yrs)
-                        </option>
-                        <option value="Mid-Level (3-5 yrs)" className="bg-[#172108]">
-                          Mid-Level (3-5 yrs)
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Team Size */}
-                    <div>
-                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
-                        DEVELOPER HEADCOUNT
-                      </label>
-                      <select
-                        value={formData.teamSize}
-                        onChange={(e) => setFormData({ ...formData, teamSize: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-lg text-xs font-sans sand-glass-input cursor-pointer"
-                      >
-                        <option value="1 Dedicated Engineer" className="bg-[#172108]">
-                          1 Dedicated Engineer
-                        </option>
-                        <option value="2 Engineers" className="bg-[#172108]">
-                          2 Engineers (Pair Pod)
-                        </option>
-                        <option value="3-5 Engineers" className="bg-[#172108]">
-                          3–5 Engineers (Cross-Functional Squad)
-                        </option>
-                        <option value="5+ Engineers" className="bg-[#172108]">
-                          5+ Engineers (Enterprise Division)
-                        </option>
-                      </select>
-                    </div>
-
-                    {/* Duration */}
-                    <div>
-                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
-                        ENGAGEMENT HORIZON
-                      </label>
-                      <select
-                        value={formData.duration}
-                        onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-lg text-xs font-sans sand-glass-input cursor-pointer"
-                      >
-                        <option value="3-6 Months" className="bg-[#172108]">
-                          3–6 Months
-                        </option>
-                        <option value="6+ Months" className="bg-[#172108]">
-                          6+ Months (Long-term)
-                        </option>
-                        <option value="1-3 Months (Sprint Blitz)" className="bg-[#172108]">
-                          1–3 Months (Sprint Blitz)
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Primary Tech Stack / Hardware */}
-                  <div>
-                    <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
-                      PRIMARY TECH STACK &amp; HARDWARE (OPTIONAL)
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.primaryTech}
-                      onChange={(e) => setFormData({ ...formData, primaryTech: e.target.value })}
-                      placeholder="e.g., STM32, FreeRTOS, MQTT, AWS IoT Core, PyTorch"
-                      className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Client Name */}
-                    <div>
-                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
-                        YOUR NAME *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.clientName}
-                        onChange={(e) => setFormData({ ...formData, clientName: e.target.value })}
-                        placeholder="e.g. Alex Johnson"
-                        className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
-                      />
-                    </div>
-
-                    {/* Work Email */}
-                    <div>
-                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
-                        WORK EMAIL *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.workEmail}
-                        onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
-                        placeholder="alex@enterprise.com"
-                        className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Company Name */}
-                  <div>
-                    <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
-                      COMPANY / ORGANIZATION NAME
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.companyName}
-                      onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-                      placeholder="e.g. Industrial Automation Corp"
-                      className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
-                    />
-                  </div>
-
-                  {/* 10% Accent CTA Button in Signal Yellow */}
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="key-signal-yellow w-full py-4 rounded-xl font-sans text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 select-none shadow-lg"
-                  >
-                    {submitting ? (
-                      <span>Matching engineers…</span>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 text-[#172108]" />
-                        <span>Request candidate profiles (under 48 hours)</span>
-                      </>
-                    )}
-                  </button>
-
-                  <div className="text-[10px] font-sans text-[#EDC9AF] text-center pt-1">
-                    Protected by strict NDA. No spam. 100% confidential talent scoping.
-                  </div>
-                </form>
-              )}
-            </div>
-          </div>
+            </form>
+          )}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

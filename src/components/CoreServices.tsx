@@ -16,6 +16,9 @@ import {
   Wifi,
   type LucideIcon,
 } from "lucide-react";
+import GallerySection, { type GalleryItem } from "./GallerySection";
+import { HERO_SERVICES } from "./three/heroServices";
+import { drawServicePoster } from "./three/galleryArt";
 
 interface CoreServicesProps {
   onOpenConsultation: () => void;
@@ -143,25 +146,8 @@ export default function CoreServices({ onOpenConsultation, onOpenTalentModal }: 
     },
   ];
 
-  return (
-    <section id="services" className="relative py-28 bg-[#F6F1EA] text-[#141B08]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
-        <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#6B8E23]/25 bg-[#6B8E23]/10 px-3.5 py-1.5 text-xs text-[#3D5214] mb-4">
-            <Layers className="w-3.5 h-3.5" />
-            <span className="font-medium">What we do</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#141B08] mb-4 font-syne leading-[1.08]">
-            Software engineering and expert talent,{" "}
-            <span className="text-[#4F6B1A]">under one roof.</span>
-          </h2>
-          <p className="text-[#4A5634] text-base sm:text-lg leading-relaxed">
-            Hand us a whole product to build, or add senior engineers to the team you already have. Either way you get
-            the same engineering standards, transparent communication and full ownership of your code.
-          </p>
-        </div>
-
+  const list = (
+      <div>
         {/* Flagship services */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {flagships.map((s) => {
@@ -301,6 +287,38 @@ export default function CoreServices({ onOpenConsultation, onOpenTalentModal }: 
           ))}
         </div>
       </div>
-    </section>
+  );
+
+  return (
+    <GallerySection
+      id="services"
+      eyebrow={
+        <>
+          <Layers className="w-3.5 h-3.5" />
+          <span className="font-medium">What we do</span>
+        </>
+      }
+      heading={
+        <>
+          Software engineering and expert talent, <span className="text-[#4F6B1A]">under one roof.</span>
+        </>
+      }
+      intro="Hand us a whole product to build, or add senior engineers to the team you already have. Either way you get the same engineering standards, transparent communication and full ownership of your code."
+      items={GALLERY_ITEMS}
+      list={list}
+      openLabel="See the details"
+    />
   );
 }
+
+/* Gallery panels: the same services as the hero, flagships first. */
+const GALLERY_ORDER = ["software", "staffing", "ai", "cloud", "data", "iot", "embedded"];
+const GALLERY_ITEMS: GalleryItem[] = GALLERY_ORDER.map((id, i) => {
+  const s = HERO_SERVICES.find((x) => x.id === id)!;
+  return {
+    anchor: s.href.replace("#", ""),
+    title: s.title,
+    subtitle: s.subtitle,
+    makeDraw: (family: string, mono: string) => drawServicePoster(s, i, family, mono),
+  };
+});

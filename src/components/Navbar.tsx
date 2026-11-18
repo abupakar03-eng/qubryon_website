@@ -28,7 +28,6 @@ export default function Navbar({ onOpenConsultation, onOpenTalentModal }: Navbar
     { name: "Tech stacks", href: "#tech-stacks", id: "tech-stacks" },
     { name: "Case studies", href: "#case-studies", id: "case-studies" },
     { name: "Global", href: "#global", id: "global" },
-    { name: "Company", href: "#corporate", id: "corporate" },
     { name: "Contact", href: "#contact", id: "contact" },
   ];
 
@@ -36,7 +35,7 @@ export default function Navbar({ onOpenConsultation, onOpenTalentModal }: Navbar
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "py-2 bg-[#F6F1EA]/90 backdrop-blur-xl border-b border-[#6B8E23]/40 shadow-[0_10px_30px_rgba(30,40,15,0.15)]"
+          ? "py-2 bg-transparent"
           : "py-4 bg-transparent"
       }`}
     >
