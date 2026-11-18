@@ -33,21 +33,21 @@ export default function FloatingActionDock({
         {/* Hire Talent Tactile Olive Key */}
         <button
           onClick={onOpenTalentModal}
-          className="key-tactical-olive flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-mono font-bold tracking-wider cursor-pointer"
+          className="key-tactical-olive flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-sans font-bold tracking-wider cursor-pointer"
           title="Hire Pre-Vetted IoT & AI Engineers"
         >
           <span className="hardware-led-yellow" />
-          <span className="hidden sm:inline">HIRE TALENT</span>
+          <span className="hidden sm:inline">Hire talent</span>
         </button>
 
         {/* Book Call 10% Signal Yellow Key */}
         <button
           onClick={onOpenConsultation}
-          className="key-signal-yellow flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-mono font-black tracking-wider text-[#172108] cursor-pointer shadow-md"
+          className="key-signal-yellow flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-sans font-black tracking-wider text-[#172108] cursor-pointer shadow-md"
           title="Schedule 30-min Strategy Call"
         >
           <Calendar className="w-3.5 h-3.5 text-[#172108]" />
-          <span>BOOK CALL</span>
+          <span>Book a call</span>
         </button>
 
         {/* Scroll To Top Key */}

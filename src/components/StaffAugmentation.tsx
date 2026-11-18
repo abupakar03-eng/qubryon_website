@@ -136,11 +136,11 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
   };
 
   return (
-    <section id="talent" className="relative py-28 bg-[#EDC9AF] text-[#1C260D] sand-cyber-grid-dense">
+    <section id="talent" className="relative py-28 bg-[#F6F1EA] text-[#1C260D] sand-cyber-grid-dense">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header with Syne & DM Mono */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[#6B8E23] text-[#F4D03F] font-mono text-xs mb-3 shadow-md">
+          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[#6B8E23] text-[#F4D03F] font-sans text-xs mb-3 shadow-md">
             <Users className="w-3.5 h-3.5 text-[#F4D03F]" />
             <span className="tracking-[0.18em] uppercase font-bold">
               ELITE ENGINEERING ON-DEMAND
@@ -150,7 +150,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
             <span className="block drop-shadow-sm">Dedicated IT Staff Augmentation for</span>
             <span className="block mt-1 text-[#466016]">IoT &amp; AI Teams.</span>
           </h2>
-          <p className="text-[#3A4A1C] text-sm sm:text-base leading-relaxed font-mono">
+          <p className="text-[#3A4A1C] text-sm sm:text-base leading-relaxed font-sans">
             Eliminate 3-month hiring cycles. Scale your product development with vetted senior engineers who have battle-tested experience in low-power firmware, high-throughput cloud streaming, and predictive AI models.
           </p>
         </div>
@@ -161,7 +161,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
             <h3 className="text-xl sm:text-2xl font-bold font-syne text-[#172108] tracking-wide">
               THE 3-STEP HIGH-VELOCITY HIRING PROCESS
             </h3>
-            <p className="text-xs sm:text-sm text-[#425227] font-mono mt-1">
+            <p className="text-xs sm:text-sm text-[#425227] font-sans mt-1">
               From requirement definition to sprint onboarding in under 48 hours.
             </p>
           </div>
@@ -170,7 +170,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
             {/* Step 1 */}
             <div className="olive-chassis p-7 rounded-2xl relative overflow-hidden group shadow-lg">
               <div className="brass-rivet absolute top-3.5 right-3.5" />
-              <div className="olive-recessed-channel inline-block px-3 py-1 rounded-md text-[11px] font-mono font-bold text-[#F4D03F] mb-4 border border-[#6B8E23]">
+              <div className="olive-recessed-channel inline-block px-3 py-1 rounded-md text-[11px] font-sans font-bold text-[#F4D03F] mb-4 border border-[#6B8E23]">
                 STEP 01 // DISPATCH
               </div>
               <div className="w-12 h-12 rounded-xl bg-[#172108] border border-[#6B8E23] flex items-center justify-center text-[#F4D03F] mb-5 shadow-inner">
@@ -179,10 +179,10 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
               <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#F4D03F] transition-colors font-syne">
                 1. Share Your Requirement
               </h4>
-              <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed mb-4 font-mono">
+              <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed mb-4 font-sans">
                 Define your exact technology stack, target microcontrollers, cloud platform, seniority level, and time-zone preferences via our inquiry wizard.
               </p>
-              <div className="pt-3 border-t border-[#6B8E23]/40 text-[11px] font-mono text-[#F4D03F] flex items-center space-x-1.5">
+              <div className="pt-3 border-t border-[#6B8E23]/40 text-[11px] font-sans text-[#F4D03F] flex items-center space-x-1.5">
                 <Clock className="w-3.5 h-3.5" />
                 <span>Response SLA: &lt; 2 Hours</span>
               </div>
@@ -191,7 +191,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
             {/* Step 2 */}
             <div className="olive-chassis p-7 rounded-2xl relative overflow-hidden group shadow-lg">
               <div className="brass-rivet absolute top-3.5 right-3.5" />
-              <div className="olive-recessed-channel inline-block px-3 py-1 rounded-md text-[11px] font-mono font-bold text-[#F4D03F] mb-4 border border-[#6B8E23]">
+              <div className="olive-recessed-channel inline-block px-3 py-1 rounded-md text-[11px] font-sans font-bold text-[#F4D03F] mb-4 border border-[#6B8E23]">
                 STEP 02 // SCREENING
               </div>
               <div className="w-12 h-12 rounded-xl bg-[#172108] border border-[#6B8E23] flex items-center justify-center text-[#F4D03F] mb-5 shadow-inner">
@@ -200,10 +200,10 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
               <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#F4D03F] transition-colors font-syne">
                 2. Interview Vetted Experts
               </h4>
-              <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed mb-4 font-mono">
+              <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed mb-4 font-sans">
                 Receive 2–3 pre-screened senior profiles matching your exact architecture within 24 to 48 hours. Conduct your technical interview directly with the candidates.
               </p>
-              <div className="pt-3 border-t border-[#6B8E23]/40 text-[11px] font-mono text-[#F4D03F] flex items-center space-x-1.5">
+              <div className="pt-3 border-t border-[#6B8E23]/40 text-[11px] font-sans text-[#F4D03F] flex items-center space-x-1.5">
                 <Shield className="w-3.5 h-3.5" />
                 <span>2-Week Risk-Free Trial Guarantee</span>
               </div>
@@ -212,7 +212,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
             {/* Step 3 */}
             <div className="olive-chassis p-7 rounded-2xl relative overflow-hidden group shadow-lg">
               <div className="brass-rivet absolute top-3.5 right-3.5" />
-              <div className="olive-recessed-channel inline-block px-3 py-1 rounded-md text-[11px] font-mono font-bold text-[#F4D03F] mb-4 border border-[#6B8E23]">
+              <div className="olive-recessed-channel inline-block px-3 py-1 rounded-md text-[11px] font-sans font-bold text-[#F4D03F] mb-4 border border-[#6B8E23]">
                 STEP 03 // ONBOARD
               </div>
               <div className="w-12 h-12 rounded-xl bg-[#172108] border border-[#6B8E23] flex items-center justify-center text-[#F4D03F] mb-5 shadow-inner">
@@ -221,10 +221,10 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
               <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#F4D03F] transition-colors font-syne">
                 3. Scale Your Team Seamlessly
               </h4>
-              <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed mb-4 font-mono">
+              <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed mb-4 font-sans">
                 Integrate chosen engineers into your Slack, Jira, and GitHub on Day 1. Complete IP assignment, strict NDA protection, and zero administrative or HR overhead.
               </p>
-              <div className="pt-3 border-t border-[#6B8E23]/40 text-[11px] font-mono text-[#F4D03F] flex items-center space-x-1.5">
+              <div className="pt-3 border-t border-[#6B8E23]/40 text-[11px] font-sans text-[#F4D03F] flex items-center space-x-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5" />
                 <span>Zero Onboarding Overhead</span>
               </div>
@@ -236,7 +236,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
         <div id="tech-stacks" className="mb-20">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 border-b border-[#6B8E23]/40 pb-4">
             <div>
-              <div className="text-xs font-mono text-[#466016] mb-1 tracking-widest uppercase font-bold">
+              <div className="text-xs font-sans text-[#466016] mb-1 tracking-widest uppercase font-bold">
                 PROVEN TALENT CAPABILITIES
               </div>
               <h3 className="text-2xl sm:text-3xl font-bold text-[#172108] font-syne tracking-wide">
@@ -257,7 +257,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold tracking-wider cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-sans font-bold tracking-wider cursor-pointer ${
                     activeCategory === cat.id ? "key-signal-yellow" : "key-tactical-olive"
                   }`}
                 >
@@ -283,12 +283,12 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                       <h4 className="text-sm font-bold text-white group-hover:text-[#F4D03F] transition-colors truncate font-syne">
                         {tech.name}
                       </h4>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded olive-recessed-channel text-[#F4D03F] border border-[#6B8E23]/60">
+                      <span className="text-[10px] font-sans px-2 py-0.5 rounded olive-recessed-channel text-[#F4D03F] border border-[#6B8E23]/60">
                         VERIFIED
                       </span>
                     </div>
-                    <p className="text-xs text-[#F4D03F] font-mono mb-1">{tech.level}</p>
-                    <p className="text-[11px] text-[#EDC9AF] truncate font-mono">{tech.popularFor}</p>
+                    <p className="text-xs text-[#F4D03F] font-sans mb-1">{tech.level}</p>
+                    <p className="text-[11px] text-[#EDC9AF] truncate font-sans">{tech.popularFor}</p>
                   </div>
                 </div>
               );
@@ -304,17 +304,17 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Column: Value Proposition */}
             <div className="lg:col-span-5 space-y-4">
-              <div className="olive-recessed-channel inline-flex items-center space-x-2 px-3 py-1 rounded-md border border-[#6B8E23] text-[#F4D03F] font-mono text-xs">
+              <div className="olive-recessed-channel inline-flex items-center space-x-2 px-3 py-1 rounded-md border border-[#6B8E23] text-[#F4D03F] font-sans text-xs">
                 <span>TALENT DEPLOYMENT ACCELERATOR</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-syne tracking-wide">
                 Request Pre-Vetted Developers
               </h3>
-              <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed font-mono">
+              <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed font-sans">
                 Specify your engineering profile requirements. Our Technical Director will curate vetted profiles and arrange technical interviews within 48 hours.
               </p>
 
-              <div className="space-y-3 pt-2 font-mono">
+              <div className="space-y-3 pt-2 font-sans">
                 <div className="flex items-center space-x-2.5 text-xs text-[#FAF1E8]">
                   <span className="hardware-led-yellow" />
                   <span>2-Week Risk-Free Trial Period</span>
@@ -334,7 +334,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
               </div>
 
               {/* Developer availability live ticker */}
-              <div className="p-4 rounded-xl olive-recessed-channel border border-[#6B8E23]/60 text-xs font-mono text-[#EDC9AF] mt-4">
+              <div className="p-4 rounded-xl olive-recessed-channel border border-[#6B8E23]/60 text-xs font-sans text-[#EDC9AF] mt-4">
                 <div className="text-[#F4D03F] font-bold mb-1 flex items-center justify-between">
                   <span>CURRENT BENCH CAPACITY</span>
                   <span className="text-[#8BAE3A] flex items-center space-x-1.5">
@@ -358,30 +358,30 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                   <h4 className="text-xl font-bold text-white font-syne">
                     Developer Request Dispatched!
                   </h4>
-                  <p className="text-xs sm:text-sm text-[#EDC9AF] max-w-md mx-auto font-mono">
+                  <p className="text-xs sm:text-sm text-[#EDC9AF] max-w-md mx-auto font-sans">
                     Thank you, <strong className="text-[#F4D03F]">{formData.clientName || "Valued Partner"}</strong>. Our technical talent director at Qubryon Technologies has received your request for{" "}
-                    <span className="text-[#F4D03F] font-mono">{formData.roleNeeded}</span>. We will share 2–3 vetted candidate dossiers to{" "}
-                    <span className="text-[#F4D03F] font-mono">{formData.workEmail}</span> within 24 hours.
+                    <span className="text-[#F4D03F] font-sans">{formData.roleNeeded}</span>. We will share 2–3 vetted candidate dossiers to{" "}
+                    <span className="text-[#F4D03F] font-sans">{formData.workEmail}</span> within 24 hours.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="key-signal-yellow px-6 py-2.5 rounded-xl text-xs font-mono tracking-wider uppercase cursor-pointer"
+                    className="key-signal-yellow px-6 py-2.5 rounded-xl text-xs font-sans tracking-wider uppercase cursor-pointer"
                   >
                     Submit Another Inquiry
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 font-mono">
+                <form onSubmit={handleSubmit} className="space-y-4 font-sans">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Role Needed */}
                     <div>
-                      <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                         ROLE REQUIRED *
                       </label>
                       <select
                         value={formData.roleNeeded}
                         onChange={(e) => setFormData({ ...formData, roleNeeded: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-lg text-xs font-mono sand-glass-input cursor-pointer"
+                        className="w-full px-3 py-2.5 rounded-lg text-xs font-sans sand-glass-input cursor-pointer"
                         required
                       >
                         <option value="Embedded C / IoT Firmware Engineer" className="bg-[#172108]">
@@ -404,13 +404,13 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
 
                     {/* Seniority */}
                     <div>
-                      <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                         EXPERIENCE LEVEL *
                       </label>
                       <select
                         value={formData.seniority}
                         onChange={(e) => setFormData({ ...formData, seniority: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-lg text-xs font-mono sand-glass-input cursor-pointer"
+                        className="w-full px-3 py-2.5 rounded-lg text-xs font-sans sand-glass-input cursor-pointer"
                         required
                       >
                         <option value="Senior (5-8 yrs)" className="bg-[#172108]">
@@ -429,13 +429,13 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Team Size */}
                     <div>
-                      <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                         DEVELOPER HEADCOUNT
                       </label>
                       <select
                         value={formData.teamSize}
                         onChange={(e) => setFormData({ ...formData, teamSize: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-lg text-xs font-mono sand-glass-input cursor-pointer"
+                        className="w-full px-3 py-2.5 rounded-lg text-xs font-sans sand-glass-input cursor-pointer"
                       >
                         <option value="1 Dedicated Engineer" className="bg-[#172108]">
                           1 Dedicated Engineer
@@ -454,13 +454,13 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
 
                     {/* Duration */}
                     <div>
-                      <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                         ENGAGEMENT HORIZON
                       </label>
                       <select
                         value={formData.duration}
                         onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-lg text-xs font-mono sand-glass-input cursor-pointer"
+                        className="w-full px-3 py-2.5 rounded-lg text-xs font-sans sand-glass-input cursor-pointer"
                       >
                         <option value="3-6 Months" className="bg-[#172108]">
                           3–6 Months
@@ -477,7 +477,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
 
                   {/* Primary Tech Stack / Hardware */}
                   <div>
-                    <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                    <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                       PRIMARY TECH STACK &amp; HARDWARE (OPTIONAL)
                     </label>
                     <input
@@ -485,14 +485,14 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                       value={formData.primaryTech}
                       onChange={(e) => setFormData({ ...formData, primaryTech: e.target.value })}
                       placeholder="e.g., STM32, FreeRTOS, MQTT, AWS IoT Core, PyTorch"
-                      className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
+                      className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Client Name */}
                     <div>
-                      <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                         YOUR NAME *
                       </label>
                       <input
@@ -501,13 +501,13 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                         value={formData.clientName}
                         onChange={(e) => setFormData({ ...formData, clientName: e.target.value })}
                         placeholder="e.g. Alex Johnson"
-                        className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
+                        className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
                       />
                     </div>
 
                     {/* Work Email */}
                     <div>
-                      <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                         WORK EMAIL *
                       </label>
                       <input
@@ -516,14 +516,14 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                         value={formData.workEmail}
                         onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
                         placeholder="alex@enterprise.com"
-                        className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
+                        className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
                       />
                     </div>
                   </div>
 
                   {/* Company Name */}
                   <div>
-                    <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                    <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                       COMPANY / ORGANIZATION NAME
                     </label>
                     <input
@@ -531,7 +531,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                       value={formData.companyName}
                       onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
                       placeholder="e.g. Industrial Automation Corp"
-                      className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
+                      className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
                     />
                   </div>
 
@@ -539,19 +539,19 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="key-signal-yellow w-full py-4 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 select-none shadow-lg"
+                    className="key-signal-yellow w-full py-4 rounded-xl font-sans text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 select-none shadow-lg"
                   >
                     {submitting ? (
-                      <span>MATCHING QUALIFIED ENGINEERS...</span>
+                      <span>Matching engineers…</span>
                     ) : (
                       <>
                         <Send className="w-4 h-4 text-[#172108]" />
-                        <span>REQUEST CANDIDATE PROFILES (UNDER 48 HOURS)</span>
+                        <span>Request candidate profiles (under 48 hours)</span>
                       </>
                     )}
                   </button>
 
-                  <div className="text-[10px] font-mono text-[#EDC9AF] text-center pt-1">
+                  <div className="text-[10px] font-sans text-[#EDC9AF] text-center pt-1">
                     Protected by strict NDA. No spam. 100% confidential talent scoping.
                   </div>
                 </form>

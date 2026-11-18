@@ -37,17 +37,17 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
                   <span className="font-syne font-extrabold text-xl tracking-[0.08em] uppercase text-white drop-shadow-md">
                     QUBRYON
                   </span>
-                  <span className="olive-recessed-channel px-2 py-0.5 rounded text-[10px] font-mono font-black text-[#F4D03F] border border-[#6B8E23]">
+                  <span className="olive-recessed-channel px-2 py-0.5 rounded text-[10px] font-sans font-black text-[#F4D03F] border border-[#6B8E23]">
                     TECH
                   </span>
                 </div>
-                <span className="text-[9.5px] font-mono tracking-[0.24em] uppercase text-[#EDC9AF] font-semibold">
+                <span className="text-[9.5px] font-sans tracking-[0.24em] uppercase text-[#EDC9AF] font-semibold">
                   IOT &amp; AI INTEGRATION SYSTEMS
                 </span>
               </div>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#E0C7B4] leading-relaxed max-w-sm font-mono">
+            <p className="text-xs sm:text-sm text-[#E0C7B4] leading-relaxed max-w-sm font-sans">
               <strong className="text-white">Qubryon Technologies Private Limited</strong> is a registered cyber-physical engineering firm specializing in custom IoT hardware architectures, edge AI predictive analytics, and enterprise IT staff augmentation.
             </p>
 
@@ -92,7 +92,7 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
           </div>
 
           {/* Col 3: Core Solutions */}
-          <div className="space-y-3 font-mono">
+          <div className="space-y-3 font-sans">
             <h4 className="text-xs font-syne font-bold uppercase tracking-wider text-[#F4D03F]">
               Core Engineering
             </h4>
@@ -131,7 +131,7 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
           </div>
 
           {/* Col 4: Staff Augmentation */}
-          <div className="space-y-3 font-mono">
+          <div className="space-y-3 font-sans">
             <h4 className="text-xs font-syne font-bold uppercase tracking-wider text-[#F4D03F]">
               Hire Tech Talent
             </h4>
@@ -182,7 +182,7 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
           </div>
 
           {/* Col 5: Consultation & Quick Action (10% Signal Yellow) */}
-          <div className="space-y-4 font-mono">
+          <div className="space-y-4 font-sans">
             <h4 className="text-xs font-syne font-bold uppercase tracking-wider text-[#F4D03F]">
               Direct Engagement
             </h4>
@@ -192,10 +192,10 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
 
             <button
               onClick={onOpenConsultation}
-              className="key-signal-yellow w-full py-3 px-3 rounded-xl font-mono text-xs tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer shadow-lg"
+              className="key-signal-yellow w-full py-3 px-3 rounded-xl font-sans text-xs tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer shadow-lg"
             >
               <Calendar className="w-3.5 h-3.5 text-[#172108]" />
-              <span>BOOK STRATEGY CALL</span>
+              <span>Book a strategy call</span>
             </button>
 
             <div className="pt-2 border-t border-[#6B8E23]/40 space-y-1.5 text-[11px] text-[#A2B682]">
@@ -216,7 +216,7 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
         </div>
 
         {/* Bottom Bar: Copyright & Compliance */}
-        <div className="pt-8 border-t border-[#6B8E23]/40 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-[#EDC9AF]">
+        <div className="pt-8 border-t border-[#6B8E23]/40 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-sans text-[#EDC9AF]">
           <div>
             &copy; 2026 Qubryon Technologies Private Limited. All rights reserved. Registered in Tiruchirappalli, Tamil Nadu, India.
           </div>

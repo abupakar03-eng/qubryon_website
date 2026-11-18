@@ -1,355 +1,322 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@500;600;700;800&display=swap');
 @import "tailwindcss";
+
+/* ==========================================================
+   QUBRYON — CLEAN MODERN DESIGN SYSTEM
+   Warm neutral canvas · deep olive surfaces · signal-yellow accent
+   Class names are kept from the earlier hardware theme so every
+   component picks up the refreshed look from this one file.
+   ========================================================== */
+
+@theme {
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
 
 @layer base {
   :root {
-    /* 60% Dominant Background: Desert Sand */
-    --desert-sand: #EDC9AF;
-    --desert-sand-surface: #F4D9C6;
-    --desert-sand-dark: #DFC0A6;
-    --desert-sand-deep: #CDA689;
+    --canvas: #F6F1EA;
+    --canvas-raised: #FFFCF8;
+    --line: rgba(28, 38, 13, 0.1);
 
-    /* 30% Secondary Color: Olive Drab & Deep Tactical Olive */
-    --olive-drab: #6B8E23;
-    --olive-drab-light: #8BAE3A;
-    --olive-drab-dark: #2F3E14;
-    --olive-drab-deep: #1E280D;
-    --olive-drab-chassis: #253310;
-    --olive-drab-border: rgba(107, 142, 35, 0.45);
+    --olive: #6B8E23;
+    --olive-ink: #141B08;
+    --olive-surface: #1A2309;
+    --olive-surface-2: #222D0F;
 
-    /* 10% Accent Color: Signal Yellow */
     --signal-yellow: #F4D03F;
     --signal-yellow-hover: #F7DC6F;
-    --signal-yellow-dark: #D4AC0D;
-    --signal-yellow-glow: rgba(244, 208, 63, 0.5);
 
-    /* High contrast text tokens */
-    --text-primary: #1C260D;
-    --text-secondary: #425227;
-    --text-light: #F8EDE4;
-    --text-muted: #E0C7B4;
+    --text-primary: #141B08;
+    --text-secondary: #4A5634;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
-    background-color: var(--desert-sand);
+    background-color: var(--canvas);
     color: var(--text-primary);
-    font-family: var(--font-dm-mono), "DM Mono", monospace;
+    font-family: var(--font-sans);
     overflow-x: hidden;
-    selection-background-color: var(--signal-yellow);
-    selection-color: #1A230B;
+    -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-syne), "Syne", sans-serif;
-    font-weight: 800;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Small uppercase labels become tidy mono "eyebrows" */
+  .uppercase {
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
   }
 }
-
-/* ==========================================================
-   60-30-10 COLOR DISTRIBUTION & SKEUOMORPHIC HARDWARE SYSTEM
-   ========================================================== */
 
 .font-syne {
   font-family: var(--font-syne), "Syne", sans-serif;
 }
 
-.font-mono-dm {
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-}
-
-/* 1. Earthy-Tech Chassis & Carbon Weave in Olive Drab */
-.olive-chassis {
-  background: linear-gradient(
-    180deg,
-    #2B3B13 0%,
-    #212E0E 50%,
-    #182309 100%
-  );
-  border: 1px solid #6B8E23;
-  border-top-color: rgba(244, 208, 63, 0.35);
-  border-bottom-color: #0E1505;
-  box-shadow:
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -2px 4px 0 rgba(0, 0, 0, 0.8),
-    0 12px 28px -4px rgba(28, 38, 13, 0.4);
-}
-
+/* 1. Surfaces — flat dark olive cards with hairline borders */
+.olive-chassis,
 .olive-chassis-deep {
-  background: linear-gradient(
-    180deg,
-    #22300D 0%,
-    #1A2509 60%,
-    #121B06 100%
-  );
-  border: 1px solid rgba(107, 142, 35, 0.45);
-  border-top-color: rgba(255, 255, 255, 0.18);
-  border-bottom-color: #080D02;
-  box-shadow:
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -2px 4px 0 rgba(0, 0, 0, 0.9),
-    0 14px 32px -4px rgba(24, 33, 11, 0.45);
+  background: var(--olive-surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 1px 2px rgba(20, 27, 8, 0.08), 0 12px 32px -12px rgba(20, 27, 8, 0.35);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .olive-carbon-panel {
-  background-color: #1A240A;
-  background-image: 
-    radial-gradient(rgba(107, 142, 35, 0.2) 15%, transparent 16%),
-    radial-gradient(rgba(244, 208, 63, 0.08) 15%, transparent 16%);
-  background-size: 8px 8px;
-  background-position: 0 0, 4px 4px;
-  border: 1px solid #6B8E23;
-  border-top-color: rgba(244, 208, 63, 0.4);
-  border-bottom-color: #0B1104;
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(107, 142, 35, 0.18), transparent 60%),
+    var(--olive-ink);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 24px 60px -24px rgba(20, 27, 8, 0.5);
 }
 
-/* 2. Recessed Milled Channels */
+/* 2. Inset areas & pills */
 .olive-recessed-channel {
-  background: #121A06;
-  border: 1px solid rgba(107, 142, 35, 0.3);
-  border-top-color: rgba(0, 0, 0, 0.9);
-  border-bottom-color: rgba(237, 201, 175, 0.25);
-  box-shadow: 
-    inset 0 3px 6px rgba(0, 0, 0, 0.9),
-    inset 0 -1px 2px rgba(255, 255, 255, 0.08),
-    0 1px 0 rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Eyebrow pills that sit on the light canvas */
+section > div > div > .olive-recessed-channel.rounded-full,
+.text-center > .olive-recessed-channel.rounded-full {
+  background: rgba(107, 142, 35, 0.1);
+  border-color: rgba(107, 142, 35, 0.25);
+  color: #3D5214;
+  box-shadow: none;
+}
+section > div > div > .olive-recessed-channel.rounded-full svg,
+.text-center > .olive-recessed-channel.rounded-full svg {
+  color: #4F6B1A;
 }
 
 .sand-recessed-channel {
-  background: #DFC0A6;
-  border: 1px solid rgba(107, 142, 35, 0.4);
-  border-top-color: rgba(70, 50, 35, 0.4);
-  border-bottom-color: rgba(255, 255, 255, 0.6);
-  box-shadow: 
-    inset 0 2px 4px rgba(60, 42, 28, 0.35),
-    0 1px 0 rgba(255, 255, 255, 0.4);
+  background: var(--canvas-raised);
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(20, 27, 8, 0.04);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* 3. 10% Accent: Tactile Signal Yellow CTA Keys */
-.key-signal-yellow {
+.sand-recessed-channel:hover {
+  border-color: rgba(107, 142, 35, 0.35);
+  box-shadow: 0 12px 32px -16px rgba(20, 27, 8, 0.25);
+  transform: translateY(-2px);
+}
+
+/* 3. Buttons */
+.key-signal-yellow,
+.key-tactical-olive {
   position: relative;
-  background: linear-gradient(
-    180deg,
-    #FDFEAA 0%,
-    #F4D03F 30%,
-    #E5BE1E 75%,
-    #C89B0E 100%
-  );
-  border: 1px solid #FDFEAA;
-  border-top-color: #FFFFFF;
-  border-bottom-color: #9A7706;
-  border-left-color: rgba(255, 255, 255, 0.6);
-  border-right-color: #9A7706;
-  color: #172108;
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-weight: 700;
-  box-shadow:
-    0 4px 12px rgba(23, 33, 8, 0.35),
-    0 0 24px rgba(244, 208, 63, 0.55),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
-    inset 0 -2.5px 3px rgba(183, 149, 11, 0.9);
-  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  text-transform: none;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
   user-select: none;
+}
+
+.key-signal-yellow {
+  background: var(--signal-yellow);
+  color: var(--olive-ink);
+  border: 1px solid transparent;
+  box-shadow: 0 1px 2px rgba(20, 27, 8, 0.15), 0 8px 20px -8px rgba(212, 172, 13, 0.6);
 }
 
 .key-signal-yellow:hover {
-  background: linear-gradient(
-    180deg,
-    #FFFFFF 0%,
-    #F7DC6F 30%,
-    #F4D03F 75%,
-    #D4AC0D 100%
-  );
-  box-shadow:
-    0 6px 18px rgba(23, 33, 8, 0.45),
-    0 0 35px rgba(244, 208, 63, 0.85),
-    inset 0 1.5px 3px #FFFFFF,
-    inset 0 -2.5px 4px #A07C08;
+  background: var(--signal-yellow-hover);
   transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(20, 27, 8, 0.15), 0 12px 28px -10px rgba(212, 172, 13, 0.7);
 }
 
-.key-signal-yellow:active {
-  transform: translateY(2px) !important;
-  box-shadow:
-    inset 0 3px 6px rgba(0, 0, 0, 0.7),
-    inset 0 0 16px rgba(212, 172, 13, 0.9),
-    0 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-/* 4. Secondary Tactile Olive Hardware Keys */
 .key-tactical-olive {
-  position: relative;
-  background: linear-gradient(
-    180deg,
-    #3B4E1A 0%,
-    #2A3812 50%,
-    #1C260A 100%
-  );
-  border: 1px solid #6B8E23;
-  border-top-color: rgba(255, 255, 255, 0.35);
-  border-bottom-color: #0E1505;
-  box-shadow:
-    0 4px 8px -1px rgba(18, 26, 7, 0.4),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.25),
-    inset 0 -2px 3px 0 rgba(0, 0, 0, 0.85);
-  color: #EDC9AF;
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
-  user-select: none;
+  background: var(--olive-surface-2);
+  color: #F3ECE3;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 2px rgba(20, 27, 8, 0.15);
 }
 
 .key-tactical-olive:hover {
-  border-color: #F4D03F;
-  border-top-color: #FFF280;
-  box-shadow:
-    0 6px 16px -2px rgba(18, 26, 7, 0.6),
-    0 0 18px rgba(244, 208, 63, 0.35),
-    inset 0 1px 2px 0 rgba(255, 255, 255, 0.4),
-    inset 0 -2px 3px 0 rgba(0, 0, 0, 0.85);
-  color: #F4D03F;
+  background: #2C3A14;
+  color: var(--signal-yellow);
+  border-color: rgba(244, 208, 63, 0.35);
   transform: translateY(-1px);
 }
 
+.key-signal-yellow:active,
 .key-tactical-olive:active {
-  transform: translateY(2px) !important;
-  background: #141C07;
-  box-shadow:
-    inset 0 3px 6px rgba(0, 0, 0, 0.9),
-    inset 0 0 12px rgba(107, 142, 35, 0.35);
+  transform: translateY(0) scale(0.98) !important;
 }
 
-/* 5. Hardware LED Indicators & Rivets */
+.key-signal-yellow:focus-visible,
+.key-tactical-olive:focus-visible {
+  outline: 2px solid var(--olive);
+  outline-offset: 2px;
+}
+
+/* Text inside buttons: drop the shouty mono treatment */
+.key-signal-yellow .uppercase,
+.key-tactical-olive .uppercase,
+.key-signal-yellow.uppercase,
+.key-tactical-olive.uppercase {
+  font-family: var(--font-sans);
+  text-transform: none;
+  letter-spacing: -0.005em;
+}
+
+/* 4. Status dots (rivets retired) */
+.brass-rivet {
+  display: none;
+}
+
+.hardware-led-yellow,
+.hardware-led-olive {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
 .hardware-led-yellow {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #F4D03F;
-  box-shadow: 
-    0 0 8px #F4D03F,
-    0 0 16px rgba(244, 208, 63, 0.9),
-    inset 0 1px 1px #FFFFFF;
+  background: var(--signal-yellow);
+  box-shadow: 0 0 0 3px rgba(244, 208, 63, 0.18);
 }
 
 .hardware-led-olive {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #6B8E23;
-  box-shadow: 
-    0 0 8px #6B8E23,
-    0 0 14px rgba(107, 142, 35, 0.8),
-    inset 0 1px 1px #FFFFFF;
+  background: #8BAE3A;
+  box-shadow: 0 0 0 3px rgba(139, 174, 58, 0.18);
 }
 
-.brass-rivet {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #F4D03F 0%, #8C731A 60%, #3D3106 100%);
-  border: 1px solid rgba(20, 28, 8, 0.8);
-  box-shadow: 
-    0 1px 2px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0.5px rgba(255, 255, 255, 0.6);
-}
-
-/* 6. Typography Depth & Metallic Letterpress */
-.text-syne-bold {
-  font-family: var(--font-syne), "Syne", sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.025em;
-}
-
-.text-syne-title {
-  font-family: var(--font-syne), "Syne", sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  text-shadow: 0 1px 2px rgba(18, 25, 7, 0.25);
-}
-
-.text-syne-headline-dark {
-  font-family: var(--font-syne), "Syne", sans-serif;
-  font-weight: 800;
-  color: #172108;
-  letter-spacing: -0.03em;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
-}
-
-.text-syne-headline-light {
-  font-family: var(--font-syne), "Syne", sans-serif;
-  font-weight: 800;
-  color: #FAF1E8;
-  letter-spacing: -0.025em;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.text-accent-yellow {
-  color: #F4D03F;
-  text-shadow: 0 0 14px rgba(244, 208, 63, 0.5);
-}
-
-.text-etched-sand {
-  color: #6C5441;
-  text-shadow: 
-    0 -1px 0 rgba(0, 0, 0, 0.3),
-    0 1px 1px rgba(255, 255, 255, 0.5);
-}
-
-.text-etched-olive {
-  color: #E6D2C3;
-  text-shadow: 
-    0 -1px 1px rgba(0, 0, 0, 0.9),
-    0 1px 1px rgba(255, 255, 255, 0.15);
-}
-
-/* 7. Grid Patterns for 60% Desert Sand Background */
-.sand-cyber-grid {
-  background-image: 
-    linear-gradient(to right, rgba(107, 142, 35, 0.12) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(107, 142, 35, 0.12) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
+/* 5. Background texture — faint grid that fades out */
+.sand-cyber-grid,
 .sand-cyber-grid-dense {
-  background-image: 
-    linear-gradient(to right, rgba(107, 142, 35, 0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(107, 142, 35, 0.15) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-image:
+    linear-gradient(to right, rgba(28, 38, 13, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28, 38, 13, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 
-/* 8. Recessed Form Inputs */
+/* 6. Form inputs */
 .sand-glass-input {
-  background: #151E08;
-  border: 1px solid rgba(107, 142, 35, 0.5);
-  border-top-color: rgba(0, 0, 0, 0.9);
-  border-bottom-color: rgba(244, 208, 63, 0.25);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.85);
-  color: #F8EDE4;
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #F8F3EC;
+  font-family: var(--font-sans);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.sand-glass-input::placeholder {
+  color: rgba(248, 243, 236, 0.4);
 }
 
 .sand-glass-input:focus {
   outline: none;
-  border-color: #F4D03F;
-  box-shadow: 
-    inset 0 2px 4px rgba(0, 0, 0, 0.85),
-    0 0 16px rgba(244, 208, 63, 0.45);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--signal-yellow);
+  box-shadow: 0 0 0 3px rgba(244, 208, 63, 0.2);
 }
 
-/* Custom Scrollbar for Earthy Palette */
+/* 7a. Frosted glass cards floating over the 3D hero */
+.glass-card {
+  z-index: 10;
+  border-radius: 1rem;
+  background: rgba(255, 252, 248, 0.72);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 20px 50px -20px rgba(20, 27, 8, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  animation: glass-float 6s ease-in-out infinite;
+}
+
+.glass-card:nth-of-type(odd) {
+  animation-delay: -3s;
+}
+
+@keyframes glass-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-card { animation: none; }
+}
+
+/* 7b. Hero dashboard visual (WebGL fallback) */
+.hero-dash-bar {
+  transform-origin: bottom;
+  animation: hero-bar 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes hero-bar {
+  from { transform: scaleY(0.75); }
+  to { transform: scaleY(1); }
+}
+
+.hero-dash-line {
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: hero-line 2.4s ease-out forwards;
+}
+
+@keyframes hero-line {
+  to { stroke-dashoffset: 0; }
+}
+
+/* 8. Global delivery map animations */
+.global-arc {
+  animation: global-arc-flow 2.4s linear infinite;
+}
+
+@keyframes global-arc-flow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+.global-ping {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: global-ping 2.2s ease-out infinite;
+}
+
+@keyframes global-ping {
+  0% { transform: scale(0.6); opacity: 0.5; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .global-arc,
+  .global-ping,
+  .hero-dash-bar,
+  .hero-dash-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 9px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #EDC9AF;
+  background: var(--canvas);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #6B8E23;
-  border-radius: 4px;
-  border: 2px solid #EDC9AF;
+  background: rgba(28, 38, 13, 0.25);
+  border-radius: 9999px;
+  border: 3px solid var(--canvas);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #F4D03F;
+  background: var(--olive);
 }

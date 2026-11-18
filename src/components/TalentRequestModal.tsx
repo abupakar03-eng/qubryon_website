@@ -63,7 +63,7 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
 
         {/* Modal Header */}
         <div className="mb-6">
-          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-3 py-1 rounded-md text-[#F4D03F] text-xs font-mono mb-2 border border-[#6B8E23]">
+          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-3 py-1 rounded-md text-[#F4D03F] text-xs font-sans mb-2 border border-[#6B8E23]">
             <Users className="w-4 h-4 text-[#F4D03F]" />
             <span className="tracking-widest uppercase font-bold">
               IT STAFF AUGMENTATION DISPATCH // 48-HR SLA
@@ -72,7 +72,7 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
           <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-syne tracking-wide">
             Deploy Pre-Vetted IoT &amp; AI Engineers
           </h3>
-          <p className="text-xs sm:text-sm text-[#EDC9AF] mt-1 font-mono">
+          <p className="text-xs sm:text-sm text-[#EDC9AF] mt-1 font-sans">
             Access pre-screened talent from Qubryon Technologies with a 2-week risk-free trial.
           </p>
         </div>
@@ -83,14 +83,14 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
               <CheckCircle2 className="w-10 h-10" />
             </div>
             <h4 className="text-2xl font-bold text-white font-syne">Talent Request Received!</h4>
-            <p className="text-xs sm:text-sm text-[#EDC9AF] max-w-md mx-auto leading-relaxed font-mono">
+            <p className="text-xs sm:text-sm text-[#EDC9AF] max-w-md mx-auto leading-relaxed font-sans">
               Our Technical Director has initiated the matching protocol for{" "}
               <strong className="text-[#F4D03F]">{formData.count}</strong> ({formData.role}).
               Candidate resumes and technical code reviews will arrive at{" "}
-              <span className="text-[#F4D03F] font-mono">{formData.email}</span> within 24 to 48 hours.
+              <span className="text-[#F4D03F] font-sans">{formData.email}</span> within 24 to 48 hours.
             </p>
 
-            <div className="olive-recessed-channel p-4 rounded-xl border border-[#6B8E23] max-w-md mx-auto text-left text-xs font-mono space-y-1">
+            <div className="olive-recessed-channel p-4 rounded-xl border border-[#6B8E23] max-w-md mx-auto text-left text-xs font-sans space-y-1">
               <div className="flex justify-between">
                 <span className="text-[#A2B682]">Match SLA:</span>
                 <span className="text-[#8BAE3A] font-bold">&lt; 48 Hours</span>
@@ -107,22 +107,22 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
 
             <button
               onClick={resetAndClose}
-              className="key-signal-yellow px-8 py-3 rounded-xl text-xs font-mono tracking-wider uppercase cursor-pointer"
+              className="key-signal-yellow px-8 py-3 rounded-xl text-xs font-sans tracking-wider uppercase cursor-pointer"
             >
               DONE
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4 font-mono">
+          <form onSubmit={handleSubmit} className="space-y-4 font-sans">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   ENGINEERING ROLE NEEDED *
                 </label>
                 <select
                   value={formData.role}
                   onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded-lg text-xs font-mono sand-glass-input cursor-pointer"
+                  className="w-full px-3 py-2.5 rounded-lg text-xs font-sans sand-glass-input cursor-pointer"
                   required
                 >
                   <option value="Embedded C & IoT Firmware Specialist" className="bg-[#172108]">
@@ -144,13 +144,13 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
               </div>
 
               <div>
-                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   SENIORITY LEVEL *
                 </label>
                 <select
                   value={formData.seniority}
                   onChange={(e) => setFormData({ ...formData, seniority: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded-lg text-xs font-mono sand-glass-input cursor-pointer"
+                  className="w-full px-3 py-2.5 rounded-lg text-xs font-sans sand-glass-input cursor-pointer"
                   required
                 >
                   <option value="Senior (5-8 yrs)" className="bg-[#172108]">
@@ -168,13 +168,13 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   HEADCOUNT *
                 </label>
                 <select
                   value={formData.count}
                   onChange={(e) => setFormData({ ...formData, count: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded-lg text-xs font-mono sand-glass-input cursor-pointer"
+                  className="w-full px-3 py-2.5 rounded-lg text-xs font-sans sand-glass-input cursor-pointer"
                 >
                   <option value="1 Engineer" className="bg-[#172108]">1 Dedicated Engineer</option>
                   <option value="2 Engineers" className="bg-[#172108]">2 Engineers</option>
@@ -184,13 +184,13 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
               </div>
 
               <div>
-                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   TIMELINE TO ONBOARD *
                 </label>
                 <select
                   value={formData.urgency}
                   onChange={(e) => setFormData({ ...formData, urgency: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded-lg text-xs font-mono sand-glass-input cursor-pointer"
+                  className="w-full px-3 py-2.5 rounded-lg text-xs font-sans sand-glass-input cursor-pointer"
                 >
                   <option value="Immediate (< 48 hrs)" className="bg-[#172108]">Immediate (&lt; 48 hrs)</option>
                   <option value="Within 1-2 Weeks" className="bg-[#172108]">Within 1-2 Weeks</option>
@@ -201,7 +201,7 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   YOUR FULL NAME *
                 </label>
                 <input
@@ -210,12 +210,12 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g. Alex Johnson"
-                  className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
+                  className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   BUSINESS WORK EMAIL *
                 </label>
                 <input
@@ -224,13 +224,13 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="alex@enterprise.com"
-                  className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
+                  className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+              <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                 COMPANY OR PRODUCT NAME *
               </label>
               <input
@@ -239,12 +239,12 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
                 value={formData.company}
                 onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                 placeholder="e.g. Continental Automation Lab"
-                className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
+                className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
               />
             </div>
 
             {/* Quick Guarantees */}
-            <div className="grid grid-cols-2 gap-2 text-[11px] font-mono text-[#EDC9AF] py-1">
+            <div className="grid grid-cols-2 gap-2 text-[11px] font-sans text-[#EDC9AF] py-1">
               <div className="flex items-center space-x-1.5">
                 <span className="hardware-led-yellow" />
                 <span>2-Week Risk-Free Trial</span>
@@ -259,14 +259,14 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
             <button
               type="submit"
               disabled={submitting}
-              className="key-signal-yellow w-full py-4 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 shadow-lg"
+              className="key-signal-yellow w-full py-4 rounded-xl font-sans text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 shadow-lg"
             >
               {submitting ? (
-                <span>DISPATCHING TALENT REQUEST...</span>
+                <span>Sending request…</span>
               ) : (
                 <>
                   <Send className="w-4 h-4 text-[#172108]" />
-                  <span>RECEIVE VETTED PROFILES WITHIN 48 HOURS</span>
+                  <span>Receive vetted profiles within 48 hours</span>
                 </>
               )}
             </button>

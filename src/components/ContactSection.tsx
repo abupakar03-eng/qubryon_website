@@ -13,6 +13,7 @@ import {
   CheckCircle2,
   MessageSquare,
   Clock,
+  Globe,
 } from "lucide-react";
 
 interface ContactSectionProps {
@@ -45,11 +46,11 @@ export default function ContactSection({
   };
 
   return (
-    <section id="contact" className="relative py-28 bg-[#EDC9AF] text-[#1C260D] sand-cyber-grid">
+    <section id="contact" className="relative py-28 bg-[#F6F1EA] text-[#1C260D] sand-cyber-grid">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header with Syne & DM Mono */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[#6B8E23] text-[#F4D03F] font-mono text-xs mb-3 shadow-md">
+          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[#6B8E23] text-[#F4D03F] font-sans text-xs mb-3 shadow-md">
             <MessageSquare className="w-3.5 h-3.5 text-[#F4D03F]" />
             <span className="tracking-[0.18em] uppercase font-bold">
               GLOBAL B2B ENGAGEMENT &amp; INQUIRY
@@ -59,26 +60,26 @@ export default function ContactSection({
             <span className="block drop-shadow-sm">Let&apos;s Build the Future of</span>
             <span className="block mt-1 text-[#466016]">Cyber-Physical Tech.</span>
           </h2>
-          <p className="text-[#3A4A1C] text-sm sm:text-base leading-relaxed font-mono">
-            Connect with our engineering leadership in Tiruchirappalli or book a direct strategy call with our principal IoT and AI architects.
+          <p className="text-[#3A4A1C] text-sm sm:text-base leading-relaxed font-sans">
+            Wherever you are, in North America, Europe, the Middle East or Asia Pacific, connect with our engineering leadership or book a strategy call with our principal IoT and AI architects in your time zone.
           </p>
 
           {/* Quick Schedule Tactile Trigger Bar (10% Signal Yellow & 30% Tactical Olive) */}
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <button
               onClick={onOpenConsultation}
-              className="key-signal-yellow px-6 py-3.5 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center space-x-2 cursor-pointer shadow-lg"
+              className="key-signal-yellow px-6 py-3.5 rounded-xl font-sans text-xs sm:text-sm tracking-wider uppercase flex items-center space-x-2 cursor-pointer shadow-lg"
             >
               <Calendar className="w-4 h-4 text-[#172108]" />
-              <span>BOOK ARCHITECTURE CALL (CALENDLY SYNC)</span>
+              <span>Book an architecture call</span>
             </button>
 
             <button
               onClick={onOpenTalentModal}
-              className="key-tactical-olive px-6 py-3.5 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center space-x-2 cursor-pointer shadow-md"
+              className="key-tactical-olive px-6 py-3.5 rounded-xl font-sans text-xs sm:text-sm tracking-wider uppercase flex items-center space-x-2 cursor-pointer shadow-md"
             >
               <UserCheck className="w-4 h-4 text-[#F4D03F]" />
-              <span>REQUEST STAFF AUGMENTATION PROFILES</span>
+              <span>Request engineer profiles</span>
             </button>
           </div>
         </div>
@@ -95,12 +96,12 @@ export default function ContactSection({
 
               <div className="flex items-center space-x-2 border-b border-[#6B8E23]/40 pb-4 mb-5">
                 <Building2 className="w-5 h-5 text-[#F4D03F]" />
-                <span className="font-mono text-xs font-bold text-[#F4D03F] tracking-wider">
+                <span className="font-sans text-xs font-bold text-[#F4D03F] tracking-wider">
                   QUBRYON TECHNOLOGIES PRIVATE LIMITED
                 </span>
               </div>
 
-              <div className="space-y-4 text-xs font-mono">
+              <div className="space-y-4 text-xs font-sans">
                 <p className="text-[#EDC9AF] leading-relaxed">
                   A registered cyber-physical engineering firm specializing in custom IoT hardware architectures, edge AI predictive analytics, and enterprise IT staff augmentation — headquartered in Tiruchirappalli, Tamil Nadu, India.
                 </p>
@@ -109,7 +110,7 @@ export default function ContactSection({
                   <span className="text-[#A2B682] block text-[10px] tracking-wider uppercase font-bold">REGISTERED OFFICE</span>
                   <div className="text-[#FAF1E8] flex items-start space-x-2 mt-1">
                     <MapPin className="w-4 h-4 text-[#F4D03F] shrink-0 mt-0.5" />
-                    <span className="font-mono text-xs">
+                    <span className="font-sans text-xs">
                       Tennur, Tiruchirappalli, Tamil Nadu, India, 620017.
                     </span>
                   </div>
@@ -124,11 +125,11 @@ export default function ContactSection({
 
             {/* Direct Contact Channels */}
             <div className="olive-chassis p-6 rounded-2xl space-y-4 shadow-md">
-              <h4 className="text-xs font-mono text-[#F4D03F] font-bold uppercase tracking-wider">
+              <h4 className="text-xs font-sans text-[#F4D03F] font-bold uppercase tracking-wider">
                 Direct Engineering Desk
               </h4>
 
-              <div className="space-y-2.5 text-xs font-mono">
+              <div className="space-y-2.5 text-xs font-sans">
                 <a
                   href="mailto:contact@qubryon.com"
                   className="olive-recessed-channel flex items-center space-x-3 text-[#EDC9AF] hover:text-[#F4D03F] transition-colors p-2.5 rounded-lg border border-[#6B8E23]/40"
@@ -154,6 +155,11 @@ export default function ContactSection({
                   <Clock className="w-4 h-4 text-[#F4D03F]" />
                   <span>09:00 - 18:30 IST (Mon - Fri)</span>
                 </div>
+
+                <div className="olive-recessed-channel flex items-center space-x-3 text-[#A2B682] p-2.5 rounded-lg border border-[#6B8E23]/40">
+                  <Globe className="w-4 h-4 text-[#F4D03F]" />
+                  <span>Extended overlap shifts for US, UK/EU, GCC &amp; APAC clients</span>
+                </div>
               </div>
             </div>
           </div>
@@ -166,7 +172,7 @@ export default function ContactSection({
                   <h3 className="text-xl sm:text-2xl font-bold text-white font-syne tracking-wide">
                     Send an RFP or Technical Inquiry
                   </h3>
-                  <p className="text-xs text-[#EDC9AF] font-mono mt-0.5">
+                  <p className="text-xs text-[#EDC9AF] font-sans mt-0.5">
                     Guaranteed response within 4 hours by a Solutions Lead.
                   </p>
                 </div>
@@ -176,20 +182,20 @@ export default function ContactSection({
                   <button
                     type="button"
                     onClick={() => setInquiryType("iot")}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold tracking-wider cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-sans font-bold tracking-wider cursor-pointer ${
                       inquiryType === "iot" ? "key-signal-yellow" : "key-tactical-olive"
                     }`}
                   >
-                    <span>CUSTOM IOT</span>
+                    <span>Custom IoT</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => setInquiryType("staffing")}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold tracking-wider cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-sans font-bold tracking-wider cursor-pointer ${
                       inquiryType === "staffing" ? "key-signal-yellow" : "key-tactical-olive"
                     }`}
                   >
-                    <span>STAFFING</span>
+                    <span>Staffing</span>
                   </button>
                 </div>
               </div>
@@ -200,22 +206,22 @@ export default function ContactSection({
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                   <h4 className="text-xl font-bold text-white font-syne">Inquiry Successfully Transmitted!</h4>
-                  <p className="text-xs sm:text-sm text-[#EDC9AF] max-w-md mx-auto font-mono">
+                  <p className="text-xs sm:text-sm text-[#EDC9AF] max-w-md mx-auto font-sans">
                     Thank you, <strong className="text-[#F4D03F]">{formData.name || "Partner"}</strong>. Our leadership team has received your message. A technical director will review your specifications and contact you shortly at{" "}
-                    <span className="text-[#F4D03F] font-mono">{formData.email}</span>.
+                    <span className="text-[#F4D03F] font-sans">{formData.email}</span>.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="key-signal-yellow px-6 py-2.5 rounded-xl text-xs font-mono tracking-wider uppercase cursor-pointer"
+                    className="key-signal-yellow px-6 py-2.5 rounded-xl text-xs font-sans tracking-wider uppercase cursor-pointer"
                   >
                     Send Another Inquiry
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 font-mono">
+                <form onSubmit={handleSubmit} className="space-y-4 font-sans">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                         YOUR FULL NAME *
                       </label>
                       <input
@@ -223,13 +229,13 @@ export default function ContactSection({
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Senthil Kumar"
-                        className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
+                        placeholder="e.g. Sarah Mitchell"
+                        className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                         CORPORATE WORK EMAIL *
                       </label>
                       <input
@@ -237,28 +243,28 @@ export default function ContactSection({
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="senthil@company.com"
-                        className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
+                        placeholder="sarah@company.com"
+                        className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                         PHONE / WHATSAPP NUMBER
                       </label>
                       <input
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="+91 98765 43210"
-                        className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
+                        placeholder="+1 415 555 0134"
+                        className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                      <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                         COMPANY NAME &amp; COUNTRY *
                       </label>
                       <input
@@ -267,13 +273,13 @@ export default function ContactSection({
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                         placeholder="e.g. Siemens / Germany"
-                        className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
+                        className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
+                    <label className="block text-[11px] font-sans text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                       PROJECT SPECIFICATIONS / SPRINT OBJECTIVES *
                     </label>
                     <textarea
@@ -282,7 +288,7 @@ export default function ContactSection({
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Share details regarding your target microcontrollers, telemetry bandwidth, required AI inference speeds, or staff augmentation headcount..."
-                      className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
+                      className="w-full px-3 py-2 rounded-lg text-xs font-sans sand-glass-input"
                     />
                   </div>
 
@@ -290,19 +296,19 @@ export default function ContactSection({
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="key-signal-yellow w-full py-4 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 shadow-lg"
+                    className="key-signal-yellow w-full py-4 rounded-xl font-sans text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 shadow-lg"
                   >
                     {submitting ? (
-                      <span>TRANSMITTING ENCRYPTED DISPATCH...</span>
+                      <span>Sending…</span>
                     ) : (
                       <>
                         <Send className="w-4 h-4 text-[#172108]" />
-                        <span>SEND TECHNICAL RFP / DISPATCH MESSAGE</span>
+                        <span>Send inquiry</span>
                       </>
                     )}
                   </button>
 
-                  <div className="flex items-center justify-between text-[10px] font-mono text-[#EDC9AF] pt-1">
+                  <div className="flex items-center justify-between text-[10px] font-sans text-[#EDC9AF] pt-1">
                     <span className="flex items-center space-x-1">
                       <ShieldCheck className="w-3.5 h-3.5 text-[#F4D03F]" />
                       <span>Encrypted SSL Transmission</span>

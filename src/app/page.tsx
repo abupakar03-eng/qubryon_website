@@ -6,6 +6,7 @@ import Hero from "@/components/Hero";
 import CoreServices from "@/components/CoreServices";
 import StaffAugmentation from "@/components/StaffAugmentation";
 import Portfolio from "@/components/Portfolio";
+import GlobalPresence from "@/components/GlobalPresence";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import InteractiveConsultationModal from "@/components/InteractiveConsultationModal";
@@ -17,7 +18,7 @@ export default function Home() {
   const [talentModalOpen, setTalentModalOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-[#EDC9AF] text-[#1C260D] flex flex-col relative overflow-x-hidden font-mono">
+    <main className="min-h-screen bg-[#F6F1EA] text-[#1C260D] flex flex-col relative overflow-x-hidden font-sans">
       {/* Top Navbar */}
       <Navbar
         onOpenConsultation={() => setConsultationOpen(true)}
@@ -45,6 +46,9 @@ export default function Home() {
 
       {/* Section 4: Portfolio / Case Studies */}
       <Portfolio />
+
+      {/* Section 5: Global Delivery Network */}
+      <GlobalPresence />
 
       {/* Section 5: Corporate Information & Contact Section */}
       <ContactSection

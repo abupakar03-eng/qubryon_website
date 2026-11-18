@@ -2,140 +2,113 @@
 
 import React from "react";
 import { ArrowRight, Users, CheckCircle2 } from "lucide-react";
-import TechParticleCanvas from "./TechParticleCanvas";
+import Hero3D from "./Hero3D";
+import { HERO_SERVICES } from "./three/heroServices";
 
 interface HeroProps {
   onOpenConsultation: () => void;
   onOpenTalentModal: () => void;
 }
 
+const METRICS = [
+  { value: "< 48 hrs", label: "To match vetted engineers" },
+  { value: "40+", label: "Technology stacks covered" },
+  { value: "100%", label: "IP & code ownership" },
+  { value: "4 regions", label: "US · EU · GCC · APAC overlap" },
+];
+
 export default function Hero({ onOpenConsultation, onOpenTalentModal }: HeroProps) {
   return (
-    <section className="relative min-h-screen pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden flex flex-col justify-center bg-[#EDC9AF] text-[#1C260D] sand-cyber-grid">
-      {/* Background Subtle Warm Radial Halos */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#6B8E23]/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[450px] h-[350px] bg-[#F4D03F]/20 rounded-full blur-[130px] pointer-events-none" />
+    <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden bg-[#F6F1EA] text-[#141B08] sand-cyber-grid">
+      {/* Soft colour wash */}
+      <div className="absolute -top-32 right-[-10%] w-[720px] h-[720px] bg-[#6B8E23]/15 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/3 -left-40 w-[480px] h-[480px] bg-[#F4D03F]/25 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        {/* Top Enterprise Status Badge (30% Olive Drab) */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-7">
-          <div className="olive-recessed-channel inline-flex items-center space-x-2.5 px-4.5 py-1.5 rounded-full border border-[#6B8E23] text-[#F4D03F] text-xs font-mono shadow-[inset_0_2px_4px_rgba(0,0,0,0.8),0_2px_8px_rgba(30,40,15,0.15)]">
-            <span className="hardware-led-yellow animate-pulse" />
-            <span className="font-bold tracking-[0.16em] uppercase">
-              ENTERPRISE CYBER-PHYSICAL SYSTEMS
-            </span>
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          {/* Copy */}
+          <div className="lg:col-span-6 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#6B8E23]/25 bg-white/60 backdrop-blur px-3.5 py-1.5 text-xs text-[#3D5214] mb-7 shadow-sm">
+              <span className="hardware-led-olive" />
+              <span className="font-medium">Software development &amp; IT staff augmentation</span>
+            </div>
+
+            <h1 className="text-[2.3rem] sm:text-[3.4rem] lg:text-[3rem] xl:text-[3.35rem] font-bold tracking-[-0.03em] text-[#141B08] leading-[1.06] mb-6 font-syne">
+              Build better software.{" "}
+              <span className="relative text-[#4F6B1A]">
+                Scale with expert engineers.
+                <span className="absolute left-0 right-0 -bottom-1 h-3 bg-[#F4D03F]/60 -z-10 rounded-sm" />
+              </span>
+            </h1>
+
+            <p className="text-base sm:text-lg text-[#4A5634] max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              Qubryon is your global software engineering partner. We design and build custom software, AI, cloud, data
+              and IoT solutions, and embed pre-vetted developers into your team in under 48 hours.
+            </p>
+
+            <div className="mt-9 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
+              <button
+                onClick={onOpenConsultation}
+                className="key-signal-yellow w-full sm:w-auto px-6 py-3.5 rounded-full text-sm flex items-center justify-center gap-2 cursor-pointer group"
+              >
+                <span>Start a project</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </button>
+
+              <button
+                onClick={onOpenTalentModal}
+                className="key-tactical-olive w-full sm:w-auto px-6 py-3.5 rounded-full text-sm flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Users className="w-4 h-4" />
+                <span>Hire developers</span>
+              </button>
+            </div>
+
+            {/* Every service, one tap away */}
+            <div className="mt-9">
+              <div className="text-[11px] uppercase text-[#4A5634]/80 mb-2.5">What we do</div>
+              <ul className="flex flex-wrap justify-center lg:justify-start gap-2">
+                {HERO_SERVICES.map((s) => (
+                  <li key={s.id}>
+                    <a
+                      href={s.href}
+                      className={`inline-flex items-center rounded-full px-3 py-1.5 text-[13px] border transition-colors ${
+                        s.highlight
+                          ? "bg-[#F4D03F] border-[#D4AC0D]/40 text-[#141B08] font-semibold hover:bg-[#F7DC6F]"
+                          : "bg-white/70 border-[#141B08]/10 text-[#2A3517] hover:border-[#6B8E23]/50 hover:text-[#141B08]"
+                      }`}
+                    >
+                      {s.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-y-2 gap-x-5 text-[13px] text-[#4A5634]">
+              {["NDA & full IP protection", "Fixed-bid, T&M or dedicated teams"].map((t) => (
+                <div key={t} className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#6B8E23]" />
+                  <span>{t}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 3D services orbit */}
+          <div className="lg:col-span-6">
+            <Hero3D />
           </div>
         </div>
 
-        {/* Main Architectural Headline in Syne */}
-        <div className="text-center max-w-4xl mx-auto mb-10">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#172108] leading-[1.08] mb-6 font-syne">
-            <span className="block drop-shadow-sm">
-              Empowering the Physical World with
-            </span>
-            <span className="block mt-1 text-[#466016] drop-shadow-sm">
-              AI &amp; IoT Solutions.
-            </span>
-          </h1>
-
-          {/* Subtext in DM Mono */}
-          <p className="text-base sm:text-lg md:text-xl text-[#3A4A1C] max-w-3xl mx-auto leading-relaxed font-mono">
-            Architecting mission-critical <strong className="text-[#172108] font-bold">custom IoT applications</strong>,{" "}
-            real-time <strong className="text-[#172108] font-bold">AI predictive analytics</strong> pipelines, and providing{" "}
-            <strong className="text-[#172108] font-bold">top-tier IT staff augmentation</strong> with pre-vetted firmware, cloud, and machine learning engineers.
-          </p>
-
-          {/* Dual Tactile CTAs (10% Signal Yellow & 30% Tactical Olive) */}
-          <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
-            {/* Primary CTA: Signal Yellow */}
-            <button
-              onClick={onOpenConsultation}
-              className="key-signal-yellow w-full sm:w-auto px-8 py-4 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2.5 cursor-pointer group shadow-lg"
-            >
-              <span>BUILD YOUR SOLUTION</span>
-              <ArrowRight className="w-4 h-4 text-[#172108] group-hover:translate-x-1 transition-transform" />
-            </button>
-
-            {/* Secondary CTA: Tactical Olive */}
-            <button
-              onClick={onOpenTalentModal}
-              className="key-tactical-olive w-full sm:w-auto px-8 py-4 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2.5 cursor-pointer group shadow-md"
-            >
-              <Users className="w-4 h-4 text-[#F4D03F] group-hover:scale-110 transition-transform" />
-              <span>HIRE EXPERT TALENT</span>
-            </button>
-          </div>
-
-          {/* Quick value props in DM Mono */}
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs font-mono text-[#425227]">
-            <div className="flex items-center space-x-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#6B8E23]" />
-              <span><span className="text-[#172108] font-bold">&lt; 48-Hr</span> Talent Match</span>
+        {/* Metrics strip */}
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 rounded-2xl border border-[#141B08]/10 bg-white/50 backdrop-blur divide-x divide-y md:divide-y-0 divide-[#141B08]/10 overflow-hidden">
+          {METRICS.map((m) => (
+            <div key={m.label} className="px-6 py-6 text-center md:text-left">
+              <div className="text-3xl font-bold font-syne tracking-tight text-[#141B08]">{m.value}</div>
+              <div className="text-[13px] text-[#4A5634] mt-1">{m.label}</div>
             </div>
-            <div className="flex items-center space-x-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#6B8E23]" />
-              <span>Strict <span className="text-[#172108] font-bold">NDA &amp; IP Protection</span></span>
-            </div>
-            <div className="flex items-center space-x-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#6B8E23]" />
-              <span>Edge to Cloud <span className="text-[#172108] font-bold">Full Stack</span></span>
-            </div>
-          </div>
-        </div>
-
-        {/* Interactive 3D Element / Tech Particle Animation Canvas */}
-        <div className="relative mt-4 mb-12">
-          {/* Decorative Corner Brackets in Olive Drab */}
-          <div className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-[#6B8E23] z-20 pointer-events-none shadow-[0_0_10px_rgba(107,142,35,0.6)]" />
-          <div className="absolute -top-3 -right-3 w-8 h-8 border-t-2 border-r-2 border-[#6B8E23] z-20 pointer-events-none shadow-[0_0_10px_rgba(107,142,35,0.6)]" />
-          <div className="absolute -bottom-3 -left-3 w-8 h-8 border-b-2 border-l-2 border-[#6B8E23] z-20 pointer-events-none shadow-[0_0_10px_rgba(107,142,35,0.6)]" />
-          <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-[#6B8E23] z-20 pointer-events-none shadow-[0_0_10px_rgba(107,142,35,0.6)]" />
-
-          {/* Canvas Component */}
-          <TechParticleCanvas />
-        </div>
-
-        {/* Live Metrics / Operational Telemetry Dashboard Cluster (30% Olive Drab) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
-          <div className="olive-chassis p-5 rounded-2xl text-center relative overflow-hidden group hover:border-[#F4D03F] transition-all shadow-md">
-            <div className="brass-rivet absolute top-2 right-2" />
-            <div className="text-2xl sm:text-3xl font-extrabold font-syne text-[#F4D03F] tracking-wider">
-              99.98%
-            </div>
-            <div className="text-[11px] font-mono text-[#EDC9AF] mt-1.5 uppercase tracking-[0.16em]">
-              TELEMETRY INGESTION SLA
-            </div>
-          </div>
-
-          <div className="olive-chassis p-5 rounded-2xl text-center relative overflow-hidden group hover:border-[#F4D03F] transition-all shadow-md">
-            <div className="brass-rivet absolute top-2 right-2" />
-            <div className="text-2xl sm:text-3xl font-extrabold font-syne text-[#F4D03F] tracking-wider">
-              &lt; 48 HRS
-            </div>
-            <div className="text-[11px] font-mono text-[#EDC9AF] mt-1.5 uppercase tracking-[0.16em]">
-              ENGINEER DEPLOYMENT
-            </div>
-          </div>
-
-          <div className="olive-chassis p-5 rounded-2xl text-center relative overflow-hidden group hover:border-[#F4D03F] transition-all shadow-md">
-            <div className="brass-rivet absolute top-2 right-2" />
-            <div className="text-2xl sm:text-3xl font-extrabold font-syne text-[#F4D03F] tracking-wider">
-              40+
-            </div>
-            <div className="text-[11px] font-mono text-[#EDC9AF] mt-1.5 uppercase tracking-[0.16em]">
-              HARDWARE &amp; IOT STACKS
-            </div>
-          </div>
-
-          <div className="olive-chassis p-5 rounded-2xl text-center relative overflow-hidden group hover:border-[#F4D03F] transition-all shadow-md">
-            <div className="brass-rivet absolute top-2 right-2" />
-            <div className="text-2xl sm:text-3xl font-extrabold font-syne text-[#F4D03F] tracking-wider">
-              100%
-            </div>
-            <div className="text-[11px] font-mono text-[#EDC9AF] mt-1.5 uppercase tracking-[0.16em]">
-              IP &amp; CODE OWNERSHIP
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

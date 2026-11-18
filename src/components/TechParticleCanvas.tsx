@@ -400,13 +400,13 @@ export default function TechParticleCanvas() {
       <div className="z-10 flex items-center justify-between px-6 py-3.5 border-b border-[#6B8E23]/60 bg-[#1A250B]/90 backdrop-blur-md">
         <div className="flex items-center space-x-2.5">
           <span className="hardware-led-yellow animate-pulse" />
-          <span className="text-xs font-mono tracking-[0.2em] text-[#F4D03F] font-bold uppercase">
+          <span className="text-xs font-sans tracking-[0.2em] text-[#F4D03F] font-bold uppercase">
             3D CYBER-PHYSICAL MESH ENGINE
           </span>
         </div>
 
         {/* Telemetry Snapshot */}
-        <div className="hidden sm:flex items-center space-x-5 text-xs font-mono text-[#EDC9AF]">
+        <div className="hidden sm:flex items-center space-x-5 text-xs font-sans text-[#EDC9AF]">
           <div className="flex items-center space-x-1.5">
             <Activity className="w-3.5 h-3.5 text-[#F4D03F]" />
             <span>PKT/S:</span>
@@ -422,7 +422,7 @@ export default function TechParticleCanvas() {
         {/* Pulse Shockwave Action (10% Signal Yellow Button) */}
         <button
           onClick={triggerShockwave}
-          className="key-signal-yellow px-3 py-1 rounded-lg text-xs font-mono font-bold flex items-center space-x-1.5 cursor-pointer shadow-md"
+          className="key-signal-yellow px-3 py-1 rounded-lg text-xs font-sans font-bold flex items-center space-x-1.5 cursor-pointer shadow-md"
           title="Send packet surge pulse across the IoT network"
         >
           <Zap className="w-3 h-3 text-[#172108] fill-[#172108]" />
@@ -441,7 +441,7 @@ export default function TechParticleCanvas() {
       <div className="z-10 pointer-events-none p-5 flex flex-col justify-end space-y-3">
         {/* Real-time Status Card Bottom Left */}
         <div className="pointer-events-auto max-w-xs p-3.5 rounded-xl olive-chassis-deep border border-[#6B8E23]/60 shadow-xl">
-          <div className="flex items-center justify-between text-[11px] font-mono text-[#F4D03F] mb-2 border-b border-[#6B8E23]/40 pb-1">
+          <div className="flex items-center justify-between text-[11px] font-sans text-[#F4D03F] mb-2 border-b border-[#6B8E23]/40 pb-1">
             <span className="flex items-center gap-1.5 font-bold">
               <ShieldCheck className="w-3.5 h-3.5 text-[#F4D03F]" />
               QUBRYON TELEMETRY BUS
@@ -450,7 +450,7 @@ export default function TechParticleCanvas() {
               ONLINE
             </span>
           </div>
-          <div className="grid grid-cols-2 gap-2 text-[10px] font-mono text-[#EDC9AF]">
+          <div className="grid grid-cols-2 gap-2 text-[10px] font-sans text-[#EDC9AF]">
             <div>
               <span className="text-[#A2B682] block text-[9px]">PROTOCOL</span>
               <span className="text-[#FAF1E8] font-bold">MQTT v5 / TLS 1.3</span>
@@ -484,7 +484,7 @@ export default function TechParticleCanvas() {
               <button
                 key={mode.id}
                 onClick={() => setActiveMode(mode.id)}
-                className={`px-3 py-1 rounded-lg text-[11px] font-mono tracking-wider font-bold transition-all cursor-pointer ${
+                className={`px-3 py-1 rounded-lg text-[11px] font-sans tracking-wider font-bold transition-all cursor-pointer ${
                   activeMode === mode.id
                     ? "key-signal-yellow"
                     : "text-[#EDC9AF] hover:text-[#F4D03F] hover:bg-[#283710]"
@@ -495,7 +495,7 @@ export default function TechParticleCanvas() {
             ))}
           </div>
 
-          <div className="flex items-center space-x-2 text-[11px] font-mono text-[#EDC9AF]">
+          <div className="flex items-center space-x-2 text-[11px] font-sans text-[#EDC9AF]">
             <span>Speed:</span>
             <button
               onClick={() => setDataFlowSpeed((s) => (s === 1 ? 2 : s === 2 ? 0.5 : 1))}
