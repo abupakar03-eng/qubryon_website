@@ -28,33 +28,33 @@ export default function FloatingActionDock({
 
   return (
     <div className="fixed bottom-5 right-5 sm:right-8 z-40 flex items-center space-x-2">
-      {/* Floating Action Pill */}
-      <div className="flex items-center space-x-1.5 p-1.5 rounded-full bg-slate-950/90 backdrop-blur-xl border border-cyan-500/40 shadow-[0_0_25px_rgba(6,182,212,0.3)]">
-        {/* Hire Talent button */}
+      {/* Tactile Hardware Chassis Housing */}
+      <div className="flex items-center space-x-2 p-1.5 rounded-2xl hardware-chassis shadow-[0_12px_32px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.25)]">
+        {/* Hire Talent Tactile Key */}
         <button
           onClick={onOpenTalentModal}
-          className="flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-semibold text-cyan-300 bg-cyan-950/70 hover:bg-cyan-500/20 border border-cyan-500/30 transition-all cursor-pointer shadow-sm"
+          className="hardware-key-titanium flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold tracking-wider cursor-pointer"
           title="Hire Pre-Vetted IoT & AI Engineers"
         >
-          <Users className="w-3.5 h-3.5 text-cyan-400" />
-          <span className="hidden sm:inline">Hire Talent</span>
+          <span className="hardware-led-cyan" />
+          <span className="hidden sm:inline text-etched-cyan">HIRE TALENT</span>
         </button>
 
-        {/* Book Call button */}
+        {/* Book Call Tactile Key */}
         <button
           onClick={onOpenConsultation}
-          className="flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-bold text-slate-950 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 transition-all cursor-pointer shadow-[0_0_12px_rgba(6,182,212,0.4)]"
+          className="hardware-key-cyan flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-mono font-black tracking-wider text-slate-950 cursor-pointer"
           title="Schedule 30-min Strategy Call"
         >
           <Calendar className="w-3.5 h-3.5 text-slate-950" />
-          <span>Book Call</span>
+          <span>BOOK CALL</span>
         </button>
 
-        {/* Scroll To Top button */}
+        {/* Scroll To Top Key */}
         {showScrollTop && (
           <button
             onClick={scrollToTop}
-            className="w-8 h-8 rounded-full bg-slate-900 border border-slate-700 hover:border-cyan-400 flex items-center justify-center text-slate-400 hover:text-cyan-300 transition-all cursor-pointer"
+            className="hardware-key w-8 h-8 rounded-xl flex items-center justify-center text-slate-300 hover:text-cyan-300 transition-all cursor-pointer"
             title="Scroll to top"
             aria-label="Scroll to top"
           >

@@ -21,27 +21,32 @@ interface FooterProps {
 
 export default function Footer({ onOpenConsultation, onOpenTalentModal }: FooterProps) {
   return (
-    <footer className="relative bg-slate-950 text-white border-t border-cyan-500/20 overflow-hidden">
-      {/* Decorative top glowing gradient */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#06b6d4]" />
+    <footer className="relative bg-[#02050c] text-white border-t border-slate-800 overflow-hidden">
+      {/* Top Brushed Metal Rim-Light Line */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#06b6d4]" />
 
       {/* Main Footer Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
           {/* Col 1 & 2: Brand & Corporate Verification */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 via-sky-500 to-blue-600 p-0.5 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.5)]">
-                <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                  <Cpu className="w-5 h-5 text-cyan-400" />
+            <div className="flex items-center space-x-3.5">
+              <div className="w-11 h-11 rounded-xl p-0.5 bg-gradient-to-b from-slate-400 via-slate-700 to-slate-950 shadow-[0_4px_8px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.4)] flex items-center justify-center">
+                <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center border border-cyan-500/40">
+                  <Cpu className="w-5 h-5 text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
                 </div>
               </div>
-              <div>
-                <span className="font-extrabold text-xl tracking-wider text-white">
-                  QUBRYON
-                </span>
-                <span className="text-xs font-mono font-bold ml-2 px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/30">
-                  TECH
+              <div className="flex flex-col">
+                <div className="flex items-center space-x-2">
+                  <span className="font-extrabold text-xl tracking-[0.14em] uppercase text-metallic-titanium font-sans">
+                    QUBRYON
+                  </span>
+                  <span className="hardware-recessed-channel px-2 py-0.5 rounded text-[10px] font-mono font-black text-cyan-300 border border-cyan-500/30">
+                    TECH
+                  </span>
+                </div>
+                <span className="text-[9.5px] font-mono tracking-[0.28em] uppercase text-etched font-semibold">
+                  IOT &amp; AI INTEGRATION SYSTEMS
                 </span>
               </div>
             </div>
@@ -50,8 +55,9 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
               <strong className="text-slate-200">Qubryon Technologies Private Limited</strong> is a registered cyber-physical engineering firm specializing in custom IoT hardware architectures, edge AI predictive analytics, and enterprise IT staff augmentation.
             </p>
 
-            {/* Incorporation Credentials */}
-            <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 text-[11px] font-mono space-y-1.5 text-slate-300">
+            {/* Incorporation Credentials with Hardware Chassis */}
+            <div className="hardware-chassis p-4 rounded-xl text-[11px] font-mono space-y-1.5 text-slate-300 relative">
+              <div className="hardware-rivet absolute top-2 right-2" />
               <div className="flex justify-between">
                 <span className="text-slate-500">Corporate Identity (CIN):</span>
                 <span className="text-cyan-300 font-bold">U62013TN2026PTC199725</span>
@@ -72,14 +78,14 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
               </div>
             </div>
 
-            {/* Social Icons (SVGs) */}
+            {/* Social Tactile Buttons */}
             <div className="flex items-center space-x-3 pt-2">
               {/* LinkedIn */}
               <a
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 hover:border-cyan-400 flex items-center justify-center text-slate-400 hover:text-cyan-300 transition-all cursor-pointer"
+                className="hardware-key w-9 h-9 rounded-xl flex items-center justify-center text-slate-400 hover:text-cyan-300 transition-all cursor-pointer"
                 aria-label="LinkedIn"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -92,7 +98,7 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
                 href="https://x.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 hover:border-cyan-400 flex items-center justify-center text-slate-400 hover:text-cyan-300 transition-all cursor-pointer"
+                className="hardware-key w-9 h-9 rounded-xl flex items-center justify-center text-slate-400 hover:text-cyan-300 transition-all cursor-pointer"
                 aria-label="X (formerly Twitter)"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -105,7 +111,7 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
                 href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 hover:border-cyan-400 flex items-center justify-center text-slate-400 hover:text-cyan-300 transition-all cursor-pointer"
+                className="hardware-key w-9 h-9 rounded-xl flex items-center justify-center text-slate-400 hover:text-cyan-300 transition-all cursor-pointer"
                 aria-label="GitHub"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -216,10 +222,10 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
 
             <button
               onClick={onOpenConsultation}
-              className="w-full py-2.5 px-3 rounded-xl font-mono text-xs font-bold text-slate-950 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 transition-all shadow-[0_0_15px_rgba(6,182,212,0.4)] flex items-center justify-center space-x-2 cursor-pointer"
+              className="hardware-key-cyan w-full py-3 px-3 rounded-xl font-mono text-xs tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer"
             >
               <Calendar className="w-3.5 h-3.5 text-slate-950" />
-              <span>Book Calendly Strategy Call</span>
+              <span>BOOK STRATEGY CALL</span>
             </button>
 
             <div className="pt-2 border-t border-slate-900 space-y-1.5 text-[11px] font-mono text-slate-400">

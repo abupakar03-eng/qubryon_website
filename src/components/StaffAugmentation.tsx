@@ -136,7 +136,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
   };
 
   return (
-    <section id="talent" className="relative py-24 bg-slate-950 text-white cyber-grid-dense">
+    <section id="talent" className="relative py-28 bg-[#030611] text-white cyber-grid-dense">
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-cyan-600/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
@@ -144,26 +144,26 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md bg-sky-950/70 border border-sky-500/30 text-sky-300 font-mono text-xs mb-3">
+          <div className="hardware-recessed-channel inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border border-sky-500/30 text-sky-300 font-mono text-xs mb-3 shadow-[inset_0_2px_4px_rgba(0,0,0,0.9)]">
             <Users className="w-3.5 h-3.5 text-sky-400" />
-            <span>ELITE ENGINEERING ON-DEMAND</span>
+            <span className="tracking-[0.18em] uppercase font-bold text-etched-cyan">
+              ELITE ENGINEERING ON-DEMAND
+            </span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Dedicated IT Staff Augmentation for{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400">
-              IoT & AI Teams.
-            </span>
+            <span className="text-metallic-titanium block">Dedicated IT Staff Augmentation for</span>
+            <span className="text-metallic-cyan block mt-1">IoT &amp; AI Teams.</span>
           </h2>
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
             Eliminate 3-month hiring cycles. Scale your product development with vetted senior engineers who have battle-tested experience in low-power firmware, high-throughput cloud streaming, and predictive AI models.
           </p>
         </div>
 
-        {/* 3-Step Hiring Process Layout */}
+        {/* 3-Step Hiring Process Layout with Physical Hardware Modules */}
         <div className="mb-20">
           <div className="text-center mb-10">
-            <h3 className="text-xl sm:text-2xl font-bold font-mono text-cyan-300">
-              The 3-Step High-Velocity Hiring Process
+            <h3 className="text-xl sm:text-2xl font-bold font-mono text-cyan-300 tracking-wider">
+              THE 3-STEP HIGH-VELOCITY HIRING PROCESS
             </h3>
             <p className="text-xs sm:text-sm text-slate-400 font-mono mt-1">
               From requirement definition to sprint onboarding in under 48 hours.
@@ -172,14 +172,15 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
             {/* Step 1 */}
-            <div className="glass-panel-card p-6 rounded-2xl border border-cyan-500/30 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 px-4 py-1.5 bg-cyan-950/80 border-b border-l border-cyan-500/40 rounded-bl-xl font-mono text-xs font-bold text-cyan-300">
-                STEP 01
+            <div className="hardware-chassis p-7 rounded-2xl relative overflow-hidden group">
+              <div className="hardware-rivet absolute top-3 right-3" />
+              <div className="hardware-recessed-channel inline-block px-3 py-1 rounded-md text-[11px] font-mono font-bold text-cyan-300 mb-4 border border-cyan-500/30">
+                STEP 01 // DISPATCH
               </div>
-              <div className="w-12 h-12 rounded-xl bg-cyan-950/90 border border-cyan-400/40 flex items-center justify-center text-cyan-400 mb-5 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                <FileCheck className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-xl bg-slate-950 border border-cyan-400/40 flex items-center justify-center text-cyan-400 mb-5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.9)]">
+                <FileCheck className="w-6 h-6 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
               </div>
-              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors font-sans">
                 1. Share Your Requirement
               </h4>
               <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
@@ -187,19 +188,20 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
               </p>
               <div className="pt-3 border-t border-slate-800 text-[11px] font-mono text-cyan-400 flex items-center space-x-1.5">
                 <Clock className="w-3.5 h-3.5" />
-                <span>Response Time: &lt; 2 Hours</span>
+                <span>Response SLA: &lt; 2 Hours</span>
               </div>
             </div>
 
             {/* Step 2 */}
-            <div className="glass-panel-card p-6 rounded-2xl border border-sky-500/40 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 px-4 py-1.5 bg-sky-950/80 border-b border-l border-sky-500/40 rounded-bl-xl font-mono text-xs font-bold text-sky-300">
-                STEP 02
+            <div className="hardware-chassis p-7 rounded-2xl relative overflow-hidden group">
+              <div className="hardware-rivet absolute top-3 right-3" />
+              <div className="hardware-recessed-channel inline-block px-3 py-1 rounded-md text-[11px] font-mono font-bold text-sky-300 mb-4 border border-sky-500/30">
+                STEP 02 // SCREENING
               </div>
-              <div className="w-12 h-12 rounded-xl bg-sky-950/90 border border-sky-400/40 flex items-center justify-center text-sky-400 mb-5 shadow-[0_0_15px_rgba(14,165,233,0.3)]">
-                <Users className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-xl bg-slate-950 border border-sky-400/40 flex items-center justify-center text-sky-400 mb-5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.9)]">
+                <Users className="w-6 h-6 drop-shadow-[0_0_8px_rgba(14,165,233,0.8)]" />
               </div>
-              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-sky-300 transition-colors">
+              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-sky-300 transition-colors font-sans">
                 2. Interview Vetted Experts
               </h4>
               <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
@@ -212,14 +214,15 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
             </div>
 
             {/* Step 3 */}
-            <div className="glass-panel-card p-6 rounded-2xl border border-blue-500/40 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 px-4 py-1.5 bg-blue-950/80 border-b border-l border-blue-500/40 rounded-bl-xl font-mono text-xs font-bold text-blue-300">
-                STEP 03
+            <div className="hardware-chassis p-7 rounded-2xl relative overflow-hidden group">
+              <div className="hardware-rivet absolute top-3 right-3" />
+              <div className="hardware-recessed-channel inline-block px-3 py-1 rounded-md text-[11px] font-mono font-bold text-blue-300 mb-4 border border-blue-500/30">
+                STEP 03 // ONBOARD
               </div>
-              <div className="w-12 h-12 rounded-xl bg-blue-950/90 border border-blue-400/40 flex items-center justify-center text-blue-400 mb-5 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
-                <Zap className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-xl bg-slate-950 border border-blue-400/40 flex items-center justify-center text-blue-400 mb-5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.9)]">
+                <Zap className="w-6 h-6 drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
               </div>
-              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">
+              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-blue-300 transition-colors font-sans">
                 3. Scale Your Team Seamlessly
               </h4>
               <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
@@ -233,36 +236,38 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
           </div>
         </div>
 
-        {/* Tech Stacks Showcase & Matrix */}
+        {/* Tech Stacks Showcase & Tactile Matrix */}
         <div id="tech-stacks" className="mb-20">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 border-b border-slate-800 pb-4">
             <div>
-              <div className="text-xs font-mono text-cyan-400 mb-1">PROVEN TALENT CAPABILITIES</div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white">
-                Vetted Across Core IoT, AI & Cloud Stacks
+              <div className="text-xs font-mono text-cyan-400 mb-1 tracking-widest uppercase">
+                PROVEN TALENT CAPABILITIES
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white font-sans tracking-wide">
+                Vetted Across Core IoT, AI &amp; Cloud Stacks
               </h3>
             </div>
 
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap gap-1.5 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800">
+            {/* Tactile Hardware Filter Keys */}
+            <div className="flex flex-wrap gap-2 hardware-recessed-channel p-1.5 rounded-xl">
               {[
-                { id: "all", label: "All Stacks" },
-                { id: "embedded", label: "Embedded & Hardware" },
+                { id: "all", label: "ALL STACKS" },
+                { id: "embedded", label: "EMBEDDED & HARDWARE" },
                 { id: "ai", label: "AI & ML" },
-                { id: "cloud", label: "Cloud & Ingestion" },
-                { id: "protocols", label: "IoT Protocols" },
-                { id: "frontend", label: "Dashboards / UI" },
+                { id: "cloud", label: "CLOUD & INGESTION" },
+                { id: "protocols", label: "IOT PROTOCOLS" },
+                { id: "frontend", label: "DASHBOARDS" },
               ].map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer ${
-                    activeCategory === cat.id
-                      ? "bg-cyan-500 text-slate-950 font-bold shadow-[0_0_10px_rgba(6,182,212,0.5)]"
-                      : "text-slate-400 hover:text-cyan-200 hover:bg-slate-800"
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold tracking-wider cursor-pointer ${
+                    activeCategory === cat.id ? "hardware-key-cyan" : "hardware-key"
                   }`}
                 >
-                  {cat.label}
+                  <span className={activeCategory === cat.id ? "" : "text-etched"}>
+                    {cat.label}
+                  </span>
                 </button>
               ))}
             </div>
@@ -274,17 +279,17 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
               return (
                 <div
                   key={tech.name}
-                  className="glass-panel p-4 rounded-xl border border-slate-800/80 hover:border-cyan-500/40 transition-all group flex items-start space-x-3.5"
+                  className="hardware-chassis p-4.5 rounded-xl transition-all group flex items-start space-x-3.5 hover:border-cyan-500/50"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-slate-900 border border-slate-700/80 flex items-center justify-center text-cyan-400 group-hover:border-cyan-400/50 group-hover:scale-105 transition-all shrink-0">
-                    <Icon className="w-5 h-5" />
+                  <div className="w-10 h-10 rounded-lg bg-slate-950 border border-slate-700/80 flex items-center justify-center text-cyan-400 group-hover:border-cyan-400/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.9)] transition-all shrink-0">
+                    <Icon className="w-5 h-5 drop-shadow-[0_0_6px_rgba(6,182,212,0.8)]" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-1">
-                      <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors truncate">
+                      <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors truncate font-sans">
                         {tech.name}
                       </h4>
-                      <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${tech.badgeColor} bg-slate-900/80`}>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded hardware-recessed-channel text-cyan-300 border border-cyan-500/30">
                         VERIFIED
                       </span>
                     </div>
@@ -298,17 +303,17 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
         </div>
 
         {/* Quick Inquiry Form for Clients to Request Developers */}
-        <div className="glass-panel-card p-8 sm:p-10 rounded-3xl border border-cyan-500/30 relative overflow-hidden shadow-[0_0_60px_rgba(6,182,212,0.15)]">
-          {/* Subtle Cyber scanline accent */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500" />
+        <div className="carbon-fiber-panel p-8 sm:p-10 rounded-3xl border border-cyan-500/30 relative overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.95),inset_0_1px_1px_rgba(255,255,255,0.2)]">
+          {/* Subtle Top Rim Highlight */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Column: Value Proposition */}
             <div className="lg:col-span-5 space-y-4">
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded bg-cyan-950/70 border border-cyan-500/30 text-cyan-300 font-mono text-xs">
+              <div className="hardware-recessed-channel inline-flex items-center space-x-2 px-3 py-1 rounded-md border border-cyan-500/30 text-cyan-300 font-mono text-xs">
                 <span>TALENT DEPLOYMENT ACCELERATOR</span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-sans tracking-wide">
                 Request Pre-Vetted Developers
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -316,29 +321,32 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
               </p>
 
               <div className="space-y-3 pt-2">
-                <div className="flex items-center space-x-2 text-xs font-mono text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                <div className="flex items-center space-x-2.5 text-xs font-mono text-slate-300">
+                  <span className="hardware-led-cyan" />
                   <span>2-Week Risk-Free Trial Period</span>
                 </div>
-                <div className="flex items-center space-x-2 text-xs font-mono text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                <div className="flex items-center space-x-2.5 text-xs font-mono text-slate-300">
+                  <span className="hardware-led-cyan" />
                   <span>Direct Communication via Slack / Teams / GitHub</span>
                 </div>
-                <div className="flex items-center space-x-2 text-xs font-mono text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400" />
-                  <span>Full IP Assignment & Strict NDA Guaranteed</span>
+                <div className="flex items-center space-x-2.5 text-xs font-mono text-slate-300">
+                  <span className="hardware-led-cyan" />
+                  <span>Full IP Assignment &amp; Strict NDA Guaranteed</span>
                 </div>
-                <div className="flex items-center space-x-2 text-xs font-mono text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                <div className="flex items-center space-x-2.5 text-xs font-mono text-slate-300">
+                  <span className="hardware-led-cyan" />
                   <span>Time-Zone Alignment (US, EU, APAC, India)</span>
                 </div>
               </div>
 
               {/* Developer availability live ticker */}
-              <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-mono text-slate-300 mt-4">
+              <div className="p-4 rounded-xl hardware-recessed-channel border border-slate-800 text-xs font-mono text-slate-300 mt-4">
                 <div className="text-cyan-400 font-bold mb-1 flex items-center justify-between">
                   <span>CURRENT BENCH CAPACITY</span>
-                  <span className="text-emerald-400">14 ENGINEERS READY</span>
+                  <span className="text-emerald-400 flex items-center space-x-1.5">
+                    <span className="hardware-led-green animate-pulse" />
+                    <span>14 ENGINEERS READY</span>
+                  </span>
                 </div>
                 <p className="text-[11px] text-slate-400">
                   Embedded C (4), PyTorch/Edge AI (3), AWS IoT Cloud (4), React/Next.js (3).
@@ -349,11 +357,13 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
             {/* Right Column: Inquiry Form */}
             <div className="lg:col-span-7">
               {submitted ? (
-                <div className="p-8 rounded-2xl bg-cyan-950/40 border border-cyan-500/50 text-center space-y-4 animate-in fade-in zoom-in-95">
-                  <div className="w-14 h-14 rounded-full bg-cyan-500/20 border border-cyan-400 flex items-center justify-center text-cyan-300 mx-auto shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+                <div className="p-8 rounded-2xl hardware-chassis text-center space-y-4 animate-in fade-in zoom-in-95">
+                  <div className="w-16 h-16 rounded-full bg-cyan-500/20 border border-cyan-400 flex items-center justify-center text-cyan-300 mx-auto shadow-[0_0_20px_rgba(6,182,212,0.4)]">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h4 className="text-xl font-bold text-white">Developer Request Dispatched!</h4>
+                  <h4 className="text-xl font-bold text-white font-sans">
+                    Developer Request Dispatched!
+                  </h4>
                   <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto">
                     Thank you, <strong className="text-cyan-300">{formData.clientName || "Valued Partner"}</strong>. Our technical talent director at Qubryon Technologies has received your request for{" "}
                     <span className="text-cyan-300 font-mono">{formData.roleNeeded}</span>. We will share 2–3 vetted candidate dossiers to{" "}
@@ -361,7 +371,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="px-6 py-2 rounded-lg text-xs font-mono text-slate-950 font-bold bg-cyan-400 hover:bg-cyan-300 cursor-pointer"
+                    className="hardware-key-cyan px-6 py-2.5 rounded-xl text-xs font-mono tracking-wider uppercase cursor-pointer"
                   >
                     Submit Another Inquiry
                   </button>
@@ -371,7 +381,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Role Needed */}
                     <div>
-                      <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+                      <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                         ROLE REQUIRED *
                       </label>
                       <select
@@ -390,7 +400,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                           AWS / Cloud IoT Systems Architect
                         </option>
                         <option value="Full-Stack React & Next.js IoT Engineer" className="bg-slate-900">
-                          Full-Stack React & Next.js IoT Engineer
+                          Full-Stack React &amp; Next.js IoT Engineer
                         </option>
                         <option value="Complete Dedicated Pod (Firmware + AI + Cloud)" className="bg-slate-900">
                           Complete Dedicated Pod (Firmware + AI + Cloud)
@@ -400,7 +410,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
 
                     {/* Seniority */}
                     <div>
-                      <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+                      <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                         EXPERIENCE LEVEL *
                       </label>
                       <select
@@ -425,7 +435,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Team Size */}
                     <div>
-                      <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+                      <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                         DEVELOPER HEADCOUNT
                       </label>
                       <select
@@ -450,7 +460,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
 
                     {/* Duration */}
                     <div>
-                      <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+                      <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                         ENGAGEMENT HORIZON
                       </label>
                       <select
@@ -473,8 +483,8 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
 
                   {/* Primary Tech Stack / Hardware */}
                   <div>
-                    <label className="block text-[11px] font-mono text-cyan-300 mb-1">
-                      PRIMARY TECH STACK & HARDWARE (OPTIONAL)
+                    <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
+                      PRIMARY TECH STACK &amp; HARDWARE (OPTIONAL)
                     </label>
                     <input
                       type="text"
@@ -488,7 +498,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Client Name */}
                     <div>
-                      <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+                      <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                         YOUR NAME *
                       </label>
                       <input
@@ -503,7 +513,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
 
                     {/* Work Email */}
                     <div>
-                      <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+                      <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                         WORK EMAIL *
                       </label>
                       <input
@@ -519,7 +529,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
 
                   {/* Company Name */}
                   <div>
-                    <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+                    <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                       COMPANY / ORGANIZATION NAME
                     </label>
                     <input
@@ -531,18 +541,18 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                     />
                   </div>
 
-                  {/* Submit Button */}
+                  {/* Tactile Hardware Key Submit Button */}
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full py-3.5 rounded-xl font-mono text-xs sm:text-sm font-bold text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-300 to-cyan-400 hover:from-cyan-300 hover:to-sky-200 transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)] flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
+                    className="hardware-key-cyan w-full py-4 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 select-none"
                   >
                     {submitting ? (
-                      <span>Matching Qualified Engineers...</span>
+                      <span>MATCHING QUALIFIED ENGINEERS...</span>
                     ) : (
                       <>
                         <Send className="w-4 h-4 text-slate-950" />
-                        <span>Request Candidate Profiles (Under 48 Hours)</span>
+                        <span>REQUEST CANDIDATE PROFILES (UNDER 48 HOURS)</span>
                       </>
                     )}
                   </button>

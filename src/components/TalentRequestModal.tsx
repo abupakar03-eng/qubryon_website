@@ -50,23 +50,31 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto glass-panel p-6 sm:p-8 rounded-3xl border border-cyan-500/40 shadow-[0_0_60px_rgba(6,182,212,0.3)] text-white">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto carbon-fiber-panel p-6 sm:p-8 rounded-3xl border border-cyan-500/40 shadow-[0_20px_50px_rgba(0,0,0,0.95),inset_0_1px_1px_rgba(255,255,255,0.25)] text-white">
+        {/* Hardware Corner Rivets */}
+        <div className="hardware-rivet absolute top-3 left-3" />
+        <div className="hardware-rivet absolute top-3 right-3" />
+        <div className="hardware-rivet absolute bottom-3 left-3" />
+        <div className="hardware-rivet absolute bottom-3 right-3" />
+
         {/* Close Button */}
         <button
           onClick={resetAndClose}
-          className="absolute top-5 right-5 p-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-400 hover:text-white cursor-pointer"
+          className="hardware-key absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-white cursor-pointer z-10"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Modal Header */}
         <div className="mb-6">
-          <div className="flex items-center space-x-2 text-cyan-400 text-xs font-mono mb-1.5">
-            <Users className="w-4 h-4 text-cyan-400" />
-            <span>IT STAFF AUGMENTATION DISPATCH // 48-HR SLA</span>
+          <div className="hardware-recessed-channel inline-flex items-center space-x-2 px-3 py-1 rounded-md text-cyan-400 text-xs font-mono mb-2 border border-cyan-500/30">
+            <Users className="w-4 h-4" />
+            <span className="tracking-widest uppercase font-bold text-etched-cyan">
+              IT STAFF AUGMENTATION DISPATCH // 48-HR SLA
+            </span>
           </div>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-sans tracking-wide">
             Deploy Pre-Vetted IoT &amp; AI Engineers
           </h3>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
@@ -79,7 +87,7 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
             <div className="w-16 h-16 rounded-full bg-cyan-500/20 border border-cyan-400 flex items-center justify-center text-cyan-300 mx-auto shadow-[0_0_25px_rgba(6,182,212,0.4)]">
               <CheckCircle2 className="w-10 h-10" />
             </div>
-            <h4 className="text-2xl font-bold text-white">Talent Request Received!</h4>
+            <h4 className="text-2xl font-bold text-white font-sans">Talent Request Received!</h4>
             <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
               Our Technical Director has initiated the matching protocol for{" "}
               <strong className="text-cyan-300">{formData.count}</strong> ({formData.role}).
@@ -87,14 +95,14 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
               <span className="text-cyan-300 font-mono">{formData.email}</span> within 24 to 48 hours.
             </p>
 
-            <div className="p-3.5 rounded-xl bg-slate-900/80 border border-cyan-500/20 max-w-md mx-auto text-left text-xs font-mono space-y-1">
+            <div className="hardware-recessed-channel p-4 rounded-xl border border-cyan-500/30 max-w-md mx-auto text-left text-xs font-mono space-y-1">
               <div className="flex justify-between">
                 <span className="text-slate-400">Match SLA:</span>
                 <span className="text-emerald-400 font-bold">&lt; 48 Hours</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-400">Trial Period:</span>
-                <span className="text-cyan-300">2 Weeks Risk-Free</span>
+                <span className="text-cyan-300 font-bold">2 Weeks Risk-Free</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-400">Assigned Recruiter:</span>
@@ -104,16 +112,16 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
 
             <button
               onClick={resetAndClose}
-              className="px-8 py-2.5 rounded-xl text-xs font-mono font-bold text-slate-950 bg-cyan-400 hover:bg-cyan-300 cursor-pointer"
+              className="hardware-key-cyan px-8 py-3 rounded-xl text-xs font-mono tracking-wider uppercase cursor-pointer"
             >
-              Done
+              DONE
             </button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                   ENGINEERING ROLE NEEDED *
                 </label>
                 <select
@@ -141,7 +149,7 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
               </div>
 
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                   SENIORITY LEVEL *
                 </label>
                 <select
@@ -165,7 +173,7 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                   HEADCOUNT *
                 </label>
                 <select
@@ -181,7 +189,7 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
               </div>
 
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                   TIMELINE TO ONBOARD *
                 </label>
                 <select
@@ -198,7 +206,7 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                   YOUR FULL NAME *
                 </label>
                 <input
@@ -212,7 +220,7 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
               </div>
 
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                   BUSINESS WORK EMAIL *
                 </label>
                 <input
@@ -227,7 +235,7 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
             </div>
 
             <div>
-              <label className="block text-[11px] font-mono text-cyan-300 mb-1">
+              <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
                 COMPANY OR PRODUCT NAME *
               </label>
               <input
@@ -243,11 +251,11 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
             {/* Quick Guarantees */}
             <div className="grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-400 py-1">
               <div className="flex items-center space-x-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                <span className="hardware-led-cyan" />
                 <span>2-Week Risk-Free Trial</span>
               </div>
               <div className="flex items-center space-x-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                <span className="hardware-led-cyan" />
                 <span>100% IP Assignment</span>
               </div>
             </div>
@@ -255,14 +263,14 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3.5 rounded-xl font-mono text-xs sm:text-sm font-bold text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-300 to-cyan-400 hover:from-cyan-300 hover:to-sky-200 transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)] flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
+              className="hardware-key-cyan w-full py-4 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
             >
               {submitting ? (
-                <span>Dispatching Talent Request...</span>
+                <span>DISPATCHING TALENT REQUEST...</span>
               ) : (
                 <>
                   <Send className="w-4 h-4 text-slate-950" />
-                  <span>Receive Vetted Profiles Within 48 Hours</span>
+                  <span>RECEIVE VETTED PROFILES WITHIN 48 HOURS</span>
                 </>
               )}
             </button>

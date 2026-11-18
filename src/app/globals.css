@@ -13,14 +13,310 @@
   body {
     background-color: #030712;
     color: #f8fafc;
-    font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+    font-family: var(--font-rajdhani), var(--font-geist-sans), system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
     selection-background-color: #00f0ff;
     selection-color: #030712;
+    letter-spacing: 0.02em;
   }
 }
 
-/* Cyberpunk & Futuristic Glow Effects */
+/* ==========================================================
+   SKEUOMORPHIC & NEUMORPHIC HARDWARE TECH SYSTEM
+   High-end IoT Dashboards / Automotive Clusters / Audio Gear
+   ========================================================== */
+
+/* 1. Brushed Metal & Carbon Fiber Textures */
+.carbon-fiber-panel {
+  background-color: #070b14;
+  background-image: 
+    radial-gradient(rgba(14, 165, 233, 0.09) 15%, transparent 16%),
+    radial-gradient(rgba(6, 182, 212, 0.06) 15%, transparent 16%);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+}
+
+.brushed-metal-dark {
+  background: linear-gradient(
+    180deg,
+    rgba(24, 32, 50, 0.96) 0%,
+    rgba(14, 19, 32, 0.98) 48%,
+    rgba(8, 11, 20, 0.99) 100%
+  );
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.95),
+    0 16px 36px -6px rgba(0, 0, 0, 0.85),
+    0 0 20px -2px rgba(6, 182, 212, 0.2);
+}
+
+.hardware-chassis {
+  background: linear-gradient(
+    180deg,
+    rgba(20, 27, 44, 0.92) 0%,
+    rgba(10, 14, 25, 0.97) 100%
+  );
+  border: 1px solid rgba(71, 85, 105, 0.4);
+  border-top-color: rgba(255, 255, 255, 0.28);
+  border-bottom-color: rgba(0, 0, 0, 0.95);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -2px 4px 0 rgba(0, 0, 0, 0.9),
+    0 12px 30px -4px rgba(0, 0, 0, 0.8);
+}
+
+/* 2. Recessed Channels / Switch Wells */
+.hardware-recessed-channel {
+  background: #040812;
+  border: 1px solid rgba(15, 23, 42, 0.95);
+  border-top-color: rgba(0, 0, 0, 0.95);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    inset 0 3px 6px rgba(0, 0, 0, 0.95),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.05),
+    0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* 3. Physical Tactile Keys (Skeuomorphic Buttons) */
+.hardware-key {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    #253248 0%,
+    #172033 45%,
+    #0c1220 100%
+  );
+  border: 1px solid #3b4d68;
+  border-top-color: rgba(255, 255, 255, 0.35);
+  border-bottom-color: rgba(0, 0, 0, 0.95);
+  border-left-color: rgba(255, 255, 255, 0.12);
+  border-right-color: rgba(0, 0, 0, 0.6);
+  box-shadow:
+    0 4px 8px -1px rgba(0, 0, 0, 0.75),
+    0 2px 4px -2px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 3px 0 rgba(0, 0, 0, 0.85);
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.hardware-key:hover {
+  border-color: rgba(6, 182, 212, 0.7);
+  border-top-color: rgba(147, 240, 255, 0.6);
+  border-bottom-color: rgba(0, 0, 0, 0.9);
+  box-shadow:
+    0 6px 16px -2px rgba(0, 0, 0, 0.85),
+    0 0 18px rgba(6, 182, 212, 0.4),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -2px 4px 0 rgba(0, 0, 0, 0.85);
+  transform: translateY(-1px);
+}
+
+.hardware-key:active,
+.hardware-key-active {
+  transform: translateY(2px) !important;
+  background: linear-gradient(
+    180deg,
+    #0a0f1a 0%,
+    #131b2c 70%,
+    #182338 100%
+  );
+  border-top-color: rgba(0, 0, 0, 0.95);
+  border-bottom-color: rgba(56, 189, 248, 0.3);
+  box-shadow:
+    inset 0 3px 6px 0 rgba(0, 0, 0, 0.98),
+    inset 0 0 12px rgba(6, 182, 212, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Primary Illuminated Cyan Anodized Key */
+.hardware-key-cyan {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    #38bdf8 0%,
+    #06b6d4 40%,
+    #0284c7 85%,
+    #0369a1 100%
+  );
+  border: 1px solid #7dd3fc;
+  border-top-color: rgba(255, 255, 255, 0.95);
+  border-bottom-color: #075985;
+  border-left-color: rgba(255, 255, 255, 0.4);
+  border-right-color: #0c4a6e;
+  color: #020617;
+  font-weight: 700;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.7),
+    0 0 25px rgba(6, 182, 212, 0.6),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.85),
+    inset 0 -2.5px 3px rgba(3, 105, 161, 0.9);
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hardware-key-cyan:hover {
+  background: linear-gradient(
+    180deg,
+    #7dd3fc 0%,
+    #22d3ee 40%,
+    #06b6d4 85%,
+    #0284c7 100%
+  );
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.8),
+    0 0 36px rgba(6, 182, 212, 0.9),
+    inset 0 1.5px 3px rgba(255, 255, 255, 1),
+    inset 0 -2.5px 4px rgba(2, 132, 199, 1);
+  transform: translateY(-1px);
+}
+
+.hardware-key-cyan:active {
+  transform: translateY(2px) !important;
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.9),
+    inset 0 0 16px rgba(2, 132, 199, 0.8),
+    0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Secondary Titanium Key */
+.hardware-key-titanium {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    #1f293d 0%,
+    #131c2c 50%,
+    #0b111e 100%
+  );
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  border-top-color: rgba(255, 255, 255, 0.35);
+  border-bottom-color: rgba(0, 0, 0, 0.95);
+  box-shadow:
+    0 4px 8px -1px rgba(0, 0, 0, 0.75),
+    0 0 16px rgba(6, 182, 212, 0.25),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -2px 3px 0 rgba(0, 0, 0, 0.85);
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hardware-key-titanium:hover {
+  border-color: rgba(6, 182, 212, 0.8);
+  border-top-color: rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 6px 16px -2px rgba(0, 0, 0, 0.85),
+    0 0 24px rgba(6, 182, 212, 0.5),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -2px 3px 0 rgba(0, 0, 0, 0.85);
+  transform: translateY(-1px);
+}
+
+.hardware-key-titanium:active {
+  transform: translateY(2px) !important;
+  background: #090e18;
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.95),
+    inset 0 0 14px rgba(6, 182, 212, 0.35);
+}
+
+/* 4. Etched, Engraved, Debossed & Metallic Typography */
+.text-etched {
+  color: #94a3b8;
+  text-shadow: 
+    0 -1px 0 rgba(0, 0, 0, 0.95),
+    0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+.text-etched-bold {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #cbd5e1;
+  text-shadow: 
+    0 -1px 1px rgba(0, 0, 0, 0.95),
+    0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+.text-etched-cyan {
+  color: #38bdf8;
+  text-shadow:
+    0 -1px 1px rgba(0, 0, 0, 0.95),
+    0 1px 1px rgba(255, 255, 255, 0.18),
+    0 0 12px rgba(6, 182, 212, 0.75);
+}
+
+.text-metallic-titanium {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #e2e8f0 30%,
+    #94a3b8 65%,
+    #475569 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.9)) drop-shadow(0 -1px 0.5px rgba(255, 255, 255, 0.3));
+}
+
+.text-metallic-cyan {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #a5f3fc 25%,
+    #38bdf8 60%,
+    #0284c7 90%,
+    #0369a1 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 18px rgba(6, 182, 212, 0.75));
+}
+
+/* 5. Hardware Micro Rivets & LED Indicators */
+.hardware-rivet {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #94a3b8 0%, #475569 50%, #0f172a 100%);
+  border: 1px solid rgba(15, 23, 42, 0.8);
+  box-shadow: 
+    0 1px 1px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.4);
+}
+
+.hardware-led-cyan {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 
+    0 0 8px #06b6d4,
+    0 0 16px rgba(6, 182, 212, 0.8),
+    inset 0 1px 1px #ffffff;
+}
+
+.hardware-led-green {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 
+    0 0 8px #10b981,
+    0 0 16px rgba(16, 185, 129, 0.8),
+    inset 0 1px 1px #ffffff;
+}
+
+/* 6. Realistic Machined Bevels */
+.hardware-bezel-rim {
+  border: 1px solid rgba(71, 85, 105, 0.4);
+  border-top-color: rgba(255, 255, 255, 0.35);
+  border-bottom-color: rgba(0, 0, 0, 0.95);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -2px 4px 0 rgba(0, 0, 0, 0.9),
+    0 10px 25px -4px rgba(0, 0, 0, 0.85);
+}
+
+/* Standard Glass & Cyber utilities */
 .glow-cyan-sm {
   box-shadow: 0 0 15px rgba(6, 182, 212, 0.35);
 }
@@ -29,54 +325,50 @@
   box-shadow: 0 0 30px rgba(6, 182, 212, 0.45), inset 0 0 15px rgba(6, 182, 212, 0.15);
 }
 
-.glow-blue {
-  box-shadow: 0 0 30px rgba(14, 165, 233, 0.4), inset 0 0 15px rgba(59, 130, 246, 0.2);
-}
-
 .glow-text-cyan {
   text-shadow: 0 0 15px rgba(6, 182, 212, 0.8), 0 0 30px rgba(6, 182, 212, 0.4);
 }
 
-.glow-text-blue {
-  text-shadow: 0 0 15px rgba(59, 130, 246, 0.8), 0 0 30px rgba(14, 165, 233, 0.4);
-}
-
-.glow-border-cyan {
-  border: 1px solid rgba(6, 182, 212, 0.4);
-  box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
-}
-
-.glow-border-cyan:hover {
-  border-color: rgba(6, 182, 212, 0.8);
-  box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
-}
-
-/* Glassmorphism Panels */
 .glass-panel {
-  background: rgba(8, 14, 29, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(56, 189, 248, 0.15);
+  background: rgba(8, 14, 29, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  border-top-color: rgba(255, 255, 255, 0.2);
+  border-bottom-color: rgba(0, 0, 0, 0.9);
 }
 
 .glass-panel-card {
-  background: linear-gradient(135deg, rgba(12, 20, 39, 0.8) 0%, rgba(6, 11, 24, 0.9) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(56, 189, 248, 0.12);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: linear-gradient(145deg, rgba(16, 25, 45, 0.85) 0%, rgba(6, 11, 24, 0.95) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  border-top-color: rgba(255, 255, 255, 0.22);
+  border-bottom-color: rgba(0, 0, 0, 0.95);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.8),
+    0 12px 28px -6px rgba(0, 0, 0, 0.7);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel-card:hover {
-  border-color: rgba(6, 182, 212, 0.45);
-  box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.25);
+  border-color: rgba(6, 182, 212, 0.55);
+  border-top-color: rgba(147, 240, 255, 0.5);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.25),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.85),
+    0 16px 36px -8px rgba(6, 182, 212, 0.35);
   transform: translateY(-2px);
 }
 
 .glass-input {
-  background: rgba(10, 18, 36, 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: rgba(8, 13, 26, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-top-color: rgba(0, 0, 0, 0.95);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.9);
   color: #f8fafc;
   transition: all 0.2s ease;
 }
@@ -84,10 +376,11 @@
 .glass-input:focus {
   outline: none;
   border-color: #06b6d4;
-  box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.9),
+    0 0 16px rgba(6, 182, 212, 0.4);
 }
 
-/* Cyber Grid Background */
 .cyber-grid {
   background-image: 
     linear-gradient(to right, rgba(6, 182, 212, 0.04) 1px, transparent 1px),
@@ -100,19 +393,6 @@
     linear-gradient(to right, rgba(6, 182, 212, 0.07) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(6, 182, 212, 0.07) 1px, transparent 1px);
   background-size: 24px 24px;
-}
-
-/* Subtle Animated Scanlines */
-.scanline-overlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0) 50%,
-    rgba(0, 0, 0, 0.2) 50%,
-    rgba(0, 0, 0, 0.2)
-  );
-  background-size: 100% 4px;
-  pointer-events: none;
 }
 
 /* Custom Cyberpunk Scrollbar */
@@ -133,33 +413,4 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #0284c7;
   box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
-}
-
-/* Pulse Glow Keyframes */
-@keyframes pulse-subtle {
-  0%, 100% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.03);
-  }
-}
-
-.animate-pulse-subtle {
-  animation: pulse-subtle 4s ease-in-out infinite;
-}
-
-@keyframes radar-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-radar-spin {
-  animation: radar-spin 8s linear infinite;
 }
