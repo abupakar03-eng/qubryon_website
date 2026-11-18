@@ -17,7 +17,7 @@ export default function Home() {
   const [talentModalOpen, setTalentModalOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-[#030712] text-slate-100 flex flex-col relative overflow-x-hidden">
+    <main className="min-h-screen bg-[#EDC9AF] text-[#1C260D] flex flex-col relative overflow-x-hidden font-mono">
       {/* Top Navbar */}
       <Navbar
         onOpenConsultation={() => setConsultationOpen(true)}

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Cpu, Activity, RefreshCw, Zap, ShieldCheck } from "lucide-react";
+import { Cpu, Activity, Zap, ShieldCheck } from "lucide-react";
 
 interface Node3D {
   x: number;
@@ -25,7 +25,7 @@ interface Packet {
 export default function TechParticleCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  
+
   const [activeMode, setActiveMode] = useState<"all" | "edge" | "ai" | "twin">("all");
   const [dataFlowSpeed, setDataFlowSpeed] = useState<number>(1);
   const [activeTelemetry, setActiveTelemetry] = useState({
@@ -95,7 +95,6 @@ export default function TechParticleCanvas() {
     ];
 
     for (let i = 0; i < nodeCount; i++) {
-      // Golden spiral spherical distribution
       const phi = Math.acos(1 - (2 * (i + 0.5)) / nodeCount);
       const theta = Math.PI * (1 + Math.sqrt(5)) * (i + 0.5);
 
@@ -104,10 +103,11 @@ export default function TechParticleCanvas() {
       const z = sphereRadius * Math.cos(phi);
 
       const type = nodeTypes[i % nodeTypes.length];
-      let color = "#06b6d4"; // cyan
-      if (type === "gateway") color = "#0284c7"; // sky
-      if (type === "ai_node") color = "#38bdf8"; // neon light cyan
-      if (type === "cloud") color = "#3b82f6"; // electric blue
+      // Earthy-tech palette: Signal Yellow, Olive Drab, Sand Tones
+      let color = "#F4D03F"; // Signal Yellow (Sensors)
+      if (type === "gateway") color = "#8BAE3A"; // Olive Drab light
+      if (type === "ai_node") color = "#FFF275"; // Vibrant Light Yellow
+      if (type === "cloud") color = "#EDC9AF"; // Desert Sand
 
       nodes.push({
         x,
@@ -121,7 +121,7 @@ export default function TechParticleCanvas() {
       });
     }
 
-    // Initialize Telemetry Data Packets
+    // Initialize Telemetry Data Packets (Signal Yellow sparks)
     const packets: Packet[] = [];
     for (let i = 0; i < 18; i++) {
       const src = Math.floor(Math.random() * nodeCount);
@@ -132,7 +132,7 @@ export default function TechParticleCanvas() {
         targetIndex: target,
         progress: Math.random(),
         speed: 0.006 + Math.random() * 0.008,
-        color: i % 2 === 0 ? "#00f0ff" : "#60a5fa",
+        color: i % 2 === 0 ? "#F4D03F" : "#EDC9AF",
       });
     }
 
@@ -144,7 +144,7 @@ export default function TechParticleCanvas() {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Subtle cybernetic radial glow in background of canvas
+      // Deep Olive / Desert Sand radial backdrop
       const bgGlow = ctx.createRadialGradient(
         width / 2,
         height / 2,
@@ -153,29 +153,29 @@ export default function TechParticleCanvas() {
         height / 2,
         width * 0.45
       );
-      bgGlow.addColorStop(0, "rgba(6, 182, 212, 0.08)");
-      bgGlow.addColorStop(0.5, "rgba(14, 165, 233, 0.03)");
-      bgGlow.addColorStop(1, "rgba(3, 7, 18, 0)");
+      bgGlow.addColorStop(0, "rgba(107, 142, 35, 0.18)");
+      bgGlow.addColorStop(0.5, "rgba(244, 208, 63, 0.06)");
+      bgGlow.addColorStop(1, "rgba(18, 26, 7, 0)");
       ctx.fillStyle = bgGlow;
       ctx.fillRect(0, 0, width, height);
 
-      // Draw subtle orbital rings
+      // Orbital rings in Olive Drab & Sand
       ctx.save();
       ctx.translate(width / 2, height / 2);
-      ctx.strokeStyle = "rgba(6, 182, 212, 0.09)";
+      ctx.strokeStyle = "rgba(107, 142, 35, 0.25)";
       ctx.lineWidth = 1;
       ctx.setLineDash([4, 8]);
       ctx.beginPath();
       ctx.ellipse(0, 0, sphereRadius * 1.15, sphereRadius * 0.45, Math.PI / 6, 0, Math.PI * 2);
       ctx.stroke();
 
-      ctx.strokeStyle = "rgba(59, 130, 246, 0.08)";
+      ctx.strokeStyle = "rgba(244, 208, 63, 0.18)";
       ctx.beginPath();
       ctx.ellipse(0, 0, sphereRadius * 1.25, sphereRadius * 0.5, -Math.PI / 5, 0, Math.PI * 2);
       ctx.stroke();
       ctx.restore();
 
-      // Smooth mouse-influenced rotation
+      // Mouse-influenced rotation
       if (mouseRef.current.isHovering) {
         const targetRotY = (mouseRef.current.x - width / 2) * 0.00008;
         const targetRotX = -(mouseRef.current.y - height / 2) * 0.00008;
@@ -186,7 +186,6 @@ export default function TechParticleCanvas() {
         rotX = angleX * 0.7;
       }
 
-      // Rotate nodes around center
       const cosY = Math.cos(rotY);
       const sinY = Math.sin(rotY);
       const cosX = Math.cos(rotX);
@@ -201,12 +200,10 @@ export default function TechParticleCanvas() {
       }> = [];
 
       nodes.forEach((node, idx) => {
-        // Y-axis rotation
         let x1 = node.x * cosY + node.z * sinY;
         let y1 = node.y;
         let z1 = -node.x * sinY + node.z * cosY;
 
-        // X-axis rotation
         let x2 = x1;
         let y2 = y1 * cosX - z1 * sinX;
         let z2 = y1 * sinX + z1 * cosX;
@@ -215,7 +212,6 @@ export default function TechParticleCanvas() {
         node.y = y2;
         node.z = z2;
 
-        // Perspective projection
         const fov = 450;
         const scale = fov / (fov + z2);
         const x2d = width / 2 + x2 * scale;
@@ -232,7 +228,6 @@ export default function TechParticleCanvas() {
         });
       });
 
-      // Filter nodes based on activeMode
       const shouldDrawNode = (type: Node3D["type"]) => {
         if (activeMode === "all") return true;
         if (activeMode === "edge" && (type === "sensor" || type === "gateway")) return true;
@@ -241,7 +236,7 @@ export default function TechParticleCanvas() {
         return false;
       };
 
-      // Draw connection vectors
+      // Draw connection vectors in Olive Drab
       const maxDistance = sphereRadius * 0.85;
       for (let i = 0; i < projectedNodes.length; i++) {
         for (let j = i + 1; j < projectedNodes.length; j++) {
@@ -250,22 +245,21 @@ export default function TechParticleCanvas() {
 
           if (!shouldDrawNode(p1.node.type) || !shouldDrawNode(p2.node.type)) continue;
 
-          // 3D Euclidean distance
           const dx = p1.node.x - p2.node.x;
           const dy = p1.node.y - p2.node.y;
           const dz = p1.node.z - p2.node.z;
           const dist3d = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
           if (dist3d < maxDistance) {
-            const alpha = (1 - dist3d / maxDistance) * 0.35 * Math.min(p1.scale, p2.scale);
+            const alpha = (1 - dist3d / maxDistance) * 0.4 * Math.min(p1.scale, p2.scale);
             ctx.beginPath();
             ctx.moveTo(p1.x2d, p1.y2d);
             ctx.lineTo(p2.x2d, p2.y2d);
 
             if (p1.node.type === "ai_node" || p2.node.type === "ai_node") {
-              ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 1.3})`;
+              ctx.strokeStyle = `rgba(244, 208, 63, ${alpha * 1.4})`;
             } else {
-              ctx.strokeStyle = `rgba(6, 182, 212, ${alpha})`;
+              ctx.strokeStyle = `rgba(107, 142, 35, ${alpha * 1.6})`;
             }
             ctx.lineWidth = 1 * Math.min(p1.scale, p2.scale);
             ctx.stroke();
@@ -273,16 +267,16 @@ export default function TechParticleCanvas() {
         }
       }
 
-      // Draw Shockwave if active
+      // Draw Signal Yellow Shockwave if active
       if (shockwaveRef.current.active) {
         const sw = shockwaveRef.current;
         ctx.save();
         ctx.beginPath();
         ctx.arc(width / 2, height / 2, sw.radius, 0, Math.PI * 2);
         const waveAlpha = Math.max(0, 1 - sw.radius / sw.maxRadius);
-        ctx.strokeStyle = `rgba(0, 240, 255, ${waveAlpha * 0.8})`;
+        ctx.strokeStyle = `rgba(244, 208, 63, ${waveAlpha * 0.9})`;
         ctx.lineWidth = 3;
-        ctx.shadowColor = "#00f0ff";
+        ctx.shadowColor = "#F4D03F";
         ctx.shadowBlur = 18;
         ctx.stroke();
         ctx.restore();
@@ -312,15 +306,14 @@ export default function TechParticleCanvas() {
 
         ctx.save();
         ctx.beginPath();
-        ctx.arc(currentX, currentY, 2.2 * currentScale, 0, Math.PI * 2);
+        ctx.arc(currentX, currentY, 2.4 * currentScale, 0, Math.PI * 2);
         ctx.fillStyle = pkt.color;
         ctx.shadowColor = pkt.color;
-        ctx.shadowBlur = 8;
+        ctx.shadowBlur = 10;
         ctx.fill();
         ctx.restore();
       });
 
-      // Sort nodes by depth (z) to render back-to-front
       projectedNodes.sort((a, b) => a.node.z - b.node.z);
 
       // Draw Nodes
@@ -337,8 +330,8 @@ export default function TechParticleCanvas() {
         ctx.arc(p.x2d, p.y2d, radius * 2.2, 0, Math.PI * 2);
         ctx.fillStyle =
           p.node.type === "ai_node"
-            ? "rgba(56, 189, 248, 0.15)"
-            : "rgba(6, 182, 212, 0.12)";
+            ? "rgba(244, 208, 63, 0.2)"
+            : "rgba(107, 142, 35, 0.22)";
         ctx.fill();
 
         // Core Node
@@ -349,16 +342,16 @@ export default function TechParticleCanvas() {
         ctx.shadowBlur = 12 * p.scale;
         ctx.fill();
 
-        // Inner specular highlight
+        // Inner highlight
         ctx.beginPath();
         ctx.arc(p.x2d - radius * 0.25, p.y2d - radius * 0.25, radius * 0.35, 0, Math.PI * 2);
         ctx.fillStyle = "#ffffff";
         ctx.fill();
 
-        // Label on larger nodes or when depth is near
+        // Label on larger nodes
         if (p.scale > 1.05 && (p.node.type === "ai_node" || p.node.type === "cloud")) {
-          ctx.font = `${Math.floor(10 * p.scale)}px ui-monospace, monospace`;
-          ctx.fillStyle = "rgba(224, 242, 254, 0.85)";
+          ctx.font = `${Math.floor(10 * p.scale)}px "DM Mono", monospace`;
+          ctx.fillStyle = "rgba(244, 208, 63, 0.9)";
           ctx.fillText(p.node.label, p.x2d + radius + 6, p.y2d + 3);
         }
 
@@ -395,42 +388,45 @@ export default function TechParticleCanvas() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full h-[540px] md:h-[600px] rounded-2xl overflow-hidden glass-panel border border-cyan-500/20 bg-slate-950/80 shadow-[0_0_50px_rgba(6,182,212,0.15)] flex flex-col justify-between"
+      className="relative w-full h-[540px] md:h-[600px] rounded-3xl overflow-hidden olive-chassis border-2 border-[#6B8E23] shadow-[0_16px_40px_rgba(25,35,10,0.5)] flex flex-col justify-between"
     >
-      {/* HUD Header Bar */}
-      <div className="z-10 flex items-center justify-between px-4 py-3 border-b border-cyan-500/20 bg-slate-900/60 backdrop-blur-md">
-        <div className="flex items-center space-x-2">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
-          </span>
-          <span className="text-xs font-mono tracking-wider text-cyan-300 font-semibold uppercase">
-            3D Cyber-Physical Mesh Engine
+      {/* Top Brass Rivets */}
+      <div className="brass-rivet absolute top-3 left-3 z-20" />
+      <div className="brass-rivet absolute top-3 right-3 z-20" />
+      <div className="brass-rivet absolute bottom-3 left-3 z-20" />
+      <div className="brass-rivet absolute bottom-3 right-3 z-20" />
+
+      {/* HUD Header Bar (30% Olive Drab) */}
+      <div className="z-10 flex items-center justify-between px-6 py-3.5 border-b border-[#6B8E23]/60 bg-[#1A250B]/90 backdrop-blur-md">
+        <div className="flex items-center space-x-2.5">
+          <span className="hardware-led-yellow animate-pulse" />
+          <span className="text-xs font-mono tracking-[0.2em] text-[#F4D03F] font-bold uppercase">
+            3D CYBER-PHYSICAL MESH ENGINE
           </span>
         </div>
 
         {/* Telemetry Snapshot */}
-        <div className="hidden sm:flex items-center space-x-4 text-xs font-mono text-slate-400">
-          <div className="flex items-center space-x-1">
-            <Activity className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Pkt/s:</span>
-            <span className="text-cyan-300 font-bold">{activeTelemetry.packetsPerSec}</span>
+        <div className="hidden sm:flex items-center space-x-5 text-xs font-mono text-[#EDC9AF]">
+          <div className="flex items-center space-x-1.5">
+            <Activity className="w-3.5 h-3.5 text-[#F4D03F]" />
+            <span>PKT/S:</span>
+            <span className="text-[#F4D03F] font-bold">{activeTelemetry.packetsPerSec}</span>
           </div>
-          <div className="flex items-center space-x-1">
-            <Cpu className="w-3.5 h-3.5 text-blue-400" />
-            <span>Latency:</span>
-            <span className="text-blue-300 font-bold">{activeTelemetry.syncLatency}</span>
+          <div className="flex items-center space-x-1.5">
+            <Cpu className="w-3.5 h-3.5 text-[#8BAE3A]" />
+            <span>LATENCY:</span>
+            <span className="text-[#8BAE3A] font-bold">{activeTelemetry.syncLatency}</span>
           </div>
         </div>
 
-        {/* Pulse Shockwave Action */}
+        {/* Pulse Shockwave Action (10% Signal Yellow Button) */}
         <button
           onClick={triggerShockwave}
-          className="flex items-center space-x-1 px-2.5 py-1 rounded bg-cyan-950/70 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/20 hover:text-cyan-100 text-xs font-mono transition-all cursor-pointer shadow-[0_0_10px_rgba(6,182,212,0.2)]"
+          className="key-signal-yellow px-3 py-1 rounded-lg text-xs font-mono font-bold flex items-center space-x-1.5 cursor-pointer shadow-md"
           title="Send packet surge pulse across the IoT network"
         >
-          <Zap className="w-3 h-3 text-cyan-400 fill-cyan-400" />
-          <span>Pulse Surge</span>
+          <Zap className="w-3 h-3 text-[#172108] fill-[#172108]" />
+          <span>PULSE SURGE</span>
         </button>
       </div>
 
@@ -438,45 +434,45 @@ export default function TechParticleCanvas() {
       <canvas
         ref={canvasRef}
         onClick={triggerShockwave}
-        className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing"
+        className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing bg-[#141E07]"
       />
 
       {/* Interactive Cyber HUD Overlays */}
-      <div className="z-10 pointer-events-none p-4 flex flex-col justify-end space-y-3">
+      <div className="z-10 pointer-events-none p-5 flex flex-col justify-end space-y-3">
         {/* Real-time Status Card Bottom Left */}
-        <div className="pointer-events-auto max-w-xs p-3 rounded-xl bg-slate-950/80 backdrop-blur-md border border-cyan-500/20 shadow-lg">
-          <div className="flex items-center justify-between text-[11px] font-mono text-cyan-400 mb-1.5 border-b border-cyan-500/20 pb-1">
+        <div className="pointer-events-auto max-w-xs p-3.5 rounded-xl olive-chassis-deep border border-[#6B8E23]/60 shadow-xl">
+          <div className="flex items-center justify-between text-[11px] font-mono text-[#F4D03F] mb-2 border-b border-[#6B8E23]/40 pb-1">
             <span className="flex items-center gap-1.5 font-bold">
-              <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+              <ShieldCheck className="w-3.5 h-3.5 text-[#F4D03F]" />
               QUBRYON TELEMETRY BUS
             </span>
-            <span className="text-[10px] text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-500/30">
-              ACTIVE
+            <span className="text-[10px] text-[#172108] bg-[#F4D03F] font-bold px-1.5 py-0.5 rounded">
+              ONLINE
             </span>
           </div>
-          <div className="grid grid-cols-2 gap-2 text-[10px] font-mono text-slate-300">
+          <div className="grid grid-cols-2 gap-2 text-[10px] font-mono text-[#EDC9AF]">
             <div>
-              <span className="text-slate-500 block">PROTOCOL</span>
-              <span className="text-cyan-300 font-semibold">MQTT v5 / TLS 1.3</span>
+              <span className="text-[#A2B682] block text-[9px]">PROTOCOL</span>
+              <span className="text-[#FAF1E8] font-bold">MQTT v5 / TLS 1.3</span>
             </div>
             <div>
-              <span className="text-slate-500 block">AI INFERENCE</span>
-              <span className="text-cyan-300 font-semibold">TensorRT Edge</span>
+              <span className="text-[#A2B682] block text-[9px]">AI INFERENCE</span>
+              <span className="text-[#FAF1E8] font-bold">TensorRT Edge</span>
             </div>
             <div>
-              <span className="text-slate-500 block">FIRMWARE</span>
-              <span className="text-cyan-300 font-semibold">Zephyr RTOS 3.6</span>
+              <span className="text-[#A2B682] block text-[9px]">FIRMWARE</span>
+              <span className="text-[#FAF1E8] font-bold">Zephyr RTOS 3.6</span>
             </div>
             <div>
-              <span className="text-slate-500 block">LOCATION</span>
-              <span className="text-cyan-300 font-semibold">TN, India (HQ)</span>
+              <span className="text-[#A2B682] block text-[9px]">LOCATION</span>
+              <span className="text-[#F4D03F] font-bold">TN, India (HQ)</span>
             </div>
           </div>
         </div>
 
         {/* Mode Selector Bottom Center/Right */}
-        <div className="pointer-events-auto flex flex-wrap items-center justify-between gap-2 bg-slate-900/80 backdrop-blur-md p-2 rounded-xl border border-cyan-500/20">
-          <div className="flex items-center space-x-1 text-xs">
+        <div className="pointer-events-auto flex flex-wrap items-center justify-between gap-2 bg-[#1A250B]/90 backdrop-blur-md p-2 rounded-xl border border-[#6B8E23]/60 shadow-lg">
+          <div className="flex items-center space-x-1.5 text-xs">
             {(
               [
                 { id: "all", label: "Full Mesh" },
@@ -488,10 +484,10 @@ export default function TechParticleCanvas() {
               <button
                 key={mode.id}
                 onClick={() => setActiveMode(mode.id)}
-                className={`px-2.5 py-1 rounded text-[11px] font-mono transition-all cursor-pointer ${
+                className={`px-3 py-1 rounded-lg text-[11px] font-mono tracking-wider font-bold transition-all cursor-pointer ${
                   activeMode === mode.id
-                    ? "bg-cyan-500 text-slate-950 font-bold shadow-[0_0_12px_rgba(6,182,212,0.6)]"
-                    : "text-slate-400 hover:text-cyan-200 hover:bg-slate-800/60"
+                    ? "key-signal-yellow"
+                    : "text-[#EDC9AF] hover:text-[#F4D03F] hover:bg-[#283710]"
                 }`}
               >
                 {mode.label}
@@ -499,11 +495,11 @@ export default function TechParticleCanvas() {
             ))}
           </div>
 
-          <div className="flex items-center space-x-2 text-[11px] font-mono text-slate-400">
+          <div className="flex items-center space-x-2 text-[11px] font-mono text-[#EDC9AF]">
             <span>Speed:</span>
             <button
               onClick={() => setDataFlowSpeed((s) => (s === 1 ? 2 : s === 2 ? 0.5 : 1))}
-              className="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-cyan-300 hover:border-cyan-500/50 cursor-pointer"
+              className="key-tactical-olive px-2 py-0.5 rounded text-xs cursor-pointer"
             >
               {dataFlowSpeed === 1 ? "1.0x" : dataFlowSpeed === 2 ? "2.0x" : "0.5x"}
             </button>

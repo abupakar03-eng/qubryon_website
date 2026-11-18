@@ -6,11 +6,6 @@ import {
   Users,
   CheckCircle2,
   Send,
-  Shield,
-  Clock,
-  Sparkles,
-  Cpu,
-  Layers,
 } from "lucide-react";
 
 interface TalentModalProps {
@@ -50,121 +45,121 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto carbon-fiber-panel p-6 sm:p-8 rounded-3xl border border-cyan-500/40 shadow-[0_20px_50px_rgba(0,0,0,0.95),inset_0_1px_1px_rgba(255,255,255,0.25)] text-white">
-        {/* Hardware Corner Rivets */}
-        <div className="hardware-rivet absolute top-3 left-3" />
-        <div className="hardware-rivet absolute top-3 right-3" />
-        <div className="hardware-rivet absolute bottom-3 left-3" />
-        <div className="hardware-rivet absolute bottom-3 right-3" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto olive-carbon-panel p-6 sm:p-8 rounded-3xl border-2 border-[#6B8E23] shadow-2xl text-[#EDC9AF]">
+        {/* Brass Corner Rivets */}
+        <div className="brass-rivet absolute top-3.5 left-3.5" />
+        <div className="brass-rivet absolute top-3.5 right-3.5" />
+        <div className="brass-rivet absolute bottom-3.5 left-3.5" />
+        <div className="brass-rivet absolute bottom-3.5 right-3.5" />
 
         {/* Close Button */}
         <button
           onClick={resetAndClose}
-          className="hardware-key absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-white cursor-pointer z-10"
+          className="key-tactical-olive absolute top-5 right-5 p-2 rounded-xl text-[#EDC9AF] hover:text-[#F4D03F] cursor-pointer z-10"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Modal Header */}
         <div className="mb-6">
-          <div className="hardware-recessed-channel inline-flex items-center space-x-2 px-3 py-1 rounded-md text-cyan-400 text-xs font-mono mb-2 border border-cyan-500/30">
-            <Users className="w-4 h-4" />
-            <span className="tracking-widest uppercase font-bold text-etched-cyan">
+          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-3 py-1 rounded-md text-[#F4D03F] text-xs font-mono mb-2 border border-[#6B8E23]">
+            <Users className="w-4 h-4 text-[#F4D03F]" />
+            <span className="tracking-widest uppercase font-bold">
               IT STAFF AUGMENTATION DISPATCH // 48-HR SLA
             </span>
           </div>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-sans tracking-wide">
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-syne tracking-wide">
             Deploy Pre-Vetted IoT &amp; AI Engineers
           </h3>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-[#EDC9AF] mt-1 font-mono">
             Access pre-screened talent from Qubryon Technologies with a 2-week risk-free trial.
           </p>
         </div>
 
         {submitted ? (
           <div className="py-8 text-center space-y-4 animate-in fade-in zoom-in-95">
-            <div className="w-16 h-16 rounded-full bg-cyan-500/20 border border-cyan-400 flex items-center justify-center text-cyan-300 mx-auto shadow-[0_0_25px_rgba(6,182,212,0.4)]">
+            <div className="w-16 h-16 rounded-full bg-[#F4D03F]/20 border border-[#F4D03F] flex items-center justify-center text-[#F4D03F] mx-auto shadow-[0_0_25px_rgba(244,208,63,0.5)]">
               <CheckCircle2 className="w-10 h-10" />
             </div>
-            <h4 className="text-2xl font-bold text-white font-sans">Talent Request Received!</h4>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+            <h4 className="text-2xl font-bold text-white font-syne">Talent Request Received!</h4>
+            <p className="text-xs sm:text-sm text-[#EDC9AF] max-w-md mx-auto leading-relaxed font-mono">
               Our Technical Director has initiated the matching protocol for{" "}
-              <strong className="text-cyan-300">{formData.count}</strong> ({formData.role}).
+              <strong className="text-[#F4D03F]">{formData.count}</strong> ({formData.role}).
               Candidate resumes and technical code reviews will arrive at{" "}
-              <span className="text-cyan-300 font-mono">{formData.email}</span> within 24 to 48 hours.
+              <span className="text-[#F4D03F] font-mono">{formData.email}</span> within 24 to 48 hours.
             </p>
 
-            <div className="hardware-recessed-channel p-4 rounded-xl border border-cyan-500/30 max-w-md mx-auto text-left text-xs font-mono space-y-1">
+            <div className="olive-recessed-channel p-4 rounded-xl border border-[#6B8E23] max-w-md mx-auto text-left text-xs font-mono space-y-1">
               <div className="flex justify-between">
-                <span className="text-slate-400">Match SLA:</span>
-                <span className="text-emerald-400 font-bold">&lt; 48 Hours</span>
+                <span className="text-[#A2B682]">Match SLA:</span>
+                <span className="text-[#8BAE3A] font-bold">&lt; 48 Hours</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">Trial Period:</span>
-                <span className="text-cyan-300 font-bold">2 Weeks Risk-Free</span>
+                <span className="text-[#A2B682]">Trial Period:</span>
+                <span className="text-[#F4D03F] font-bold">2 Weeks Risk-Free</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">Assigned Recruiter:</span>
+                <span className="text-[#A2B682]">Assigned Recruiter:</span>
                 <span className="text-white">Qubryon Engineering Resource Desk</span>
               </div>
             </div>
 
             <button
               onClick={resetAndClose}
-              className="hardware-key-cyan px-8 py-3 rounded-xl text-xs font-mono tracking-wider uppercase cursor-pointer"
+              className="key-signal-yellow px-8 py-3 rounded-xl text-xs font-mono tracking-wider uppercase cursor-pointer"
             >
               DONE
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4 font-mono">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   ENGINEERING ROLE NEEDED *
                 </label>
                 <select
                   value={formData.role}
                   onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded-lg text-xs font-mono glass-input text-white cursor-pointer"
+                  className="w-full px-3 py-2.5 rounded-lg text-xs font-mono sand-glass-input cursor-pointer"
                   required
                 >
-                  <option value="Embedded C & IoT Firmware Specialist" className="bg-slate-900">
+                  <option value="Embedded C & IoT Firmware Specialist" className="bg-[#172108]">
                     Embedded C &amp; IoT Firmware Specialist
                   </option>
-                  <option value="AI / Machine Learning Edge Engineer" className="bg-slate-900">
+                  <option value="AI / Machine Learning Edge Engineer" className="bg-[#172108]">
                     AI / Machine Learning Edge Engineer
                   </option>
-                  <option value="AWS IoT Cloud & Pipeline Architect" className="bg-slate-900">
+                  <option value="AWS IoT Cloud & Pipeline Architect" className="bg-[#172108]">
                     AWS IoT Cloud &amp; Pipeline Architect
                   </option>
-                  <option value="Full-Stack React & Next.js Telemetry Dev" className="bg-slate-900">
+                  <option value="Full-Stack React & Next.js Telemetry Dev" className="bg-[#172108]">
                     Full-Stack React &amp; Next.js Telemetry Dev
                   </option>
-                  <option value="Cross-Functional IoT Squad (Pod)" className="bg-slate-900">
+                  <option value="Cross-Functional IoT Squad (Pod)" className="bg-[#172108]">
                     Cross-Functional IoT Squad (Pod)
                   </option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   SENIORITY LEVEL *
                 </label>
                 <select
                   value={formData.seniority}
                   onChange={(e) => setFormData({ ...formData, seniority: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded-lg text-xs font-mono glass-input text-white cursor-pointer"
+                  className="w-full px-3 py-2.5 rounded-lg text-xs font-mono sand-glass-input cursor-pointer"
                   required
                 >
-                  <option value="Senior (5-8 yrs)" className="bg-slate-900">
+                  <option value="Senior (5-8 yrs)" className="bg-[#172108]">
                     Senior (5-8 yrs) - Enterprise Standard
                   </option>
-                  <option value="Lead / Principal Architect (8+ yrs)" className="bg-slate-900">
+                  <option value="Lead / Principal Architect (8+ yrs)" className="bg-[#172108]">
                     Lead / Principal Architect (8+ yrs)
                   </option>
-                  <option value="Mid-Level (3-5 yrs)" className="bg-slate-900">
+                  <option value="Mid-Level (3-5 yrs)" className="bg-[#172108]">
                     Mid-Level (3-5 yrs)
                   </option>
                 </select>
@@ -173,40 +168,40 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   HEADCOUNT *
                 </label>
                 <select
                   value={formData.count}
                   onChange={(e) => setFormData({ ...formData, count: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded-lg text-xs font-mono glass-input text-white cursor-pointer"
+                  className="w-full px-3 py-2.5 rounded-lg text-xs font-mono sand-glass-input cursor-pointer"
                 >
-                  <option value="1 Engineer" className="bg-slate-900">1 Dedicated Engineer</option>
-                  <option value="2 Engineers" className="bg-slate-900">2 Engineers</option>
-                  <option value="3-5 Engineers" className="bg-slate-900">3-5 Engineers (Squad)</option>
-                  <option value="5+ Engineers" className="bg-slate-900">5+ Engineers</option>
+                  <option value="1 Engineer" className="bg-[#172108]">1 Dedicated Engineer</option>
+                  <option value="2 Engineers" className="bg-[#172108]">2 Engineers</option>
+                  <option value="3-5 Engineers" className="bg-[#172108]">3-5 Engineers (Squad)</option>
+                  <option value="5+ Engineers" className="bg-[#172108]">5+ Engineers</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   TIMELINE TO ONBOARD *
                 </label>
                 <select
                   value={formData.urgency}
                   onChange={(e) => setFormData({ ...formData, urgency: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded-lg text-xs font-mono glass-input text-white cursor-pointer"
+                  className="w-full px-3 py-2.5 rounded-lg text-xs font-mono sand-glass-input cursor-pointer"
                 >
-                  <option value="Immediate (< 48 hrs)" className="bg-slate-900">Immediate (&lt; 48 hrs)</option>
-                  <option value="Within 1-2 Weeks" className="bg-slate-900">Within 1-2 Weeks</option>
-                  <option value="Next Month" className="bg-slate-900">Next Month</option>
+                  <option value="Immediate (< 48 hrs)" className="bg-[#172108]">Immediate (&lt; 48 hrs)</option>
+                  <option value="Within 1-2 Weeks" className="bg-[#172108]">Within 1-2 Weeks</option>
+                  <option value="Next Month" className="bg-[#172108]">Next Month</option>
                 </select>
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   YOUR FULL NAME *
                 </label>
                 <input
@@ -215,12 +210,12 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g. Alex Johnson"
-                  className="w-full px-3 py-2 rounded-lg text-xs font-mono glass-input text-white"
+                  className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   BUSINESS WORK EMAIL *
                 </label>
                 <input
@@ -229,13 +224,13 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="alex@enterprise.com"
-                  className="w-full px-3 py-2 rounded-lg text-xs font-mono glass-input text-white"
+                  className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
+              <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                 COMPANY OR PRODUCT NAME *
               </label>
               <input
@@ -244,32 +239,33 @@ export default function TalentRequestModal({ isOpen, onClose }: TalentModalProps
                 value={formData.company}
                 onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                 placeholder="e.g. Continental Automation Lab"
-                className="w-full px-3 py-2 rounded-lg text-xs font-mono glass-input text-white"
+                className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
               />
             </div>
 
             {/* Quick Guarantees */}
-            <div className="grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-400 py-1">
+            <div className="grid grid-cols-2 gap-2 text-[11px] font-mono text-[#EDC9AF] py-1">
               <div className="flex items-center space-x-1.5">
-                <span className="hardware-led-cyan" />
+                <span className="hardware-led-yellow" />
                 <span>2-Week Risk-Free Trial</span>
               </div>
               <div className="flex items-center space-x-1.5">
-                <span className="hardware-led-cyan" />
+                <span className="hardware-led-yellow" />
                 <span>100% IP Assignment</span>
               </div>
             </div>
 
+            {/* 10% Signal Yellow Submit Button */}
             <button
               type="submit"
               disabled={submitting}
-              className="hardware-key-cyan w-full py-4 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
+              className="key-signal-yellow w-full py-4 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 shadow-lg"
             >
               {submitting ? (
                 <span>DISPATCHING TALENT REQUEST...</span>
               ) : (
                 <>
-                  <Send className="w-4 h-4 text-slate-950" />
+                  <Send className="w-4 h-4 text-[#172108]" />
                   <span>RECEIVE VETTED PROFILES WITHIN 48 HOURS</span>
                 </>
               )}

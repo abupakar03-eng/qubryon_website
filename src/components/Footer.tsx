@@ -4,13 +4,10 @@ import React from "react";
 import Link from "next/link";
 import {
   Cpu,
-  Shield,
-  ArrowRight,
   Mail,
   Phone,
   MapPin,
   Calendar,
-  Globe,
   CheckCircle,
 } from "lucide-react";
 
@@ -21,58 +18,57 @@ interface FooterProps {
 
 export default function Footer({ onOpenConsultation, onOpenTalentModal }: FooterProps) {
   return (
-    <footer className="relative bg-[#02050c] text-white border-t border-slate-800 overflow-hidden">
-      {/* Top Brushed Metal Rim-Light Line */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#06b6d4]" />
+    <footer className="relative bg-[#172108] text-[#EDC9AF] border-t-2 border-[#6B8E23] overflow-hidden">
+      {/* Top Signal Yellow Accent Line */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#F4D03F] to-transparent shadow-[0_0_15px_#F4D03F]" />
 
-      {/* Main Footer Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
           {/* Col 1 & 2: Brand & Corporate Verification */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center space-x-3.5">
-              <div className="w-11 h-11 rounded-xl p-0.5 bg-gradient-to-b from-slate-400 via-slate-700 to-slate-950 shadow-[0_4px_8px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.4)] flex items-center justify-center">
-                <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center border border-cyan-500/40">
-                  <Cpu className="w-5 h-5 text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+              <div className="w-11 h-11 rounded-xl p-0.5 bg-gradient-to-b from-[#8BAE3A] via-[#6B8E23] to-[#121A06] shadow-[0_4px_8px_rgba(0,0,0,0.5)] flex items-center justify-center">
+                <div className="w-full h-full rounded-[10px] bg-[#121A06] flex items-center justify-center border border-[#6B8E23]">
+                  <Cpu className="w-5 h-5 text-[#F4D03F] drop-shadow-[0_0_8px_rgba(244,208,63,0.8)]" />
                 </div>
               </div>
               <div className="flex flex-col">
                 <div className="flex items-center space-x-2">
-                  <span className="font-extrabold text-xl tracking-[0.14em] uppercase text-metallic-titanium font-sans">
+                  <span className="font-syne font-extrabold text-xl tracking-[0.08em] uppercase text-white drop-shadow-md">
                     QUBRYON
                   </span>
-                  <span className="hardware-recessed-channel px-2 py-0.5 rounded text-[10px] font-mono font-black text-cyan-300 border border-cyan-500/30">
+                  <span className="olive-recessed-channel px-2 py-0.5 rounded text-[10px] font-mono font-black text-[#F4D03F] border border-[#6B8E23]">
                     TECH
                   </span>
                 </div>
-                <span className="text-[9.5px] font-mono tracking-[0.28em] uppercase text-etched font-semibold">
+                <span className="text-[9.5px] font-mono tracking-[0.24em] uppercase text-[#EDC9AF] font-semibold">
                   IOT &amp; AI INTEGRATION SYSTEMS
                 </span>
               </div>
             </div>
 
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm">
-              <strong className="text-slate-200">Qubryon Technologies Private Limited</strong> is a registered cyber-physical engineering firm specializing in custom IoT hardware architectures, edge AI predictive analytics, and enterprise IT staff augmentation.
+            <p className="text-xs sm:text-sm text-[#E0C7B4] leading-relaxed max-w-sm font-mono">
+              <strong className="text-white">Qubryon Technologies Private Limited</strong> is a registered cyber-physical engineering firm specializing in custom IoT hardware architectures, edge AI predictive analytics, and enterprise IT staff augmentation.
             </p>
 
             {/* Incorporation Credentials with Hardware Chassis */}
-            <div className="hardware-chassis p-4 rounded-xl text-[11px] font-mono space-y-1.5 text-slate-300 relative">
-              <div className="hardware-rivet absolute top-2 right-2" />
+            <div className="olive-chassis p-4 rounded-xl text-[11px] font-mono space-y-1.5 text-[#EDC9AF] relative border border-[#6B8E23]/60 shadow-md">
+              <div className="brass-rivet absolute top-2 right-2" />
               <div className="flex justify-between">
-                <span className="text-slate-500">Corporate Identity (CIN):</span>
-                <span className="text-cyan-300 font-bold">U62013TN2026PTC199725</span>
+                <span className="text-[#A2B682]">Corporate Identity (CIN):</span>
+                <span className="text-[#F4D03F] font-bold">U62013TN2026PTC199725</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-500">Incorporation Date:</span>
-                <span className="text-slate-300">November 3, 2026</span>
+                <span className="text-[#A2B682]">Incorporation Date:</span>
+                <span className="text-[#FAF1E8]">November 3, 2026</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-500">Registered Office:</span>
-                <span className="text-slate-300">Tennur, Tiruchirappalli, TN 620017</span>
+                <span className="text-[#A2B682]">Registered Office:</span>
+                <span className="text-[#FAF1E8]">Tennur, Tiruchirappalli, TN 620017</span>
               </div>
-              <div className="pt-1 border-t border-slate-800 flex justify-between text-[10px]">
-                <span className="text-slate-500">Directors:</span>
-                <span className="text-cyan-200 truncate ml-2">
+              <div className="pt-1 border-t border-[#6B8E23]/40 flex justify-between text-[10px]">
+                <span className="text-[#A2B682]">Directors:</span>
+                <span className="text-[#F4D03F] truncate ml-2">
                   Senthilkumar Vivek Santha Kumar &bull; Abubakkar Mohamed Sathik
                 </span>
               </div>
@@ -80,12 +76,11 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
 
             {/* Social Tactile Buttons */}
             <div className="flex items-center space-x-3 pt-2">
-              {/* LinkedIn */}
               <a
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="hardware-key w-9 h-9 rounded-xl flex items-center justify-center text-slate-400 hover:text-cyan-300 transition-all cursor-pointer"
+                className="key-tactical-olive w-9 h-9 rounded-xl flex items-center justify-center text-[#EDC9AF] hover:text-[#F4D03F] transition-all cursor-pointer"
                 aria-label="LinkedIn"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -93,12 +88,11 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
                 </svg>
               </a>
 
-              {/* X / Twitter */}
               <a
                 href="https://x.com"
                 target="_blank"
                 rel="noreferrer"
-                className="hardware-key w-9 h-9 rounded-xl flex items-center justify-center text-slate-400 hover:text-cyan-300 transition-all cursor-pointer"
+                className="key-tactical-olive w-9 h-9 rounded-xl flex items-center justify-center text-[#EDC9AF] hover:text-[#F4D03F] transition-all cursor-pointer"
                 aria-label="X (formerly Twitter)"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -106,12 +100,11 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
                 </svg>
               </a>
 
-              {/* GitHub */}
               <a
                 href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
-                className="hardware-key w-9 h-9 rounded-xl flex items-center justify-center text-slate-400 hover:text-cyan-300 transition-all cursor-pointer"
+                className="key-tactical-olive w-9 h-9 rounded-xl flex items-center justify-center text-[#EDC9AF] hover:text-[#F4D03F] transition-all cursor-pointer"
                 aria-label="GitHub"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -122,38 +115,38 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
           </div>
 
           {/* Col 3: Core Solutions */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400">
+          <div className="space-y-3 font-mono">
+            <h4 className="text-xs font-syne font-bold uppercase tracking-wider text-[#F4D03F]">
               Core Engineering
             </h4>
-            <ul className="space-y-2 text-xs font-mono text-slate-400">
+            <ul className="space-y-2 text-xs text-[#EDC9AF]">
               <li>
-                <a href="#services" className="hover:text-cyan-300 transition-colors">
+                <a href="#services" className="hover:text-[#F4D03F] transition-colors">
                   Custom IoT Development
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-cyan-300 transition-colors">
+                <a href="#services" className="hover:text-[#F4D03F] transition-colors">
                   Edge AI &amp; Predictive Analytics
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-cyan-300 transition-colors">
+                <a href="#services" className="hover:text-[#F4D03F] transition-colors">
                   Industrial IoT 4.0 &amp; SCADA
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-cyan-300 transition-colors">
+                <a href="#services" className="hover:text-[#F4D03F] transition-colors">
                   Firmware &amp; Zephyr RTOS
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-cyan-300 transition-colors">
+                <a href="#services" className="hover:text-[#F4D03F] transition-colors">
                   AWS &amp; Azure IoT Fabrics
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-cyan-300 transition-colors">
+                <a href="#services" className="hover:text-[#F4D03F] transition-colors">
                   Digital Twin 3D Dashboards
                 </a>
               </li>
@@ -161,15 +154,15 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
           </div>
 
           {/* Col 4: Staff Augmentation */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400">
+          <div className="space-y-3 font-mono">
+            <h4 className="text-xs font-syne font-bold uppercase tracking-wider text-[#F4D03F]">
               Hire Tech Talent
             </h4>
-            <ul className="space-y-2 text-xs font-mono text-slate-400">
+            <ul className="space-y-2 text-xs text-[#EDC9AF]">
               <li>
                 <button
                   onClick={onOpenTalentModal}
-                  className="hover:text-cyan-300 transition-colors text-left cursor-pointer"
+                  className="hover:text-[#F4D03F] transition-colors text-left cursor-pointer"
                 >
                   Hire Embedded C Developers
                 </button>
@@ -177,7 +170,7 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
               <li>
                 <button
                   onClick={onOpenTalentModal}
-                  className="hover:text-cyan-300 transition-colors text-left cursor-pointer"
+                  className="hover:text-[#F4D03F] transition-colors text-left cursor-pointer"
                 >
                   Hire Python &amp; PyTorch Specialists
                 </button>
@@ -185,7 +178,7 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
               <li>
                 <button
                   onClick={onOpenTalentModal}
-                  className="hover:text-cyan-300 transition-colors text-left cursor-pointer"
+                  className="hover:text-[#F4D03F] transition-colors text-left cursor-pointer"
                 >
                   Hire AWS IoT Cloud Architects
                 </button>
@@ -193,52 +186,52 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
               <li>
                 <button
                   onClick={onOpenTalentModal}
-                  className="hover:text-cyan-300 transition-colors text-left cursor-pointer"
+                  className="hover:text-[#F4D03F] transition-colors text-left cursor-pointer"
                 >
                   Hire React &amp; Next.js Engineers
                 </button>
               </li>
               <li>
-                <a href="#talent" className="hover:text-cyan-300 transition-colors">
+                <a href="#talent" className="hover:text-[#F4D03F] transition-colors">
                   3-Step Hiring Process
                 </a>
               </li>
               <li>
-                <a href="#talent" className="hover:text-cyan-300 transition-colors">
+                <a href="#talent" className="hover:text-[#F4D03F] transition-colors">
                   2-Week Risk-Free Trial
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Col 5: Consultation & Quick Action */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400">
+          {/* Col 5: Consultation & Quick Action (10% Signal Yellow) */}
+          <div className="space-y-4 font-mono">
+            <h4 className="text-xs font-syne font-bold uppercase tracking-wider text-[#F4D03F]">
               Direct Engagement
             </h4>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-[#EDC9AF] leading-relaxed">
               Have an active RFP or immediate sprint vacancy? Connect with our technical directors directly.
             </p>
 
             <button
               onClick={onOpenConsultation}
-              className="hardware-key-cyan w-full py-3 px-3 rounded-xl font-mono text-xs tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer"
+              className="key-signal-yellow w-full py-3 px-3 rounded-xl font-mono text-xs tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer shadow-lg"
             >
-              <Calendar className="w-3.5 h-3.5 text-slate-950" />
+              <Calendar className="w-3.5 h-3.5 text-[#172108]" />
               <span>BOOK STRATEGY CALL</span>
             </button>
 
-            <div className="pt-2 border-t border-slate-900 space-y-1.5 text-[11px] font-mono text-slate-400">
+            <div className="pt-2 border-t border-[#6B8E23]/40 space-y-1.5 text-[11px] text-[#A2B682]">
               <div className="flex items-center space-x-2">
-                <CheckCircle className="w-3.5 h-3.5 text-cyan-400" />
+                <CheckCircle className="w-3.5 h-3.5 text-[#F4D03F]" />
                 <span>100% IP &amp; Source Ownership</span>
               </div>
               <div className="flex items-center space-x-2">
-                <CheckCircle className="w-3.5 h-3.5 text-cyan-400" />
+                <CheckCircle className="w-3.5 h-3.5 text-[#F4D03F]" />
                 <span>Strict Mutual NDA Governance</span>
               </div>
               <div className="flex items-center space-x-2">
-                <CheckCircle className="w-3.5 h-3.5 text-cyan-400" />
+                <CheckCircle className="w-3.5 h-3.5 text-[#F4D03F]" />
                 <span>SOC 2 Type II Aligned Practices</span>
               </div>
             </div>
@@ -246,19 +239,19 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
         </div>
 
         {/* Bottom Bar: Copyright & Compliance */}
-        <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+        <div className="pt-8 border-t border-[#6B8E23]/40 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-[#EDC9AF]">
           <div>
             &copy; 2026 Qubryon Technologies Private Limited. All rights reserved. Registered in Tiruchirappalli, Tamil Nadu, India.
           </div>
 
           <div className="flex items-center space-x-4">
-            <span className="hover:text-slate-300 cursor-pointer">Privacy Policy</span>
+            <span className="hover:text-[#F4D03F] cursor-pointer">Privacy Policy</span>
             <span>&bull;</span>
-            <span className="hover:text-slate-300 cursor-pointer">Terms of Service</span>
+            <span className="hover:text-[#F4D03F] cursor-pointer">Terms of Service</span>
             <span>&bull;</span>
-            <span className="hover:text-slate-300 cursor-pointer">Security Standards</span>
+            <span className="hover:text-[#F4D03F] cursor-pointer">Security Standards</span>
             <span>&bull;</span>
-            <span className="text-cyan-400">CIN: U62013TN2026PTC199725</span>
+            <span className="text-[#F4D03F] font-bold">CIN: U62013TN2026PTC199725</span>
           </div>
         </div>
       </div>

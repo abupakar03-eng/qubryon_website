@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Rajdhani, Geist_Mono } from "next/font/google";
+import { Syne, DM_Mono } from "next/font/google";
 import "./globals.css";
 
-const rajdhani = Rajdhani({
-  variable: "--font-rajdhani",
-  weight: ["500", "600", "700"],
+const syne = Syne({
+  variable: "--font-syne",
+  weight: ["500", "600", "700", "800"],
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const dmMono = DM_Mono({
+  variable: "--font-dm-mono",
+  weight: ["300", "400", "500"],
   subsets: ["latin"],
 });
 
@@ -49,9 +50,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${rajdhani.variable} ${geistMono.variable} h-full antialiased dark`}
+      className={`${syne.variable} ${dmMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#030712] text-slate-100 selection:bg-cyan-400 selection:text-slate-950 font-sans">
+      <body className="min-h-full flex flex-col bg-[#EDC9AF] text-[#1E260F] selection:bg-[#F4D03F] selection:text-[#1E260F] font-mono">
         {children}
       </body>
     </html>

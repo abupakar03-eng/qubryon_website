@@ -7,11 +7,8 @@ import {
   Clock,
   Video,
   CheckCircle2,
-  Cpu,
-  Shield,
   ArrowRight,
   Globe,
-  Sparkles,
 } from "lucide-react";
 
 interface ConsultationModalProps {
@@ -72,43 +69,43 @@ export default function InteractiveConsultationModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto carbon-fiber-panel p-6 sm:p-8 rounded-3xl border border-cyan-500/40 shadow-[0_20px_50px_rgba(0,0,0,0.95),inset_0_1px_1px_rgba(255,255,255,0.25)] text-white">
-        {/* Hardware Corner Rivets */}
-        <div className="hardware-rivet absolute top-3 left-3" />
-        <div className="hardware-rivet absolute top-3 right-3" />
-        <div className="hardware-rivet absolute bottom-3 left-3" />
-        <div className="hardware-rivet absolute bottom-3 right-3" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto olive-carbon-panel p-6 sm:p-8 rounded-3xl border-2 border-[#6B8E23] shadow-2xl text-[#EDC9AF]">
+        {/* Brass Corner Rivets */}
+        <div className="brass-rivet absolute top-3.5 left-3.5" />
+        <div className="brass-rivet absolute top-3.5 right-3.5" />
+        <div className="brass-rivet absolute bottom-3.5 left-3.5" />
+        <div className="brass-rivet absolute bottom-3.5 right-3.5" />
 
         {/* Close Button */}
         <button
           onClick={resetAndClose}
-          className="hardware-key absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-white cursor-pointer z-10"
+          className="key-tactical-olive absolute top-5 right-5 p-2 rounded-xl text-[#EDC9AF] hover:text-[#F4D03F] cursor-pointer z-10"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Modal Header */}
         <div className="mb-6">
-          <div className="hardware-recessed-channel inline-flex items-center space-x-2 px-3 py-1 rounded-md text-cyan-400 text-xs font-mono mb-2 border border-cyan-500/30">
+          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-3 py-1 rounded-md text-[#F4D03F] text-xs font-mono mb-2 border border-[#6B8E23]">
             <Video className="w-4 h-4" />
-            <span className="tracking-widest uppercase font-bold text-etched-cyan">
+            <span className="tracking-widest uppercase font-bold">
               30-MIN STRATEGY CALL // CALENDLY SYNC
             </span>
           </div>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-sans tracking-wide">
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-syne tracking-wide">
             Schedule a Technical Strategy Session
           </h3>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-[#EDC9AF] mt-1 font-mono">
             Connect directly with a Principal IoT &amp; AI Solutions Architect from Qubryon Technologies.
           </p>
         </div>
 
         {step === "slot" && (
-          <div className="space-y-6">
+          <div className="space-y-6 font-mono">
             {/* Step 1: Select Consultation Topic */}
             <div>
-              <label className="block text-xs font-mono text-cyan-300 mb-2 font-bold uppercase tracking-wider">
+              <label className="block text-xs font-mono text-[#F4D03F] mb-2 font-bold uppercase tracking-wider">
                 1. Select Discussion Topic
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -119,17 +116,17 @@ export default function InteractiveConsultationModal({
                     onClick={() => setSelectedTopic(t)}
                     className={`p-3 rounded-xl text-left text-xs font-mono transition-all cursor-pointer ${
                       selectedTopic === t
-                        ? "hardware-key-cyan"
-                        : "hardware-key text-slate-300"
+                        ? "key-signal-yellow"
+                        : "key-tactical-olive"
                     }`}
                   >
                     <div className="flex items-center space-x-2">
                       <div
                         className={`w-2 h-2 rounded-full ${
-                          selectedTopic === t ? "bg-slate-950 animate-pulse" : "bg-cyan-500"
+                          selectedTopic === t ? "bg-[#172108] animate-pulse" : "bg-[#F4D03F]"
                         }`}
                       />
-                      <span className={selectedTopic === t ? "text-slate-950 font-bold" : "text-etched"}>
+                      <span className={selectedTopic === t ? "text-[#172108] font-bold" : "text-[#EDC9AF]"}>
                         {t}
                       </span>
                     </div>
@@ -140,7 +137,7 @@ export default function InteractiveConsultationModal({
 
             {/* Step 2: Date Picker */}
             <div>
-              <label className="block text-xs font-mono text-cyan-300 mb-2 font-bold uppercase tracking-wider">
+              <label className="block text-xs font-mono text-[#F4D03F] mb-2 font-bold uppercase tracking-wider">
                 2. Select Preferred Date
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -151,12 +148,12 @@ export default function InteractiveConsultationModal({
                     onClick={() => setSelectedDate(d.val)}
                     className={`p-2.5 rounded-xl text-center text-xs font-mono transition-all cursor-pointer ${
                       selectedDate === d.val
-                        ? "hardware-key-cyan"
-                        : "hardware-key text-slate-400"
+                        ? "key-signal-yellow"
+                        : "key-tactical-olive"
                     }`}
                   >
-                    <Calendar className={`w-3.5 h-3.5 mx-auto mb-1 ${selectedDate === d.val ? "text-slate-950" : "text-cyan-400"}`} />
-                    <span className={selectedDate === d.val ? "text-slate-950 font-bold" : "text-etched"}>
+                    <Calendar className={`w-3.5 h-3.5 mx-auto mb-1 ${selectedDate === d.val ? "text-[#172108]" : "text-[#F4D03F]"}`} />
+                    <span className={selectedDate === d.val ? "text-[#172108] font-bold" : "text-[#EDC9AF]"}>
                       {d.label}
                     </span>
                   </button>
@@ -167,11 +164,11 @@ export default function InteractiveConsultationModal({
             {/* Step 3: Time Slot */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <label className="block text-xs font-mono text-cyan-300 font-bold uppercase tracking-wider">
+                <label className="block text-xs font-mono text-[#F4D03F] font-bold uppercase tracking-wider">
                   3. Select Time Slot
                 </label>
-                <span className="text-[10px] font-mono text-slate-400 flex items-center space-x-1">
-                  <Globe className="w-3 h-3 text-cyan-400" />
+                <span className="text-[10px] font-mono text-[#A2B682] flex items-center space-x-1">
+                  <Globe className="w-3 h-3 text-[#F4D03F]" />
                   <span>Timezone: {timezone}</span>
                 </span>
               </div>
@@ -183,12 +180,12 @@ export default function InteractiveConsultationModal({
                     onClick={() => setSelectedTime(ts)}
                     className={`p-2.5 rounded-xl text-center text-xs font-mono transition-all cursor-pointer ${
                       selectedTime === ts
-                        ? "hardware-key-cyan"
-                        : "hardware-key text-slate-300"
+                        ? "key-signal-yellow"
+                        : "key-tactical-olive"
                     }`}
                   >
-                    <Clock className={`w-3.5 h-3.5 mx-auto mb-1 ${selectedTime === ts ? "text-slate-950" : "text-cyan-400"}`} />
-                    <span className={selectedTime === ts ? "text-slate-950 font-bold" : "text-etched"}>
+                    <Clock className={`w-3.5 h-3.5 mx-auto mb-1 ${selectedTime === ts ? "text-[#172108]" : "text-[#F4D03F]"}`} />
+                    <span className={selectedTime === ts ? "text-[#172108] font-bold" : "text-[#EDC9AF]"}>
                       {ts}
                     </span>
                   </button>
@@ -196,32 +193,31 @@ export default function InteractiveConsultationModal({
               </div>
             </div>
 
-            {/* Next Action */}
+            {/* Next Action (10% Signal Yellow) */}
             <div className="pt-2">
               <button
                 type="button"
                 onClick={() => setStep("details")}
-                className="hardware-key-cyan w-full py-4 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer"
+                className="key-signal-yellow w-full py-4 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer shadow-lg"
               >
                 <span>CONTINUE TO ATTENDEE INFORMATION</span>
-                <ArrowRight className="w-4 h-4 text-slate-950" />
+                <ArrowRight className="w-4 h-4 text-[#172108]" />
               </button>
             </div>
           </div>
         )}
 
         {step === "details" && (
-          <form onSubmit={handleConfirm} className="space-y-4">
-            {/* Slot summary pill */}
-            <div className="hardware-recessed-channel p-3.5 rounded-xl flex items-center justify-between text-xs font-mono border border-cyan-500/30">
+          <form onSubmit={handleConfirm} className="space-y-4 font-mono">
+            <div className="olive-recessed-channel p-3.5 rounded-xl flex items-center justify-between text-xs font-mono border border-[#6B8E23]">
               <div>
-                <span className="text-slate-400">BOOKING:</span>{" "}
-                <span className="text-cyan-300 font-bold">{selectedDate} @ {selectedTime}</span>
+                <span className="text-[#A2B682]">BOOKING:</span>{" "}
+                <span className="text-[#F4D03F] font-bold">{selectedDate} @ {selectedTime}</span>
               </div>
               <button
                 type="button"
                 onClick={() => setStep("slot")}
-                className="text-cyan-400 hover:underline cursor-pointer"
+                className="text-[#F4D03F] hover:underline cursor-pointer"
               >
                 Change
               </button>
@@ -229,7 +225,7 @@ export default function InteractiveConsultationModal({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   FULL NAME *
                 </label>
                 <input
@@ -238,12 +234,12 @@ export default function InteractiveConsultationModal({
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   placeholder="e.g. Senthil Kumar"
-                  className="w-full px-3 py-2 rounded-lg text-xs font-mono glass-input text-white"
+                  className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
+                <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                   WORK EMAIL *
                 </label>
                 <input
@@ -252,13 +248,13 @@ export default function InteractiveConsultationModal({
                   value={formData.workEmail}
                   onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
                   placeholder="name@company.com"
-                  className="w-full px-3 py-2 rounded-lg text-xs font-mono glass-input text-white"
+                  className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
+              <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                 COMPANY OR PROJECT NAME *
               </label>
               <input
@@ -267,12 +263,12 @@ export default function InteractiveConsultationModal({
                 value={formData.company}
                 onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                 placeholder="e.g. Nexus Robotics Inc."
-                className="w-full px-3 py-2 rounded-lg text-xs font-mono glass-input text-white"
+                className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
               />
             </div>
 
             <div>
-              <label className="block text-[11px] font-mono text-cyan-300 mb-1 tracking-wider uppercase font-bold">
+              <label className="block text-[11px] font-mono text-[#F4D03F] mb-1 tracking-wider uppercase font-bold">
                 BRIEF TECHNICAL CHALLENGE / REQUIREMENT
               </label>
               <textarea
@@ -280,7 +276,7 @@ export default function InteractiveConsultationModal({
                 value={formData.currentChallenge}
                 onChange={(e) => setFormData({ ...formData, currentChallenge: e.target.value })}
                 placeholder="Describe your current hardware architecture, telemetry bottlenecks, or hiring needs..."
-                className="w-full px-3 py-2 rounded-lg text-xs font-mono glass-input text-white"
+                className="w-full px-3 py-2 rounded-lg text-xs font-mono sand-glass-input"
               />
             </div>
 
@@ -291,9 +287,9 @@ export default function InteractiveConsultationModal({
                 id="nda"
                 checked={formData.ndaRequired}
                 onChange={(e) => setFormData({ ...formData, ndaRequired: e.target.checked })}
-                className="w-4 h-4 rounded border-cyan-500 text-cyan-500 focus:ring-0 bg-slate-900 cursor-pointer"
+                className="w-4 h-4 rounded border-[#6B8E23] text-[#F4D03F] focus:ring-0 bg-[#172108] cursor-pointer"
               />
-              <label htmlFor="nda" className="text-xs font-mono text-slate-300 cursor-pointer">
+              <label htmlFor="nda" className="text-xs font-mono text-[#EDC9AF] cursor-pointer">
                 Send mutual 2-way Non-Disclosure Agreement (NDA) prior to the call.
               </label>
             </div>
@@ -302,13 +298,13 @@ export default function InteractiveConsultationModal({
               <button
                 type="button"
                 onClick={() => setStep("slot")}
-                className="hardware-key w-1/3 py-3 rounded-xl font-mono text-xs font-bold tracking-wider text-slate-300 cursor-pointer"
+                className="key-tactical-olive w-1/3 py-3 rounded-xl font-mono text-xs font-bold tracking-wider text-[#EDC9AF] cursor-pointer"
               >
                 BACK
               </button>
               <button
                 type="submit"
-                className="hardware-key-cyan w-2/3 py-3 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center cursor-pointer"
+                className="key-signal-yellow w-2/3 py-3 rounded-xl font-mono text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center cursor-pointer shadow-lg"
               >
                 CONFIRM VIDEO CONSULTATION
               </button>
@@ -318,34 +314,34 @@ export default function InteractiveConsultationModal({
 
         {step === "confirmed" && (
           <div className="text-center py-6 space-y-5 animate-in fade-in zoom-in-95">
-            <div className="w-16 h-16 rounded-full bg-cyan-500/20 border border-cyan-400 flex items-center justify-center text-cyan-300 mx-auto shadow-[0_0_25px_rgba(6,182,212,0.5)]">
+            <div className="w-16 h-16 rounded-full bg-[#F4D03F]/20 border border-[#F4D03F] flex items-center justify-center text-[#F4D03F] mx-auto shadow-[0_0_25px_rgba(244,208,63,0.5)]">
               <CheckCircle2 className="w-10 h-10" />
             </div>
 
             <div>
-              <h4 className="text-2xl font-bold text-white font-sans">Consultation Confirmed!</h4>
-              <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto mt-2 leading-relaxed">
+              <h4 className="text-2xl font-bold text-white font-syne">Consultation Confirmed!</h4>
+              <p className="text-xs sm:text-sm text-[#EDC9AF] max-w-md mx-auto mt-2 leading-relaxed font-mono">
                 A calendar invitation with a secure Google Meet / Teams link has been generated for{" "}
-                <strong className="text-cyan-300">{formData.workEmail || "your email"}</strong>.
+                <strong className="text-[#F4D03F]">{formData.workEmail || "your email"}</strong>.
               </p>
             </div>
 
-            <div className="hardware-recessed-channel p-4 rounded-xl border border-cyan-500/30 max-w-md mx-auto text-left text-xs font-mono space-y-1.5">
+            <div className="olive-recessed-channel p-4 rounded-xl border border-[#6B8E23] max-w-md mx-auto text-left text-xs font-mono space-y-1.5">
               <div className="flex justify-between">
-                <span className="text-slate-400">Date &amp; Time:</span>
-                <span className="text-cyan-300 font-bold">{selectedDate} @ {selectedTime}</span>
+                <span className="text-[#A2B682]">Date &amp; Time:</span>
+                <span className="text-[#F4D03F] font-bold">{selectedDate} @ {selectedTime}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">Domain:</span>
-                <span className="text-cyan-300">{selectedTopic}</span>
+                <span className="text-[#A2B682]">Domain:</span>
+                <span className="text-[#FAF1E8]">{selectedTopic}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">Host:</span>
+                <span className="text-[#A2B682]">Host:</span>
                 <span className="text-white">Principal IoT Architect, Qubryon Tech</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">Location:</span>
-                <span className="text-emerald-400">Encrypted Video Conference</span>
+                <span className="text-[#A2B682]">Location:</span>
+                <span className="text-[#8BAE3A] font-bold">Encrypted Video Conference</span>
               </div>
             </div>
 
@@ -353,7 +349,7 @@ export default function InteractiveConsultationModal({
               <button
                 type="button"
                 onClick={resetAndClose}
-                className="hardware-key-cyan px-8 py-3 rounded-xl text-xs font-mono tracking-wider uppercase cursor-pointer"
+                className="key-signal-yellow px-8 py-3 rounded-xl text-xs font-mono tracking-wider uppercase cursor-pointer"
               >
                 RETURN TO SITE
               </button>

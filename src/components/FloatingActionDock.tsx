@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Calendar, Users, ArrowUp, MessageCircle, Shield } from "lucide-react";
+import { Calendar, ArrowUp } from "lucide-react";
 
 interface FloatingActionDockProps {
   onOpenConsultation: () => void;
@@ -28,25 +28,25 @@ export default function FloatingActionDock({
 
   return (
     <div className="fixed bottom-5 right-5 sm:right-8 z-40 flex items-center space-x-2">
-      {/* Tactile Hardware Chassis Housing */}
-      <div className="flex items-center space-x-2 p-1.5 rounded-2xl hardware-chassis shadow-[0_12px_32px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.25)]">
-        {/* Hire Talent Tactile Key */}
+      {/* Tactical Olive Chassis Housing with Signal Yellow Key */}
+      <div className="flex items-center space-x-2 p-1.5 rounded-2xl olive-chassis shadow-[0_12px_32px_rgba(20,28,8,0.45)] border border-[#6B8E23]">
+        {/* Hire Talent Tactile Olive Key */}
         <button
           onClick={onOpenTalentModal}
-          className="hardware-key-titanium flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold tracking-wider cursor-pointer"
+          className="key-tactical-olive flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-mono font-bold tracking-wider cursor-pointer"
           title="Hire Pre-Vetted IoT & AI Engineers"
         >
-          <span className="hardware-led-cyan" />
-          <span className="hidden sm:inline text-etched-cyan">HIRE TALENT</span>
+          <span className="hardware-led-yellow" />
+          <span className="hidden sm:inline">HIRE TALENT</span>
         </button>
 
-        {/* Book Call Tactile Key */}
+        {/* Book Call 10% Signal Yellow Key */}
         <button
           onClick={onOpenConsultation}
-          className="hardware-key-cyan flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-mono font-black tracking-wider text-slate-950 cursor-pointer"
+          className="key-signal-yellow flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-mono font-black tracking-wider text-[#172108] cursor-pointer shadow-md"
           title="Schedule 30-min Strategy Call"
         >
-          <Calendar className="w-3.5 h-3.5 text-slate-950" />
+          <Calendar className="w-3.5 h-3.5 text-[#172108]" />
           <span>BOOK CALL</span>
         </button>
 
@@ -54,7 +54,7 @@ export default function FloatingActionDock({
         {showScrollTop && (
           <button
             onClick={scrollToTop}
-            className="hardware-key w-8 h-8 rounded-xl flex items-center justify-center text-slate-300 hover:text-cyan-300 transition-all cursor-pointer"
+            className="key-tactical-olive w-8 h-8 rounded-xl flex items-center justify-center text-[#EDC9AF] hover:text-[#F4D03F] transition-all cursor-pointer"
             title="Scroll to top"
             aria-label="Scroll to top"
           >

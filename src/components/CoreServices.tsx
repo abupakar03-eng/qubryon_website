@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Cpu,
   Users,
@@ -10,8 +10,6 @@ import {
   Eye,
   CheckCircle2,
   ArrowRight,
-  Database,
-  ShieldAlert,
   Server,
   Zap,
 } from "lucide-react";
@@ -168,31 +166,31 @@ export default function CoreServices({ onOpenConsultation, onOpenTalentModal }: 
   ];
 
   return (
-    <section id="services" className="relative py-28 bg-[#040813] text-white cyber-grid">
-      {/* Decorative Top Hardware Rim Highlight */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#06b6d4]" />
+    <section id="services" className="relative py-28 bg-[#E5BFA5] text-[#1C260D] sand-cyber-grid">
+      {/* Top Hardware Rim Highlight in Olive Drab */}
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#6B8E23] to-transparent shadow-[0_0_12px_rgba(107,142,35,0.6)]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
+        {/* Section Header with Syne & DM Mono */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="hardware-recessed-channel inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 text-cyan-300 font-mono text-xs mb-3 shadow-[inset_0_2px_4px_rgba(0,0,0,0.9)]">
-            <Zap className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="tracking-[0.18em] uppercase font-bold text-etched-cyan">
+          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[#6B8E23] text-[#F4D03F] font-mono text-xs mb-3 shadow-md">
+            <Zap className="w-3.5 h-3.5 text-[#F4D03F]" />
+            <span className="tracking-[0.18em] uppercase font-bold">
               CORE ENGINEERING SERVICES
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
-            <span className="text-metallic-titanium block">Custom IoT &amp; AI Systems.</span>
-            <span className="text-metallic-cyan block mt-1">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#172108] mb-4 font-syne">
+            <span className="block drop-shadow-sm">Custom IoT &amp; AI Systems.</span>
+            <span className="block mt-1 text-[#466016]">
               Plus On-Demand Staff Augmentation.
             </span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-[#3A4A1C] text-sm sm:text-base leading-relaxed font-mono">
             Whether you need a full turnkey cyber-physical deployment from scratch or pre-vetted senior engineers to bolster your existing in-house team, Qubryon delivers enterprise reliability.
           </p>
         </div>
 
-        {/* 2 Primary Flagship Pillars with Tactile Hardware Styling */}
+        {/* 2 Primary Flagship Pillars (30% Olive Drab Palette) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
           {services.slice(0, 2).map((service, index) => {
             const Icon = service.icon;
@@ -201,66 +199,61 @@ export default function CoreServices({ onOpenConsultation, onOpenTalentModal }: 
             return (
               <div
                 key={service.id}
-                className="relative rounded-2xl p-7 sm:p-9 transition-all duration-300 hardware-chassis overflow-hidden group"
+                className="relative rounded-3xl p-7 sm:p-9 transition-all duration-300 olive-chassis overflow-hidden group shadow-xl"
               >
-                {/* Hardware Rivet Accents */}
-                <div className="hardware-rivet absolute top-3 left-3" />
-                <div className="hardware-rivet absolute top-3 right-3" />
-                <div className="hardware-rivet absolute bottom-3 left-3" />
-                <div className="hardware-rivet absolute bottom-3 right-3" />
+                {/* Brass Rivet Accents */}
+                <div className="brass-rivet absolute top-3.5 left-3.5" />
+                <div className="brass-rivet absolute top-3.5 right-3.5" />
+                <div className="brass-rivet absolute bottom-3.5 left-3.5" />
+                <div className="brass-rivet absolute bottom-3.5 right-3.5" />
 
                 {/* Flagship Header Banner */}
-                <div className="flex items-center justify-between mb-6 border-b border-slate-800 pb-5">
+                <div className="flex items-center justify-between mb-6 border-b border-[#6B8E23]/40 pb-5">
                   <div className="flex items-center space-x-3.5">
-                    {/* Machined tactile module housing */}
-                    <div className="w-13 h-13 rounded-xl p-0.5 bg-gradient-to-b from-slate-400 via-slate-700 to-slate-950 shadow-[0_4px_8px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.4)] flex items-center justify-center">
-                      <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center border border-cyan-500/40">
-                        <Icon className="w-6 h-6 text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+                    <div className="w-13 h-13 rounded-xl p-0.5 bg-gradient-to-b from-[#8BAE3A] via-[#6B8E23] to-[#172108] shadow-[0_4px_8px_rgba(0,0,0,0.5)] flex items-center justify-center">
+                      <div className="w-full h-full rounded-[10px] bg-[#172108] flex items-center justify-center border border-[#6B8E23]">
+                        <Icon className="w-6 h-6 text-[#F4D03F] drop-shadow-[0_0_8px_rgba(244,208,63,0.8)]" />
                       </div>
                     </div>
                     <div>
-                      <span className="text-[10px] font-mono tracking-[0.22em] text-cyan-400 font-bold uppercase block">
+                      <span className="text-[10px] font-mono tracking-[0.22em] text-[#F4D03F] font-bold uppercase block">
                         FLAGSHIP MODULE 0{index + 1}
                       </span>
-                      <h3 className="text-xl sm:text-2xl font-bold text-white font-sans tracking-wide">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white font-syne tracking-wide">
                         {service.title}
                       </h3>
                     </div>
                   </div>
-                  <span className="hardware-recessed-channel text-[11px] font-mono px-3 py-1 rounded-md text-slate-300 hidden sm:inline-block border border-slate-800">
+                  <span className="olive-recessed-channel text-[11px] font-mono px-3 py-1 rounded-md text-[#EDC9AF] hidden sm:inline-block border border-[#6B8E23]/50">
                     {service.category}
                   </span>
                 </div>
 
-                <p className="text-sm font-semibold text-cyan-300 mb-3">{service.tagline}</p>
-                <p className="text-xs sm:text-sm text-slate-300 mb-6 leading-relaxed">
+                <p className="text-sm font-semibold text-[#F4D03F] mb-3 font-mono">{service.tagline}</p>
+                <p className="text-xs sm:text-sm text-[#EDC9AF] mb-6 leading-relaxed font-mono">
                   {service.description}
                 </p>
 
-                {/* Key Capabilities */}
-                <div className="space-y-3 mb-6">
+                {/* Key Capabilities in DM Mono */}
+                <div className="space-y-3 mb-6 font-mono">
                   {service.features.map((feat, i) => (
-                    <div key={i} className="flex items-start space-x-2.5 text-xs sm:text-sm text-slate-300">
-                      <CheckCircle2
-                        className={`w-4 h-4 mt-0.5 shrink-0 ${
-                          isAugmentation ? "text-sky-400" : "text-cyan-400"
-                        }`}
-                      />
+                    <div key={i} className="flex items-start space-x-2.5 text-xs sm:text-sm text-[#FAF1E8]">
+                      <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0 text-[#F4D03F]" />
                       <span className="leading-snug">{feat}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* Tech Stack Pills in Recessed Hardware Well */}
-                <div className="pt-4 border-t border-slate-800/80 mb-7">
-                  <div className="text-[10.5px] font-mono text-etched mb-2 tracking-widest uppercase">
+                {/* Tech Stack Pills in Recessed Well */}
+                <div className="pt-4 border-t border-[#6B8E23]/40 mb-7">
+                  <div className="text-[10.5px] font-mono text-[#A2B682] mb-2 tracking-widest uppercase">
                     HARDWARE &amp; PROTOCOL SPEC:
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {service.techBadge.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-1 rounded text-xs font-mono hardware-recessed-channel text-cyan-300 border border-cyan-500/20"
+                        className="px-2.5 py-1 rounded text-xs font-mono olive-recessed-channel text-[#F4D03F] border border-[#6B8E23]/40"
                       >
                         {tech}
                       </span>
@@ -268,17 +261,17 @@ export default function CoreServices({ onOpenConsultation, onOpenTalentModal }: 
                   </div>
                 </div>
 
-                {/* Tactile Push Button */}
+                {/* Action CTA Button (10% Signal Yellow on Flagship 01) */}
                 <button
                   onClick={service.action}
-                  className={`w-full py-3.5 rounded-xl font-mono text-xs sm:text-sm font-bold tracking-wider flex items-center justify-center space-x-2 cursor-pointer select-none group ${
-                    isAugmentation ? "hardware-key-titanium" : "hardware-key-cyan"
+                  className={`w-full py-4 rounded-xl font-mono text-xs sm:text-sm font-bold tracking-wider flex items-center justify-center space-x-2 cursor-pointer select-none group shadow-lg ${
+                    isAugmentation ? "key-tactical-olive" : "key-signal-yellow"
                   }`}
                 >
-                  <span className={isAugmentation ? "text-etched-cyan font-bold" : ""}>
+                  <span className={isAugmentation ? "text-[#F4D03F] font-bold" : "text-[#172108]"}>
                     {service.ctaText}
                   </span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className={`w-4 h-4 group-hover:translate-x-1 transition-transform ${isAugmentation ? "text-[#F4D03F]" : "text-[#172108]"}`} />
                 </button>
               </div>
             );
@@ -287,12 +280,12 @@ export default function CoreServices({ onOpenConsultation, onOpenTalentModal }: 
 
         {/* 4 Specialized Extended Capabilities Grid */}
         <div className="mb-12">
-          <div className="flex items-center justify-between mb-8 border-b border-slate-800 pb-4">
+          <div className="flex items-center justify-between mb-8 border-b border-[#6B8E23]/40 pb-4">
             <div>
-              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#172108] font-syne tracking-wide">
                 Specialized Engineering Domains
               </h3>
-              <p className="text-xs sm:text-sm text-slate-400 font-mono mt-1">
+              <p className="text-xs sm:text-sm text-[#425227] font-mono mt-1">
                 Modular expertise tailored for smart factories, medical hardware, clean energy, and autonomous robotics.
               </p>
             </div>
@@ -304,21 +297,21 @@ export default function CoreServices({ onOpenConsultation, onOpenTalentModal }: 
               return (
                 <div
                   key={item.id}
-                  className="hardware-chassis p-6 rounded-2xl flex flex-col justify-between group hover:border-cyan-500/50 transition-all relative overflow-hidden"
+                  className="olive-chassis p-6 rounded-2xl flex flex-col justify-between group hover:border-[#F4D03F] transition-all relative overflow-hidden shadow-md"
                 >
-                  <div className="hardware-rivet absolute top-2 right-2" />
+                  <div className="brass-rivet absolute top-2 right-2" />
 
                   <div>
-                    <div className="w-11 h-11 rounded-xl bg-slate-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-4 group-hover:scale-105 group-hover:border-cyan-400/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.9)] transition-all">
-                      <SubIcon className="w-5 h-5 drop-shadow-[0_0_6px_rgba(6,182,212,0.8)]" />
+                    <div className="w-11 h-11 rounded-xl bg-[#172108] border border-[#6B8E23] flex items-center justify-center text-[#F4D03F] mb-4 group-hover:scale-105 shadow-inner transition-all">
+                      <SubIcon className="w-5 h-5 drop-shadow-[0_0_6px_rgba(244,208,63,0.8)]" />
                     </div>
-                    <span className="text-[10px] font-mono text-cyan-400 tracking-[0.2em] font-bold block mb-1 uppercase">
+                    <span className="text-[10px] font-mono text-[#F4D03F] tracking-[0.2em] font-bold block mb-1 uppercase">
                       {item.category}
                     </span>
-                    <h4 className="text-base font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors font-sans">
+                    <h4 className="text-base font-bold text-white mb-2 group-hover:text-[#F4D03F] transition-colors font-syne">
                       {item.title}
                     </h4>
-                    <p className="text-xs text-slate-400 leading-relaxed mb-5">
+                    <p className="text-xs text-[#EDC9AF] leading-relaxed mb-5 font-mono">
                       {item.description}
                     </p>
                   </div>
@@ -328,7 +321,7 @@ export default function CoreServices({ onOpenConsultation, onOpenTalentModal }: 
                       {item.techBadge.slice(0, 3).map((t) => (
                         <span
                           key={t}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded hardware-recessed-channel text-slate-300 border border-slate-800"
+                          className="text-[10px] font-mono px-2 py-0.5 rounded olive-recessed-channel text-[#EDC9AF] border border-[#6B8E23]/40"
                         >
                           {t}
                         </span>
@@ -337,10 +330,10 @@ export default function CoreServices({ onOpenConsultation, onOpenTalentModal }: 
 
                     <button
                       onClick={item.action}
-                      className="w-full hardware-key py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider text-cyan-300 hover:text-white transition-all flex items-center justify-center space-x-1.5 cursor-pointer"
+                      className="key-tactical-olive w-full py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider text-[#EDC9AF] hover:text-[#F4D03F] transition-all flex items-center justify-center space-x-1.5 cursor-pointer"
                     >
-                      <span className="text-etched-cyan">EXPLORE DOMAIN</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>EXPLORE DOMAIN</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-[#F4D03F]" />
                     </button>
                   </div>
                 </div>

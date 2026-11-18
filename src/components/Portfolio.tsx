@@ -4,15 +4,9 @@ import React, { useState } from "react";
 import {
   Layers,
   ArrowUpRight,
-  Cpu,
-  Activity,
   CheckCircle2,
-  ExternalLink,
-  ShieldCheck,
   TrendingUp,
   X,
-  Server,
-  Zap,
 } from "lucide-react";
 
 export default function Portfolio() {
@@ -136,26 +130,26 @@ export default function Portfolio() {
       : caseStudies.filter((c) => c.category === activeFilter);
 
   return (
-    <section id="case-studies" className="relative py-28 bg-[#040812] text-white cyber-grid">
+    <section id="case-studies" className="relative py-28 bg-[#DFC0A6] text-[#1C260D] sand-cyber-grid">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
+        {/* Section Header with Syne & DM Mono */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="hardware-recessed-channel inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 text-cyan-300 font-mono text-xs mb-3 shadow-[inset_0_2px_4px_rgba(0,0,0,0.9)]">
-            <Layers className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="tracking-[0.18em] uppercase font-bold text-etched-cyan">
+          <div className="olive-recessed-channel inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[#6B8E23] text-[#F4D03F] font-mono text-xs mb-3 shadow-md">
+            <Layers className="w-3.5 h-3.5 text-[#F4D03F]" />
+            <span className="tracking-[0.18em] uppercase font-bold">
               DEPLOYMENT TRACK RECORD
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
-            <span className="text-metallic-titanium block">Proven Case Studies &amp;</span>
-            <span className="text-metallic-cyan block mt-1">Measurable ROI.</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#172108] mb-4 font-syne">
+            <span className="block drop-shadow-sm">Proven Case Studies &amp;</span>
+            <span className="block mt-1 text-[#466016]">Measurable ROI.</span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-[#3A4A1C] text-sm sm:text-base leading-relaxed font-mono">
             Examine how Qubryon&apos;s custom IoT hardware architectures and embedded AI intelligence deliver tangible business outcomes in harsh physical environments.
           </p>
 
-          {/* Tactile Filter Keys */}
-          <div className="flex flex-wrap justify-center gap-2 mt-8 hardware-recessed-channel p-1.5 rounded-2xl inline-flex">
+          {/* Tactile Filter Keys (Signal Yellow on Active) */}
+          <div className="flex flex-wrap justify-center gap-2 mt-8 olive-recessed-channel p-1.5 rounded-2xl inline-flex border border-[#6B8E23]/40 shadow-inner">
             {[
               { id: "all", label: "ALL CASE STUDIES" },
               { id: "industrial", label: "SMART MANUFACTURING" },
@@ -166,55 +160,53 @@ export default function Portfolio() {
               <button
                 key={f.id}
                 onClick={() => setActiveFilter(f.id)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold tracking-wider cursor-pointer ${
-                  activeFilter === f.id ? "hardware-key-cyan" : "hardware-key text-slate-300"
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold tracking-wider cursor-pointer transition-all ${
+                  activeFilter === f.id ? "key-signal-yellow" : "key-tactical-olive"
                 }`}
               >
-                <span className={activeFilter === f.id ? "" : "text-etched"}>
-                  {f.label}
-                </span>
+                <span>{f.label}</span>
               </button>
             ))}
           </div>
         </div>
 
-        {/* Case Studies Grid */}
+        {/* Case Studies Grid (30% Olive Drab Chassis) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {filteredCases.map((item) => (
             <div
               key={item.id}
-              className="hardware-chassis p-7 sm:p-9 rounded-2xl flex flex-col justify-between group relative overflow-hidden hover:border-cyan-500/50 transition-all"
+              className="olive-chassis p-7 sm:p-9 rounded-3xl flex flex-col justify-between group relative overflow-hidden hover:border-[#F4D03F] transition-all shadow-xl"
             >
-              <div className="hardware-rivet absolute top-3 left-3" />
-              <div className="hardware-rivet absolute top-3 right-3" />
-              <div className="hardware-rivet absolute bottom-3 left-3" />
-              <div className="hardware-rivet absolute bottom-3 right-3" />
+              <div className="brass-rivet absolute top-3.5 left-3.5" />
+              <div className="brass-rivet absolute top-3.5 right-3.5" />
+              <div className="brass-rivet absolute bottom-3.5 left-3.5" />
+              <div className="brass-rivet absolute bottom-3.5 right-3.5" />
 
               <div>
                 {/* Header Metrics Banner */}
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-4 pb-4 border-b border-slate-800">
-                  <span className="hardware-recessed-channel text-[10.5px] font-mono tracking-widest text-cyan-400 font-bold px-2.5 py-1 rounded border border-cyan-500/30 uppercase">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-4 pb-4 border-b border-[#6B8E23]/40">
+                  <span className="olive-recessed-channel text-[10.5px] font-mono tracking-widest text-[#F4D03F] font-bold px-2.5 py-1 rounded border border-[#6B8E23]/60 uppercase">
                     {item.badge}
                   </span>
-                  <div className="hardware-recessed-channel flex items-center space-x-1.5 text-emerald-400 font-mono text-xs font-bold px-3 py-1 rounded border border-emerald-500/30">
-                    <span className="hardware-led-green animate-pulse" />
+                  <div className="olive-recessed-channel flex items-center space-x-1.5 text-[#F4D03F] font-mono text-xs font-bold px-3 py-1 rounded border border-[#6B8E23]/60">
+                    <TrendingUp className="w-3.5 h-3.5 text-[#F4D03F]" />
                     <span>{item.impactMetric}</span>
                   </div>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors font-sans tracking-wide">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-[#F4D03F] transition-colors font-syne tracking-wide">
                   {item.title}
                 </h3>
-                <p className="text-xs font-mono text-slate-400 mb-4">{item.clientSector}</p>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+                <p className="text-xs font-mono text-[#EDC9AF] mb-4">{item.clientSector}</p>
+                <p className="text-xs sm:text-sm text-[#FAF1E8] leading-relaxed mb-6 font-mono">
                   {item.summary}
                 </p>
 
-                {/* Key Results list */}
-                <div className="space-y-2 mb-6">
+                {/* Key Results list in DM Mono */}
+                <div className="space-y-2 mb-6 font-mono">
                   {item.results.slice(0, 3).map((res: string, i: number) => (
-                    <div key={i} className="flex items-start space-x-2 text-xs text-slate-300">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" />
+                    <div key={i} className="flex items-start space-x-2 text-xs text-[#EDC9AF]">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#F4D03F] mt-0.5 shrink-0" />
                       <span>{res}</span>
                     </div>
                   ))}
@@ -223,11 +215,11 @@ export default function Portfolio() {
 
               <div>
                 {/* Tech Stack Pills in Recessed Well */}
-                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800 mb-6">
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-[#6B8E23]/40 mb-6 font-mono">
                   {item.techStack.map((tech: string) => (
                     <span
                       key={tech}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded hardware-recessed-channel border border-slate-800 text-cyan-300"
+                      className="text-[10px] font-mono px-2 py-0.5 rounded olive-recessed-channel border border-[#6B8E23]/40 text-[#EDC9AF]"
                     >
                       {tech}
                     </span>
@@ -237,10 +229,10 @@ export default function Portfolio() {
                 {/* Tactile Hardware Details Button */}
                 <button
                   onClick={() => setSelectedCase(item)}
-                  className="hardware-key w-full py-3 rounded-xl text-xs font-mono font-bold tracking-wider text-cyan-300 hover:text-white transition-all flex items-center justify-center space-x-2 cursor-pointer group/btn"
+                  className="key-tactical-olive w-full py-3 rounded-xl text-xs font-mono font-bold tracking-wider text-[#EDC9AF] hover:text-[#F4D03F] transition-all flex items-center justify-center space-x-2 cursor-pointer group/btn"
                 >
-                  <span className="text-etched-cyan uppercase">EXAMINE SYSTEM ARCHITECTURE</span>
-                  <ArrowUpRight className="w-4 h-4 text-cyan-400 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                  <span className="uppercase">EXAMINE SYSTEM ARCHITECTURE</span>
+                  <ArrowUpRight className="w-4 h-4 text-[#F4D03F] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                 </button>
               </div>
             </div>
@@ -249,52 +241,52 @@ export default function Portfolio() {
 
         {/* Case Study Deep-Dive Modal */}
         {selectedCase && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md animate-in fade-in duration-200">
-            <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto carbon-fiber-panel p-7 sm:p-9 rounded-3xl border border-cyan-500/40 shadow-[0_20px_50px_rgba(0,0,0,0.95)] text-white">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
+            <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto olive-carbon-panel p-7 sm:p-9 rounded-3xl border-2 border-[#6B8E23] shadow-2xl text-[#EDC9AF]">
               {/* Close Button */}
               <button
                 onClick={() => setSelectedCase(null)}
-                className="hardware-key absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-white cursor-pointer z-10"
+                className="key-tactical-olive absolute top-5 right-5 p-2 rounded-xl text-[#EDC9AF] hover:text-[#F4D03F] cursor-pointer z-10"
               >
                 <X className="w-5 h-5" />
               </button>
 
               <div className="mb-4">
-                <span className="hardware-recessed-channel text-[11px] font-mono text-cyan-400 px-3 py-1 rounded border border-cyan-500/30 inline-block mb-2 uppercase">
+                <span className="olive-recessed-channel text-[11px] font-mono text-[#F4D03F] px-3 py-1 rounded border border-[#6B8E23] inline-block mb-2 uppercase font-bold">
                   {selectedCase.badge}
                 </span>
-                <h3 className="text-2xl font-bold text-white mb-2 font-sans">{selectedCase.title}</h3>
-                <p className="text-xs font-mono text-slate-400">{selectedCase.clientSector}</p>
+                <h3 className="text-2xl font-bold text-white mb-2 font-syne">{selectedCase.title}</h3>
+                <p className="text-xs font-mono text-[#EDC9AF]">{selectedCase.clientSector}</p>
               </div>
 
               {/* Verified Result Banner */}
-              <div className="p-4 rounded-xl hardware-recessed-channel border border-cyan-500/30 flex items-center justify-between mb-6">
+              <div className="p-4 rounded-xl olive-recessed-channel border border-[#6B8E23] flex items-center justify-between mb-6">
                 <div>
-                  <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">MEASURABLE ROI ACHIEVED</div>
-                  <div className="text-xl font-bold font-mono text-emerald-400">
+                  <div className="text-[10px] font-mono text-[#A2B682] uppercase tracking-wider">MEASURABLE ROI ACHIEVED</div>
+                  <div className="text-xl font-bold font-syne text-[#F4D03F]">
                     {selectedCase.impactMetric}
                   </div>
                 </div>
-                <div className="text-right text-[11px] font-mono text-cyan-300">
-                  <span>Architecture: Turnkey + Staff Augmentation</span>
+                <div className="text-right text-[11px] font-mono text-[#EDC9AF]">
+                  <span>Turnkey Cyber-Physical + Staff Augmentation</span>
                 </div>
               </div>
 
               {/* Problem vs Solution */}
-              <div className="space-y-4 mb-6">
+              <div className="space-y-4 mb-6 font-mono">
                 <div>
-                  <h4 className="text-sm font-bold font-mono text-rose-400 uppercase mb-1 tracking-wider">
+                  <h4 className="text-sm font-bold text-[#F4D03F] uppercase mb-1 tracking-wider">
                     The Engineering Challenge
                   </h4>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed hardware-recessed-channel p-3.5 rounded-lg border border-slate-800">
+                  <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed olive-recessed-channel p-3.5 rounded-lg border border-[#6B8E23]/40">
                     {selectedCase.problem}
                   </p>
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold font-mono text-cyan-400 uppercase mb-1 tracking-wider">
+                  <h4 className="text-sm font-bold text-[#8BAE3A] uppercase mb-1 tracking-wider">
                     The Qubryon Cyber-Physical Architecture
                   </h4>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed hardware-recessed-channel p-3.5 rounded-lg border border-slate-800">
+                  <p className="text-xs sm:text-sm text-[#FAF1E8] leading-relaxed olive-recessed-channel p-3.5 rounded-lg border border-[#6B8E23]/40">
                     {selectedCase.solution}
                   </p>
                 </div>
@@ -302,16 +294,16 @@ export default function Portfolio() {
 
               {/* System Architecture Data Flow */}
               <div className="mb-6">
-                <h4 className="text-sm font-bold font-mono text-cyan-300 uppercase mb-2 tracking-wider">
+                <h4 className="text-sm font-bold font-mono text-[#F4D03F] uppercase mb-2 tracking-wider">
                   System Architecture Pipeline
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
                   {selectedCase.architecture.map((arch: string, idx: number) => (
                     <div
                       key={idx}
-                      className="p-2.5 rounded-lg hardware-recessed-channel border border-cyan-500/20 text-slate-300 flex items-center space-x-2"
+                      className="p-2.5 rounded-lg olive-recessed-channel border border-[#6B8E23]/40 text-[#EDC9AF] flex items-center space-x-2"
                     >
-                      <span className="text-cyan-400 font-bold">0{idx + 1}.</span>
+                      <span className="text-[#F4D03F] font-bold">0{idx + 1}.</span>
                       <span>{arch}</span>
                     </div>
                   ))}
@@ -319,14 +311,14 @@ export default function Portfolio() {
               </div>
 
               {/* Full Results */}
-              <div className="mb-6">
-                <h4 className="text-sm font-bold font-mono text-white uppercase mb-2 tracking-wider">
+              <div className="mb-6 font-mono">
+                <h4 className="text-sm font-bold text-white uppercase mb-2 tracking-wider font-syne">
                   Verified Performance Outcomes
                 </h4>
                 <div className="space-y-2">
                   {selectedCase.results.map((r: string, idx: number) => (
-                    <div key={idx} className="flex items-start space-x-2 text-xs text-slate-300">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
+                    <div key={idx} className="flex items-start space-x-2 text-xs text-[#FAF1E8]">
+                      <CheckCircle2 className="w-4 h-4 text-[#F4D03F] mt-0.5 shrink-0" />
                       <span>{r}</span>
                     </div>
                   ))}
@@ -334,13 +326,13 @@ export default function Portfolio() {
               </div>
 
               {/* Modal Footer CTA */}
-              <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row gap-3 items-center justify-between">
-                <div className="text-[11px] font-mono text-slate-400">
+              <div className="pt-4 border-t border-[#6B8E23]/40 flex flex-col sm:flex-row gap-3 items-center justify-between">
+                <div className="text-[11px] font-mono text-[#EDC9AF]">
                   Ready to deploy a similar architecture for your enterprise?
                 </div>
                 <button
                   onClick={() => setSelectedCase(null)}
-                  className="hardware-key-cyan px-6 py-2.5 rounded-xl font-mono text-xs tracking-wider uppercase cursor-pointer"
+                  className="key-signal-yellow px-6 py-2.5 rounded-xl font-mono text-xs tracking-wider uppercase cursor-pointer"
                 >
                   CLOSE CASE STUDY
                 </button>
