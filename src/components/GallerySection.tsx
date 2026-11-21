@@ -33,7 +33,7 @@ const VH_PER_ITEM = 45;
 
 const THEME = {
   teal: {
-    section: "bg-[#0A3A40] text-[#F3ECE3]",
+    section: "bg-transparent text-[#F3ECE3]",
     eyebrow: "border-[#EDC9AF]/25 bg-[#EDC9AF]/10 text-[#EDC9AF]",
     intro: "text-[#F3ECE3]/70",
     toggle: "border-white/15 bg-white/5",
@@ -45,7 +45,7 @@ const THEME = {
     arrow: "border-white/25 bg-white/5 text-[#F3ECE3] hover:bg-white/15",
   },
   sand: {
-    section: "bg-[#EDC9AF] text-[#141B08]",
+    section: "bg-[#EDC9AF]/90 text-[#141B08]",
     eyebrow: "border-[#0A3A40]/20 bg-[#0A3A40]/[0.07] text-[#0A3A40]",
     intro: "text-[#3B2F25]",
     toggle: "border-[#141B08]/15 bg-white/40",

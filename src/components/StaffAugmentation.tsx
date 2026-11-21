@@ -49,7 +49,7 @@ const STEPS: Step[] = [
     title: "Tell us exactly who you need",
     body: "Share the role, seniority, tech stack, time zone and engagement length. A solutions lead reviews it and replies within 2 hours.",
     outcome: "A clear, written role profile agreed with you before any search begins.",
-    tint: "from-[#0F4C53] to-[#0A3A40]",
+    tint: "from-[#0F4C53]/75 to-[#0A3A40]/60",
     accent: "#F4D03F",
     tiles: [
       {
@@ -93,7 +93,7 @@ const STEPS: Step[] = [
     title: "Interview pre-vetted engineers",
     body: "Within 48 hours you receive 2–3 profiles matched to your architecture. You run the technical interview and make the call.",
     outcome: "Engineers you have personally interviewed and approved, backed by a 2-week risk-free trial.",
-    tint: "from-[#0B4047] to-[#072E33]",
+    tint: "from-[#0B4047]/80 to-[#072E33]/65",
     accent: "#EDC9AF",
     tiles: [
       {
@@ -139,7 +139,7 @@ const STEPS: Step[] = [
     title: "Scale your team from day one",
     body: "Engineers join your Slack, Jira and GitHub on day one and follow your sprint rhythm. We handle contracts, payroll and HR.",
     outcome: "More delivery capacity without hiring overhead, with full IP assignment and strict NDAs.",
-    tint: "from-[#12585F] to-[#0A3A40]",
+    tint: "from-[#12585F]/75 to-[#0A3A40]/60",
     accent: "#8FD0C9",
     tiles: [
       {
@@ -241,7 +241,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
   return (
     <>
       {/* ---------------------------- TALENT ---------------------------- */}
-      <section id="talent" className="relative bg-[#0A3A40] text-[#F3ECE3]">
+      <section id="talent" className="relative text-[#F3ECE3]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-28 pb-16 text-center">
           <div className="text-[12px] uppercase tracking-[0.18em] text-[#EDC9AF] font-semibold">IT staff augmentation</div>
           <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-light tracking-[-0.03em] leading-[1.05] font-sans">
@@ -258,7 +258,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
           {STEPS.map((step, i) => (
             <div
               key={step.name}
-              className={`lg:sticky lg:top-0 lg:min-h-screen flex items-center bg-gradient-to-b ${step.tint} border-t border-white/5`}
+              className={`lg:sticky lg:top-0 lg:min-h-screen flex items-center bg-gradient-to-b ${step.tint} backdrop-blur-2xl border-t border-white/10`}
               style={{ zIndex: i + 1 }}
             >
               <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 lg:pt-28 pb-12">
@@ -294,13 +294,13 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
           ))}
         </div>
 
-        <div className="relative z-10 bg-[#0A3A40] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <RequestDevelopers onSuccessSubmit={onSuccessSubmit} />
         </div>
       </section>
 
       {/* ---------------------------- TECH STACKS ---------------------------- */}
-      <section id="tech-stacks" className="relative bg-gradient-to-b from-[#0A3A40] via-[#072C31] to-[#0A3A40] text-[#F3ECE3] overflow-hidden">
+      <section id="tech-stacks" className="relative text-[#F3ECE3] overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-28 text-center">
           <div className="text-[12px] uppercase tracking-[0.18em] text-[#EDC9AF] font-semibold">One team. Every layer.</div>
           <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-light tracking-[-0.03em] leading-[1.05] font-sans">
@@ -329,7 +329,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                 className={`rounded-3xl p-6 border backdrop-blur transition-all duration-300 ${
                   highlight === i
                     ? "bg-[#EDC9AF] border-[#EDC9AF] text-[#072C31] shadow-[0_24px_60px_-28px_rgba(0,0,0,0.7)] -translate-y-1"
-                    : "bg-white/[0.05] border-white/10 text-[#F3ECE3]"
+                    : "bg-white/[0.06] border-white/12 text-[#F3ECE3] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]"
                 }`}
               >
                 <div className={`text-[12px] tabular-nums ${highlight === i ? "text-[#0A3A40]" : "text-[#F3ECE3]/50"}`}>

@@ -68,21 +68,79 @@
   font-family: var(--font-syne), "Syne", sans-serif;
 }
 
-/* 1. Surfaces — flat dark olive cards with hairline borders */
+/* ==========================================================
+   GLASS SYSTEM — frosted, translucent surfaces over a living backdrop
+   ========================================================== */
+
+/* Generic frosted glass (light-on-teal) */
+.glass {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.035));
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+    0 24px 60px -32px rgba(0, 0, 0, 0.6);
+}
+
+/* Sand-tinted glass for the 20% Desert Sand areas */
+.glass-sand {
+  background: linear-gradient(145deg, rgba(246, 222, 203, 0.9), rgba(237, 201, 175, 0.78));
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  backdrop-filter: blur(18px) saturate(130%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 24px 60px -32px rgba(0, 0, 0, 0.45);
+}
+
+/* 1. Surfaces — dark tinted glass (readable on teal and on sand) */
 .olive-chassis,
 .olive-chassis-deep {
-  background: var(--olive-surface);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 1px 2px rgba(20, 27, 8, 0.08), 0 12px 32px -12px rgba(20, 27, 8, 0.35);
+  background: linear-gradient(150deg, rgba(16, 78, 86, 0.55), rgba(6, 35, 40, 0.6));
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 18px 44px -24px rgba(0, 0, 0, 0.6);
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .olive-carbon-panel {
   background:
-    radial-gradient(120% 80% at 100% 0%, rgba(237, 201, 175, 0.1), transparent 60%),
-    var(--olive-ink);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 24px 60px -24px rgba(20, 27, 8, 0.5);
+    radial-gradient(120% 80% at 100% 0%, rgba(237, 201, 175, 0.12), transparent 60%),
+    linear-gradient(150deg, rgba(10, 58, 64, 0.72), rgba(4, 28, 32, 0.8));
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  backdrop-filter: blur(22px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 30px 80px -36px rgba(0, 0, 0, 0.7);
+}
+
+/* Page-wide living backdrop: drifting colour orbs behind every section */
+.aurora-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  will-change: transform;
+  animation: aurora-drift 30s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(7vw, -5vh, 0) scale(1.15); }
+  100% { transform: translate3d(-6vw, 6vh, 0) scale(0.92); }
+}
+
+.aurora-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-orb { animation: none; }
 }
 
 /* 2. Inset areas & pills */
@@ -105,9 +163,11 @@ section > div > div > .olive-recessed-channel.rounded-full svg,
 }
 
 .sand-recessed-channel {
-  background: var(--canvas-raised);
-  border: 1px solid var(--line);
-  box-shadow: 0 1px 2px rgba(20, 27, 8, 0.04);
+  background: linear-gradient(145deg, rgba(255, 252, 248, 0.9), rgba(246, 236, 225, 0.78));
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  backdrop-filter: blur(16px) saturate(130%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 18px 44px -28px rgba(0, 0, 0, 0.45);
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -143,14 +203,16 @@ section > div > div > .olive-recessed-channel.rounded-full svg,
 }
 
 .key-tactical-olive {
-  background: var(--olive-surface-2);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
   color: #F3ECE3;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 1px 2px rgba(20, 27, 8, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 8px 20px -12px rgba(0, 0, 0, 0.5);
 }
 
 .key-tactical-olive:hover {
-  background: #15606B;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
   color: var(--signal-yellow);
   border-color: rgba(244, 208, 63, 0.35);
   transform: translateY(-1px);
@@ -232,12 +294,12 @@ section > div > div > .olive-recessed-channel.rounded-full svg,
 
 /* 6b. Contact & footer textures */
 .texture-code {
-  background-color: #072C31;
+  background-color: rgba(5, 33, 37, 0.55);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='140' viewBox='0 0 220 140'%3E%3Cg fill='%23F3ECE3' fill-opacity='0.045' font-family='monospace' font-size='18' font-weight='700'%3E%3Ctext x='8' y='28'%3E%26lt;/%26gt;%3C/text%3E%3Ctext x='92' y='22'%3E%7B %7D%3C/text%3E%3Ctext x='160' y='34'%3E01%3C/text%3E%3Ctext x='40' y='72'%3E=%26gt;%3C/text%3E%3Ctext x='118' y='78'%3E[ ]%3C/text%3E%3Ctext x='184' y='70'%3E//%3C/text%3E%3Ctext x='14' y='118'%3E()%3C/text%3E%3Ctext x='70' y='124'%3E10%3C/text%3E%3Ctext x='140' y='118'%3E%26lt;%26gt;%3C/text%3E%3C/g%3E%3C/svg%3E");
 }
 
 .texture-grain {
-  background-color: #EDC9AF;
+  background-color: rgba(237, 201, 175, 0.9);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.27  0 0 0 0 0.2  0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 

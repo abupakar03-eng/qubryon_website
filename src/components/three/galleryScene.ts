@@ -36,6 +36,9 @@ const ROOM = {
     shadow: "rgba(0,0,0,0.55)",
     tagTitle: "#F3ECE3",
     tagSub: "#A9C3C2",
+    // frosted-glass room: the page backdrop glows through walls and floor
+    wallOpacity: 0.72,
+    floorOpacity: 0.82,
   },
   sand: {
     fog: 0xedc9af,
@@ -47,6 +50,8 @@ const ROOM = {
     shadow: "rgba(60,36,20,0.35)",
     tagTitle: "#2A2018",
     tagSub: "#7A5F4A",
+    wallOpacity: 0.86,
+    floorOpacity: 0.9,
   },
 } as const;
 
@@ -78,14 +83,19 @@ export function createGalleryScene(container: HTMLElement, items: GalleryArtwork
   const wallTex = keep(gradientTexture([...room.wall]));
   const wall = new THREE.Mesh(
     keep(new THREE.CylinderGeometry(R, R, 7, 160, 1, true)),
-    keep(new THREE.MeshBasicMaterial({ map: wallTex, side: THREE.BackSide })),
+    keep(new THREE.MeshBasicMaterial({ map: wallTex, side: THREE.BackSide, transparent: true, opacity: room.wallOpacity, depthWrite: false })),
   );
   wall.position.y = 3.5;
+  wall.renderOrder = -2;
   scene.add(wall);
 
   const floorTex = keep(radialTexture(room.floorInner, room.floorOuter));
-  const floor = new THREE.Mesh(keep(new THREE.CircleGeometry(R, 120)), keep(new THREE.MeshBasicMaterial({ map: floorTex })));
+  const floor = new THREE.Mesh(
+    keep(new THREE.CircleGeometry(R, 120)),
+    keep(new THREE.MeshBasicMaterial({ map: floorTex, transparent: true, opacity: room.floorOpacity, depthWrite: false })),
+  );
   floor.rotation.x = -Math.PI / 2;
+  floor.renderOrder = -1;
   scene.add(floor);
 
   // skirting line where wall meets floor

@@ -12,13 +12,17 @@ import Footer from "@/components/Footer";
 import InteractiveConsultationModal from "@/components/InteractiveConsultationModal";
 import TalentRequestModal from "@/components/TalentRequestModal";
 import FloatingActionDock from "@/components/FloatingActionDock";
+import GlassBackdrop from "@/components/GlassBackdrop";
 
 export default function Home() {
   const [consultationOpen, setConsultationOpen] = useState(false);
   const [talentModalOpen, setTalentModalOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-[#0A3A40] text-[#1C260D] flex flex-col relative overflow-x-clip font-sans">
+    <main className="min-h-screen text-[#1C260D] flex flex-col relative overflow-x-clip font-sans">
+      {/* Living glass backdrop behind every section */}
+      <GlassBackdrop />
+
       {/* Top Navbar */}
       <Navbar
         onOpenConsultation={() => setConsultationOpen(true)}

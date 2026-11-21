@@ -20,7 +20,7 @@ const METRICS = [
 
 export default function Hero({ onOpenConsultation, onOpenTalentModal }: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-[#072C31] text-[#F3ECE3] pt-36 pb-16 md:pt-40 md:pb-20">
+    <section className="relative overflow-hidden text-[#F3ECE3] pt-36 pb-16 md:pt-40 md:pb-20">
       {/* subtle vignette + grain-like dot texture */}
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(70%_60%_at_70%_40%,rgba(237,201,175,0.10),transparent_70%)]" />
       <div className="absolute inset-0 pointer-events-none opacity-[0.35] bg-[radial-gradient(rgba(243,236,227,0.07)_1px,transparent_1px)] [background-size:22px_22px]" />

@@ -117,7 +117,7 @@ export default function GlobalPresence() {
   const hq = project(HQ.lon, HQ.lat);
 
   return (
-    <section id="global" className="relative py-28 bg-[#0A3A40] text-[#F3ECE3] overflow-hidden">
+    <section id="global" className="relative py-28 text-[#F3ECE3] overflow-hidden">
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#EDC9AF]/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -252,7 +252,7 @@ export default function GlobalPresence() {
         {/* Delivery pillars */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {PILLARS.map(({ icon: Icon, title, body }) => (
-            <div key={title} className="rounded-2xl p-6 bg-[#EDC9AF] text-[#141B08] transition-transform hover:-translate-y-0.5">
+            <div key={title} className="rounded-2xl p-6 glass-sand text-[#141B08] transition-transform hover:-translate-y-0.5">
               <div className="w-10 h-10 rounded-xl olive-chassis flex items-center justify-center mb-4">
                 <Icon className="w-5 h-5 text-[#F4D03F]" />
               </div>
