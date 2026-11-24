@@ -51,10 +51,18 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Headlines use Geist; Syne is reserved for the wordmark, card titles and big numbers (.font-syne) */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-syne), "Syne", sans-serif;
-    font-weight: 700;
+    font-family: var(--font-sans);
+    font-weight: 600;
     letter-spacing: -0.02em;
+  }
+
+  /* One consistent, high-contrast focus ring for keyboard users */
+  :focus-visible {
+    outline: 2px solid var(--signal-yellow);
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 
   /* Small uppercase labels become tidy mono "eyebrows" */
@@ -125,8 +133,14 @@
   position: absolute;
   border-radius: 9999px;
   filter: blur(90px);
-  will-change: transform;
-  animation: aurora-drift 30s ease-in-out infinite alternate;
+}
+
+/* drift only on larger screens with a fine pointer; phones get a static glow (saves GPU/battery) */
+@media (min-width: 768px) and (pointer: fine) {
+  .aurora-orb {
+    will-change: transform;
+    animation: aurora-drift 30s ease-in-out infinite alternate;
+  }
 }
 
 @keyframes aurora-drift {
@@ -321,7 +335,13 @@ section > div > div > .olive-recessed-channel.rounded-full svg,
 
 .line-input:focus {
   outline: none;
-  border-bottom-color: #141B08;
+  border-bottom-color: #0A3A40;
+  /* thicker teal underline so focus is clearly visible */
+  box-shadow: 0 2px 0 0 #0A3A40;
+}
+
+.line-input:focus-visible {
+  outline: none;
 }
 
 /* embossed footer wordmark */

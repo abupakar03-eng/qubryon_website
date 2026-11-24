@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useModals } from "./ModalProvider";
 import {
   ArrowRight,
   BrainCircuit,
@@ -19,11 +20,6 @@ import {
 import GallerySection, { type GalleryItem } from "./GallerySection";
 import { HERO_SERVICES } from "./three/heroServices";
 import { drawServicePoster } from "./three/galleryArt";
-
-interface CoreServicesProps {
-  onOpenConsultation: () => void;
-  onOpenTalentModal: () => void;
-}
 
 interface Flagship {
   id: string;
@@ -104,7 +100,8 @@ const ENGAGEMENTS = [
   { icon: UsersRound, title: "Dedicated teams", body: "Engineers who work only on your product, in your tools and time zone." },
 ];
 
-export default function CoreServices({ onOpenConsultation, onOpenTalentModal }: CoreServicesProps) {
+export default function CoreServices() {
+  const { openConsultation: onOpenConsultation, openTalent: onOpenTalentModal } = useModals();
   const flagships: (Flagship & { action: () => void })[] = [
     {
       id: "service-software",

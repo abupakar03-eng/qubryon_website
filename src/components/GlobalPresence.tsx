@@ -127,7 +127,7 @@ export default function GlobalPresence() {
             <Globe className="w-3.5 h-3.5 text-[#EDC9AF]" />
             <span className="tracking-[0.18em] uppercase font-bold">GLOBAL DELIVERY NETWORK</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#F3ECE3] mb-4 font-syne">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-[-0.03em] leading-[1.05] text-[#F3ECE3] mb-4 font-sans">
             <span className="block drop-shadow-sm">Engineered in India.</span>
             <span className="block mt-1 text-[#EDC9AF]">Deployed Worldwide.</span>
           </h2>
@@ -148,7 +148,7 @@ export default function GlobalPresence() {
             <span className="text-[#F4D03F] font-bold flex items-center gap-2">
               <span className="hardware-led-yellow animate-pulse" /> LIVE DELIVERY UPLINKS
             </span>
-            <span className="text-[#F3ECE3]/55">ORIGIN: TIRUCHIRAPPALLI, IN · 10.8°N 78.7°E</span>
+            <span className="text-[#F3ECE3]/75">ORIGIN: TIRUCHIRAPPALLI, IN · 10.8°N 78.7°E</span>
           </div>
 
           <svg

@@ -1,7 +1,15 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import React, { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+
+const PHONE_QUERY = "(max-width: 767px)";
+const subscribePhone = (cb: () => void) => {
+  const mq = window.matchMedia(PHONE_QUERY);
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+};
+const getPhone = () => window.matchMedia(PHONE_QUERY).matches;
 
 type Draw = (ctx: CanvasRenderingContext2D, w: number, h: number) => void;
 
@@ -29,7 +37,7 @@ interface Props {
   theme?: "teal" | "sand";
 }
 
-const VH_PER_ITEM = 45;
+const VH_PER_ITEM = 36;
 
 const THEME = {
   teal: {
@@ -39,7 +47,7 @@ const THEME = {
     toggle: "border-white/15 bg-white/5",
     toggleOn: "bg-[#EDC9AF] text-[#072C31]",
     toggleOff: "text-[#F3ECE3]/70 hover:text-white",
-    muted: "text-[#F3ECE3]/50",
+    muted: "text-[#F3ECE3]/72",
     sub: "text-[#F3ECE3]/70",
     link: "text-[#F3ECE3] decoration-[#F3ECE3]/40 hover:decoration-[#F3ECE3]",
     arrow: "border-white/25 bg-white/5 text-[#F3ECE3] hover:bg-white/15",
@@ -51,7 +59,7 @@ const THEME = {
     toggle: "border-[#141B08]/15 bg-white/40",
     toggleOn: "bg-[#0A3A40] text-[#F3ECE3]",
     toggleOff: "text-[#141B08]/70 hover:text-[#141B08]",
-    muted: "text-[#141B08]/50",
+    muted: "text-[#141B08]/70",
     sub: "text-[#3B2F25]",
     link: "text-[#141B08] decoration-[#141B08]/40 hover:decoration-[#141B08]",
     arrow: "border-[#141B08]/25 bg-white/50 hover:bg-white",
@@ -60,7 +68,10 @@ const THEME = {
 
 export default function GallerySection({ id, eyebrow, heading, intro, items, list, onOpen, openLabel = "Look closer", theme = "sand" }: Props) {
   const t = THEME[theme];
-  const [view, setView] = useState<"gallery" | "list">("gallery");
+  // phones default to the lighter List view; an explicit choice always wins
+  const isPhone = useSyncExternalStore(subscribePhone, getPhone, () => false);
+  const [viewChoice, setView] = useState<"gallery" | "list" | null>(null);
+  const view = viewChoice ?? (isPhone ? "list" : "gallery");
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
   const [index, setIndex] = useState(0);
@@ -139,13 +150,20 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
           },
         );
 
-        // page scroll drives the walk
-        const onScroll = () => {
+        // page scroll drives the walk. Layout is measured only on resize/reflow,
+        // and scroll work is batched into one update per animation frame.
+        let trackTop = 0;
+        let travel = 0;
+        const measure = () => {
           const track = trackRef.current;
           if (!track) return;
-          const r = track.getBoundingClientRect();
-          const travel = track.offsetHeight - window.innerHeight;
-          const progress = travel > 0 ? Math.min(Math.max(-r.top / travel, 0), 1) : 0;
+          trackTop = track.getBoundingClientRect().top + window.scrollY;
+          travel = track.offsetHeight - window.innerHeight;
+        };
+        let ticking = false;
+        const update = () => {
+          ticking = false;
+          const progress = travel > 0 ? Math.min(Math.max((window.scrollY - trackTop) / travel, 0), 1) : 0;
           const p = progress * (n - 1);
           scene.setPosition(p);
           const i = Math.round(p);
@@ -154,9 +172,23 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
             setIndex(i);
           }
         };
+        const onScroll = () => {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(update);
+          }
+        };
+        const onReflow = () => {
+          measure();
+          onScroll();
+        };
+        // content above can change height (e.g. another section switching view)
+        const reflowObserver = new ResizeObserver(onReflow);
+        reflowObserver.observe(document.body);
         window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", onScroll);
-        onScroll();
+        window.addEventListener("resize", onReflow);
+        measure();
+        update();
 
         // horizontal drag walks too (vertical touch scrolling stays native)
         let dragging = false;
@@ -169,9 +201,8 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
           if (!dragging) return;
           const dx = e.clientX - lastX;
           lastX = e.clientX;
-          const track = trackRef.current;
-          if (!track || n < 2) return;
-          const perItem = (track.offsetHeight - window.innerHeight) / (n - 1);
+          if (n < 2) return;
+          const perItem = travel / (n - 1);
           window.scrollBy(0, (-dx / 260) * perItem);
         };
         const up = () => (dragging = false);
@@ -180,8 +211,9 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
         window.addEventListener("pointerup", up);
 
         cleanup = () => {
+          reflowObserver.disconnect();
           window.removeEventListener("scroll", onScroll);
-          window.removeEventListener("resize", onScroll);
+          window.removeEventListener("resize", onReflow);
           el.removeEventListener("pointerdown", down);
           window.removeEventListener("pointermove", move);
           window.removeEventListener("pointerup", up);
@@ -225,14 +257,24 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
           <div className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs mb-4 ${t.eyebrow}`}>
             {eyebrow}
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight font-syne leading-[1.08] mb-4">{heading}</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-[-0.03em] font-sans leading-[1.05] mb-4">{heading}</h2>
           <p className={`text-base sm:text-lg leading-relaxed ${t.intro}`}>{intro}</p>
         </div>
         {!failed && (
-          <div className={`inline-flex self-start lg:self-auto rounded-full border p-1 ${t.toggle}`} role="group" aria-label="View">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3 self-start lg:self-auto">
+          {showGallery && (
+            <a
+              href={`#${id}-end`}
+              className={`text-[13px] underline underline-offset-4 inline-flex items-center gap-1 ${t.link}`}
+            >
+              Skip the walkthrough <ArrowDown className="w-3.5 h-3.5" aria-hidden="true" />
+            </a>
+          )}
+          <div className={`inline-flex rounded-full border p-1 ${t.toggle}`} role="group" aria-label="View">
             {(["gallery", "list"] as const).map((v) => (
               <button
                 key={v}
+                type="button"
                 onClick={() => setView(v)}
                 aria-pressed={view === v}
                 className={`px-4 py-1.5 rounded-full text-[12px] uppercase cursor-pointer transition-colors ${
@@ -242,6 +284,7 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
                 {v}
               </button>
             ))}
+          </div>
           </div>
         )}
       </div>
@@ -264,7 +307,7 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
             {/* Caption + controls */}
             <div className="absolute inset-x-0 bottom-24 sm:bottom-10 flex flex-col items-center text-center px-4 pointer-events-none">
               <div className={`text-[11px] uppercase ${t.muted}`}>You are walking past</div>
-              <div className="mt-1.5 text-2xl sm:text-3xl font-bold font-syne tracking-tight">{current?.title}</div>
+              <div className="mt-1.5 text-2xl sm:text-3xl font-medium tracking-tight">{current?.title}</div>
               <div className={`text-sm mt-1 ${t.sub}`}>{current?.subtitle}</div>
               <button
                 onClick={() => open(index)}
@@ -299,6 +342,8 @@ export default function GallerySection({ id, eyebrow, heading, intro, items, lis
       ) : (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28">{list}</div>
       )}
+      {/* target for "Skip the walkthrough" */}
+      <div id={`${id}-end`} tabIndex={-1} className="outline-none" />
     </section>
   );
 }

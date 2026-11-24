@@ -1,15 +1,12 @@
 "use client";
 
 import React from "react";
-
-interface FooterProps {
-  onOpenConsultation: () => void;
-  onOpenTalentModal: () => void;
-}
+import { useModals } from "./ModalProvider";
 
 type FooterLink = { label: string; href?: string; onClick?: () => void; external?: boolean };
 
-export default function Footer({ onOpenConsultation, onOpenTalentModal }: FooterProps) {
+export default function Footer() {
+  const { openConsultation: onOpenConsultation, openTalent: onOpenTalentModal } = useModals();
   const columns: { title: string; links: FooterLink[] }[] = [
     {
       title: "Services",
@@ -73,7 +70,7 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
         <nav aria-label="Footer" className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-10">
           {columns.map((col) => (
             <div key={col.title}>
-              <div className="text-[14px] text-[#F3ECE3]/55">{col.title}</div>
+              <div className="text-[14px] text-[#F3ECE3]/75">{col.title}</div>
               <ul className="mt-4 space-y-2.5">
                 {col.links.map((l) => (
                   <li key={l.label}>
@@ -106,7 +103,7 @@ export default function Footer({ onOpenConsultation, onOpenTalentModal }: Footer
       </div>
 
       {/* Legal */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-[13px] text-[#F3ECE3]/50 border-t border-[#F3ECE3]/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-[13px] text-[#F3ECE3]/72 border-t border-[#F3ECE3]/10">
         <div>© 2026 Qubryon Technologies Private Limited · Tiruchirappalli, India</div>
         <div className="flex gap-5">
           <span>Privacy policy</span>

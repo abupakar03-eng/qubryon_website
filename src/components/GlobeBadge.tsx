@@ -79,14 +79,32 @@ export default function GlobeBadge() {
       }
     };
 
+    // animate only while on screen and the tab is visible
+    let visible = true;
     const loop = () => {
+      raf = 0;
+      if (!visible || document.hidden) return;
       rot += 0.12;
       draw();
       raf = requestAnimationFrame(loop);
     };
-    if (reduced) draw();
-    else loop();
-    return () => cancelAnimationFrame(raf);
+    const start = () => {
+      if (!reduced && !raf) raf = requestAnimationFrame(loop);
+    };
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible) start();
+    });
+    io.observe(canvas);
+    const onVisibility = () => !document.hidden && start();
+    document.addEventListener("visibilitychange", onVisibility);
+    draw();
+    start();
+    return () => {
+      cancelAnimationFrame(raf);
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, []);
 
   const time = now
@@ -101,7 +119,7 @@ export default function GlobeBadge() {
           <span className="font-semibold">Tiruchirappalli, India</span>{" "}
           <span className="tabular-nums text-[#F3ECE3]/60">{time}</span>
         </div>
-        <div className="text-[13px] text-[#F3ECE3]/55 mt-0.5">
+        <div className="text-[13px] text-[#F3ECE3]/75 mt-0.5">
           {now ? aheadOfLondon(now) : " "} · serving clients worldwide
         </div>
       </div>

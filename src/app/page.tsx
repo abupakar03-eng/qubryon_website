@@ -1,6 +1,3 @@
-"use client";
-
-import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import CoreServices from "@/components/CoreServices";
@@ -9,78 +6,41 @@ import Portfolio from "@/components/Portfolio";
 import GlobalPresence from "@/components/GlobalPresence";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
-import InteractiveConsultationModal from "@/components/InteractiveConsultationModal";
-import TalentRequestModal from "@/components/TalentRequestModal";
 import FloatingActionDock from "@/components/FloatingActionDock";
 import GlassBackdrop from "@/components/GlassBackdrop";
+import ModalProvider from "@/components/ModalProvider";
 
+/**
+ * Server component. Interactive sections are client components; site-wide
+ * modal state lives in <ModalProvider>.
+ */
 export default function Home() {
-  const [consultationOpen, setConsultationOpen] = useState(false);
-  const [talentModalOpen, setTalentModalOpen] = useState(false);
-
   return (
-    <main className="min-h-screen text-[#1C260D] flex flex-col relative overflow-x-clip font-sans">
+    <ModalProvider>
+      {/* Skip link for keyboard and screen-reader users */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-[#F4D03F] focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-[#072C31] focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
+
       {/* Living glass backdrop behind every section */}
       <GlassBackdrop />
 
-      {/* Top Navbar */}
-      <Navbar
-        onOpenConsultation={() => setConsultationOpen(true)}
-        onOpenTalentModal={() => setTalentModalOpen(true)}
-      />
+      <Navbar />
 
-      {/* Section 1: Hero Section */}
-      <Hero
-        onOpenConsultation={() => setConsultationOpen(true)}
-        onOpenTalentModal={() => setTalentModalOpen(true)}
-      />
+      <main id="main-content" tabIndex={-1} className="min-h-screen text-[#1C260D] flex flex-col relative overflow-x-clip font-sans outline-none">
+        <Hero />
+        <CoreServices />
+        <StaffAugmentation />
+        <Portfolio />
+        <GlobalPresence />
+        <ContactSection />
+      </main>
 
-      {/* Section 2: Core Services Grid */}
-      <CoreServices
-        onOpenConsultation={() => setConsultationOpen(true)}
-        onOpenTalentModal={() => setTalentModalOpen(true)}
-      />
-
-      {/* Section 3: Dedicated "Hire Tech Talent" (Staff Augmentation) */}
-      <StaffAugmentation
-        onSuccessSubmit={(data) => {
-          console.log("Developer Inquiry Received:", data);
-        }}
-      />
-
-      {/* Section 4: Portfolio / Case Studies */}
-      <Portfolio />
-
-      {/* Section 5: Global Delivery Network */}
-      <GlobalPresence />
-
-      {/* Section 5: Corporate Information & Contact Section */}
-      <ContactSection
-        onOpenConsultation={() => setConsultationOpen(true)}
-        onOpenTalentModal={() => setTalentModalOpen(true)}
-      />
-
-      {/* Footer */}
-      <Footer
-        onOpenConsultation={() => setConsultationOpen(true)}
-        onOpenTalentModal={() => setTalentModalOpen(true)}
-      />
-
-      {/* Modals & Floating Docks */}
-      <InteractiveConsultationModal
-        isOpen={consultationOpen}
-        onClose={() => setConsultationOpen(false)}
-      />
-
-      <TalentRequestModal
-        isOpen={talentModalOpen}
-        onClose={() => setTalentModalOpen(false)}
-      />
-
-      <FloatingActionDock
-        onOpenConsultation={() => setConsultationOpen(true)}
-        onOpenTalentModal={() => setTalentModalOpen(true)}
-      />
-    </main>
+      <Footer />
+      <FloatingActionDock />
+    </ModalProvider>
   );
 }

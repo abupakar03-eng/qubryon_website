@@ -1,13 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import { useModals } from "./ModalProvider";
 import { ArrowUpRight, Plus, CheckCircle2 } from "lucide-react";
 import { submitInquiry } from "@/lib/submitInquiry";
-
-interface ContactSectionProps {
-  onOpenConsultation: () => void;
-  onOpenTalentModal: () => void;
-}
 
 const NEEDS = ["Custom software", "Staff augmentation", "AI & ML", "Cloud & DevOps", "IoT / embedded", "Not sure yet"];
 const TIMELINES = ["As soon as possible", "Within a month", "In 1–3 months", "Just exploring"];
@@ -67,7 +63,8 @@ function Chips({ options, value, onChange, label }: { options: string[]; value: 
   );
 }
 
-export default function ContactSection({ onOpenConsultation, onOpenTalentModal }: ContactSectionProps) {
+export default function ContactSection() {
+  const { openConsultation: onOpenConsultation, openTalent: onOpenTalentModal } = useModals();
   const [form, setForm] = useState({ name: "", email: "", company: "", need: "", timeline: "", message: "", website: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);

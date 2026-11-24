@@ -1,15 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useModals } from "./ModalProvider";
 import Link from "next/link";
 import { Cpu, Menu, X, ArrowRight, ChevronRight, Users } from "lucide-react";
 
-interface NavbarProps {
-  onOpenConsultation: () => void;
-  onOpenTalentModal: () => void;
-}
-
-export default function Navbar({ onOpenConsultation, onOpenTalentModal }: NavbarProps) {
+export default function Navbar() {
+  const { openConsultation: onOpenConsultation, openTalent: onOpenTalentModal } = useModals();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState<string>("");
@@ -18,7 +15,8 @@ export default function Navbar({ onOpenConsultation, onOpenTalentModal }: Navbar
     const handleScroll = () => {
       setScrolled(window.scrollY > 15);
     };
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -33,7 +31,7 @@ export default function Navbar({ onOpenConsultation, onOpenTalentModal }: Navbar
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-[padding] duration-300 ${
         scrolled
           ? "py-2 bg-transparent"
           : "py-4 bg-transparent"
@@ -117,11 +115,14 @@ export default function Navbar({ onOpenConsultation, onOpenTalentModal }: Navbar
           {/* Mobile Menu Button */}
           <div className="flex xl:hidden">
             <button
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="key-tactical-olive p-2 rounded-xl text-[#F4D03F] focus:outline-none cursor-pointer"
-              aria-label="Toggle menu"
+              className="key-tactical-olive p-2 rounded-xl text-[#F4D03F] cursor-pointer"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" aria-hidden="true" /> : <Menu className="w-5 h-5" aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -129,11 +130,11 @@ export default function Navbar({ onOpenConsultation, onOpenTalentModal }: Navbar
 
       {/* Mobile Drawer (30% Olive Drab) */}
       {mobileMenuOpen && (
-        <div className="xl:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2 animate-in fade-in slide-in-from-top-4 duration-150">
+        <div id="mobile-menu" className="xl:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2 animate-in fade-in slide-in-from-top-4 duration-150">
           <div className="olive-chassis rounded-2xl p-5 border border-[#6B8E23] shadow-2xl space-y-4">
             
             <div className="text-[10px] font-sans tracking-[0.2em] text-[#F4D03F] font-bold uppercase border-b border-[#6B8E23]/40 pb-2 flex items-center justify-between">
-              <span>SYSTEM DIRECTORY // FIRMWARE v2.6</span>
+              <span>Menu</span>
               <span className="hardware-led-yellow" />
             </div>
 

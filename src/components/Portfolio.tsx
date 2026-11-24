@@ -155,11 +155,11 @@ export default function Portfolio() {
           {/* Filters */}
           <div className="flex flex-wrap gap-2 olive-recessed-channel p-1.5 rounded-2xl inline-flex border border-[#6B8E23]/40 shadow-inner">
             {[
-              { id: "all", label: "ALL CASE STUDIES" },
-              { id: "industrial", label: "SMART MANUFACTURING" },
-              { id: "logistics", label: "FLEET & COLD CHAIN" },
-              { id: "energy", label: "CLEANTECH & ENERGY" },
-              { id: "ai-vision", label: "EDGE AI & VISION" },
+              { id: "all", label: "All case studies" },
+              { id: "industrial", label: "Smart manufacturing" },
+              { id: "logistics", label: "Fleet & cold chain" },
+              { id: "energy", label: "Cleantech & energy" },
+              { id: "ai-vision", label: "Edge AI & vision" },
             ].map((f) => (
               <button
                 key={f.id}
@@ -235,7 +235,7 @@ export default function Portfolio() {
                   onClick={() => setSelectedCase(item)}
                   className="key-tactical-olive w-full py-3 rounded-xl text-xs font-sans font-bold tracking-wider text-[#EDC9AF] hover:text-[#F4D03F] transition-all flex items-center justify-center space-x-2 cursor-pointer group/btn"
                 >
-                  <span className="uppercase">EXAMINE SYSTEM ARCHITECTURE</span>
+                  <span>Read the case study</span>
                   <ArrowUpRight className="w-4 h-4 text-[#F4D03F] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                 </button>
               </div>
@@ -303,13 +303,13 @@ export default function Portfolio() {
               {/* Verified Result Banner */}
               <div className="p-4 rounded-xl olive-recessed-channel border border-[#6B8E23] flex items-center justify-between mb-6">
                 <div>
-                  <div className="text-[10px] font-sans text-[#A2B682] uppercase tracking-wider">MEASURABLE ROI ACHIEVED</div>
+                  <div className="text-[10px] font-sans text-[#A2B682] uppercase tracking-wider">Headline result</div>
                   <div className="text-xl font-bold font-syne text-[#F4D03F]">
                     {selectedCase.impactMetric}
                   </div>
                 </div>
                 <div className="text-right text-[11px] font-sans text-[#EDC9AF]">
-                  <span>Turnkey Cyber-Physical + Staff Augmentation</span>
+                  <span>Product engineering + staff augmentation</span>
                 </div>
               </div>
 
@@ -317,7 +317,7 @@ export default function Portfolio() {
               <div className="space-y-4 mb-6 font-sans">
                 <div>
                   <h4 className="text-sm font-bold text-[#F4D03F] uppercase mb-1 tracking-wider">
-                    The Engineering Challenge
+                    The challenge
                   </h4>
                   <p className="text-xs sm:text-sm text-[#EDC9AF] leading-relaxed olive-recessed-channel p-3.5 rounded-lg border border-[#6B8E23]/40">
                     {selectedCase.problem}
@@ -325,7 +325,7 @@ export default function Portfolio() {
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-[#8BAE3A] uppercase mb-1 tracking-wider">
-                    The Qubryon Cyber-Physical Architecture
+                    What we built
                   </h4>
                   <p className="text-xs sm:text-sm text-[#FAF1E8] leading-relaxed olive-recessed-channel p-3.5 rounded-lg border border-[#6B8E23]/40">
                     {selectedCase.solution}
@@ -336,7 +336,7 @@ export default function Portfolio() {
               {/* System Architecture Data Flow */}
               <div className="mb-6">
                 <h4 className="text-sm font-bold font-sans text-[#F4D03F] uppercase mb-2 tracking-wider">
-                  System Architecture Pipeline
+                  Architecture
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans">
                   {selectedCase.architecture.map((arch: string, idx: number) => (
@@ -354,7 +354,7 @@ export default function Portfolio() {
               {/* Full Results */}
               <div className="mb-6 font-sans">
                 <h4 className="text-sm font-bold text-white uppercase mb-2 tracking-wider font-syne">
-                  Verified Performance Outcomes
+                  Results
                 </h4>
                 <div className="space-y-2">
                   {selectedCase.results.map((r: string, idx: number) => (
@@ -369,7 +369,7 @@ export default function Portfolio() {
               {/* Modal Footer CTA */}
               <div className="pt-4 border-t border-[#6B8E23]/40 flex flex-col sm:flex-row gap-3 items-center justify-between">
                 <div className="text-[11px] font-sans text-[#EDC9AF]">
-                  Ready to deploy a similar architecture for your enterprise?
+                  Planning something similar? Let’s talk.
                 </div>
                 <button
                   onClick={() => setSelectedCase(null)}

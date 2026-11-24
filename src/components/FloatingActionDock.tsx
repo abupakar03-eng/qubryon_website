@@ -1,64 +1,65 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Calendar, ArrowUp } from "lucide-react";
+import { Calendar, ArrowUp, Users } from "lucide-react";
+import { useModals } from "./ModalProvider";
 
-interface FloatingActionDockProps {
-  onOpenConsultation: () => void;
-  onOpenTalentModal: () => void;
-}
-
-export default function FloatingActionDock({
-  onOpenConsultation,
-  onOpenTalentModal,
-}: FloatingActionDockProps) {
+/**
+ * Floating quick actions. Appears only after the visitor scrolls past the hero,
+ * where the same actions are already on screen, so CTAs aren't duplicated.
+ */
+export default function FloatingActionDock() {
+  const { openConsultation, openTalent } = useModals();
+  const [visible, setVisible] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
+      const y = window.scrollY;
+      setVisible(y > window.innerHeight * 0.85);
+      setShowScrollTop(y > window.innerHeight * 1.5);
     };
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
-    <div className="fixed bottom-5 right-5 sm:right-8 z-40 flex items-center space-x-2">
-      {/* Tactical Olive Chassis Housing with Signal Yellow Key */}
-      <div className="flex items-center space-x-2 p-1.5 rounded-2xl olive-chassis shadow-[0_12px_32px_rgba(20,28,8,0.45)] border border-[#6B8E23]">
-        {/* Hire Talent Tactile Olive Key */}
+    <div
+      className={`fixed bottom-5 right-5 sm:right-8 z-40 transition-[opacity,transform] duration-300 ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+      }`}
+      aria-hidden={!visible}
+      inert={!visible}
+    >
+      <div className="flex items-center gap-2 p-1.5 rounded-2xl olive-chassis">
         <button
-          onClick={onOpenTalentModal}
-          className="key-tactical-olive flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-sans font-bold tracking-wider cursor-pointer"
-          title="Hire Pre-Vetted IoT & AI Engineers"
+          type="button"
+          onClick={openTalent}
+          aria-label="Hire talent"
+          className="key-tactical-olive flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs cursor-pointer"
         >
-          <span className="hardware-led-yellow" />
+          <Users className="w-3.5 h-3.5 text-[#F4D03F]" aria-hidden="true" />
           <span className="hidden sm:inline">Hire talent</span>
         </button>
 
-        {/* Book Call 10% Signal Yellow Key */}
         <button
-          onClick={onOpenConsultation}
-          className="key-signal-yellow flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-sans font-black tracking-wider text-[#172108] cursor-pointer shadow-md"
-          title="Schedule 30-min Strategy Call"
+          type="button"
+          onClick={openConsultation}
+          className="key-signal-yellow flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs cursor-pointer"
         >
-          <Calendar className="w-3.5 h-3.5 text-[#172108]" />
+          <Calendar className="w-3.5 h-3.5" aria-hidden="true" />
           <span>Book a call</span>
         </button>
 
-        {/* Scroll To Top Key */}
         {showScrollTop && (
           <button
-            onClick={scrollToTop}
-            className="key-tactical-olive w-8 h-8 rounded-xl flex items-center justify-center text-[#EDC9AF] hover:text-[#F4D03F] transition-all cursor-pointer"
-            title="Scroll to top"
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             aria-label="Scroll to top"
+            className="key-tactical-olive w-8 h-8 rounded-xl flex items-center justify-center text-[#EDC9AF] hover:text-[#F4D03F] transition-colors cursor-pointer"
           >
-            <ArrowUp className="w-3.5 h-3.5" />
+            <ArrowUp className="w-3.5 h-3.5" aria-hidden="true" />
           </button>
         )}
       </div>

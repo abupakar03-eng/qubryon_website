@@ -50,7 +50,7 @@ const STEPS: Step[] = [
     title: "Tell us exactly who you need",
     body: "Share the role, seniority, tech stack, time zone and engagement length. A solutions lead reviews it and replies within 2 hours.",
     outcome: "A clear, written role profile agreed with you before any search begins.",
-    tint: "from-[#0F4C53]/75 to-[#0A3A40]/60",
+    tint: "from-[#0F4C53]/95 to-[#0A3A40]/90",
     accent: "#F4D03F",
     tiles: [
       {
@@ -94,7 +94,7 @@ const STEPS: Step[] = [
     title: "Interview pre-vetted engineers",
     body: "Within 48 hours you receive 2–3 profiles matched to your architecture. You run the technical interview and make the call.",
     outcome: "Engineers you have personally interviewed and approved, backed by a 2-week risk-free trial.",
-    tint: "from-[#0B4047]/80 to-[#072E33]/65",
+    tint: "from-[#0B4047]/95 to-[#072E33]/90",
     accent: "#EDC9AF",
     tiles: [
       {
@@ -140,7 +140,7 @@ const STEPS: Step[] = [
     title: "Scale your team from day one",
     body: "Engineers join your Slack, Jira and GitHub on day one and follow your sprint rhythm. We handle contracts, payroll and HR.",
     outcome: "More delivery capacity without hiring overhead, with full IP assignment and strict NDAs.",
-    tint: "from-[#12585F]/75 to-[#0A3A40]/60",
+    tint: "from-[#12585F]/95 to-[#0A3A40]/90",
     accent: "#8FD0C9",
     tiles: [
       {
@@ -259,14 +259,14 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
           {STEPS.map((step, i) => (
             <div
               key={step.name}
-              className={`lg:sticky lg:top-0 lg:min-h-screen flex items-center bg-gradient-to-b ${step.tint} backdrop-blur-2xl border-t border-white/10`}
+              className={`lg:sticky lg:top-0 lg:min-h-screen flex items-center bg-gradient-to-b ${step.tint} border-t border-white/10`}
               style={{ zIndex: i + 1 }}
             >
               <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 lg:pt-28 pb-12">
                 <div className="rounded-3xl bg-white/[0.06] backdrop-blur border border-white/10 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)] p-6 sm:p-9">
                   <div className="flex items-center justify-between">
                     <div className="text-lg font-semibold">{step.name}</div>
-                    <div className="text-[12px] text-[#F3ECE3]/55 tabular-nums">
+                    <div className="text-[12px] text-[#F3ECE3]/75 tabular-nums">
                       {String(i + 1).padStart(2, "0")} / {String(STEPS.length).padStart(2, "0")}
                     </div>
                   </div>
@@ -333,7 +333,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
                     : "bg-white/[0.06] border-white/12 text-[#F3ECE3] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]"
                 }`}
               >
-                <div className={`text-[12px] tabular-nums ${highlight === i ? "text-[#0A3A40]" : "text-[#F3ECE3]/50"}`}>
+                <div className={`text-[12px] tabular-nums ${highlight === i ? "text-[#0A3A40]" : "text-[#F3ECE3]/72"}`}>
                   {String(i + 1).padStart(2, "0")} / {String(STACK_GROUPS.length).padStart(2, "0")}
                 </div>
                 <h3 className="mt-2 text-lg font-semibold leading-snug">{g.title}</h3>

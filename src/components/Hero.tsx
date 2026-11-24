@@ -1,15 +1,11 @@
 "use client";
 
 import React from "react";
+import { useModals } from "./ModalProvider";
 import { ArrowDownRight, ArrowRight } from "lucide-react";
 import HeroParticles from "./HeroParticles";
 import GlobeBadge from "./GlobeBadge";
 import { HERO_SERVICES } from "./three/heroServices";
-
-interface HeroProps {
-  onOpenConsultation: () => void;
-  onOpenTalentModal: () => void;
-}
 
 const METRICS = [
   { value: "< 48 hrs", label: "To match vetted engineers" },
@@ -18,7 +14,8 @@ const METRICS = [
   { value: "4 regions", label: "US · EU · GCC · APAC overlap" },
 ];
 
-export default function Hero({ onOpenConsultation, onOpenTalentModal }: HeroProps) {
+export default function Hero() {
+  const { openConsultation: onOpenConsultation, openTalent: onOpenTalentModal } = useModals();
   return (
     <section className="relative overflow-hidden text-[#F3ECE3] pt-36 pb-16 md:pt-40 md:pb-20">
       {/* subtle vignette + grain-like dot texture */}
@@ -41,7 +38,7 @@ export default function Hero({ onOpenConsultation, onOpenTalentModal }: HeroProp
 
             <h1 className="text-[2.6rem] sm:text-6xl lg:text-[3.6rem] xl:text-[4.1rem] leading-[1.04] tracking-[-0.035em] font-light font-sans">
               <span className="block text-[#F3ECE3]">Software that ships.</span>
-              <span className="block text-[#F3ECE3]/45">Engineers who stay.</span>
+              <span className="block text-[#F3ECE3]/60">Engineers who stay.</span>
             </h1>
 
             <p className="mt-6 text-base sm:text-lg text-[#F3ECE3]/65 max-w-lg leading-relaxed">
@@ -96,7 +93,7 @@ export default function Hero({ onOpenConsultation, onOpenTalentModal }: HeroProp
           {METRICS.map((m) => (
             <div key={m.label} className="pt-6 pb-2 pr-4">
               <div className="text-3xl sm:text-4xl font-light tracking-tight text-[#F3ECE3]">{m.value}</div>
-              <div className="text-[13px] text-[#F3ECE3]/50 mt-1">{m.label}</div>
+              <div className="text-[13px] text-[#F3ECE3]/72 mt-1">{m.label}</div>
             </div>
           ))}
         </div>

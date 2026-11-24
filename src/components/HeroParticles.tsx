@@ -87,7 +87,7 @@ export default function HeroParticles() {
       <div className="mx-auto w-full max-w-[560px] mt-2">
         <div className="flex items-end justify-between gap-4">
           <a href={active.href} className="group min-w-0">
-            <div className="text-[11px] uppercase text-[#F3ECE3]/45 tabular-nums">
+            <div className="text-[11px] uppercase text-[#F3ECE3]/70 tabular-nums">
               {String(index + 1).padStart(2, "0")} / {String(PARTICLE_SHAPES.length).padStart(2, "0")}
             </div>
             <div className="mt-1 flex items-center gap-1.5 text-lg text-[#F3ECE3] group-hover:text-[#F4D03F] transition-colors">
