@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Syne, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -18,34 +18,47 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Public site URL, used for absolute OG/Twitter image links. Set NEXT_PUBLIC_SITE_URL when the domain is live.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://qubryon.com";
+
+export const viewport: Viewport = {
+  themeColor: "#0A3A40",
+  colorScheme: "dark",
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Qubryon Technologies | Software Development, AI & IT Staff Augmentation",
   description:
-    "Qubryon Technologies is a global IoT and AI engineering partner delivering custom IoT applications, edge AI predictive analytics and pre-vetted IT staff augmentation to clients across North America, Europe, the Middle East and Asia Pacific from its delivery center in India.",
+    "Qubryon Technologies is a global software engineering partner. We build custom software, AI, cloud, data and IoT products and embed pre-vetted developers into your team in under 48 hours, for clients across North America, Europe, the Middle East and Asia Pacific.",
   keywords: [
     "Qubryon Technologies",
-    "IoT Software Development Company",
-    "AI Integration Services",
-    "Offshore IoT Development",
-    "IT Staff Augmentation India",
-    "Dedicated Embedded Engineers",
-    "Embedded C Developers",
-    "PyTorch Engineers",
-    "AWS IoT Core",
-    "Zephyr RTOS",
-    "Industrial IoT 4.0",
-    "Predictive Maintenance",
-    "Nearshore Offshore Engineering USA UK Europe",
+    "Custom Software Development",
+    "IT Staff Augmentation",
+    "Hire Developers India",
+    "Dedicated Development Team",
+    "AI and Machine Learning Services",
+    "Cloud and DevOps Services",
+    "Data Engineering",
+    "IoT Software Development",
+    "React Next.js Developers",
+    "Python Developers",
+    "Offshore Software Development",
   ],
   authors: [{ name: "Qubryon Technologies Private Limited" }],
   openGraph: {
-    title: "Qubryon Technologies - Empowering the Physical World with AI & IoT Solutions",
+    title: "Qubryon Technologies — Software that ships. Engineers who stay.",
     description:
-      "Global IoT & AI engineering partner: custom IoT development, edge AI predictive analytics and pre-vetted engineers deployed in under 48 hours, with time-zone overlap for US, EU, GCC and APAC teams.",
+      "Custom software, AI, cloud and IoT products, plus pre-vetted engineers in your team in under 48 hours, with time-zone overlap for US, EU, GCC and APAC teams.",
     type: "website",
     locale: "en_US",
     alternateLocale: ["en_GB", "en_IN", "en_AU"],
     siteName: "Qubryon Technologies",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Qubryon Technologies — Software that ships. Engineers who stay.",
+    description: "Custom software, AI, cloud and IoT products, plus pre-vetted engineers in under 48 hours.",
   },
 };
 

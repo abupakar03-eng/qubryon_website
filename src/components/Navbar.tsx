@@ -41,15 +41,10 @@ export default function Navbar() {
         {/* Main Hardware Container (30% Olive Drab Palette) */}
         <div className="relative rounded-2xl olive-chassis px-4 py-2.5 sm:px-5 sm:py-3 shadow-[0_12px_28px_rgba(25,35,10,0.35),inset_0_1px_1px_rgba(255,255,255,0.2)] flex items-center justify-between">
           
-          {/* Brass Rivets (Hardware Detailing) */}
-          <div className="brass-rivet absolute -top-1 -left-1 hidden sm:block" />
-          <div className="brass-rivet absolute -top-1 -right-1 hidden sm:block" />
-          <div className="brass-rivet absolute -bottom-1 -left-1 hidden sm:block" />
-          <div className="brass-rivet absolute -bottom-1 -right-1 hidden sm:block" />
 
           {/* Left: Brand Identity with Machined Olive Bezel */}
           <Link href="/" className="flex items-center space-x-3.5 group select-none">
-            <div className="relative w-11 h-11 rounded-xl p-0.5 bg-gradient-to-b from-[#8BAE3A] via-[#6B8E23] to-[#1A250B] shadow-[0_4px_8px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_20px_rgba(244,208,63,0.6)] transition-all">
+            <div className="relative w-11 h-11 rounded-xl p-0.5 bg-gradient-to-b from-[#8BAE3A] via-[#6B8E23] to-[#1A250B] shadow-[0_4px_8px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_20px_rgba(244,208,63,0.6)] transition-shadow">
               <div className="w-full h-full rounded-[10px] bg-[#172108] border border-[#6B8E23] flex items-center justify-center relative overflow-hidden">
                 <Cpu className="w-5 h-5 text-[#F4D03F] drop-shadow-[0_0_8px_rgba(244,208,63,0.8)] group-hover:scale-110 transition-transform relative z-10" />
               </div>

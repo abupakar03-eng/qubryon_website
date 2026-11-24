@@ -104,8 +104,7 @@
 }
 
 /* 1. Surfaces — dark tinted glass (readable on teal and on sand) */
-.olive-chassis,
-.olive-chassis-deep {
+.olive-chassis {
   background: linear-gradient(150deg, rgba(16, 78, 86, 0.55), rgba(6, 35, 40, 0.6));
   -webkit-backdrop-filter: blur(16px) saturate(150%);
   backdrop-filter: blur(16px) saturate(150%);
@@ -253,11 +252,7 @@ section > div > div > .olive-recessed-channel.rounded-full svg,
   letter-spacing: -0.005em;
 }
 
-/* 4. Status dots (rivets retired) */
-.brass-rivet {
-  display: none;
-}
-
+/* 4. Status dots */
 .hardware-led-yellow,
 .hardware-led-olive {
   display: inline-block;
@@ -275,15 +270,6 @@ section > div > div > .olive-recessed-channel.rounded-full svg,
 .hardware-led-olive {
   background: #8BAE3A;
   box-shadow: 0 0 0 3px rgba(139, 174, 58, 0.18);
-}
-
-/* 5. Background texture — faint grid that fades out */
-.sand-cyber-grid,
-.sand-cyber-grid-dense {
-  background-image:
-    linear-gradient(to right, rgba(28, 38, 13, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(28, 38, 13, 0.045) 1px, transparent 1px);
-  background-size: 56px 56px;
 }
 
 /* 6. Form inputs */
@@ -362,52 +348,6 @@ section > div > div > .olive-recessed-channel.rounded-full svg,
   to { width: 100%; }
 }
 
-/* 7a. Frosted glass cards floating over the 3D hero */
-.glass-card {
-  z-index: 10;
-  border-radius: 1rem;
-  background: rgba(255, 252, 248, 0.72);
-  backdrop-filter: blur(14px) saturate(1.4);
-  -webkit-backdrop-filter: blur(14px) saturate(1.4);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 20px 50px -20px rgba(20, 27, 8, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  animation: glass-float 6s ease-in-out infinite;
-}
-
-.glass-card:nth-of-type(odd) {
-  animation-delay: -3s;
-}
-
-@keyframes glass-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .glass-card { animation: none; }
-}
-
-/* 7b. Hero dashboard visual (WebGL fallback) */
-.hero-dash-bar {
-  transform-origin: bottom;
-  animation: hero-bar 3.2s ease-in-out infinite alternate;
-}
-
-@keyframes hero-bar {
-  from { transform: scaleY(0.75); }
-  to { transform: scaleY(1); }
-}
-
-.hero-dash-line {
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
-  animation: hero-line 2.4s ease-out forwards;
-}
-
-@keyframes hero-line {
-  to { stroke-dashoffset: 0; }
-}
-
 /* 8. Global delivery map animations */
 .global-arc {
   animation: global-arc-flow 2.4s linear infinite;
@@ -435,9 +375,7 @@ section > div > div > .olive-recessed-channel.rounded-full svg,
     scroll-behavior: auto;
   }
   .global-arc,
-  .global-ping,
-  .hero-dash-bar,
-  .hero-dash-line {
+  .global-ping {
     animation: none;
     stroke-dashoffset: 0;
   }

@@ -327,7 +327,7 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
               <div
                 key={g.title}
                 id={`stack-group-${i}`}
-                className={`rounded-3xl p-6 border backdrop-blur transition-all duration-300 ${
+                className={`rounded-3xl p-6 border backdrop-blur transition-[background-color,border-color,color,transform,box-shadow] duration-300 ${
                   highlight === i
                     ? "bg-[#EDC9AF] border-[#EDC9AF] text-[#072C31] shadow-[0_24px_60px_-28px_rgba(0,0,0,0.7)] -translate-y-1"
                     : "bg-white/[0.06] border-white/12 text-[#F3ECE3] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]"

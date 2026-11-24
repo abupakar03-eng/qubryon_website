@@ -139,10 +139,6 @@ export default function GlobalPresence() {
 
         {/* World Map Console */}
         <div className="olive-carbon-panel relative rounded-3xl p-4 sm:p-6 shadow-2xl mb-10">
-          <div className="brass-rivet absolute top-3 left-3" />
-          <div className="brass-rivet absolute top-3 right-3" />
-          <div className="brass-rivet absolute bottom-3 left-3" />
-          <div className="brass-rivet absolute bottom-3 right-3" />
 
           <div className="flex flex-wrap items-center justify-between gap-2 px-2 pb-3 mb-2 border-b border-white/10 text-[10px] sm:text-[11px] font-sans tracking-[0.16em] uppercase">
             <span className="text-[#F4D03F] font-bold flex items-center gap-2">
@@ -218,7 +214,6 @@ export default function GlobalPresence() {
             const info = now ? localInfo(now, r.tz) : null;
             return (
               <div key={r.region} className="olive-chassis rounded-2xl p-5 relative overflow-hidden shadow-md">
-                <div className="brass-rivet absolute top-2.5 right-2.5" />
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <div className="text-[10px] font-sans tracking-[0.18em] uppercase text-[#9FC9C4] font-bold">

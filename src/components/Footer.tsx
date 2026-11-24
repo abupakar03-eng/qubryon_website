@@ -1,9 +1,13 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { useModals } from "./ModalProvider";
 
 type FooterLink = { label: string; href?: string; onClick?: () => void; external?: boolean };
+
+/** Add the company's real profile URLs here, e.g. { label: "LinkedIn", href: "https://www.linkedin.com/company/…", external: true } */
+const SOCIAL_LINKS: FooterLink[] = [];
 
 export default function Footer() {
   const { openConsultation: onOpenConsultation, openTalent: onOpenTalentModal } = useModals();
@@ -34,15 +38,9 @@ export default function Footer() {
         { label: "Contact", href: "#contact" },
       ],
     },
-    {
-      title: "Follow",
-      links: [
-        { label: "LinkedIn", href: "https://www.linkedin.com", external: true },
-        { label: "X", href: "https://x.com", external: true },
-        { label: "GitHub", href: "https://github.com", external: true },
-      ],
-    },
   ];
+  // The "Follow" column only shows once real profile URLs are added to SOCIAL_LINKS.
+  if (SOCIAL_LINKS.length) columns.push({ title: "Follow", links: SOCIAL_LINKS });
 
   return (
     <footer className="texture-code relative text-[#F3ECE3] overflow-hidden">
@@ -58,6 +56,7 @@ export default function Footer() {
           </a>{" "}
           or{" "}
           <button
+            type="button"
             onClick={onOpenConsultation}
             className="underline underline-offset-[6px] decoration-[#F3ECE3]/50 hover:text-[#F4D03F] hover:decoration-[#F4D03F] cursor-pointer"
           >
@@ -67,7 +66,7 @@ export default function Footer() {
         </p>
 
         {/* Link columns */}
-        <nav aria-label="Footer" className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-10">
+        <nav aria-label="Footer" className={`mt-20 grid grid-cols-2 gap-10 ${columns.length > 3 ? "md:grid-cols-4" : "md:grid-cols-3"}`}>
           {columns.map((col) => (
             <div key={col.title}>
               <div className="text-[14px] text-[#F3ECE3]/75">{col.title}</div>
@@ -105,10 +104,9 @@ export default function Footer() {
       {/* Legal */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-[13px] text-[#F3ECE3]/72 border-t border-[#F3ECE3]/10">
         <div>© 2026 Qubryon Technologies Private Limited · Tiruchirappalli, India</div>
-        <div className="flex gap-5">
-          <span>Privacy policy</span>
-          <span>Terms of service</span>
-        </div>
+        <Link href="/privacy" className="underline underline-offset-4 decoration-[#F3ECE3]/40 hover:text-[#F4D03F] hover:decoration-[#F4D03F]">
+          Privacy policy
+        </Link>
       </div>
     </footer>
   );

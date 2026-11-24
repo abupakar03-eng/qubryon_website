@@ -164,7 +164,7 @@ export default function Portfolio() {
               <button
                 key={f.id}
                 onClick={() => setActiveFilter(f.id)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-sans font-bold tracking-wider cursor-pointer transition-all ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-sans font-bold tracking-wider cursor-pointer transition-colors ${
                   activeFilter === f.id ? "key-signal-yellow" : "key-tactical-olive"
                 }`}
               >
@@ -179,12 +179,8 @@ export default function Portfolio() {
           {filteredCases.map((item) => (
             <div
               key={item.id}
-              className="olive-chassis p-7 sm:p-9 rounded-3xl flex flex-col justify-between group relative overflow-hidden hover:border-[#F4D03F] transition-all shadow-xl"
+              className="olive-chassis p-7 sm:p-9 rounded-3xl flex flex-col justify-between group relative overflow-hidden hover:border-[#F4D03F] transition-colors shadow-xl"
             >
-              <div className="brass-rivet absolute top-3.5 left-3.5" />
-              <div className="brass-rivet absolute top-3.5 right-3.5" />
-              <div className="brass-rivet absolute bottom-3.5 left-3.5" />
-              <div className="brass-rivet absolute bottom-3.5 right-3.5" />
 
               <div>
                 {/* Header Metrics Banner */}
@@ -233,7 +229,7 @@ export default function Portfolio() {
                 {/* Tactile Hardware Details Button */}
                 <button
                   onClick={() => setSelectedCase(item)}
-                  className="key-tactical-olive w-full py-3 rounded-xl text-xs font-sans font-bold tracking-wider text-[#EDC9AF] hover:text-[#F4D03F] transition-all flex items-center justify-center space-x-2 cursor-pointer group/btn"
+                  className="key-tactical-olive w-full py-3 rounded-xl text-xs font-sans font-bold tracking-wider text-[#EDC9AF] hover:text-[#F4D03F] transition-colors flex items-center justify-center space-x-2 cursor-pointer group/btn"
                 >
                   <span>Read the case study</span>
                   <ArrowUpRight className="w-4 h-4 text-[#F4D03F] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
