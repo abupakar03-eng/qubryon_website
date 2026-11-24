@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ArrowUpRight, Plus, CheckCircle2 } from "lucide-react";
+import { submitInquiry } from "@/lib/submitInquiry";
 
 interface ContactSectionProps {
   onOpenConsultation: () => void;
@@ -67,17 +68,19 @@ function Chips({ options, value, onChange, label }: { options: string[]; value: 
 }
 
 export default function ContactSection({ onOpenConsultation, onOpenTalentModal }: ContactSectionProps) {
-  const [form, setForm] = useState({ name: "", email: "", company: "", need: "", timeline: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", company: "", need: "", timeline: "", message: "", website: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-    }, 800);
+    setError("");
+    const result = await submitInquiry("contact", { ...form });
+    setSubmitting(false);
+    if (result.ok) setSubmitted(true);
+    else setError(result.message);
   };
 
   return (
@@ -123,8 +126,8 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
             <p className="mt-2 text-[15px] text-[#5A4636]">A few details help us bring the right people to the first call.</p>
 
             {submitted ? (
-              <div className="mt-10 border-t border-[#141B08]/15 pt-10">
-                <CheckCircle2 className="w-9 h-9 text-[#0A3A40]" />
+              <div role="status" className="mt-10 border-t border-[#141B08]/15 pt-10">
+                <CheckCircle2 className="w-9 h-9 text-[#0A3A40]" aria-hidden="true" />
                 <h4 className="mt-4 text-2xl font-medium">Thanks, {form.name || "we've got it"}.</h4>
                 <p className="mt-2 text-[#5A4636] max-w-lg">
                   Your message is with our team. We&apos;ll reply personally at{" "}
@@ -144,9 +147,11 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
                     <span className="text-[13px] text-[#5A4636]">Name</span>
                     <input
                       required
+                      name="name"
+                      autoComplete="name"
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      placeholder="Your name"
+                      placeholder="Your name…"
                       className="line-input"
                     />
                   </label>
@@ -155,6 +160,9 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
                     <input
                       required
                       type="email"
+                      name="email"
+                      autoComplete="email"
+                      spellCheck={false}
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
                       placeholder="you@company.com"
@@ -167,9 +175,11 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
                     Company &amp; country <span className="text-[#5A4636]/60">(optional)</span>
                   </span>
                   <input
+                    name="company"
+                    autoComplete="organization"
                     value={form.company}
                     onChange={(e) => setForm({ ...form, company: e.target.value })}
-                    placeholder="e.g. Acme Inc., Germany"
+                    placeholder="e.g. Acme Inc., Germany…"
                     className="line-input"
                   />
                 </label>
@@ -186,6 +196,7 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
                   <span className="text-[13px] text-[#5A4636]">The project</span>
                   <textarea
                     required
+                    name="message"
                     rows={4}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -193,6 +204,24 @@ export default function ContactSection({ onOpenConsultation, onOpenTalentModal }
                     className="line-input resize-y"
                   />
                 </label>
+
+                {/* honeypot — hidden from people and assistive tech */}
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="hidden"
+                  value={form.website}
+                  onChange={(e) => setForm({ ...form, website: e.target.value })}
+                />
+
+                {error && (
+                  <p role="alert" className="text-[15px] border-l-2 border-[#0A3A40] bg-white/40 px-4 py-3 text-[#3B2F25]">
+                    {error}
+                  </p>
+                )}
 
                 <button
                   type="submit"

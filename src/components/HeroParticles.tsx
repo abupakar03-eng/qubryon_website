@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Pause, Play } from "lucide-react";
 import { PARTICLE_SHAPES, SHAPE_DURATION } from "./three/particleScene";
 
 /**
@@ -11,6 +11,8 @@ import { PARTICLE_SHAPES, SHAPE_DURATION } from "./three/particleScene";
 export default function HeroParticles() {
   const mountRef = useRef<HTMLDivElement>(null);
   const goToRef = useRef<((i: number) => void) | null>(null);
+  const setPausedRef = useRef<((p: boolean) => void) | null>(null);
+  const [paused, setPaused] = useState(false);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
   const [index, setIndex] = useState(0);
@@ -46,6 +48,7 @@ export default function HeroParticles() {
           onShapeChange: setIndex,
         });
         goToRef.current = s.goTo;
+        setPausedRef.current = s.setPaused;
         dispose = s.dispose;
       })
       .catch(() => setFailed(true));
@@ -57,6 +60,12 @@ export default function HeroParticles() {
   }, []);
 
   const active = PARTICLE_SHAPES[index];
+
+  const togglePaused = () => {
+    const next = !paused;
+    setPaused(next);
+    setPausedRef.current?.(next);
+  };
 
   return (
     <div className="relative w-full">
@@ -86,19 +95,35 @@ export default function HeroParticles() {
               <ArrowUpRight className="w-4 h-4 shrink-0 opacity-60 group-hover:opacity-100 transition-opacity" />
             </div>
           </a>
-          <div className="flex items-center gap-1.5 pb-1.5" role="tablist" aria-label="Choose a service">
-            {PARTICLE_SHAPES.map((s, i) => (
+          <div className="flex items-center gap-3 pb-0.5">
+            <div className="flex items-center gap-1.5" role="group" aria-label="Choose a theme">
+              {PARTICLE_SHAPES.map((s, i) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  aria-pressed={i === index}
+                  aria-label={s.label}
+                  onClick={() => goToRef.current?.(i)}
+                  className="h-6 flex items-center cursor-pointer"
+                >
+                  <span
+                    className={`block h-1.5 rounded-full transition-[width,background-color] ${
+                      i === index ? "w-6 bg-[#F4D03F]" : "w-1.5 bg-[#F3ECE3]/30 hover:bg-[#F3ECE3]/60"
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
+            {!reduced && !failed && (
               <button
-                key={s.id}
-                role="tab"
-                aria-selected={i === index}
-                aria-label={s.label}
-                onClick={() => goToRef.current?.(i)}
-                className={`h-1.5 rounded-full transition-all cursor-pointer ${
-                  i === index ? "w-6 bg-[#F4D03F]" : "w-1.5 bg-[#F3ECE3]/30 hover:bg-[#F3ECE3]/60"
-                }`}
-              />
-            ))}
+                type="button"
+                onClick={togglePaused}
+                aria-label={paused ? "Play animation" : "Pause animation"}
+                className="w-8 h-8 rounded-full border border-[#F3ECE3]/25 bg-white/5 text-[#F3ECE3] flex items-center justify-center hover:bg-white/15 hover:border-[#F3ECE3]/50 transition-colors cursor-pointer"
+              >
+                {paused ? <Play className="w-3.5 h-3.5" aria-hidden="true" /> : <Pause className="w-3.5 h-3.5" aria-hidden="true" />}
+              </button>
+            )}
           </div>
         </div>
         <div className="mt-3 h-px w-full bg-[#F3ECE3]/12 overflow-hidden">
@@ -106,7 +131,7 @@ export default function HeroParticles() {
             <div
               key={index}
               className="hero-progress h-full bg-[#F4D03F]/70"
-              style={{ animationDuration: `${SHAPE_DURATION}s` }}
+              style={{ animationDuration: `${SHAPE_DURATION}s`, animationPlayState: paused ? "paused" : "running" }}
             />
           )}
         </div>

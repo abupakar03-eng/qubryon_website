@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import {
   CheckCircle2,
   Clock,
@@ -14,6 +14,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import DotTerrain, { type TerrainPin } from "./DotTerrain";
+import { submitInquiry } from "@/lib/submitInquiry";
 
 interface StaffAugmentationProps {
   onSuccessSubmit?: (data: Record<string, string>) => void;
@@ -361,39 +362,53 @@ export default function StaffAugmentation({ onSuccessSubmit }: StaffAugmentation
 /* ======================= Request developers form ======================= */
 
 function RequestDevelopers({ onSuccessSubmit }: StaffAugmentationProps) {
+  const ids = useId();
   const [formData, setFormData] = useState({
-    roleNeeded: "Senior React / Next.js Engineer",
+    role: "Senior React / Next.js Engineer",
     seniority: "Senior (5-8 yrs)",
-    teamSize: "1 Dedicated Engineer",
-    duration: "6+ Months",
-    primaryTech: "",
-    clientName: "",
-    workEmail: "",
-    companyName: "",
+    count: "1 engineer",
+    duration: "6+ months",
+    stack: "",
+    name: "",
+    email: "",
+    company: "",
+    website: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    setError("");
+    const result = await submitInquiry("talent", { ...formData });
+    setSubmitting(false);
+    if (result.ok) {
       setSubmitted(true);
       onSuccessSubmit?.(formData);
-    }, 800);
+    } else {
+      setError(result.message);
+    }
   };
 
-  const select = (key: keyof typeof formData, label: string, options: string[]) => (
+  const labelCls = "block text-[12px] text-[#E6DED3]/85 mb-1.5";
+  const field = "w-full px-3 py-2.5 rounded-xl text-sm sand-glass-input";
+
+  const select = (key: "role" | "seniority" | "count" | "duration", label: string, options: string[]) => (
     <div>
-      <label className="block text-[12px] text-[#E6DED3]/80 mb-1.5">{label}</label>
+      <label htmlFor={`${ids}-${key}`} className={labelCls}>
+        {label}
+      </label>
       <select
+        id={`${ids}-${key}`}
+        name={key}
         value={formData[key]}
         onChange={(e) => setFormData({ ...formData, [key]: e.target.value })}
-        className="w-full px-3 py-2.5 rounded-xl text-sm sand-glass-input cursor-pointer"
+        className={`${field} cursor-pointer`}
       >
         {options.map((o) => (
-          <option key={o} value={o} className="bg-[#172108]">
+          <option key={o} value={o} className="bg-[#072C31] text-[#F3ECE3]">
             {o}
           </option>
         ))}
@@ -427,22 +442,21 @@ function RequestDevelopers({ onSuccessSubmit }: StaffAugmentationProps) {
 
         <div className="lg:col-span-7">
           {submitted ? (
-            <div className="rounded-2xl bg-white/5 border border-white/10 p-8 text-center">
-              <CheckCircle2 className="w-10 h-10 text-[#F4D03F] mx-auto" />
+            <div role="status" className="rounded-2xl bg-white/5 border border-white/10 p-8 text-center">
+              <CheckCircle2 className="w-10 h-10 text-[#F4D03F] mx-auto" aria-hidden="true" />
               <h4 className="mt-4 text-xl font-semibold text-white">Request received</h4>
               <p className="mt-2 text-sm text-[#E6DED3]/80 max-w-md mx-auto">
-                Thank you, {formData.clientName || "there"}. We&apos;ll share 2–3 vetted profiles for{" "}
-                <span className="text-[#F4D03F]">{formData.roleNeeded}</span> at{" "}
-                <span className="text-[#F4D03F]">{formData.workEmail}</span> within 48 hours.
+                Thank you, {formData.name || "there"}. We&apos;ll email <span className="text-[#F4D03F]">{formData.email}</span> about
+                your <span className="text-[#F4D03F]">{formData.role}</span> request and the next steps.
               </p>
-              <button onClick={() => setSubmitted(false)} className="key-signal-yellow mt-6 px-6 py-2.5 rounded-full text-sm cursor-pointer">
+              <button type="button" onClick={() => setSubmitted(false)} className="key-signal-yellow mt-6 px-6 py-2.5 rounded-full text-sm cursor-pointer">
                 Submit another request
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {select("roleNeeded", "Role *", [
+                {select("role", "Role *", [
                   "Senior React / Next.js Engineer",
                   "Backend Engineer (Python / Rust)",
                   "ML / AI Engineer (PyTorch)",
@@ -452,60 +466,100 @@ function RequestDevelopers({ onSuccessSubmit }: StaffAugmentationProps) {
                   "Dedicated cross-functional pod",
                 ])}
                 {select("seniority", "Experience *", ["Senior (5-8 yrs)", "Lead / Principal (8+ yrs)", "Mid-level (3-5 yrs)"])}
-                {select("teamSize", "Headcount", ["1 Dedicated Engineer", "2 Engineers", "3-5 Engineers", "5+ Engineers"])}
-                {select("duration", "Engagement length", ["1-3 Months", "3-6 Months", "6+ Months"])}
+                {select("count", "Headcount", ["1 engineer", "2 engineers", "3-5 engineers", "5+ engineers"])}
+                {select("duration", "Engagement length", ["1-3 months", "3-6 months", "6+ months"])}
               </div>
               <div>
-                <label className="block text-[12px] text-[#E6DED3]/80 mb-1.5">Main tech stack</label>
+                <label htmlFor={`${ids}-stack`} className={labelCls}>
+                  Main tech stack
+                </label>
                 <input
+                  id={`${ids}-stack`}
+                  name="stack"
                   type="text"
-                  value={formData.primaryTech}
-                  onChange={(e) => setFormData({ ...formData, primaryTech: e.target.value })}
-                  placeholder="e.g. Next.js, Python, AWS, PostgreSQL"
-                  className="w-full px-3 py-2.5 rounded-xl text-sm sand-glass-input"
+                  autoComplete="off"
+                  value={formData.stack}
+                  onChange={(e) => setFormData({ ...formData, stack: e.target.value })}
+                  placeholder="e.g. Next.js, Python, AWS, PostgreSQL…"
+                  className={field}
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[12px] text-[#E6DED3]/80 mb-1.5">Your name *</label>
+                  <label htmlFor={`${ids}-name`} className={labelCls}>
+                    Your name *
+                  </label>
                   <input
+                    id={`${ids}-name`}
+                    name="name"
                     type="text"
+                    autoComplete="name"
                     required
-                    value={formData.clientName}
-                    onChange={(e) => setFormData({ ...formData, clientName: e.target.value })}
-                    placeholder="e.g. Alex Johnson"
-                    className="w-full px-3 py-2.5 rounded-xl text-sm sand-glass-input"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    placeholder="e.g. Alex Johnson…"
+                    className={field}
                   />
                 </div>
                 <div>
-                  <label className="block text-[12px] text-[#E6DED3]/80 mb-1.5">Work email *</label>
+                  <label htmlFor={`${ids}-email`} className={labelCls}>
+                    Work email *
+                  </label>
                   <input
+                    id={`${ids}-email`}
+                    name="email"
                     type="email"
+                    autoComplete="email"
+                    spellCheck={false}
                     required
-                    value={formData.workEmail}
-                    onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="alex@company.com"
-                    className="w-full px-3 py-2.5 rounded-xl text-sm sand-glass-input"
+                    className={field}
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-[12px] text-[#E6DED3]/80 mb-1.5">Company</label>
+                <label htmlFor={`${ids}-company`} className={labelCls}>
+                  Company
+                </label>
                 <input
+                  id={`${ids}-company`}
+                  name="company"
                   type="text"
-                  value={formData.companyName}
-                  onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-                  placeholder="e.g. Acme Inc."
-                  className="w-full px-3 py-2.5 rounded-xl text-sm sand-glass-input"
+                  autoComplete="organization"
+                  value={formData.company}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  placeholder="e.g. Acme Inc.…"
+                  className={field}
                 />
               </div>
+
+              {/* honeypot — hidden from people and assistive tech */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+                value={formData.website}
+                onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+              />
+
+              {error && (
+                <p role="alert" className="text-sm rounded-xl border border-[#F4D03F]/40 bg-[#F4D03F]/10 text-[#F7E7A8] px-3.5 py-2.5">
+                  {error}
+                </p>
+              )}
+
               <button
                 type="submit"
                 disabled={submitting}
-                className="key-signal-yellow w-full py-3.5 rounded-full text-sm flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="key-signal-yellow w-full py-3.5 rounded-full text-sm flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
               >
                 {submitting ? (
-                  <span>Matching engineers…</span>
+                  <span>Sending request…</span>
                 ) : (
                   <>
                     <Send className="w-4 h-4" />

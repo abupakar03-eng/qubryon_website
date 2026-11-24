@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useId, useMemo, useState } from "react";
 import GallerySection, { type GalleryItem } from "./GallerySection";
+import { useDialog } from "@/lib/useDialog";
 import { drawCasePoster } from "./three/galleryArt";
 import {
   Layers,
@@ -14,6 +15,9 @@ import {
 export default function Portfolio() {
   const [selectedCase, setSelectedCase] = useState<any | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("all");
+  const closeCase = useCallback(() => setSelectedCase(null), []);
+  const caseDialogRef = useDialog<HTMLDivElement>(!!selectedCase, closeCase);
+  const caseTitleId = useId();
 
   const caseStudies = [
     {
@@ -266,21 +270,33 @@ export default function Portfolio() {
 
         {/* Case Study Deep-Dive Modal */}
         {selectedCase && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
-            <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto olive-carbon-panel p-7 sm:p-9 rounded-3xl border-2 border-[#6B8E23] shadow-2xl text-[#EDC9AF]">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md"
+            onMouseDown={(e) => e.target === e.currentTarget && closeCase()}
+          >
+            <div
+              ref={caseDialogRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={caseTitleId}
+              tabIndex={-1}
+              className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto overscroll-contain olive-carbon-panel p-7 sm:p-9 rounded-3xl text-[#EDC9AF] outline-none"
+            >
               {/* Close Button */}
               <button
-                onClick={() => setSelectedCase(null)}
+                type="button"
+                onClick={closeCase}
+                aria-label="Close case study"
                 className="key-tactical-olive absolute top-5 right-5 p-2 rounded-xl text-[#EDC9AF] hover:text-[#F4D03F] cursor-pointer z-10"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5" aria-hidden="true" />
               </button>
 
-              <div className="mb-4">
+              <div className="mb-4 pr-12">
                 <span className="olive-recessed-channel text-[11px] font-sans text-[#F4D03F] px-3 py-1 rounded border border-[#6B8E23] inline-block mb-2 uppercase font-bold">
                   {selectedCase.badge}
                 </span>
-                <h3 className="text-2xl font-bold text-white mb-2 font-syne">{selectedCase.title}</h3>
+                <h2 id={caseTitleId} className="text-2xl font-bold text-white mb-2 font-syne">{selectedCase.title}</h2>
                 <p className="text-xs font-sans text-[#EDC9AF]">{selectedCase.clientSector}</p>
               </div>
 

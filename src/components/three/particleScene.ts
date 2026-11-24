@@ -203,7 +203,8 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
   let current = 0;
   let morphStart = 0;
   let elapsed = 0;
-  let formClock = 0; // time since the current form appeared (drives flow + spin)
+  let formClock = 0; // time the current form has been shown (drives flow, spin, auto-advance)
+  let paused = false; // user paused motion (WCAG 2.2.2)
   const MORPH = 2.2;
 
   const goTo = (index: number) => {
@@ -214,7 +215,7 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
     morphStart = elapsed;
     formClock = 0;
     opts.onShapeChange?.(next);
-    if (reducedMotion) start();
+    if (reducedMotion || paused) start();
   };
 
   const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
@@ -224,8 +225,8 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
 
   const frame = (dt: number) => {
     elapsed += dt;
-    formClock += dt;
-    if (!reducedMotion && elapsed - morphStart > SHAPE_DURATION) goTo(current + 1);
+    if (!paused) formClock += dt;
+    if (!reducedMotion && !paused && formClock > SHAPE_DURATION) goTo(current + 1);
 
     const form = forms[current];
     const ft = reducedMotion ? 1.5 : formClock;
@@ -310,7 +311,9 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
       readyFired = true;
       opts.onReady?.();
     }
-    if (!reducedMotion) raf = requestAnimationFrame(loop);
+    // keep animating unless motion is reduced, or paused and the current morph has settled
+    const settled = elapsed - morphStart > MORPH + 0.8;
+    if (!reducedMotion && !(paused && settled)) raf = requestAnimationFrame(loop);
   };
   function start() {
     if (raf) return;
@@ -330,6 +333,11 @@ export function createParticleScene(container: HTMLElement, opts: Options = {}) 
 
   return {
     goTo,
+    /** Pause or resume all motion (auto-advance, flow and spin). */
+    setPaused(value: boolean) {
+      paused = value;
+      if (!paused) start();
+    },
     dispose() {
       cancelAnimationFrame(raf);
       io.disconnect();
